@@ -26,18 +26,10 @@
 
 These are professional judgement scores, not empirical measurements.
 
----
-
 # CHAT 2 — CONTENIDO NUEVO
 
-## Chat 2 validation
+## Planning note
 
-La descomposición de M1 se estabilizó en siete pasos. El resultado no se convirtió en una nueva decisión histórica porque DEC-0001 ya fija el orden de módulos y las decisiones de seguridad, almacenamiento y UI siguen siendo heredadas.
+The candidate order above is historical Chat 1 evidence and is preserved. Chat 2 did not alter it.
 
----
-
-# CHAT 2 — CONTENIDO NUEVO
-
-## Chat 2 decision review
-
-No new decision record was created. The seven-step M1 plan is a plan outcome, not a new module-order decision.
+For M1 step count, Chat 2 used a separate dynamic decomposition; three candidate decompositions were reviewed and the seven-unit decomposition was retained as the most coherent balance between depth and fragmentation. This is a planning outcome, not a new product architecture decision.

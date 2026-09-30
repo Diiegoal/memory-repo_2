@@ -9,7 +9,6 @@ A conversational, reflective SRE/DevOps agent should operate as an evidence-driv
 ## 2. Runtime state versus long-term memory
 
 LangGraph's current persistence documentation distinguishes thread-scoped checkpoints from cross-thread stores. This maps naturally to:
-
 - current incident execution state;
 - long-term incident history/runbooks/knowledge.
 
@@ -51,18 +50,22 @@ M1 + M3 supply the harness and context model. OpenAI's Feb 2026 harness-engineer
 
 The supplied M12 document contains some release information published after the executable prompt's Sep 11 cutoff. Those values are retained as source statements but not promoted to cutoff-current state.
 
----
-
 # CHAT 2 — CONTENIDO NUEVO
 
-## 12. Chat 2 — M1 construction knowledge
+## New consolidated knowledge
 
-M1 is operationalized as a seven-step method: characterize task/mode; select tool; design context; manage context rot; construct prompts; select coding pattern; integrate the three pillars through cases A-E. The project-specific SRE reference is context, not a substitute for M1.
+Chat2 operationalized M1 as the first AI-engineering foundation for the SRE target. The useful M1 knowledge is represented by the seven canonical steps in `chats/chat-002/M1_PLAN.md`. The plan distinguishes source facts, inherited decisions, proposals and future execution.
 
-## 13. Chat 2 — External context verification
+## M1 practical rules derived from source
 
-Current sources consulted on 2026-09-30 included OpenAI Harness Engineering, AGENTS.md and Claude Code documentation. They are used as supporting external facts about repository context and tool/context mechanisms, not as replacements for M1 or as new historical decisions.
+1. Tool choice and mode are explicit decisions, not defaults.
+2. Context is a managed engineering resource; use minimum-sufficient selection and isolation.
+3. Prompts are contracts with observable success criteria.
+4. Workflows use plan/execute/test/review/refactor loops.
+5. Repository-local knowledge should be structured for progressive disclosure.
+6. Validation and feedback are part of the operating method, not only a final step.
+7. M1 does not implement product runtime components.
 
-## 14. Chat 2 — Decision review
+## Temporal/provenance note
 
-No new substantive decision was adopted. Chat 1 decisions remain the controlling inherited state.
+OpenAI Harness Engineering (2026-02-11) corroborates the repository-knowledge/system-of-record and progressive-disclosure approach. It is within the mandatory cutoff.

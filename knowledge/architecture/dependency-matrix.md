@@ -25,10 +25,19 @@
 - M11 ↔ M13
 - M12 → all modules as reference information only
 
----
-
 # CHAT 2 — CONTENIDO NUEVO
 
-## Chat 2 M1 dependencies
+## M1 internal dependency graph
 
-La cadena interna de M1 es P01 → P02 → P03 → P04 → P05 → P06 → P07, con P07 como integración. Esta secuencia no modifica el orden intermodular heredado.
+| From | To | Reason |
+|---|---|---|
+| P01 | P02 | shared task/mode model |
+| P01 | P03 | shared context/problem model |
+| P01 | P04 | shared prompt/problem model |
+| P02 | P05 | workflow uses selected mode/tool |
+| P03 | P04 | prompt depends on selected context |
+| P04 | P05 | workflow needs prompt contract |
+| P05 | P06 | integration consolidates the operating loop |
+| P06 | P07 | final gate validates the integrated system |
+
+No additional dependency is asserted where a step can run independently.

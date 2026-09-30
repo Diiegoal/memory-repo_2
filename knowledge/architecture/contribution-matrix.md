@@ -16,10 +16,8 @@
 | M13 | Delivery | How the system is shipped and operated | CI/CD/IaC/release controls |
 | M12 | Reference only | What the target SRE architecture looks like | Reference knowledge only |
 
----
-
 # CHAT 2 — CONTENIDO NUEVO
 
-## Chat 2 contribution
+## M1 contribution
 
-P01→caracterización; P02→selección de herramienta; P03→contexto persistente; P04→higiene; P05→prompt; P06→patrones; P07→integración A-E.
+M1 contributes an AI-assisted engineering operating system rather than product runtime code. Its outputs are planning/context/prompt/workflow/validation artifacts that can later be consumed by M3 and subsequent modules.

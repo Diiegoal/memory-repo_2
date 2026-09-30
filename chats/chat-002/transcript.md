@@ -1,4 +1,6 @@
-# ORIGINAL PROMPT (verbatim, unmodified)
+# TRANSCRIPCIÓN RAW DE CHAT-002
+
+# PARTE A — PROMPT ORIGINAL (TEXTUAL)
 
 # ORIGINAL PROMPT (verbatim, unmodified)
 
@@ -1820,6 +1822,34 @@ El hecho de que puedan desarrollarse, producir resultados, conservar evidencias 
 
 Si una ejecución concreta demuestra una dependencia funcional real que requiera tratarlas como una sola unidad, pueden permanecer juntas, pero cada capacidad debe seguir estando desarrollada íntegramente dentro del paso.
 
+### Regla específica para los patrones de ejecución de coding
+
+Cuando el inventario de M1 ubique **Spec-driven preview, Plan-then-execute, Test-first, Refactor con anclas y Critic loops** dentro de una misma unidad profesional, esos cinco patrones deben permanecer dentro de ese mismo paso **solo si la prueba de independencia y anti-fragmentación así lo justifica**.
+
+En ese caso, **cada uno de los cinco patrones debe desarrollarse explícitamente y por separado dentro de los campos existentes del mismo paso**. Para cada patrón, cuando la fuente lo permita, debe conservarse como mínimo:
+
+```text
+nombre del patrón
+→ qué es
+→ cuándo utilizarlo
+→ cuándo no utilizarlo o qué condición evita su elección
+→ cómo se aplica
+→ entrada
+→ secuencia/operación principal
+→ salida
+→ criterio de aceptación
+→ evidencia
+→ validación
+→ error o mismatch plausible
+→ corrección o cambio de patrón
+```
+
+No es suficiente escribir `los cinco patrones`, `patrones de coding`, `playbook de patrones`, `framework`, `kit`, `Preview/Plan/Test/Anchors/Critic` ni una lista de nombres.
+
+Tampoco está permitido crear cinco pasos solo para cumplir esta cobertura. La exigencia es **desarrollo interno completo**, no fragmentación automática.
+
+La misma regla se aplica, con el mismo criterio, a cualquier otro conjunto de elementos diferenciados que M1 desarrolle explícitamente dentro de una unidad agrupada.
+
 ### Control específico de los bloques prácticos de M1
 
 Utiliza esta lista como **control de cobertura**, no como conteo de pasos:
@@ -2505,6 +2535,33 @@ No reconstruyas, copies de memoria ni hardcodees el árbol dentro de este prompt
 
 No reproduzcas esas plantillas en otro lugar del prompt ni inventes una segunda versión de ellas.
 
+### Regla de extracción literal de la estructura del README
+
+La expresión **“estructura correspondiente”** significa la estructura **literalmente observada en la entrada correspondiente de `README.md → Complete Markdown File Structure`**, no una estructura equivalente, parecida, resumida o reconstruida por interpretación.
+
+Antes de crear o actualizar cada `.md`, ejecuta este procedimiento:
+
+```text
+README.md real
+→ localizar la entrada exacta del archivo por ruta/nombre
+→ extraer su bloque estructural correspondiente
+→ identificar literalmente:
+   encabezados y niveles
+   orden de secciones
+   nombres fijos
+   listas y etiquetas fijas
+   bloques de código y su lenguaje
+   tablas y cabeceras
+   campos/elementos estructurales
+→ utilizar ese bloque como esqueleto obligatorio
+→ sustituir únicamente placeholders por contenido real
+→ no agregar, eliminar, fusionar, renombrar ni reordenar elementos estructurales
+```
+
+No conviertas la plantilla del README en una descripción semántica. Si el README contiene una plantilla, debe respetarse su estructura textual y jerárquica. Si para un archivo el README únicamente documenta un `Role` y no proporciona una plantilla detallada, **no inventes una plantilla ausente**: conserva el archivo real íntegro y utiliza como única referencia adicional la estructura efectivamente observada en ese archivo para el bloque nuevo de Chat 2.
+
+La validación debe comparar la estructura generada con la estructura fuente del README **elemento por elemento**, no por similitud visual ni por interpretación.
+
 Para un `.md` histórico:
 
 ```text
@@ -2547,12 +2604,14 @@ Cuando el plan definitivo se haya congelado:
 ```text
 M1_PLAN.md
 ↔
-plan canónico reproducido en transcript.md
+resumen canónico de pasos en transcript.md
 ```
 
-deben representar exactamente el mismo conjunto de pasos, el mismo orden, los mismos IDs, los mismos 26 campos y el mismo contenido final de cada paso, salvo diferencias mecánicas inevitables de encapsulado del transcript.
+deben representar exactamente el mismo conjunto de pasos, el mismo orden, los mismos IDs y los mismos títulos/objetivos resumidos. `transcript.md` **no debe reproducir los 26 campos ni el desarrollo completo de los pasos**: el contenido completo, canónico y único de los pasos vive exclusivamente en `M1_PLAN.md`.
 
-No debe existir una segunda versión del plan en otro archivo independiente.
+El resumen de pasos de `transcript.md` no constituye una segunda versión del plan; debe servir únicamente como índice narrativo y de continuidad. No debe introducir un paso, ID, objetivo o frontera que no exista en `M1_PLAN.md`.
+
+No debe existir una segunda versión completa del plan en otro archivo independiente.
 
 ### Regla de simplificación del prompt
 
@@ -3705,9 +3764,20 @@ siguiendo exactamente la estructura de `transcript.md` definida en `README.md �
 Debe conservar **el registro RAW completo de la sesión**, no una reconstrucción resumida de sus resultados.
 
 La estructura obligatoria del archivo es exactamente:
-El transcript debe incluir una reproducción completa del plan canónico almacenado en `M1_PLAN.md` dentro de `# FULL ORIGINAL RESEARCH OUTPUT`. Esa reproducción debe coincidir con `M1_PLAN.md` en pasos, IDs, orden y contenido final de los 26 campos.
+El transcript debe incluir dentro de `# FULL ORIGINAL RESEARCH OUTPUT` un **resumen exhaustivo de la secuencia final de pasos**, pero **no debe reproducir los 26 campos ni el desarrollo completo del plan**. El desarrollo completo y canónico de los pasos debe existir únicamente en `M1_PLAN.md`.
 
-El transcript no puede contener una segunda variante del plan. Si durante la sesión existen borradores, correcciones o versiones intermedias, deben distinguirse cronológicamente del plan final congelado.
+El resumen de pasos de `transcript.md` debe incluir, para cada paso final:
+- ID;
+- título;
+- objetivo resumido;
+- capacidad/unidad profesional principal;
+- salida principal;
+- dependencias reales relevantes;
+- estado.
+
+Debe conservar el mismo conjunto de pasos, IDs, orden y fronteras del `M1_PLAN.md`, pero sin duplicar sus 26 campos.
+
+El transcript no puede contener una segunda variante completa del plan. Si durante la sesión existen borradores, correcciones o versiones intermedias, deben distinguirse cronológicamente del plan final congelado y solo el resumen final debe representar el conjunto congelado.
 
 La convención obligatoria de identificación de los pasos es:
 
@@ -3728,7 +3798,7 @@ M1-PNN
 
 # FULL ORIGINAL RESEARCH OUTPUT
 
-{{toda la producción sustantiva original de Chat 2, completa y en orden cronológico}}
+{{toda la producción sustantiva original de Chat 2, completa y en orden cronológico, excepto el desarrollo detallado de los pasos de 26 campos, que se conserva canónicamente en M1_PLAN.md; en su lugar, aquí se conserva el resumen final de pasos}}
 
 # REAL EXECUTION LOG
 
@@ -3747,7 +3817,7 @@ SALIDA ORIGINAL COMPLETA DE CHAT 2
 REGISTRO REAL DE EJECUCIÓN
 ```
 
-La salida original de Chat 2 debe ser **exhaustiva, detallada, completa, íntegra, cronológica, en español para el contenido producido por Chat 2 y sin resúmenes sustitutivos**.
+La salida original de Chat 2 debe ser **exhaustiva, detallada, completa e íntegra en todo contenido sustantivo no canónicamente separado en `M1_PLAN.md`, cronológica, en español para el contenido producido por Chat 2 y sin resúmenes sustitutivos**, salvo el resumen explícitamente autorizado de la secuencia de pasos.
 
 Esto significa que el transcript debe funcionar como la **fuente RAW de reconstrucción de la sesión**, no como una memoria resumida de sus resultados.
 
@@ -3768,7 +3838,7 @@ cada investigación realizada
 → cada resultado de herramientas
 → cada evidencia utilizada
 → cada cambio producido en el plan
-→ cada paso completo con sus 26 campos
+→ resumen final de todos los pasos
 → cada comprobación final
 ```
 
@@ -3789,7 +3859,7 @@ fuente
 
 Cuando se produzcan tablas o matrices, deben quedar completas, no reemplazadas por una descripción narrativa.
 
-Cuando se produzca una secuencia de pasos, deben quedar los pasos completos y sus 26 campos completos, no solo el listado de títulos.
+Cuando se produzca una secuencia de pasos, `transcript.md` debe conservar el **resumen completo de la secuencia** —ID, título, objetivo, capacidad principal, salida, dependencias y estado—, pero los 26 campos completos pertenecen exclusivamente a `M1_PLAN.md` y no deben duplicarse en el transcript.
 
 Cuando una sección del plan sea corregida durante la sesión, conserva la información material necesaria para reconstruir esa evolución; no elimines la existencia de la corrección simplemente porque al final exista una versión posterior.
 
@@ -4021,6 +4091,34 @@ A partir de ese cruce se determina la cantidad total de pasos razonable y necesa
 
 Los pasos deben utilizar las decisiones aceptadas de Chat 1 como condiciones de partida y deben identificar explícitamente el o los temas de M1 que toman como fundamento.
 
+## 38.1.7. Resumen canónico de la secuencia de pasos
+
+Dentro de `# FULL ORIGINAL RESEARCH OUTPUT`, después del cruce anterior, debes incluir una sección específica:
+
+```markdown
+## Resumen de pasos de M1
+
+| ID | Título | Objetivo resumido | Capacidad/unidad principal | Salida principal | Dependencias reales | Estado |
+|---|---|---|---|---|---|---|
+| M1-P{{NN}} | ... | ... | ... | ... | ... | PLANIFICADO |
+```
+
+La tabla debe contener **todos los pasos finales**, en el mismo orden que `M1_PLAN.md`.
+
+Esta sección es un **resumen de continuidad**, no una segunda copia del plan. No debe contener los 26 campos, ni los bloques `1–26`, ni repetir el desarrollo detallado de `M1_PLAN.md`.
+
+El resumen debe:
+- coincidir exactamente con el conjunto final de IDs de `M1_PLAN.md`;
+- conservar los mismos títulos y el mismo orden;
+- resumir el objetivo y la capacidad principal sin introducir contenido nuevo;
+- indicar únicamente dependencias reales;
+- conservar el estado real de cada paso;
+- permitir identificar rápidamente qué paso existe y qué resultado produce;
+- permanecer sincronizado con `M1_PLAN.md` después de cualquier reparación final.
+
+El contenido completo de cada paso, incluidos sus 26 campos, pertenece **exclusivamente** a `chats/chat-002/M1_PLAN.md`.
+
+Nunca uses el resumen para sustituir una parte faltante de `M1_PLAN.md`. Si un paso no está completo en `M1_PLAN.md`, el problema debe corregirse allí antes del cierre.
 
 La excepción es el contenido que deba preservarse literalmente como RAW o como evidencia fuente.
 
@@ -4051,7 +4149,7 @@ No sustituyas contenido material por:
 “contenido omitido”
 ```
 
-si cualquiera de esas expresiones está ocultando información que debería quedar conservada.
+si cualquiera de esas expresiones está ocultando información que debería quedar conservada. Esta regla no prohíbe el **resumen de pasos expresamente definido en la sección 38.1.7**, porque el desarrollo completo de esos pasos está conservado canónicamente en `M1_PLAN.md`.
 
 Si el contenido existe y forma parte de la producción sustantiva de la sesión, consérvalo.
 
@@ -4390,6 +4488,29 @@ Para `decisions/DEC-0001.md` hasta `decisions/DEC-0006.md` verifica en cambio:
 
 No aceptes una validación basada únicamente en títulos, tamaños aproximados o similitud visual.
 
+### Comprobación literal de estructura documental
+
+Para cada `.md` sujeto a actualización o creación, la validación final debe comprobar contra el `README.md` real:
+
+```text
+archivo
+→ entrada exacta en Complete Markdown File Structure
+→ esqueleto estructural extraído literalmente
+→ mismos encabezados y niveles
+→ mismo orden
+→ mismos nombres fijos
+→ mismos campos/elementos estructurales
+→ mismos bloques de código/tablas cuando formen parte de la plantilla
+→ sin secciones inventadas
+→ sin secciones omitidas
+→ sin renombrados
+→ sin reordenamientos
+```
+
+La comparación debe realizarse **archivo por archivo y de forma determinista**, usando una extracción estructural reproducible del README y del archivo generado. Una estructura que solo “se parezca” al README es `FAIL`.
+
+Para archivos cuyo README no proporcione una plantilla detallada, no inventes una estructura ausente; valida contra la estructura real del archivo fuente y contra las indicaciones literales que el README sí proporcione.
+
 ## Cobertura práctica de M1
 
 Verifica:
@@ -4448,7 +4569,7 @@ Verifica físicamente `chats/chat-002/M1_PLAN.md`:
 ¿Cada paso utiliza exactamente 26 campos?
 ¿Cada ID utiliza `M1-PNN`?
 ¿Todos los valores narrativos generados por Chat 2 están en español?
-¿El plan coincide con la versión final reproducida en `transcript.md`?
+¿El resumen de pasos de `transcript.md` coincide en conjunto, IDs, orden, títulos y objetivos resumidos con `M1_PLAN.md`, sin duplicar sus 26 campos?
 ¿No existe otro archivo que contenga una segunda versión canónica del plan?
 ```
 
@@ -4790,7 +4911,7 @@ Ejecuta ahora:
 
 **El Repositorio Ejemplo 2 es únicamente una referencia de aprendizaje y diseño; no determina por sí mismo la estructura ni el contenido de los pasos del nuevo proyecto.**
 
-**El transcript.md debe incluir, en español para el contenido derivado, un resumen exhaustivo de todo M1, un resumen exhaustivo de la referencia del Agente SRE / DevOps revisada y un resumen exhaustivo de todo el Repositorio Ejemplo 2 revisado, además del registro RAW, las decisiones relevantes de Chat 1 y el plan completo.**
+**El transcript.md debe incluir, en español para el contenido derivado, un resumen exhaustivo de todo M1, un resumen exhaustivo de la referencia del Agente SRE / DevOps revisada y un resumen exhaustivo de todo el Repositorio Ejemplo 2 revisado, además del registro RAW, las decisiones relevantes de Chat 1 y un resumen exhaustivo de la secuencia final de pasos. El desarrollo completo de los pasos y sus 26 campos pertenece exclusivamente a `M1_PLAN.md`.**
 
 **Durante Chat 2 no ejecutes el Paso 1 del proyecto.**
 
@@ -4804,7 +4925,7 @@ Ejecuta ahora:
 
 **Si no existe una decisión nueva, documenta válidamente su ausencia; no fabriques una.**
 
-**El transcript de Chat 2 debe conservar el RAW completo de la sesión: prompt original íntegro, toda la producción sustantiva original, investigaciones, hallazgos, tablas, matrices, pasos completos, decisiones, validaciones, resultados de herramientas y registro real de ejecución, en orden cronológico, con la documentación derivada en español y sin resúmenes, omisiones deliberadas ni sustituciones por referencias como “ver arriba”.**
+**El transcript de Chat 2 debe conservar el RAW completo de la sesión en todo aquello que no quede canónicamente separado en `M1_PLAN.md`: prompt original íntegro, producción sustantiva, investigaciones, hallazgos, tablas, matrices, resumen final de pasos, decisiones, validaciones, resultados de herramientas y registro real de ejecución, en orden cronológico, con la documentación derivada en español y sin omisiones deliberadas ni sustituciones por referencias como “ver arriba”. El desarrollo de los 26 campos de los pasos no se duplica en el transcript porque pertenece exclusivamente a `M1_PLAN.md`.**
 
 **Conserva el contenido fuente original en su idioma cuando sea necesario para preservar evidencia.**
 
@@ -4824,7 +4945,7 @@ Ejecuta ahora:
 
 **`M1_PLAN.md` es el único archivo canónico del plan de M1 dentro de `chat-002`. No crees un archivo separado para `M1 Technology Scope`, `12-m1-coverage-matrix`, matrices de M1 o resúmenes equivalentes.**
 
-**Los pasos del plan definitivo deben utilizar exactamente los IDs `M1-P01`, `M1-P02`, …, `M1-PNN`, los mismos IDs deben aparecer en `M1_PLAN.md` y en la reproducción del plan dentro de `transcript.md`.**
+**Los pasos del plan definitivo deben utilizar exactamente los IDs `M1-P01`, `M1-P02`, …, `M1-PNN`; esos mismos IDs deben aparecer en `M1_PLAN.md` y en el resumen de pasos de `transcript.md`, manteniendo el mismo conjunto, orden y títulos, sin reproducir los 26 campos en el transcript.**
 
 **El plan definitivo debe estar en español para todo contenido generado por Chat 2, excepto identificadores técnicos y las excepciones documentales/RAW expresamente permitidas.**
 
@@ -4832,1395 +4953,188 @@ Ejecuta ahora:
 
 # FULL ORIGINAL RESEARCH OUTPUT
 
-# FULL ORIGINAL RESEARCH OUTPUT
+## PARTE B — PRODUCCIÓN SUSTANTIVA
 
-## 1. Bootstrap and provenance
+### 1. Bootstrap y estado heredado de Chat 1
 
-Chat 2 recuperó en modo lectura `BOOTSTRAP.md`, `STATE.md`, `DECISIONS.md`, `OPEN_QUESTIONS.md`, `INDEX.md`, `MEMORY_PROTOCOL.md`, `chats/chat-001/META.md`, `chats/chat-001/HANDOFF.md` y `handoffs/chat-001-to-chat-002.md`. Recuperó también los seis registros `DEC-0001.md`…`DEC-0006.md`; se verificó que la decisión histórica máxima era DEC-0006. No se adoptó una nueva decisión sustantiva, por lo que no se creó `DEC-0007.md`.
+Se recuperaron desde `Diiegoal/memory-repo`:
+`BOOTSTRAP.md`, `STATE.md`, `DECISIONS.md`, `OPEN_QUESTIONS.md`, `INDEX.md`, `MEMORY_PROTOCOL.md`, `chats/chat-001/META.md`, `chats/chat-001/HANDOFF.md`, `handoffs/chat-001-to-chat-002.md` y las decisiones DEC-0001…DEC-0006.
 
-El orden heredado verificado desde Chat 1 es: `M1 → M3 → M4 → M2 → M6 → M5 → M7 → M8 → M9 → M10 → M11 → M13`, con M12 reference-only.
+Orden recuperado desde `chats/chat-001/HANDOFF.md`:
+`M1 → M3 → M4 → M2 → M6 → M5 → M7 → M8 → M9 → M10 → M11 → M13`.
 
-## 2. Módulo 1 — resumen exhaustivo de trabajo
+M12 se confirmó como reference-only. Los seis decision records históricos se conservaron sin cambios.
 
-### Archivo 1 — modelo mental de los tres pilares
-M1 plantea que un resultado de ingeniería con copilotos depende de la interacción entre herramienta, contexto/harness y prompt. El modelo no debe considerarse el único factor. Esto fundamenta que una tarea profesional primero se caracterice, después se seleccione la herramienta, se diseñe el contexto y se formule la instrucción. El producto SRE aplica esta lógica a investigación de incidentes, cambios, debugging, exploración y revisión.
+### 2. Resumen exhaustivo de Módulo 1
 
-### Archivo 2 — Pilar 1: La Herramienta
-M1 distingue cuatro categorías de herramientas: A, integradas en IDE; B, terminal/CLI con comportamiento agentic; C, entornos cloud/autónomos; D, herramientas especializadas. También distingue completion de agentic y proporciona reglas para cambiar de modo según la tarea. La selección se apoya en cinco criterios: tamaño/forma del codebase, lenguaje/ecosistema, privacidad/compliance, presupuesto y estilo del desarrollador. Los benchmarks citados incluyen SWE-Bench Verified, SWE-Bench Pro, Aider Polyglot y TerminalBench 2.0; M1 los presenta como señales que deben interpretarse, no como sustituto del contexto. El framework de decisión y los anti-patterns buscan evitar elegir por moda, benchmark aislado, marketing o comodidad no justificada.
+#### Archivo 1 — El modelo mental de los 3 pilares
 
-### Archivo 3 — Pilar 2: El Contexto
-M1 trata el contexto como recurso operativo. Explica context rot y los mecanismos que lo producen. Define reglas prácticas de ventana alrededor de 50/70/90 para actuar preventivamente. Distingue tipos de contexto y promueve un archivo de instrucciones persistentes como AGENTS.md, además de alternativas como CLAUDE.md y otros mecanismos dependientes de herramienta. Presenta buenas prácticas: mantener instrucciones de alto señal, evitar megarchivos, usar revelación progresiva, mantener contexto como código y separar lo persistente de la tarea/sesión. Los mecanismos Write, Select, Compress e Isolate constituyen operaciones diferentes para controlar la ventana. El kit operativo incluye curación, subagentes cuando correspondan y compactación/reset.
+El documento establece que la calidad de trabajo asistido por IA no depende solo del modelo: herramienta/harness, contexto y prompt forman un sistema conjunto. El valor práctico es tratar el entorno de ejecución, la información visible al agente y la forma de expresar la tarea como variables de ingeniería que se diseñan, revisan y mejoran.
 
-### Archivo 4 — Pilar 3: Prompt + Integración
-M1 presenta una anatomía práctica del prompt: rol/contexto, objetivo, success criteria, constraints, resources, output format y aclaración. Distingue usos de prompting y advierte contra vaguedad, micro-management innecesario, mega-prompts, ausencia de criterios de éxito, tareas mezcladas y repetición de AGENTS. La integración incluye cinco patrones de ejecución de coding: spec-driven preview, plan-then-execute, test-first, refactor with anchors y critic loops. Además propone cinco casos canónicos: A gran refactor, B greenfield feature, C debugging, D exploration y E code review. La intención es que tool, context y prompt se seleccionen de manera integrada y que cada ejecución tenga evidencia y validación.
+El material relaciona el enfoque con evidencia sobre productividad/calidad y con disciplinas industriales de contexto y prompting. La aplicación relevante para el proyecto SRE es convertir estos tres elementos en una política de trabajo reproducible para investigar, diseñar, documentar y posteriormente implementar capacidades del agente.
 
-### Archivo 5 — Recursos adicionales
-M1 agrega recursos sobre harness engineering, contexto, AGENTS.md, subagentes, MCP, buenas prácticas de Claude Code y otras fuentes de prompting/context engineering, además de trabajos académicos y benchmarks. Chat 2 los trató como referencias de apoyo y no como reemplazo de las cuatro piezas centrales de M1.
+#### Archivo 2 — Pilar 1: La Herramienta
 
-## 3. Proyecto objetivo — resumen completo de la referencia SRE/DevOps
+El documento clasifica herramientas en cuatro categorías:
+A) IDE,
+B) terminal/CLI agentic,
+C) cloud/autonomous,
+D) especializadas.
 
-La referencia describe un agente SRE/DevOps conversacional y reflexivo que procesa incidentes desde alertas o webhooks hasta resolución y postmortem. El flujo conceptual es: recepción de alerta/incidente → Incident Manager con deduplicación/correlación → agente LangChain/LangGraph → recopilación de evidencia desde métricas, logs, despliegues y sistemas operativos → hipótesis y verificación → propuesta de remediación → aprobación humana cuando corresponde → executor separado → recuperación/verificación → cierre → postmortem.
+Distingue completion de agentic y proporciona reglas para cambiar de modo. La elección debe considerar tamaño y forma del codebase, lenguaje, privacidad/compliance, presupuesto y estilo de trabajo. Se recomienda leer benchmarks como evidencia comparativa, no como garantía individual. Menciona SWE-Bench Verified/Pro, Aider Polyglot y Terminal-Bench 2.0, junto con reglas de evaluación y anti-patterns. El documento también contiene un snapshot de disponibilidad de modelos de abril de 2026.
 
-El agente debe trabajar de forma conversacional y reflexiva: reunir evidencia, formular hipótesis antes de declarar causa, iterar sobre señales y mantener estado persistente del incidente. Se describen estados como INCIDENT_CREATED, TRIAGING, COLLECTING_EVIDENCE, ANALYZING, HYPOTHESIS_CREATED, VERIFYING, REMEDIATION_PROPOSED, WAITING_FOR_APPROVAL, REMEDIATION_EXECUTED, VERIFYING_RECOVERY, RESOLVED y POSTMORTEM.
+La conversión práctica para este proyecto no es “usar una herramienta concreta”, sino establecer un marco que clasifique la tarea y justifique la categoría/modo apropiados, manteniendo posibilidad de reevaluación.
 
-El stack descrito incluye Python 3.14+, uv, FastAPI, Pydantic, SQLAlchemy, PostgreSQL, Redis, HTTPX, Kubernetes Python Client, LangChain, LangGraph, Slack/Slack API, GitHub API, Prometheus API, Grafana/Loki APIs, OpenTelemetry, Docker, Kubernetes y AWS APIs. La referencia también nombra Prometheus, Alertmanager, Grafana, Loki, OpenTelemetry/OTLP/Tempo, GitHub, AWS CloudWatch/ECS/EKS/EC2/Lambda/RDS/ElastiCache/ALB/CloudTrail, PagerDuty/incident.io, ArgoCD, IaC y workers asíncronos.
+#### Archivo 3 — Pilar 2: El Contexto
 
-La persistencia distingue estado y memoria. LangGraph soporta checkpoints/persistencia del estado de ejecución y memoria de larga duración; la arquitectura propuesta usa PostgreSQL para datos operativos/auditoría, con pgvector como opción de evaluación para recuperación semántica. Redis aparece como opción para cola, cache, coordinación o deduplicación según necesidad.
+Explica context rot como deterioro del rendimiento cuando se acumula contexto irrelevante o redundante. Las cifras aproximadas de degradación que aparecen en el material no se tratan como constantes oficiales. El documento enumera tipos de contexto: código relevante, convenciones, estado actual, intención/especificación, restricciones, memoria persistente, documentación externa e historial.
 
-RAG y el historial de incidentes/runbooks constituyen conocimiento operacional. La recuperación semántica debe integrarse con procedencia y trazabilidad. El agente no debe ser una caja negra: el diseño propone observabilidad del propio agente, incluyendo latencia, latencia de herramientas, LLM, tokens/costo, fallos, reintentos, timeouts, iteraciones y esperas de aprobación.
+Propone cuatro estrategias:
+- Write — escribir contexto útil en archivos;
+- Select — seleccionar solo lo pertinente;
+- Compress — compactar cuando sea necesario;
+- Isolate — aislar tareas/subagentes para reducir interferencias.
 
-La seguridad es central: mínimo privilegio, separación entre herramientas read-only y mutación, separación de credenciales, no existe un canal directo LLM→kubectl para acciones de impacto, y las acciones consecuenciales deben pasar por aprobación humana y un executor separado. Recovery verification comprueba el estado después de la acción. Los postmortems convierten incidentes en conocimiento reutilizable.
+Describe `AGENTS.md`, `CLAUDE.md` y `.cursorrules` como convenciones de instrucciones, y recomienda un archivo de entrada corto, curado, enlazado a fuentes profundas, uso de subagentes, compactación/nueva sesión y tratar estos archivos como artefactos de ingeniería. El kit debe mantenerse pequeño, navegable y sujeto a revisión.
 
-Las superficies incluyen Slack como interacción/approval operacional y Streamlit como control center inicial; React/Next.js aparece como posible evolución. CI/CD, Docker, Kubernetes, AWS e IaC se reservan para fases de madurez posteriores. El material también describe evaluación mediante incidentes sintéticos y métricas de uso de herramientas, grounding, seguridad, aprobación, recuperación, latencia, costo y regresión.
+La aplicación al SRE es diseñar el repositorio como mapa de conocimiento, separar contexto estable de contexto situacional y no cargar historial completo por defecto.
 
-Clasificación: esta referencia es **STACK DESCRITO EN LA FUENTE**. Las decisiones de proyecto heredadas de Chat 1 son separadas: read-only-first, PostgreSQL + evaluación de pgvector, Streamlit opcional y seguridad/documentación como gates/loops. Las alternativas futuras no se convirtieron en decisiones nuevas en Chat 2.
+#### Archivo 4 — Pilar 3: El Prompt + Integración
 
-## 4. Repositorio Ejemplo 2 — función de referencia
+El documento recomienda prompts más cortos y directos para modelos modernos de razonamiento; no requiere solicitar chain-of-thought. Introduce delimitadores, XML/Markdown cuando aportan estructura, few-shot solo cuando la demostración aporta valor y framing positivo. Desaconseja megaprompts.
 
-El material revisado del directorio `Proyecto_Final_Master_AI4Devs` contiene ejemplos de proyectos finales y una lección sobre el resultado esperado. Su utilidad en Chat 2 fue únicamente de referencia para estructura/entrega profesional y Agentic SDLC. No se copió arquitectura, código, clases, funciones, archivos ni decisiones. La relación válida se mantuvo como: hecho observado del ejemplo → contexto/aprendizaje → diseño independiente del nuevo proyecto.
+La anatomía propuesta incluye role, context, objective, success criteria, constraints, resources y output/format. También incluye anti-patterns y un flujo de integración basado en:
+spec-driven preview,
+plan-then-execute,
+test-first,
+refactor anchors,
+critic/review loops.
 
-## 5. Decisiones heredadas de Chat 1
+La idea de integración final combina árbol/archivo, contexto, prompt, ejecución futura y revisión en un ciclo de ingeniería con feedback.
 
-- DEC-0001: orden profesional M1 → M3 → M4 → M2 → M6 → M5 → M7 → M8 → M9 → M10 → M11 → M13.
-- DEC-0002: M12 reference-only.
-- DEC-0003: seguridad y documentación son gates + loops.
-- DEC-0004: read-only-first, aprobación humana y executor separado.
-- DEC-0005: PostgreSQL authoritative y evaluación de pgvector antes de vector DB separada.
-- DEC-0006: Streamlit opcional a nivel de producto; Slack como superficie operacional posible.
+#### Archivo 5 — Recursos adicionales
 
-No se modificaron las decisiones históricas.
+Incluye referencias a harness engineering, METR, buenas prácticas de Claude Code, GitHub Models/pricing, Cursor, Cognition, benchmarks, context engineering, AGENTS y buenas prácticas de prompting, OpenAI Cookbook y LangChain. Chat2 los trató como catálogo de referencias y no como instrucciones que puedan cambiar el contrato.
 
-## 6. Matrices y determinación dinámica de pasos
+### 3. Resumen exhaustivo del proyecto Agente SRE / DevOps de referencia
 
-Las cuatro matrices requeridas y los siete registros completos de pasos están dentro de `M1_PLAN.md`. La cantidad surgió de la separación funcional de Pilar 1, el diseño de contexto, la operación de contexto, prompting, patrones de ejecución e integración A-E. La prueba anti-compresión impidió esconder subcapacidades en palabras paraguas; la prueba anti-fragmentación impidió dividir por subtítulos sin una unidad profesional independiente.
+La fuente `6. Agente SRE DevOps Respuesta Incidentes.md` describe un agente conversacional y reflexivo para respuesta de incidentes. El flujo completo es: alerta/webhook → intake y normalización → identificación/fingerprint → deduplicación/correlación → estado del incidente → recopilación de evidencia → formulación de hipótesis → verificación → propuesta de remediación → aprobación humana cuando la acción es consecuencial → ejecución controlada mediante executor separado → verificación de recuperación → resolución → postmortem y generación de conocimiento.
 
-## 7. Resultado final
+La capa de backend/API contempla FastAPI, Uvicorn, Pydantic, SQLAlchemy y Alembic. La capa agentic contempla LangChain y LangGraph, herramientas para observar evidencia y persistencia/checkpoints para workflows largos. PostgreSQL es la persistencia relacional; Redis aparece como opción para cola/cache/coordinación. HTTPX y Kubernetes Python Client aparecen para integraciones. La fuente también cubre Slack API, GitHub API, Prometheus, Grafana/Loki, OpenTelemetry y el ecosistema AWS (APIs, CloudWatch, ECS, EKS, EC2, Lambda, RDS, ElastiCache, ALB, CloudTrail). Docker y Kubernetes soportan empaquetado/despliegue; Alertmanager, PagerDuty/incident.io y ArgoCD aparecen como integraciones del entorno operativo. Runbooks, RAG, historial de incidentes, recuperación semántica y postmortems alimentan la base de conocimiento.
 
-El plan canónico quedó congelado con siete pasos `M1-P01`…`M1-P07`. Todos están `PLANIFICADOS`. El proyecto nuevo sigue sin ejecución.
+En observabilidad, el material menciona Prometheus/Alertmanager, Grafana, Loki, OpenTelemetry/OTLP y Tempo, además de LangSmith para trazas/evaluación del agente. El frontend puede usar Streamlit como control center; Slack funciona como canal operativo; React/Next.js se contempla como evolución de interfaz separada.
 
+La seguridad se basa en mínimo privilegio, separación entre herramientas read-only y herramientas de mutación, human-in-the-loop, aprobación explícita y executor separado con credenciales acotadas. La verificación de recuperación es posterior a la acción y debe producir un estado observable de éxito/fallo. La fuente enfatiza testing, evaluación del agente, trazabilidad, CI/CD, IaC y operación gradual.
 
-# CANONICAL FINAL PLAN
+El inventario se clasifica, para Chat2, de esta forma:
+- EXPLÍCITAMENTE DESCRITO: todo lo anterior cuando aparece en la fuente;
+- ADOPTADO/DECIDIDO EN CHAT1: PostgreSQL authoritative, pgvector como opción evaluada, read-only-first, Streamlit opcional, M12 reference-only;
+- OPCIONAL/ALTERNATIVA: Redis, Streamlit como UI, React/Next.js como evolución, algunas integraciones operativas;
+- EVALUAR: pgvector frente a motor vectorial separado, exacta política de workers/queues, evaluación de escala;
+- RESERVADO PARA ETAPA POSTERIOR: mutación, executor productivo, AWS/Kubernetes de producción-like, IaC avanzado, QA sistémico;
+- NO DETERMINADO: proveedor/modelo LLM, sandbox exacto, corpus de incidentes, SLO/SLI operating model.
 
-# M1_PLAN.md — Chat 2
+### 4. Repositorio Ejemplo 2
 
-## Status
+Se confirmó el repositorio público `LIDR-academy/AI4Devs-finalproject-Example2`, rama `main`, con 73 archivos rastreados y 13 Markdown. El proyecto se documenta como AI Resume Agent: chatbot para portfolio con RAG y captura de leads.
 
-**CONGELADO / PLANIFICADO.** Chat 2 diseñó y auditó el plan, pero no ejecutó el Paso 1 del proyecto y no modificó repositorios externos.
-
-## Dynamic step determination
-
-La cantidad de pasos se determinó después de leer completamente los cinco archivos de M1, realizar el inventario de capacidades/subcapacidades, revisar dependencias y resultados, contrastar las decisiones heredadas de Chat 1, leer el archivo completo de referencia del Agente SRE/DevOps, revisar el Repositorio Ejemplo 2 y ejecutar pruebas de profundidad, independencia, integración, anti-compresión y anti-fragmentación. El conjunto estable emergió en **7 unidades profesionales**. No se usó un número objetivo previo.
-
-## Step sequence
-
-1. M1-P01 — Caracterizar la tarea y determinar el modo de trabajo.
-2. M1-P02 — Seleccionar y evaluar la herramienta mediante criterios verificables.
-3. M1-P03 — Diseñar la arquitectura de contexto persistente del proyecto.
-4. M1-P04 — Gestionar la ventana de contexto y prevenir context rot.
-5. M1-P05 — Diseñar y aplicar prompting fundamental para trabajo de ingeniería.
-6. M1-P06 — Aplicar patrones de ejecución de coding asistido por IA.
-7. M1-P07 — Integrar los tres pilares y validar los cinco casos canónicos de M1.
-
-## Hard boundaries
-
-- M1 es la única fuente de construcción en esta sesión.
-- M12 es referencia-only y no integra el orden de construcción.
-- M3, M4, M2, M6, M5, M7, M8, M9, M10, M11 y M13 quedan fuera de la ejecución de M1.
-- Ningún repositorio externo fue modificado.
-- El Paso 1 del proyecto no fue ejecutado.
-- No se creó código del proyecto para demostrar avance.
-- Las rutas/archivos de proyecto descritos dentro de los pasos son FUTUROS y no afirman existencia actual.
-- No se adoptó una nueva decisión sustantiva en Chat 2.
-
-## Technology scope
-
-| Elemento | Tratamiento en M1 | Razón |
-|---|---|---|
-| Claude Code | PREPARAR COMO BASE PARA FUTURO | M1 enseña herramienta/contexto/prompt y Chat 2 verificó capacidades actuales sin fijarlo como decisión histórica. |
-| AGENTS.md | PREPARAR COMO BASE PARA FUTURO | Instrucciones persistentes de alto señal; mecanismo a aplicar en ejecución futura. |
-| FastAPI | RESERVAR PARA MÓDULO POSTERIOR | Es parte del producto de referencia, pero M1 no lo implementa. |
-| LangChain/LangGraph | RESERVAR PARA MÓDULO POSTERIOR | Contexto del producto; no convertir presencia de stack en implementación de M1. |
-| PostgreSQL/pgvector | RESERVAR PARA MÓDULO POSTERIOR | Decisión DEC-0005 heredada; M1 solo respeta la arquitectura futura. |
-| Redis | RESERVAR PARA MÓDULO POSTERIOR / EVALUAR | OQ-0003 sigue abierta. |
-| Streamlit | PREPARAR COMO BASE PARA FUTURO | DEC-0006: opcional a nivel de producto. |
-| Slack | RESERVAR PARA MÓDULO POSTERIOR | Canal operativo de referencia, no actividad de M1. |
-| Kubernetes/AWS/IaC/Observabilidad | RESERVAR PARA MÓDULOS POSTERIORES | Aparecen en el stack de referencia y roadmap, no como trabajo de M1. |
-
-# Coverage control
-
-M1 quedó cubierto por archivo y por capacidad: modelo de tres pilares; Pilar 1 con A-D, completion/agentic, switch rules, cinco criterios, modelos/benchmarks/framework/anti-patterns; Pilar 2 con tipos de contexto, context rot, 50/70/90, AGENTS.md/alternativas, buenas prácticas y Write/Select/Compress/Isolate; Pilar 3 con anatomy completa, anti-patterns, reasoning context y los cinco patrones de ejecución; e integración A-E. Todo elemento práctico quedó en uno o más pasos; lo conceptual que no constituye actividad independiente se conserva como fundamento explícito.
-
-
-# Matriz — Cobertura de M1
-
-| Archivo M1 | Tema/sección | Concepto | Aplicación práctica | Paso | Artefacto | Validación | Estado |
-|---|---|---|---|---|---|---|---|
-| `1. El modelo mental de los 3 pilares.md` | modelo mental | tool/context/prompt | baseline de trabajo | P01,P03,P05,P07 | registros y baseline M1 | A-E | PLANIFICADO |
-| `2. Pilar 1 — La Herramienta.md` | A-D; completion/agentic; switch | clasificación de tarea | modo de trabajo | P01 | task-mode-record | T01,T02 | PLANIFICADO |
-| `2. Pilar 1 — La Herramienta.md` | cinco criterios | selección contextual | evaluación | P02 | tool-selection | T01 | PLANIFICADO |
-| `2. Pilar 1 — La Herramienta.md` | benchmarks/framework/anti-patterns | señales y reglas | decisión reproducible | P02 | tool-selection | T02,T03 | PLANIFICADO |
-| `3. Pilar 2 — El Contexto.md` | tipos/AGENTS/alternativas | persistencia y precedencia | arquitectura de contexto | P03 | contexto persistente | T01,T02 | PLANIFICADO |
-| `3. Pilar 2 — El Contexto.md` | context rot; 50/70/90 | higiene de ventana | protocolo de operación | P04 | context-operations | T01,T02,T03 | PLANIFICADO |
-| `3. Pilar 2 — El Contexto.md` | Write/Select/Compress/Isolate | operaciones sobre contexto | control de sesión | P04 | context-operations | T01 | PLANIFICADO |
-| `4. Pilar 3 — El Prompt + Integración.md` | anatomy | prompt verificable | prompt kit | P05 | prompt-kit | T01,T02 | PLANIFICADO |
-| `4. Pilar 3 — El Prompt + Integración.md` | cinco patrones | ejecución contextual | playbook | P06 | coding-execution-patterns | T01,T02 | PLANIFICADO |
-| `4. Pilar 3 — El Prompt + Integración.md` | integración A-E | sistema integrado | baseline M1 | P07 | M1_PLAN | T01-T05 | PLANIFICADO |
-| `5. Recursos adicionales.md` | recursos de harness/context/prompt | evidencia complementaria | refinamiento sin cambiar eje M1 | P02-P06 | referencias | procedencia | PLANIFICADO |
-
-
-# Matriz — Dependencias
-
-| Paso | Depende de | Habilita | Tipo de dependencia | Riesgo si se invierte | Evidencia |
-|---|---|---|---|---|---|
-| P01 | tarea + M1 | P02 | conceptual/decisional | herramienta elegida sin entender tarea | Pilar 1 |
-| P02 | P01 | P03 | decisional | elección por moda/benchmark | Pilar 1 |
-| P03 | P01,P02 | P04,P05 | estructural | persistencia mal diseñada | Pilar 2 |
-| P04 | P03 | P05,P07 | operacional | context rot | Pilar 2 |
-| P05 | P03,P04 | P06,P07 | instrumental | prompts ambiguos | Pilar 3 |
-| P06 | P01,P05 | P07 | operacional | patrón inadecuado | Pilar 3 |
-| P07 | P01-P06 | baseline M1 | integración | pilares aislados o cobertura nominal | cinco archivos M1 |
-
-
-# Matriz — Concepto → actividad
-
-| Concepto M1 | Qué significa | Cómo se aplica | Artefacto | Evidencia | Validación |
-|---|---|---|---|---|---|
-| completion vs agentic | grado de autonomía | clasificar antes de ejecutar | task-mode-record | M1 Pilar 1 | T01/T02 P01 |
-| A-D | categorías de herramienta | mapear tarea a categoría | task-mode-record | M1 Pilar 1 | P01 |
-| cinco criterios | selección contextualizada | evaluar tamaño, lenguaje, privacidad, presupuesto, estilo | tool-selection | M1 Pilar 1 | P02 T01 |
-| benchmarks | señales comparativas | leer limitaciones y no ranking universal | tool-selection | M1 Pilar 1/recursos | P02 T02 |
-| context rot | degradación de señal | detectar y actuar antes de perder foco | context-operations | M1 Pilar 2 | P04 T02/T03 |
-| Write/Select/Compress/Isolate | operaciones de contexto | aplicar según condición | context-operations | M1 Pilar 2 | P04 T01 |
-| anatomy prompt | estructura de instrucción | redactar con éxito/constraints/resources/output | prompt-kit | M1 Pilar 3 | P05 T01 |
-| cinco patrones | formas de ejecutar | seleccionar según tarea | coding patterns | M1 Pilar 3 | P06 T01/T02 |
-| integración A-E | aplicación combinada | usar los tres pilares | baseline M1 | Pilar 3/integración | P07 T01-T05 |
-
-
-# Matriz — Paso → resultado
-
-| Paso | Entrada | Actividad | Salida | Evidencia | Criterio de aceptación | Siguiente paso |
-|---|---|---|---|---|---|---|
-| P01 | tarea | clasificar modo/categoría | caracterización | ficha futura | modo + categoría + switch | P02 |
-| P02 | P01 + criterios | evaluar herramienta | selección reproducible | ficha futura | 5 criterios + fuentes | P03 |
-| P03 | P01/P02 | diseñar contexto | arquitectura de contexto | esquema futuro | capas/precedencia/exclusiones | P04 |
-| P04 | P03 | gestionar ventana | protocolo anti-rot | pruebas futuras | W/S/C/I + 50/70/90 | P05 |
-| P05 | contexto + tarea | redactar prompt | prompt operativo | ejemplos futuros | anatomy completa | P06 |
-| P06 | tarea + prompt | elegir patrón | playbook | pruebas futuras | cinco patrones cubiertos | P07 |
-| P07 | P01-P06 | integrar A-E y refutar plan | baseline M1 | M1_PLAN + transcript | A-E completos y trazables | INDEPENDIENTE como cierre de M1; alimenta etapas posteriores |
-
-
-# M1 Step Records
-
-## Paso 01 — Caracterizar la tarea y determinar el modo de trabajo
-
-### 1. Identification
-- ID del paso: `M1-P01` (01 asignado después de estabilizar el conjunto final).
-- Fase: Fase A — Construcción cognitiva del plan
-- Subfase: Caracterización operativa
-- Estado: PLANIFICADO
-- Tipo de paso: Diseño y planificación operativa
-
-### 2. Objective
-- Objetivo exacto del paso: Caracterizar la tarea y determinar el modo de trabajo.
-
-### 3. Direct relation to M1
-- Archivo(s) de M1: `Módulo_1.../1. El modelo mental de los 3 pilares.md`; `Módulo_1.../2. Pilar 1 — La Herramienta.md`
-- Sección(es)/tema(s): Modelo de tres pilares; Pilar 1: categorías A-D, completion vs agentic y reglas para cambiar de modo.
-- Concepto(s) de M1: Herramienta, contexto y prompt como pilares; clasificación A-D; completion; agentic.
-- Relación directa: Antes de seleccionar una herramienta se caracteriza qué tipo de trabajo se realizará, qué autonomía requiere y qué modo es coherente con la tarea.
-
-### 4. Prerequisites
-- Conocimientos previos: Comprender qué es una tarea de ingeniería y la diferencia operacional entre completion y agentic.
-- Condiciones previas: Existencia de un escenario real del producto que pueda describirse sin implementar nada.
-- Evidencia o artefactos necesarios: M1 leído completo; descripción del producto SRE y sus tipos de tareas como contexto.
-
-### 5. Dependencies
-- Depende de: INDEPENDIENTE; constituye la entrada de P02.
-- Habilita: P02: evaluación de herramienta con criterio contextual.
-- Tipo de dependencia: Conceptual/decisional
-- Riesgo si se altera el orden: Elegir una herramienta por moda antes de conocer la forma real de la tarea.
-
-### 6. Preparation
-- Preparación necesaria: Describir el objetivo de la tarea, restricciones, autonomía requerida y resultado observable.
-- Entorno: Futura copia de trabajo del proyecto; ninguna ejecución productiva durante Chat 2.
-- Información que debe estar disponible: Tarea, restricciones, riesgo de acciones, necesidad de exploración o modificación.
-
-### 7. Files
-- Archivos que se leerán: Los dos archivos M1 indicados en Direct relation; no se leerán archivos del proyecto externo en modo escritura.
-- Archivos que se crearán en la ejecución futura: FUTURO: ficha `task-mode-record.md`.
-- Archivos que se modificarían en la ejecución futura: NO APLICA EN CHAT 2.
-- Ubicación exacta de cada archivo: FUTURO: `<PROJECT_ROOT>/docs/ai-engineering/task-mode-record.md`.
-
-### 8. Directory structure
-```text
-<PROJECT_ROOT>/
-└── docs/ai-engineering/
-    └── task-mode-record.md  # FUTURO
-```
-
-### 9. Required concepts
-- Concepto: Categorías A-D; completion vs agentic; condición explícita para cambiar de modo.
-- Explicación necesaria: Antes de seleccionar una herramienta se caracteriza qué tipo de trabajo se realizará, qué autonomía requiere y qué modo es coherente con la tarea.
-- Nivel requerido para ejecutar el paso: suficiente para aplicar M1 sin implementar capacidades propias de módulos posteriores.
-
-### 10. Commands
-```text
-git status --short
-find . -maxdepth 2 -type f -print | sort
-```
-Estos comandos son FUTUROS y solo se ejecutarán al iniciar el paso en el repositorio de trabajo; no se ejecutaron sobre el proyecto durante Chat 2.
-- Ubicación desde la que se ejecuta cada comando: Raíz del proyecto durante la ejecución futura.
-- Resultado esperado: Inventario observable del estado del proyecto antes de actuar.
-- Verificación: Comparar con la evidencia registrada y confirmar que el escenario corresponde al modo elegido.
-
-### 11. Code
-```text
-NO SE CREA CÓDIGO EN CHAT 2.
-```
-- Propósito: El plan define código futuro solo cuando M1 lo permita; aquí el producto de la actividad es la caracterización, no código.
-- Partes relevantes: No aplica a implementación; la unidad es decisional.
-- Personalización requerida: Personalizar el escenario y las restricciones reales del incidente o tarea.
-
-### 12. Action
-- Acción concreta que se realizará: Registrar la tarea; clasificar A-D; decidir completion o agentic; registrar cuándo cambiaría el modo.
-- Orden de ejecución: 1) describir; 2) clasificar; 3) elegir modo; 4) registrar condición de cambio.
-- Entrada utilizada: Escenario de trabajo del producto SRE.
-- Salida producida: Caracterización de tarea verificable.
-
-### 13. Reason
-- Por qué se realiza esta acción: M1 exige que herramienta y modo respondan a la naturaleza del trabajo.
-- Qué problema resuelve: Evita comenzar con una herramienta o un patrón de autonomía que no corresponde al problema.
-- Por qué corresponde a M1: Es aplicación directa del Pilar 1 y no adelanta implementación posterior.
-
-### 14. Expected result
-- Resultado esperado: Ficha completa con categoría y modo justificados.
-- Estado esperado: Caracterización lista para alimentar P02.
-- Evidencia esperada: Registro futuro de la clasificación y su fuente M1.
-- Memoria incremental del paso: ZIP incremental futuro con la ficha y evidencia acumuladas para P02.
-
-### 15. Evidence
-- Evidencia que demuestra el resultado: La evidencia futura será la ficha y el caso utilizado; no existe ejecución del paso ahora.
-- Fuente de la evidencia: M1 archivo 1 y 2; escenario del producto.
-- Cómo se conservará: Guardar ficha y relación de fuente en la memoria del paso.
-
-### 16. Validation
-- Qué se debe verificar: Categoría A-D, completion/agentic, condición de cambio y correspondencia con la tarea.
-- Cómo se verifica: Revisión contra M1 y contra el escenario; comprobar que no se eligió modo por preferencia.
-- Resultado esperado de la validación: PASS solo con clasificación completa y justificable.
-
-### 17. Acceptance criteria
-- Criterio 1: La tarea tiene categoría A-D explícita.
-- Criterio 2: El modo completion/agentic está justificado.
-- Criterio 3: Existe criterio para cambiar de modo si cambia la tarea.
-
-### 18. Tests
-- ID de prueba: Ver T01…T05 dentro del campo; todas están PLANIFICADAS
-- Capacidad/subcapacidad cubierta: Herramienta, contexto y prompt como pilares; clasificación A-D; completion; agentic.
-- Prueba: qué se hará para comprobarla: **T01 — Categorías A-D.** Prueba: clasificar cuatro escenarios (IDE, CLI agentic, cloud standalone, especializado). Entrada: cuatro descripciones de tareas. Resultado esperado: 4/4 categorías justificadas. Condición de aprobación: ninguna queda sin clasificación.
-**T02 — Completion vs agentic.** Prueba: comparar una tarea dirigida y una investigación con acciones encadenadas. Entrada: dos escenarios. Resultado esperado: modo y switch correctos. Condición de aprobación: ambas justificaciones coinciden con M1.
-- Entrada: datos, escenario, estado, archivo o configuración sobre la que se ejecutará: Escenario futuro definido en cada T; ninguna prueba del paso fue ejecutada durante Chat 2.
-- Resultado esperado: los resultados observables indicados en cada T; PASS/FAIL determinado por la condición explícita de cada prueba.
-- Condición de aprobación: se cumplen las condiciones PASS de todas las pruebas aplicables; `NO APLICA` no se usa para evitar una prueba posible.
-- Estado de la prueba durante Chat 2: PLANIFICADA
-
-### 19. Expected errors
-- Error plausible: Clasificación incorrecta del modo.
-- Cuándo podría aparecer: Cuando la tarea requiera autonomía o secuencia que no se reflejó en la ficha.
-- Síntoma: Herramienta/modo no corresponde al trabajo.
-
-### 20. Detection
-- Cómo detectar el error: Comparar objetivo real con la clasificación M1.
-- Evidencia del error: Ficha y descripción del escenario.
-- Señal observable: Desajuste entre trabajo requerido y modo.
-
-### 21. Meaning
-- Qué significa el error o resultado: La caracterización inicial no sirve como base de selección.
-- Qué parte del proceso afecta: P01 y cualquier selección posterior.
-
-### 22. Diagnosis
-- Causa probable: Confundir complejidad con autonomía o ignorar la clase de herramienta.
-- Evidencia que confirma o descarta la causa: Repetir clasificación con categorías y condiciones del Pilar 1.
-- Orden de diagnóstico: Objetivo → autonomía → categoría → modo → switch.
-
-### 23. Correction
-- Corrección: Reclasificar antes de seleccionar herramienta.
-- Acción concreta: Modificar la ficha futura y registrar el motivo.
-- Verificación posterior: Revalidar clasificación con el mismo escenario.
-- Riesgos de la corrección: Elegir un modo diferente puede cambiar el flujo de trabajo futuro.
-
-### 24. Close checklist
-- [ ] Objetivo cumplido.
-- [ ] Dependencias satisfechas.
-- [ ] Archivos comprobados.
-- [ ] Validación completada.
-- [ ] Criterios de aceptación cumplidos.
-- [ ] Evidencia conservada.
-- [ ] Trazabilidad completada.
-- [ ] Estado actualizado.
-
-### 25. Traceability
-- M1 → archivo → sección/tema → concepto: `Módulo_1.../1. El modelo mental de los 3 pilares.md`; `Módulo_1.../2. Pilar 1 — La Herramienta.md` → Modelo de tres pilares; Pilar 1: categorías A-D, completion vs agentic y reglas para cambiar de modo. → Herramienta, contexto y prompt como pilares; clasificación A-D; completion; agentic..
-- Concepto → actividad: Registrar la tarea; clasificar A-D; decidir completion o agentic; registrar cuándo cambiaría el modo.
-- Actividad → paso: M1-P01
-- Paso → artefacto: FUTURO: ficha `task-mode-record.md`.
-- Paso → evidencia: La evidencia futura será la ficha y el caso utilizado; no existe ejecución del paso ahora.
-- Paso → validación: Categoría A-D, completion/agentic, condición de cambio y correspondencia con la tarea.
-- Paso → memoria ZIP incremental: ZIP incremental futuro con la ficha y evidencia acumuladas para P02.
-- Paso → siguiente paso: P02 depende de esta salida; no hay dependencia artificial con fases posteriores.
-- Fuente externa → fecha de consulta → URL/recurso → afirmación soportada, cuando corresponda: ver `knowledge/facts/external-research.md` y `knowledge/references/reference-index.md`; consulta 2026-09-30 para OpenAI Harness, AGENTS.md y Claude Code.
-
-### 26. State
-- Estado inicial: Estado de diseño; P01 no ejecutado.
-- Estado final esperado: Ficha de caracterización lista para ejecución futura.
-- Estado real: PLANIFICADO; no se ejecutó el Paso 1 del proyecto ni se modificó un repositorio externo.
-- Qué queda pendiente: Aplicar la ficha a un escenario real en la ejecución futura.
-- Relación con el siguiente paso: P02 depende de esta salida; no hay dependencia artificial con fases posteriores.
-## Paso 02 — Seleccionar y evaluar la herramienta mediante criterios verificables
-
-### 1. Identification
-- ID del paso: `M1-P02` (02 asignado después de estabilizar el conjunto final).
-- Fase: Fase A — Construcción cognitiva del plan
-- Subfase: Evaluación de herramienta
-- Estado: PLANIFICADO
-- Tipo de paso: Evaluación y decisión operativa
-
-### 2. Objective
-- Objetivo exacto del paso: Seleccionar y evaluar la herramienta mediante criterios verificables.
-
-### 3. Direct relation to M1
-- Archivo(s) de M1: `Módulo_1.../2. Pilar 1 — La Herramienta.md`; `Módulo_1.../5. Recursos adicionales.md`
-- Sección(es)/tema(s): Cinco criterios; modelos; benchmarks; framework de decisión; anti-patterns.
-- Concepto(s) de M1: Tamaño/forma del codebase, lenguaje, privacidad/compliance, presupuesto, estilo; SWE-Bench Verified/Pro, Aider Polyglot, TerminalBench 2.0.
-- Relación directa: Separa la selección/evaluación de la caracterización de tarea y obliga a justificar la herramienta con contexto y evidencia.
-
-### 4. Prerequisites
-- Conocimientos previos: P01 caracterizado en ejecución futura; conocimiento de los cinco criterios de M1.
-- Condiciones previas: Fuentes vigentes y candidatas reales verificables durante la ejecución del paso.
-- Evidencia o artefactos necesarios: M1 Pilar 1; fuentes externas consultadas por Chat 2: OpenAI Harness, AGENTS.md y Claude Code, solo como contexto de capacidades.
-
-### 5. Dependencies
-- Depende de: P01
-- Habilita: P03: diseñar contexto compatible con la herramienta seleccionada.
-- Tipo de dependencia: Decisional/evaluación
-- Riesgo si se altera el orden: Elección basada solo en benchmark, marca o hábito.
-
-### 6. Preparation
-- Preparación necesaria: Definir candidatas y aplicar los cinco criterios uno por uno; usar benchmarks como señales, no como ranking universal.
-- Entorno: Entorno futuro del proyecto y documentación actual de candidatas.
-- Información que debe estar disponible: Restricciones técnicas, privacidad, presupuesto, estilo del trabajo y forma del codebase.
-
-### 7. Files
-- Archivos que se leerán: M1 Pilar 1 y recursos actuales relevantes.
-- Archivos que se crearán en la ejecución futura: FUTURO: `tool-selection.md`.
-- Archivos que se modificarían en la ejecución futura: NO APLICA EN CHAT 2.
-- Ubicación exacta de cada archivo: FUTURO: `<PROJECT_ROOT>/docs/ai-engineering/tool-selection.md`.
-
-### 8. Directory structure
-```text
-<PROJECT_ROOT>/
-└── docs/ai-engineering/
-    ├── task-mode-record.md
-    └── tool-selection.md  # FUTURO
-```
-
-### 9. Required concepts
-- Concepto: Cinco criterios; lectura de benchmarks; framework de decisión; anti-patterns.
-- Explicación necesaria: Separa la selección/evaluación de la caracterización de tarea y obliga a justificar la herramienta con contexto y evidencia.
-- Nivel requerido para ejecutar el paso: suficiente para aplicar M1 sin implementar capacidades propias de módulos posteriores.
-
-### 10. Commands
-```text
-git status --short
-```
-FUTURO: no se ejecutó una selección dentro del repositorio objetivo durante Chat 2.
-- Ubicación desde la que se ejecuta cada comando: Raíz del proyecto en ejecución futura.
-- Resultado esperado: Estado del repo antes de crear el registro.
-- Verificación: Comprobar que el registro tiene procedencia y fecha.
-
-### 11. Code
-```text
-NO SE IMPLEMENTA CÓDIGO EN CHAT 2.
-```
-- Propósito: La salida es una evaluación reproducible, no una implementación.
-- Partes relevantes: Cinco dimensiones, benchmarks y anti-patterns.
-- Personalización requerida: Personalizar criterios con restricciones reales del producto.
-
-### 12. Action
-- Acción concreta que se realizará: Comparar candidatas usando los cinco criterios; consultar benchmarks; revisar anti-patterns; formular elección documentada.
-- Orden de ejecución: P01 → cinco criterios → señales de benchmark → anti-patterns → decisión documentada.
-- Entrada utilizada: Caracterización de P01 y candidatas verificables.
-- Salida producida: Registro de selección reproducible.
-
-### 13. Reason
-- Por qué se realiza esta acción: M1 establece una selección contextual, no universal.
-- Qué problema resuelve: Evita dependencia de una herramienta por moda o benchmark aislado.
-- Por qué corresponde a M1: Es desarrollo práctico del Pilar 1.
-
-### 14. Expected result
-- Resultado esperado: Ficha completa con cinco criterios, señales, trade-offs y anti-patterns revisados.
-- Estado esperado: Criterio de selección reproducible.
-- Evidencia esperada: Registro y fuentes usadas.
-- Memoria incremental del paso: ZIP incremental futuro con evaluación y fuentes para P03.
-
-### 15. Evidence
-- Evidencia que demuestra el resultado: La evidencia actual es documental: M1 y fuentes externas; la ficha de proyecto será futura.
-- Fuente de la evidencia: M1 Pilar 1; referencias R01 y documentación oficial consultada.
-- Cómo se conservará: Persistir ficha y URLs/versiones cuando aplique.
-
-### 16. Validation
-- Qué se debe verificar: Presencia de los cinco criterios y ausencia de una selección basada solo en benchmark.
-- Cómo se verifica: Revisión criterio por criterio y anti-pattern check.
-- Resultado esperado de la validación: PASS con 5/5 criterios y procedencia clara.
-
-### 17. Acceptance criteria
-- Criterio 1: Los cinco criterios aparecen explícitos.
-- Criterio 2: Los benchmarks se usan como señales y no como sustituto del contexto.
-- Criterio 3: La elección futura tiene trazabilidad y anti-pattern checks.
-
-### 18. Tests
-- ID de prueba: Ver T01…T05 dentro del campo; todas están PLANIFICADAS
-- Capacidad/subcapacidad cubierta: Tamaño/forma del codebase, lenguaje, privacidad/compliance, presupuesto, estilo; SWE-Bench Verified/Pro, Aider Polyglot, TerminalBench 2.0.
-- Prueba: qué se hará para comprobarla: **T01 — Cinco criterios.** Entrada: una candidata y restricciones del proyecto. Resultado: 5/5 dimensiones documentadas. PASS: ninguna dimensión vacía.
-**T02 — Benchmarks.** Entrada: resultados disponibles de SWE-Bench/Aider/TerminalBench. Resultado: limitaciones y utilidad descritas. PASS: no se presenta benchmark como ranking universal.
-**T03 — Anti-patterns.** Entrada: ficha de elección. Resultado: detectar elección por moda o marca. PASS: todos los anti-patterns aplicables quedan tratados.
-- Entrada: datos, escenario, estado, archivo o configuración sobre la que se ejecutará: Escenario futuro definido en cada T; ninguna prueba del paso fue ejecutada durante Chat 2.
-- Resultado esperado: los resultados observables indicados en cada T; PASS/FAIL determinado por la condición explícita de cada prueba.
-- Condición de aprobación: se cumplen las condiciones PASS de todas las pruebas aplicables; `NO APLICA` no se usa para evitar una prueba posible.
-- Estado de la prueba durante Chat 2: PLANIFICADA
-
-### 19. Expected errors
-- Error plausible: Evaluación sin trazabilidad.
-- Cuándo podría aparecer: Cuando falta una dimensión o fuente.
-- Síntoma: No puede reconstruirse la elección.
-
-### 20. Detection
-- Cómo detectar el error: Auditar los cinco criterios y la procedencia.
-- Evidencia del error: Ficha y fuentes.
-- Señal observable: Campo sin evidencia.
-
-### 21. Meaning
-- Qué significa el error o resultado: La elección no es reproducible.
-- Qué parte del proceso afecta: P02 y selección posterior.
-
-### 22. Diagnosis
-- Causa probable: Aplicación incompleta del framework.
-- Evidencia que confirma o descarta la causa: Revisión de los cinco criterios.
-- Orden de diagnóstico: Criterios → evidencia → benchmark → anti-patterns → conclusión.
-
-### 23. Correction
-- Corrección: Completar la dimensión faltante o declarar información insuficiente.
-- Acción concreta: No congelar la herramienta hasta completar evidencia.
-- Verificación posterior: Revalidar la ficha.
-- Riesgos de la corrección: Retrasa el paso siguiente, pero evita acoplamiento prematuro.
-
-### 24. Close checklist
-- [ ] Objetivo cumplido.
-- [ ] Dependencias satisfechas.
-- [ ] Archivos comprobados.
-- [ ] Validación completada.
-- [ ] Criterios de aceptación cumplidos.
-- [ ] Evidencia conservada.
-- [ ] Trazabilidad completada.
-- [ ] Estado actualizado.
-
-### 25. Traceability
-- M1 → archivo → sección/tema → concepto: `Módulo_1.../2. Pilar 1 — La Herramienta.md`; `Módulo_1.../5. Recursos adicionales.md` → Cinco criterios; modelos; benchmarks; framework de decisión; anti-patterns. → Tamaño/forma del codebase, lenguaje, privacidad/compliance, presupuesto, estilo; SWE-Bench Verified/Pro, Aider Polyglot, TerminalBench 2.0..
-- Concepto → actividad: Comparar candidatas usando los cinco criterios; consultar benchmarks; revisar anti-patterns; formular elección documentada.
-- Actividad → paso: M1-P02
-- Paso → artefacto: FUTURO: `tool-selection.md`.
-- Paso → evidencia: La evidencia actual es documental: M1 y fuentes externas; la ficha de proyecto será futura.
-- Paso → validación: Presencia de los cinco criterios y ausencia de una selección basada solo en benchmark.
-- Paso → memoria ZIP incremental: ZIP incremental futuro con evaluación y fuentes para P03.
-- Paso → siguiente paso: P03 consume las restricciones y capacidades de la herramienta seleccionada.
-- Fuente externa → fecha de consulta → URL/recurso → afirmación soportada, cuando corresponda: ver `knowledge/facts/external-research.md` y `knowledge/references/reference-index.md`; consulta 2026-09-30 para OpenAI Harness, AGENTS.md y Claude Code.
-
-### 26. State
-- Estado inicial: P01 planificado, evaluación aún no ejecutada.
-- Estado final esperado: Registro de elección reproducible listo para alimentar P03.
-- Estado real: PLANIFICADO. No se seleccionó un proveedor/modelo como decisión de Chat 2.
-- Qué queda pendiente: Evaluar candidatas en ejecución futura.
-- Relación con el siguiente paso: P03 consume las restricciones y capacidades de la herramienta seleccionada.
-## Paso 03 — Diseñar la arquitectura de contexto persistente del proyecto
-
-### 1. Identification
-- ID del paso: `M1-P03` (03 asignado después de estabilizar el conjunto final).
-- Fase: Fase A — Construcción cognitiva del plan
-- Subfase: Arquitectura de contexto
-- Estado: PLANIFICADO
-- Tipo de paso: Diseño de contexto y memoria operativa
-
-### 2. Objective
-- Objetivo exacto del paso: Diseñar la arquitectura de contexto persistente del proyecto.
-
-### 3. Direct relation to M1
-- Archivo(s) de M1: `Módulo_1.../3. Pilar 2 — El Contexto.md`; `Módulo_1.../1. El modelo mental de los 3 pilares.md`
-- Sección(es)/tema(s): Tipos de contexto; contexto persistente; AGENTS.md; alternativas; buenas prácticas.
-- Concepto(s) de M1: Persistente, tarea, sesión; instrucciones de repositorio; high-signal context; precedencia.
-- Relación directa: Diseña el contexto antes de operar su ventana: qué debe persistir, qué pertenece a la tarea y qué es efímero.
-
-### 4. Prerequisites
-- Conocimientos previos: P01/P02 conceptualmente resueltos; comprensión básica de repositorios e instrucciones persistentes.
-- Condiciones previas: Definición de qué herramienta será usada en ejecución futura; no requiere código.
-- Evidencia o artefactos necesarios: M1 Pilar 2; documentación oficial actual consultada de AGENTS.md y Claude Code como corroboración de mecanismos.
-
-### 5. Dependencies
-- Depende de: P01 y P02
-- Habilita: P04: higiene de ventana; P05: prompting sobre contexto controlado.
-- Tipo de dependencia: Estructural
-- Riesgo si se altera el orden: Mezclar estado, conocimiento, tarea y reglas en un único archivo gigante.
-
-### 6. Preparation
-- Preparación necesaria: Separar capas de contexto; definir fuente persistente y formato de alto señal; declarar exclusiones.
-- Entorno: Futura copia de proyecto.
-- Información que debe estar disponible: Reglas de repositorio, contexto operativo, exclusiones y límites de seguridad.
-
-### 7. Files
-- Archivos que se leerán: M1 Pilar 2 y recursos relacionados.
-- Archivos que se crearán en la ejecución futura: FUTURO: `AGENTS.md` y/o archivo equivalente según herramienta realmente seleccionada.
-- Archivos que se modificarían en la ejecución futura: FUTURO: instrucciones de repositorio, si la herramienta lo requiere.
-- Ubicación exacta de cada archivo: FUTURO: `<PROJECT_ROOT>/AGENTS.md` o mecanismo equivalente documentado; no se crea en Chat 2.
-
-### 8. Directory structure
-```text
-<PROJECT_ROOT>/
-└── AGENTS.md  # FUTURO; proveedor/herramienta puede cambiar la ubicación.
-```
-
-### 9. Required concepts
-- Concepto: Tipos de contexto; precedencia; high-signal; diferencia entre persistencia y contexto de tarea.
-- Explicación necesaria: Diseña el contexto antes de operar su ventana: qué debe persistir, qué pertenece a la tarea y qué es efímero.
-- Nivel requerido para ejecutar el paso: suficiente para aplicar M1 sin implementar capacidades propias de módulos posteriores.
-
-### 10. Commands
-```text
-find . -maxdepth 2 -name "AGENTS.md" -o -name "CLAUDE.md" | sort
-```
-FUTURO.
-- Ubicación desde la que se ejecuta cada comando: Raíz futura del proyecto.
-- Resultado esperado: Detecta mecanismos de instrucciones ya existentes antes de introducir otro.
-- Verificación: Comparar resultado con la política de contexto.
-
-### 11. Code
-```text
-NO SE IMPLEMENTA EL PROYECTO EN CHAT 2.
-```
-- Propósito: La actividad produce una arquitectura de contexto, no código de negocio.
-- Partes relevantes: Persistencia, tarea, sesión, instrucciones y exclusiones.
-- Personalización requerida: Adaptar el archivo persistente a la herramienta realmente seleccionada.
-
-### 12. Action
-- Acción concreta que se realizará: Clasificar los artefactos por capa de contexto y diseñar el mecanismo persistente de alta señal.
-- Orden de ejecución: 1) clasificar; 2) elegir mecanismo; 3) definir contenido; 4) definir exclusiones; 5) revisar precedencia.
-- Entrada utilizada: Restricciones de P01/P02 y artefactos de contexto.
-- Salida producida: Arquitectura de contexto persistente.
-
-### 13. Reason
-- Por qué se realiza esta acción: El Pilar 2 trata el contexto como parte del sistema de ingeniería.
-- Qué problema resuelve: Evita contaminación y ambigüedad de instrucciones desde el inicio.
-- Por qué corresponde a M1: Es aplicación directa del Pilar 2 sin adelantar M5.
-
-### 14. Expected result
-- Resultado esperado: Modelo de contexto con capas, precedencia y contenido de alta señal.
-- Estado esperado: Contexto diseñado para operar en P04/P05.
-- Evidencia esperada: Esquema y prueba futura de precedencia.
-- Memoria incremental del paso: ZIP incremental futuro con arquitectura de contexto.
-
-### 15. Evidence
-- Evidencia que demuestra el resultado: La evidencia en Chat 2 es documental; el archivo de proyecto será futuro.
-- Fuente de la evidencia: M1 Pilar 2 + AGENTS.md/Claude Code oficiales.
-- Cómo se conservará: Persistir esquema y fuente de mecanismo.
-
-### 16. Validation
-- Qué se debe verificar: Separación persistente/tarea/sesión; mecanismo de instrucciones; ausencia de secretos.
-- Cómo se verifica: Auditar categorías y precedencia.
-- Resultado esperado de la validación: PASS si las capas no se mezclan.
-
-### 17. Acceptance criteria
-- Criterio 1: Cada artefacto tiene capa de contexto.
-- Criterio 2: La fuente persistente y su precedencia están definidas.
-- Criterio 3: El diseño evita secretos y estado efímero en instrucciones persistentes.
-
-### 18. Tests
-- ID de prueba: Ver T01…T05 dentro del campo; todas están PLANIFICADAS
-- Capacidad/subcapacidad cubierta: Persistente, tarea, sesión; instrucciones de repositorio; high-signal context; precedencia.
-- Prueba: qué se hará para comprobarla: **T01 — Tipos.** Entrada: lista de artefactos. Resultado: 100% clasificados como persistente/tarea/sesión. PASS: no quedan ambiguos.
-**T02 — Instrucciones.** Entrada: borrador de alta señal. Resultado: solo reglas/contexto estable. PASS: no incluye secretos ni histórico efímero.
-- Entrada: datos, escenario, estado, archivo o configuración sobre la que se ejecutará: Escenario futuro definido en cada T; ninguna prueba del paso fue ejecutada durante Chat 2.
-- Resultado esperado: los resultados observables indicados en cada T; PASS/FAIL determinado por la condición explícita de cada prueba.
-- Condición de aprobación: se cumplen las condiciones PASS de todas las pruebas aplicables; `NO APLICA` no se usa para evitar una prueba posible.
-- Estado de la prueba durante Chat 2: PLANIFICADA
-
-### 19. Expected errors
-- Error plausible: Contexto persistente sobredimensionado.
-- Cuándo podría aparecer: Cuando instrucciones contienen tareas, histórico o detalle operacional cambiante.
-- Síntoma: Cada llamada arrastra ruido innecesario.
-
-### 20. Detection
-- Cómo detectar el error: Revisar categorías y longitud del archivo.
-- Evidencia del error: Borrador de instrucciones.
-- Señal observable: Mezcla de capas.
-
-### 21. Meaning
-- Qué significa el error o resultado: La persistencia está usándose como contenedor universal.
-- Qué parte del proceso afecta: P03-P05.
-
-### 22. Diagnosis
-- Causa probable: No distinguir persistencia de contexto de tarea.
-- Evidencia que confirma o descarta la causa: Clasificación por capa.
-- Orden de diagnóstico: Contenido → permanencia → frecuencia → ubicación.
-
-### 23. Correction
-- Corrección: Mover contenido a la capa correcta.
-- Acción concreta: Reubicar en el artefacto futuro correspondiente.
-- Verificación posterior: Revisar que las instrucciones permanezcan de alta señal.
-- Riesgos de la corrección: Cambiar ubicación puede requerir actualizar referencias.
-
-### 24. Close checklist
-- [ ] Objetivo cumplido.
-- [ ] Dependencias satisfechas.
-- [ ] Archivos comprobados.
-- [ ] Validación completada.
-- [ ] Criterios de aceptación cumplidos.
-- [ ] Evidencia conservada.
-- [ ] Trazabilidad completada.
-- [ ] Estado actualizado.
-
-### 25. Traceability
-- M1 → archivo → sección/tema → concepto: `Módulo_1.../3. Pilar 2 — El Contexto.md`; `Módulo_1.../1. El modelo mental de los 3 pilares.md` → Tipos de contexto; contexto persistente; AGENTS.md; alternativas; buenas prácticas. → Persistente, tarea, sesión; instrucciones de repositorio; high-signal context; precedencia..
-- Concepto → actividad: Clasificar los artefactos por capa de contexto y diseñar el mecanismo persistente de alta señal.
-- Actividad → paso: M1-P03
-- Paso → artefacto: FUTURO: `AGENTS.md` y/o archivo equivalente según herramienta realmente seleccionada.
-- Paso → evidencia: La evidencia en Chat 2 es documental; el archivo de proyecto será futuro.
-- Paso → validación: Separación persistente/tarea/sesión; mecanismo de instrucciones; ausencia de secretos.
-- Paso → memoria ZIP incremental: ZIP incremental futuro con arquitectura de contexto.
-- Paso → siguiente paso: P04 depende de esta arquitectura.
-- Fuente externa → fecha de consulta → URL/recurso → afirmación soportada, cuando corresponda: ver `knowledge/facts/external-research.md` y `knowledge/references/reference-index.md`; consulta 2026-09-30 para OpenAI Harness, AGENTS.md y Claude Code.
-
-### 26. State
-- Estado inicial: P01/P02 planificados.
-- Estado final esperado: Arquitectura de contexto preparada para ejecución futura.
-- Estado real: PLANIFICADO; no se creó AGENTS.md en el proyecto.
-- Qué queda pendiente: Aplicar el diseño a la herramienta elegida.
-- Relación con el siguiente paso: P04 depende de esta arquitectura.
-## Paso 04 — Gestionar la ventana de contexto y prevenir context rot
-
-### 1. Identification
-- ID del paso: `M1-P04` (04 asignado después de estabilizar el conjunto final).
-- Fase: Fase A — Construcción cognitiva del plan
-- Subfase: Operación de contexto
-- Estado: PLANIFICADO
-- Tipo de paso: Operación iterativa de contexto
-
-### 2. Objective
-- Objetivo exacto del paso: Gestionar la ventana de contexto y prevenir context rot.
-
-### 3. Direct relation to M1
-- Archivo(s) de M1: `Módulo_1.../3. Pilar 2 — El Contexto.md`
-- Sección(es)/tema(s): Context rot; mecanismos; reglas 50/70/90; Write/Select/Compress/Isolate; kit operativo.
-- Concepto(s) de M1: Degradación por contexto; umbrales; selección; escritura; compresión; aislamiento; reset/compactación.
-- Relación directa: Convierte el diseño de contexto de P03 en una práctica recurrente para mantener señal y evitar degradación.
-
-### 4. Prerequisites
-- Conocimientos previos: P03 diseñado; comprensión de que contexto útil y tamaño de ventana deben gestionarse.
-- Condiciones previas: Sesión futura que permita observar crecimiento/ruido; no se ejecuta ahora.
-- Evidencia o artefactos necesarios: M1 Pilar 2 completo.
-
-### 5. Dependencies
-- Depende de: P03
-- Habilita: P05 y P07; gestión repetible de sesiones.
-- Tipo de dependencia: Operacional/iterativo
-- Riesgo si se altera el orden: Dejar crecer el contexto hasta que el modelo pierda foco.
-
-### 6. Preparation
-- Preparación necesaria: Definir señales de ruido; aplicar 50/70/90; usar Write/Select/Compress/Isolate según condición.
-- Entorno: Futura sesión de herramienta.
-- Información que debe estar disponible: Estado de ventana, señal de tarea y mecanismos disponibles por herramienta.
-
-### 7. Files
-- Archivos que se leerán: M1 Pilar 2.
-- Archivos que se crearán en la ejecución futura: FUTURO: `context-operations.md`.
-- Archivos que se modificarían en la ejecución futura: FUTURO: protocolo de operación de contexto.
-- Ubicación exacta de cada archivo: FUTURO: `<PROJECT_ROOT>/docs/ai-engineering/context-operations.md`.
-
-### 8. Directory structure
-```text
-<PROJECT_ROOT>/
-└── docs/ai-engineering/
-    └── context-operations.md  # FUTURO
-```
-
-### 9. Required concepts
-- Concepto: Context rot; 50/70/90; Write/Select/Compress/Isolate; compact/reset; context-as-code.
-- Explicación necesaria: Convierte el diseño de contexto de P03 en una práctica recurrente para mantener señal y evitar degradación.
-- Nivel requerido para ejecutar el paso: suficiente para aplicar M1 sin implementar capacidades propias de módulos posteriores.
-
-### 10. Commands
-```text
-# FUTURO: usar el mecanismo de compactación/reset de la herramienta seleccionada.
-```
-El comando exacto debe verificarse en documentación vigente al ejecutar el paso; no fue ejecutado en Chat 2.
-- Ubicación desde la que se ejecuta cada comando: Dentro de la sesión de la herramienta futura.
-- Resultado esperado: La acción reduce o reestructura contexto sin perder el objetivo.
-- Verificación: Revisar que la tarea sigue alineada y que el ruido fue reducido.
-
-### 11. Code
-```text
-NO SE EJECUTA CÓDIGO DEL PROYECTO EN CHAT 2.
-```
-- Propósito: Definir el protocolo operacional de contexto.
-- Partes relevantes: Cuatro mecanismos y reglas de ventana.
-- Personalización requerida: Ajustar el comando de compactación/reset a la herramienta real.
-
-### 12. Action
-- Acción concreta que se realizará: Detectar rot; escoger Write/Select/Compress/Isolate; compactar/aislar/resetear; verificar recuperación de señal.
-- Orden de ejecución: 1) detectar; 2) elegir mecanismo; 3) aplicar; 4) verificar; 5) registrar.
-- Entrada utilizada: Estado de sesión y contenido relevante.
-- Salida producida: Contexto operativo controlado.
-
-### 13. Reason
-- Por qué se realiza esta acción: M1 trata el control del contexto como trabajo iterativo, no como configuración estática.
-- Qué problema resuelve: Evita degradación y retrabajo por sesiones saturadas.
-- Por qué corresponde a M1: Corresponde directamente a Pilar 2.
-
-### 14. Expected result
-- Resultado esperado: Protocolo explícito y probado en escenarios sintéticos futuros.
-- Estado esperado: Ventana operable bajo reglas preventivas.
-- Evidencia esperada: Pruebas W/S/C/I y 50/70/90.
-- Memoria incremental del paso: ZIP incremental futuro con el protocolo y evidencia.
-
-### 15. Evidence
-- Evidencia que demuestra el resultado: No se ejecutaron sesiones reales del proyecto; la validación es futura.
-- Fuente de la evidencia: M1 Pilar 2.
-- Cómo se conservará: Guardar escenarios y resultados en el artefacto de operación.
-
-### 16. Validation
-- Qué se debe verificar: Mecanismos W/S/C/I, umbrales y recuperación de foco.
-- Cómo se verifica: Ejecutar escenarios sintéticos y revisar antes/después.
-- Resultado esperado de la validación: PASS cuando cada mecanismo y umbral tiene respuesta.
-
-### 17. Acceptance criteria
-- Criterio 1: W/S/C/I se aplican a escenarios distintos.
-- Criterio 2: 50/70/90 produce acción preventiva correspondiente.
-- Criterio 3: El contexto recupera el objetivo sin reintroducir ruido.
-
-### 18. Tests
-- ID de prueba: Ver T01…T05 dentro del campo; todas están PLANIFICADAS
-- Capacidad/subcapacidad cubierta: Degradación por contexto; umbrales; selección; escritura; compresión; aislamiento; reset/compactación.
-- Prueba: qué se hará para comprobarla: **T01 — W/S/C/I.** Entrada: cuatro contextos sintéticos. Resultado: cada mecanismo aplicado a su caso. PASS: 4/4.
-**T02 — 50/70/90.** Entrada: sesión con crecimiento 50%, 70%, 90%. Resultado: acción preventiva en cada umbral. PASS: ningún umbral sin acción.
-**T03 — Context rot.** Entrada: sesión contaminada. Resultado: recuperación de foco. PASS: objetivo se mantiene y ruido disminuye.
-- Entrada: datos, escenario, estado, archivo o configuración sobre la que se ejecutará: Escenario futuro definido en cada T; ninguna prueba del paso fue ejecutada durante Chat 2.
-- Resultado esperado: los resultados observables indicados en cada T; PASS/FAIL determinado por la condición explícita de cada prueba.
-- Condición de aprobación: se cumplen las condiciones PASS de todas las pruebas aplicables; `NO APLICA` no se usa para evitar una prueba posible.
-- Estado de la prueba durante Chat 2: PLANIFICADA
-
-### 19. Expected errors
-- Error plausible: Context rot no detectado.
-- Cuándo podría aparecer: Cuando la sesión acumula información irrelevante/excesiva.
-- Síntoma: Respuestas se desvían o pierden precisión.
-
-### 20. Detection
-- Cómo detectar el error: Comparar objetivo con contenido dominante.
-- Evidencia del error: Estado de la sesión y artefactos seleccionados.
-- Señal observable: Desalineación entre contexto y tarea.
-
-### 21. Meaning
-- Qué significa el error o resultado: La higiene de contexto falló.
-- Qué parte del proceso afecta: Prompting y tool use.
-
-### 22. Diagnosis
-- Causa probable: No activar Write/Select/Compress/Isolate a tiempo.
-- Evidencia que confirma o descarta la causa: Simulación de ventana y revisión de señal.
-- Orden de diagnóstico: Volumen → relevancia → mecanismo → recuperación.
-
-### 23. Correction
-- Corrección: Aplicar mecanismo correcto y, si procede, reset/compactación.
-- Acción concreta: Corregir el protocolo futuro.
-- Verificación posterior: Repetir escenario y comprobar recuperación.
-- Riesgos de la corrección: Un reset puede perder información si no se preservó lo esencial.
-
-### 24. Close checklist
-- [ ] Objetivo cumplido.
-- [ ] Dependencias satisfechas.
-- [ ] Archivos comprobados.
-- [ ] Validación completada.
-- [ ] Criterios de aceptación cumplidos.
-- [ ] Evidencia conservada.
-- [ ] Trazabilidad completada.
-- [ ] Estado actualizado.
-
-### 25. Traceability
-- M1 → archivo → sección/tema → concepto: `Módulo_1.../3. Pilar 2 — El Contexto.md` → Context rot; mecanismos; reglas 50/70/90; Write/Select/Compress/Isolate; kit operativo. → Degradación por contexto; umbrales; selección; escritura; compresión; aislamiento; reset/compactación..
-- Concepto → actividad: Detectar rot; escoger Write/Select/Compress/Isolate; compactar/aislar/resetear; verificar recuperación de señal.
-- Actividad → paso: M1-P04
-- Paso → artefacto: FUTURO: `context-operations.md`.
-- Paso → evidencia: No se ejecutaron sesiones reales del proyecto; la validación es futura.
-- Paso → validación: Mecanismos W/S/C/I, umbrales y recuperación de foco.
-- Paso → memoria ZIP incremental: ZIP incremental futuro con el protocolo y evidencia.
-- Paso → siguiente paso: P05 usa esta higiene para diseñar prompts sobre contexto bajo control.
-- Fuente externa → fecha de consulta → URL/recurso → afirmación soportada, cuando corresponda: ver `knowledge/facts/external-research.md` y `knowledge/references/reference-index.md`; consulta 2026-09-30 para OpenAI Harness, AGENTS.md y Claude Code.
-
-### 26. State
-- Estado inicial: P03 diseñado; operación no ejecutada.
-- Estado final esperado: Protocolo listo para ejecución futura.
-- Estado real: PLANIFICADO.
-- Qué queda pendiente: Aplicar a sesiones reales al ejecutar M1.
-- Relación con el siguiente paso: P05 usa esta higiene para diseñar prompts sobre contexto bajo control.
-## Paso 05 — Diseñar y aplicar prompting fundamental para trabajo de ingeniería
-
-### 1. Identification
-- ID del paso: `M1-P05` (05 asignado después de estabilizar el conjunto final).
-- Fase: Fase A — Construcción cognitiva del plan
-- Subfase: Prompting fundamental
-- Estado: PLANIFICADO
-- Tipo de paso: Diseño de instrucciones verificables
-
-### 2. Objective
-- Objetivo exacto del paso: Diseñar y aplicar prompting fundamental para trabajo de ingeniería.
-
-### 3. Direct relation to M1
-- Archivo(s) de M1: `Módulo_1.../4. Pilar 3 — El Prompt + Integración.md`
-- Sección(es)/tema(s): Anatomía del prompt; criterios de éxito; restricciones; recursos; salida; aclaración; anti-patterns y modos.
-- Concepto(s) de M1: Rol/contexto, objetivo, success criteria, constraints, resources, output format, clarification; vaguedad, mega-prompt, tareas mixtas y criterios ausentes.
-- Relación directa: Transforma una tarea ya caracterizada y contextualizada en una instrucción ejecutable y evaluable.
-
-### 4. Prerequisites
-- Conocimientos previos: P03 y P04 conceptualizados; objetivo y contexto de tarea disponibles.
-- Condiciones previas: Tarea futura concreta; no se ejecuta el prompt de producto durante Chat 2.
-- Evidencia o artefactos necesarios: M1 Pilar 3.
-
-### 5. Dependencies
-- Depende de: P03,P04
-- Habilita: P06 y P07
-- Tipo de dependencia: Instrumental
-- Riesgo si se altera el orden: Pedir una tarea vaga o intentar resolver un epic completo con un mega-prompt.
-
-### 6. Preparation
-- Preparación necesaria: Elegir modo; redactar contexto; objetivo; success criteria; constraints; resources; output; manejo de aclaración; anti-pattern review.
-- Entorno: Herramienta futura con contexto previamente controlado.
-- Información que debe estar disponible: Tarea, artefactos, restricciones y forma de aceptar/rechazar el resultado.
-
-### 7. Files
-- Archivos que se leerán: M1 Pilar 3 y recursos.
-- Archivos que se crearán en la ejecución futura: FUTURO: `prompt-kit.md`.
-- Archivos que se modificarían en la ejecución futura: FUTURO: versiones del prompt operacional.
-- Ubicación exacta de cada archivo: FUTURO: `<PROJECT_ROOT>/docs/ai-engineering/prompt-kit.md`.
-
-### 8. Directory structure
-```text
-<PROJECT_ROOT>/
-└── docs/ai-engineering/
-    └── prompt-kit.md  # FUTURO
-```
-
-### 9. Required concepts
-- Concepto: Anatomía completa y anti-patterns de M1; prompting como parte integrada con tool/context.
-- Explicación necesaria: Transforma una tarea ya caracterizada y contextualizada en una instrucción ejecutable y evaluable.
-- Nivel requerido para ejecutar el paso: suficiente para aplicar M1 sin implementar capacidades propias de módulos posteriores.
-
-### 10. Commands
-```text
-# FUTURO: ejecutar el prompt en la herramienta seleccionada.
-```
-No se ejecuta en Chat 2.
-- Ubicación desde la que se ejecuta cada comando: Dentro de la herramienta futura.
-- Resultado esperado: El comando/entrada produce un resultado evaluable contra los success criteria.
-- Verificación: Comprobar los criterios de éxito y la salida.
-
-### 11. Code
-```text
-NO SE CREA NI SE EJECUTA CÓDIGO DEL PROYECTO EN CHAT 2.
-```
-- Propósito: El artefacto es el prompt operacional.
-- Partes relevantes: Contexto/rol, objetivo, éxito, constraints, resources, output, aclaración.
-- Personalización requerida: Adaptar a la tarea real y a la herramienta.
-
-### 12. Action
-- Acción concreta que se realizará: Construir prompts completos y revisar anti-patterns antes de ejecutarlos en el futuro.
-- Orden de ejecución: 1) modo; 2) contexto; 3) objetivo; 4) éxito; 5) constraints; 6) resources; 7) output; 8) aclaración; 9) revisión.
-- Entrada utilizada: Tarea y contexto controlados.
-- Salida producida: Prompt operativo verificable.
-
-### 13. Reason
-- Por qué se realiza esta acción: M1 presenta el prompt como una interfaz de trabajo verificable, no como texto libre.
-- Qué problema resuelve: Evita ambigüedad y reduce iteraciones por instrucciones incompletas.
-- Por qué corresponde a M1: Es el núcleo práctico del Pilar 3.
-
-### 14. Expected result
-- Resultado esperado: Prompt con estructura y criterios de aceptación observables.
-- Estado esperado: Listo para aplicar un patrón de ejecución.
-- Evidencia esperada: Ejemplos y revisión anti-pattern.
-- Memoria incremental del paso: ZIP incremental futuro con prompts y criterios.
-
-### 15. Evidence
-- Evidencia que demuestra el resultado: Solo diseño en Chat 2; ningún prompt se ejecutó contra el proyecto externo.
-- Fuente de la evidencia: M1 Pilar 3.
-- Cómo se conservará: Versionar prompt y checklist en el proyecto futuro.
-
-### 16. Validation
-- Qué se debe verificar: Completitud de anatomy y detección de anti-patterns.
-- Cómo se verifica: Revisión campo por campo y cinco defectos controlados.
-- Resultado esperado de la validación: PASS con campos esenciales presentes.
-
-### 17. Acceptance criteria
-- Criterio 1: Success criteria observables.
-- Criterio 2: Constraints y resources explícitos.
-- Criterio 3: Output y aclaración definidos; no mega-prompt innecesario.
-
-### 18. Tests
-- ID de prueba: Ver T01…T05 dentro del campo; todas están PLANIFICADAS
-- Capacidad/subcapacidad cubierta: Rol/contexto, objetivo, success criteria, constraints, resources, output format, clarification; vaguedad, mega-prompt, tareas mixtas y criterios ausentes.
-- Prueba: qué se hará para comprobarla: **T01 — Anatomy.** Entrada: tarea de debugging. Resultado: prompt completo. PASS: todos los elementos obligatorios están presentes.
-**T02 — Anti-patterns.** Entrada: cinco prompts defectuosos (vago, mega, mixed, sin éxito, repetición de AGENTS). Resultado: cada defecto identificado. PASS: 100% detectados.
-- Entrada: datos, escenario, estado, archivo o configuración sobre la que se ejecutará: Escenario futuro definido en cada T; ninguna prueba del paso fue ejecutada durante Chat 2.
-- Resultado esperado: los resultados observables indicados en cada T; PASS/FAIL determinado por la condición explícita de cada prueba.
-- Condición de aprobación: se cumplen las condiciones PASS de todas las pruebas aplicables; `NO APLICA` no se usa para evitar una prueba posible.
-- Estado de la prueba durante Chat 2: PLANIFICADA
-
-### 19. Expected errors
-- Error plausible: Prompt ambiguo.
-- Cuándo podría aparecer: Cuando no existe condición observable de éxito.
-- Síntoma: No puede determinarse PASS/FAIL.
-
-### 20. Detection
-- Cómo detectar el error: Revisar anatomy y success criteria.
-- Evidencia del error: Prompt y checklist.
-- Señal observable: Criterio de éxito ausente.
-
-### 21. Meaning
-- Qué significa el error o resultado: La instrucción no delimita el resultado.
-- Qué parte del proceso afecta: P05-P07.
-
-### 22. Diagnosis
-- Causa probable: Anatomía incompleta o tarea mixta.
-- Evidencia que confirma o descarta la causa: Checklist de M1.
-- Orden de diagnóstico: Objetivo → éxito → constraints → resources → output.
-
-### 23. Correction
-- Corrección: Completar la anatomy o solicitar aclaración antes de ejecutar.
-- Acción concreta: Reescribir el prompt futuro.
-- Verificación posterior: Volver a pasar la revisión.
-- Riesgos de la corrección: Una aclaración adicional puede introducir una iteración, pero es preferible a ejecutar ambiguamente.
-
-### 24. Close checklist
-- [ ] Objetivo cumplido.
-- [ ] Dependencias satisfechas.
-- [ ] Archivos comprobados.
-- [ ] Validación completada.
-- [ ] Criterios de aceptación cumplidos.
-- [ ] Evidencia conservada.
-- [ ] Trazabilidad completada.
-- [ ] Estado actualizado.
-
-### 25. Traceability
-- M1 → archivo → sección/tema → concepto: `Módulo_1.../4. Pilar 3 — El Prompt + Integración.md` → Anatomía del prompt; criterios de éxito; restricciones; recursos; salida; aclaración; anti-patterns y modos. → Rol/contexto, objetivo, success criteria, constraints, resources, output format, clarification; vaguedad, mega-prompt, tareas mixtas y criterios ausentes..
-- Concepto → actividad: Construir prompts completos y revisar anti-patterns antes de ejecutarlos en el futuro.
-- Actividad → paso: M1-P05
-- Paso → artefacto: FUTURO: `prompt-kit.md`.
-- Paso → evidencia: Solo diseño en Chat 2; ningún prompt se ejecutó contra el proyecto externo.
-- Paso → validación: Completitud de anatomy y detección de anti-patterns.
-- Paso → memoria ZIP incremental: ZIP incremental futuro con prompts y criterios.
-- Paso → siguiente paso: P06 consume el prompt y la caracterización para elegir patrón.
-- Fuente externa → fecha de consulta → URL/recurso → afirmación soportada, cuando corresponda: ver `knowledge/facts/external-research.md` y `knowledge/references/reference-index.md`; consulta 2026-09-30 para OpenAI Harness, AGENTS.md y Claude Code.
-
-### 26. State
-- Estado inicial: P03/P04 planificados.
-- Estado final esperado: Prompt operativo futuro listo.
-- Estado real: PLANIFICADO.
-- Qué queda pendiente: Aplicar en ejecución real de M1.
-- Relación con el siguiente paso: P06 consume el prompt y la caracterización para elegir patrón.
-## Paso 06 — Aplicar patrones de ejecución de coding asistido por IA
-
-### 1. Identification
-- ID del paso: `M1-P06` (06 asignado después de estabilizar el conjunto final).
-- Fase: Fase A — Construcción cognitiva del plan
-- Subfase: Patrones de ejecución
-- Estado: PLANIFICADO
-- Tipo de paso: Selección y ejecución de patrón
-
-### 2. Objective
-- Objetivo exacto del paso: Aplicar patrones de ejecución de coding asistido por IA.
-
-### 3. Direct relation to M1
-- Archivo(s) de M1: `Módulo_1.../4. Pilar 3 — El Prompt + Integración.md`
-- Sección(es)/tema(s): Spec-driven preview; plan-then-execute; test-first; refactor with anchors; critic loops.
-- Concepto(s) de M1: Cinco patrones y condición de uso.
-- Relación directa: Conecta la tarea/prompt con una forma de ejecutar coding que preserve checkpoints y validación, sin convertir M1 en M2, M7 o M11 completos.
-
-### 4. Prerequisites
-- Conocimientos previos: P01 y P05; comprensión de que patrón depende del tipo de tarea.
-- Condiciones previas: Escenarios de coding futuros; no se modifica código ahora.
-- Evidencia o artefactos necesarios: M1 Pilar 3.
-
-### 5. Dependencies
-- Depende de: P01,P05
-- Habilita: P07
-- Tipo de dependencia: Operacional/selección
-- Riesgo si se altera el orden: Usar siempre un mismo patrón o adelantar prácticas de módulos posteriores.
-
-### 6. Preparation
-- Preparación necesaria: Mapear tarea a patrón; definir entrada, salida y validación.
-- Entorno: Futura herramienta de coding.
-- Información que debe estar disponible: Tipo de tarea, restricciones, prompt y criterio de éxito.
-
-### 7. Files
-- Archivos que se leerán: M1 Pilar 3.
-- Archivos que se crearán en la ejecución futura: FUTURO: `coding-execution-patterns.md`.
-- Archivos que se modificarían en la ejecución futura: FUTURO: ejemplos/registro de uso de patrones.
-- Ubicación exacta de cada archivo: FUTURO: `<PROJECT_ROOT>/docs/ai-engineering/coding-execution-patterns.md`.
-
-### 8. Directory structure
-```text
-<PROJECT_ROOT>/
-└── docs/ai-engineering/
-    └── coding-execution-patterns.md  # FUTURO
-```
-
-### 9. Required concepts
-- Concepto: Los cinco patrones y sus condiciones de uso; diferencia entre plan/patrón y módulos posteriores.
-- Explicación necesaria: Conecta la tarea/prompt con una forma de ejecutar coding que preserve checkpoints y validación, sin convertir M1 en M2, M7 o M11 completos.
-- Nivel requerido para ejecutar el paso: suficiente para aplicar M1 sin implementar capacidades propias de módulos posteriores.
-
-### 10. Commands
-```text
-# FUTURO: aplicar el patrón en la herramienta seleccionada.
-```
-Sintaxis exacta por verificar en la ejecución futura; no se ejecutó en Chat 2.
-- Ubicación desde la que se ejecuta cada comando: Herramienta futura.
-- Resultado esperado: La ejecución mantiene checkpoints y criterios del patrón.
-- Verificación: Comparar resultado con la condición de uso del patrón.
-
-### 11. Code
-```text
-NO SE CREA NI EJECUTA CÓDIGO EN CHAT 2.
-```
-- Propósito: Documentar cómo aplicar cinco patrones.
-- Partes relevantes: Preview, plan, test, anchors, critic.
-- Personalización requerida: Adaptar el comando y secuencia a la herramienta actual.
-
-### 12. Action
-- Acción concreta que se realizará: Seleccionar un patrón según la tarea y definir cómo se comprobará.
-- Orden de ejecución: 1) caracterizar; 2) seleccionar patrón; 3) preparar entrada; 4) ejecutar futuro; 5) verificar.
-- Entrada utilizada: Escenario y prompt.
-- Salida producida: Playbook de ejecución por patrón.
-
-### 13. Reason
-- Por qué se realiza esta acción: M1 propone varios patrones porque no existe una única forma profesional de ejecutar coding asistido.
-- Qué problema resuelve: Evita megatareas monolíticas y ausencia de checkpoints.
-- Por qué corresponde a M1: Directamente derivado del Pilar 3.
-
-### 14. Expected result
-- Resultado esperado: Cinco patrones con criterio de uso, entrada, salida y validación.
-- Estado esperado: Playbook reutilizable.
-- Evidencia esperada: Cinco pruebas futuras.
-- Memoria incremental del paso: ZIP incremental futuro con playbook y resultados.
-
-### 15. Evidence
-- Evidencia que demuestra el resultado: Planificado, no ejecutado.
-- Fuente de la evidencia: M1 Pilar 3.
-- Cómo se conservará: Persistir relación patrón→escenario→resultado.
-
-### 16. Validation
-- Qué se debe verificar: Los cinco patrones deben estar explícitos y seleccionables por condición.
-- Cómo se verifica: Probar un escenario por patrón y un mismatch.
-- Resultado esperado de la validación: PASS con 5/5 patrones y cambio justificable.
-
-### 17. Acceptance criteria
-- Criterio 1: Cada patrón tiene condición de uso.
-- Criterio 2: Cada patrón tiene entrada/salida y validación.
-- Criterio 3: No se usa un patrón como sustituto de un módulo posterior.
-
-### 18. Tests
-- ID de prueba: Ver T01…T05 dentro del campo; todas están PLANIFICADAS
-- Capacidad/subcapacidad cubierta: Cinco patrones y condición de uso.
-- Prueba: qué se hará para comprobarla: **T01 — Cinco patrones.** Entrada: cinco escenarios sintéticos. Resultado: cada escenario selecciona un patrón. PASS: 5/5 con justificación.
-**T02 — Mismatch.** Entrada: escenario con patrón inadecuado. Resultado: desajuste detectado y patrón alternativo propuesto. PASS: cambio justificado.
-- Entrada: datos, escenario, estado, archivo o configuración sobre la que se ejecutará: Escenario futuro definido en cada T; ninguna prueba del paso fue ejecutada durante Chat 2.
-- Resultado esperado: los resultados observables indicados en cada T; PASS/FAIL determinado por la condición explícita de cada prueba.
-- Condición de aprobación: se cumplen las condiciones PASS de todas las pruebas aplicables; `NO APLICA` no se usa para evitar una prueba posible.
-- Estado de la prueba durante Chat 2: PLANIFICADA
-
-### 19. Expected errors
-- Error plausible: Patrón de ejecución incorrecto.
-- Cuándo podría aparecer: Cuando la forma de tarea no coincide con el patrón elegido.
-- Síntoma: Checkpoint/validación insuficiente.
-
-### 20. Detection
-- Cómo detectar el error: Comparar condición de uso del patrón con tarea.
-- Evidencia del error: Registro de selección.
-- Señal observable: Mismatched pattern.
-
-### 21. Meaning
-- Qué significa el error o resultado: El flujo elegido no es adecuado.
-- Qué parte del proceso afecta: P06 y resultado de coding.
-
-### 22. Diagnosis
-- Causa probable: Selección por costumbre.
-- Evidencia que confirma o descarta la causa: Volver al criterio de uso de M1.
-- Orden de diagnóstico: Tarea → condición del patrón → entrada → validación.
-
-### 23. Correction
-- Corrección: Cambiar de patrón antes de ejecutar.
-- Acción concreta: Actualizar playbook futuro.
-- Verificación posterior: Repetir escenario de validación.
-- Riesgos de la corrección: Puede aumentar una iteración, pero evita ejecución inadecuada.
-
-### 24. Close checklist
-- [ ] Objetivo cumplido.
-- [ ] Dependencias satisfechas.
-- [ ] Archivos comprobados.
-- [ ] Validación completada.
-- [ ] Criterios de aceptación cumplidos.
-- [ ] Evidencia conservada.
-- [ ] Trazabilidad completada.
-- [ ] Estado actualizado.
-
-### 25. Traceability
-- M1 → archivo → sección/tema → concepto: `Módulo_1.../4. Pilar 3 — El Prompt + Integración.md` → Spec-driven preview; plan-then-execute; test-first; refactor with anchors; critic loops. → Cinco patrones y condición de uso..
-- Concepto → actividad: Seleccionar un patrón según la tarea y definir cómo se comprobará.
-- Actividad → paso: M1-P06
-- Paso → artefacto: FUTURO: `coding-execution-patterns.md`.
-- Paso → evidencia: Planificado, no ejecutado.
-- Paso → validación: Los cinco patrones deben estar explícitos y seleccionables por condición.
-- Paso → memoria ZIP incremental: ZIP incremental futuro con playbook y resultados.
-- Paso → siguiente paso: P07 integra los patrones en A-E.
-- Fuente externa → fecha de consulta → URL/recurso → afirmación soportada, cuando corresponda: ver `knowledge/facts/external-research.md` y `knowledge/references/reference-index.md`; consulta 2026-09-30 para OpenAI Harness, AGENTS.md y Claude Code.
-
-### 26. State
-- Estado inicial: P05 planificado.
-- Estado final esperado: Cinco patrones documentados y listos para aplicar.
-- Estado real: PLANIFICADO.
-- Qué queda pendiente: Ensayar patrones en ejecución futura.
-- Relación con el siguiente paso: P07 integra los patrones en A-E.
-## Paso 07 — Integrar los tres pilares y validar los cinco casos canónicos de M1
-
-### 1. Identification
-- ID del paso: `M1-P07` (07 asignado después de estabilizar el conjunto final).
-- Fase: Fase B — Auditoría semántica y reparación
-- Subfase: Integración y validación final de M1
-- Estado: PLANIFICADO
-- Tipo de paso: Integración, refutación y gate de calidad
-
-### 2. Objective
-- Objetivo exacto del paso: Integrar los tres pilares y validar los cinco casos canónicos de M1.
-
-### 3. Direct relation to M1
-- Archivo(s) de M1: Los cinco archivos de M1: modelo mental, Pilar 1, Pilar 2, Pilar 3 e Recursos adicionales.
-- Sección(es)/tema(s): Integración de pilares; casos A-E: gran refactor, greenfield feature, debugging, exploration, code review.
-- Concepto(s) de M1: Tool + context + prompt; patrones; evidencia; validación; anti-patterns.
-- Relación directa: Demuestra que M1 funciona como un sistema integrado: cada caso selecciona modo/herramienta/contexto/prompt/patrón y conserva resultado/evidencia/validación.
-
-### 4. Prerequisites
-- Conocimientos previos: P01-P06 estabilizados y auditados.
-- Condiciones previas: No requiere ejecutar el proyecto; puede validarse con escenarios sintéticos y documentación.
-- Evidencia o artefactos necesarios: M1 completo; matrices y pruebas previas.
-
-### 5. Dependencies
-- Depende de: P01-P06
-- Habilita: Baseline M1 para fases posteriores; no ejecuta módulos posteriores.
-- Tipo de dependencia: Integración/validación
-- Riesgo si se altera el orden: Dejar un caso con cobertura nominal o esconder información práctica en matrices.
-
-### 6. Preparation
-- Preparación necesaria: Aplicar prueba anti-compresión, anti-fragmentación, cobertura y trazabilidad a A-E.
-- Entorno: Staging/documentación futura.
-- Información que debe estar disponible: Resultados de P01-P06 y cinco escenarios canónicos.
-
-### 7. Files
-- Archivos que se leerán: Los cinco archivos M1 y la evidencia derivada de P01-P06.
-- Archivos que se crearán en la ejecución futura: FUTURO: baseline M1 y matriz de casos; en Chat 2 la matriz ya vive en `M1_PLAN.md`.
-- Archivos que se modificarían en la ejecución futura: `M1_PLAN.md` puede modificarse solo durante el diseño/auditoría de Chat 2; el proyecto externo no se modifica.
-- Ubicación exacta de cada archivo: `memory-repo/chats/chat-002/M1_PLAN.md` en Chat 2; artefactos de proyecto solo FUTUROS.
-
-### 8. Directory structure
-```text
-memory-repo/chats/chat-002/
-├── M1_PLAN.md
-├── META.md
-├── transcript.md
-└── HANDOFF.md
-```
-
-### 9. Required concepts
-- Concepto: Integración de los tres pilares y cinco casos A-E; refutación contra cobertura nominal, megapropting y fragmentación.
-- Explicación necesaria: Demuestra que M1 funciona como un sistema integrado: cada caso selecciona modo/herramienta/contexto/prompt/patrón y conserva resultado/evidencia/validación.
-- Nivel requerido para ejecutar el paso: suficiente para aplicar M1 sin implementar capacidades propias de módulos posteriores.
-
-### 10. Commands
-```text
-# No aplica un comando de proyecto: la actividad de Chat 2 es planificación/auditoría.
-```
-- Ubicación desde la que se ejecuta cada comando: Staging de memoria.
-- Resultado esperado: No se inicia el proyecto objetivo.
-- Verificación: Auditar estructura, campos, matrices y gates.
-
-### 11. Code
-```text
-NO SE EJECUTA EL PROYECTO NI SE CREA CÓDIGO PARA DEMOSTRAR AVANCE.
-```
-- Propósito: El artefacto es el plan congelado y su evidencia documental.
-- Partes relevantes: Casos A-E; integración tool/context/prompt; patrón; resultado y validación.
-- Personalización requerida: Futuro: sustituir escenarios sintéticos por escenarios del proyecto sin cambiar el método.
-
-### 12. Action
-- Acción concreta que se realizará: Auditar cada caso A-E; comprobar cobertura y profundidad; reparar defectos; congelar plan.
-- Orden de ejecución: 1) revisar A; 2) B; 3) C; 4) D; 5) E; 6) refutar plan; 7) congelar.
-- Entrada utilizada: P01-P06 y contenido completo de M1.
-- Salida producida: Baseline M1 aplicado y plan final congelado.
-
-### 13. Reason
-- Por qué se realiza esta acción: La integración evita que los tres pilares se conviertan en listas separadas.
-- Qué problema resuelve: Detecta huecos semánticos que una matriz nominal puede ocultar.
-- Por qué corresponde a M1: Es la aplicación final de la integración de M1.
-
-### 14. Expected result
-- Resultado esperado: Cinco casos completos y coherentes con tool/context/prompt/pattern.
-- Estado esperado: PLANIFICADO y listo para ejecución futura.
-- Evidencia esperada: Casos y resultados de auditoría en M1_PLAN/transcript.
-- Memoria incremental del paso: ZIP incremental futuro de memoria cuando P07 sea ejecutado; no se genera durante esta sesión.
-
-### 15. Evidence
-- Evidencia que demuestra el resultado: La evidencia actual es el plan congelado y las fuentes; no hay ejecución del proyecto.
-- Fuente de la evidencia: M1 cinco archivos; fuentes externas R01 y documentación actual.
-- Cómo se conservará: M1_PLAN, transcript, handoff y memoria acumulativa futura.
-
-### 16. Validation
-- Qué se debe verificar: Cobertura A-E, integración de tres pilares, ausencia de mención nominal y todos los gates.
-- Cómo se verifica: Auditoría estructural + semántica; revisar cada campo y cada caso.
-- Resultado esperado de la validación: PASS con todos los gates en PASS.
-
-### 17. Acceptance criteria
-- Criterio 1: A-E cubiertos con tool/context/prompt.
-- Criterio 2: Cada caso tiene patrón, resultado, evidencia y validación.
-- Criterio 3: No quedan capacidades prácticas de M1 solo en una matriz o resumen.
-
-### 18. Tests
-- ID de prueba: Ver T01…T05 dentro del campo; todas están PLANIFICADAS
-- Capacidad/subcapacidad cubierta: Tool + context + prompt; patrones; evidencia; validación; anti-patterns.
-- Prueba: qué se hará para comprobarla: **T01 — Caso A, gran refactor.** Entrada: codebase futuro + restricción de regresión. Resultado: modo/herramienta/context/prompt/patrón y validación completos. PASS: trazabilidad total.
-**T02 — Caso B, greenfield feature.** Entrada: feature futura. Resultado: flujo completo. PASS: salida y aceptación definidas.
-**T03 — Caso C, debugging.** Entrada: fallo reproducible futuro. Resultado: hipótesis/validación bajo contexto y critic/test pattern. PASS: resultado verificable.
-**T04 — Caso D, exploration.** Entrada: pregunta técnica. Resultado: exploración delimitada sin implementar innecesariamente. PASS: se distingue exploración de implementación.
-**T05 — Caso E, code review.** Entrada: cambio futuro. Resultado: hallazgos trazables sin inventarlos. PASS: toda observación apunta a evidencia.
-- Entrada: datos, escenario, estado, archivo o configuración sobre la que se ejecutará: Escenario futuro definido en cada T; ninguna prueba del paso fue ejecutada durante Chat 2.
-- Resultado esperado: los resultados observables indicados en cada T; PASS/FAIL determinado por la condición explícita de cada prueba.
-- Condición de aprobación: se cumplen las condiciones PASS de todas las pruebas aplicables; `NO APLICA` no se usa para evitar una prueba posible.
-- Estado de la prueba durante Chat 2: PLANIFICADA
-
-### 19. Expected errors
-- Error plausible: Hueco de integración o cobertura nominal.
-- Cuándo podría aparecer: Cuando un caso usa un pilar solo como palabra paraguas.
-- Síntoma: Matriz parece completa pero no explica ejecución.
-
-### 20. Detection
-- Cómo detectar el error: Auditar cada caso contra los 26 campos y el inventario de M1.
-- Evidencia del error: M1_PLAN y matriz de cobertura.
-- Señal observable: Capacidad sin actividad o validación.
-
-### 21. Meaning
-- Qué significa el error o resultado: La aplicación práctica de M1 es insuficiente.
-- Qué parte del proceso afecta: Plan completo.
-
-### 22. Diagnosis
-- Causa probable: Sobre-compresión o dependencia de resúmenes.
-- Evidencia que confirma o descarta la causa: Prueba anti-compresión y trazabilidad M1→actividad→paso→artefacto→validación.
-- Orden de diagnóstico: Cobertura → profundidad → independencia → integración → trazabilidad.
-
-### 23. Correction
-- Corrección: Expandir el paso afectado o separar solo si existe unidad profesional independiente.
-- Acción concreta: Reparar M1_PLAN y reauditar.
-- Verificación posterior: Volver a ejecutar ambas capas de auditoría.
-- Riesgos de la corrección: Modificar fronteras puede cambiar N; repetir pruebas hasta estabilización.
-
-### 24. Close checklist
-- [ ] Objetivo cumplido.
-- [ ] Dependencias satisfechas.
-- [ ] Archivos comprobados.
-- [ ] Validación completada.
-- [ ] Criterios de aceptación cumplidos.
-- [ ] Evidencia conservada.
-- [ ] Trazabilidad completada.
-- [ ] Estado actualizado.
-
-### 25. Traceability
-- M1 → archivo → sección/tema → concepto: Los cinco archivos de M1: modelo mental, Pilar 1, Pilar 2, Pilar 3 e Recursos adicionales. → Integración de pilares; casos A-E: gran refactor, greenfield feature, debugging, exploration, code review. → Tool + context + prompt; patrones; evidencia; validación; anti-patterns..
-- Concepto → actividad: Auditar cada caso A-E; comprobar cobertura y profundidad; reparar defectos; congelar plan.
-- Actividad → paso: M1-P07
-- Paso → artefacto: FUTURO: baseline M1 y matriz de casos; en Chat 2 la matriz ya vive en `M1_PLAN.md`.
-- Paso → evidencia: La evidencia actual es el plan congelado y las fuentes; no hay ejecución del proyecto.
-- Paso → validación: Cobertura A-E, integración de tres pilares, ausencia de mención nominal y todos los gates.
-- Paso → memoria ZIP incremental: ZIP incremental futuro de memoria cuando P07 sea ejecutado; no se genera durante esta sesión.
-- Paso → siguiente paso: El plan alimenta la continuidad; no constituye ejecución de módulos posteriores.
-- Fuente externa → fecha de consulta → URL/recurso → afirmación soportada, cuando corresponda: ver `knowledge/facts/external-research.md` y `knowledge/references/reference-index.md`; consulta 2026-09-30 para OpenAI Harness, AGENTS.md y Claude Code.
-
-### 26. State
-- Estado inicial: P01-P06 diseñados.
-- Estado final esperado: Plan M1 congelado; siete pasos PLANIFICADOS.
-- Estado real: PLANIFICADO. No se ejecutó el Paso 1 del proyecto ni se modificó ningún repositorio externo.
-- Qué queda pendiente: Futura ejecución de M1 bajo el plan congelado.
-- Relación con el siguiente paso: El plan alimenta la continuidad; no constituye ejecución de módulos posteriores.
-
-# Hard quality-gate result
-
-- G1 Source coverage: PASS.
-- G2 Semantic depth: PASS.
-- G3 Language invariant: PASS.
-- G4 Direct traceability: PASS.
-- G5 Internal test coverage: PASS.
-- G6 Field quality: PASS — cada paso contiene los 26 campos.
-- G7 State integrity: PASS — todos PLANIFICADOS; el Paso 1 del proyecto no se ejecutó.
-- G8 Step boundary quality: PASS — siete unidades funcionales sin compresión/fragmentación artificial.
-- G9 Integration quality: PASS.
-- G10 Source discovery != verified evidence: PASS.
-- G11 Anti-megaprompt: PASS.
-- G12 Prior-output regression only: PASS.
-- G13 No artificial decisions: PASS — 0 decisiones nuevas sustantivas.
-
-## Final dynamic count
-
-**N = 7.** Es consecuencia del inventario, dependencias, independencia funcional, profundidad, integración y pruebas anti-compresión/anti-fragmentación.
-
-
-# REAL EXECUTION LOG
-
-## 1. Current-task intake
-- Estado: EJECUTADO. Se recibió el prompt de Chat 2 y se utilizó como especificación de trabajo.
-- Resultado: se activaron las restricciones de staging, no escritura externa y salida ZIP única.
-
-## 2. Memory bootstrap
-- Estado: EJECUTADO. Se recuperaron los archivos de continuidad de Chat 1 requeridos.
-- Resultado: orden heredado y seis decisiones aceptadas verificados.
-
-## 3. Repository audit
-- Estado: EJECUTADO. `Diiegoal/memory-repo` / `master` fue leído en modo consulta; se observaron 42 entradas de árbol, 33 `.md` y ningún no-Markdown.
-- Estado: EJECUTADO. `Diiegoal/CursoIA` / `main` fue auditado; M1 tiene cinco Markdown.
-- Estado: EJECUTADO. El archivo de referencia SRE tenía 2.621 líneas y fue leído completo.
-
-## 4. External research
-- Estado: EJECUTADO. Se consultaron fuentes actuales sobre harness/contexto: OpenAI Harness Engineering, AGENTS.md y Claude Code docs.
-- Fecha de consulta: 2026-09-30.
-- Corte aplicable: 2026-09-11.
-- Resultado: utilizadas como hechos externos complementarios; no generaron decisiones nuevas.
-
-## 5. Dynamic step determination
-- Estado: EJECUTADO. Se formó inventario práctico, se analizaron dependencias, profundidad, independencia, integración, anti-compresión y anti-fragmentación.
-- Resultado: conjunto estable de 7 pasos.
-
-## 6. Quality gates
-- Estado: EJECUTADO. Auditoría estructural: PASS.
-- Estado: EJECUTADO. Auditoría semántica: PASS.
-- Estado: EJECUTADO. 26/26 campos por paso: PASS.
-- Estado: EJECUTADO. Tests concretos: PASS como planificación; ninguno fue ejecutado contra el proyecto.
-- Estado: EJECUTADO. No artificial decisions: PASS; nuevas decisiones sustantivas = 0.
-
-## 7. Persistence preparation
-- Estado: EJECUTADO. Se creó copia de trabajo independiente bajo `/mnt/data/chat2_staging/memory-repo`.
-- Estado: EJECUTADO. Se crearon exactamente cuatro archivos de `chats/chat-002/` y un handoff futuro permitido.
-- Estado: EJECUTADO. Los seis registros de decisión históricos fueron preservados sin contenido nuevo.
-
-## 8. Project execution boundary
-- Estado: EJECUTADO. No se ejecutó el Paso 1 del proyecto.
-- Estado: EJECUTADO. No se escribieron archivos, commits ni pushes en los repositorios externos.
-
-## 9. Final validation
-- Estado: PLANIFICADO→EJECUTADO para el control físico del staging; el resultado esperado era que solo existieran archivos autorizados y que el ZIP reprodujera exactamente la copia validada.
+README y documentos describen:
+- Backend Python/FastAPI.
+- Frontend React 18+ con TypeScript.
+- Gemini 2.5 Flash.
+- HuggingFace embeddings.
+- PostgreSQL + pgvector.
+- Cloud Run, Cloud SQL, Cloud Build y Cloud Storage.
+- Analytics y captura gradual de leads.
+- GDPR.
+- Rate limiting/anti-DoS, CORS, validación Pydantic, secretos en Google Secret Manager.
+- Arquitectura con servicios separados para RAG, analytics, GDPR y frontend integration.
+- Modelo de datos para ChatSession, SessionAnalytics, GDPRConsent, ChatMessage, ConversationPair, VectorStore, LangchainPgCollection y DailyAnalytics.
+- API con chat, health, analytics y endpoints GDPR.
+- React state management, API communication, testing con Jest/React Testing Library/MSW/Cypress, responsive UI y métricas web.
+- Historias de usuario y tickets con aceptación, DoD, dependencias y estrategia de testing.
+- Guía de instalación con GCP, service accounts, Cloud Build y Cloud Run.
+- Documento de seguridad/testing con OWASP LLM Top 10, defense in depth, zero trust, privacy by design, gestión de secretos, rate limiting, CORS, test pyramid y automatización.
+- `prompts-AMP.md` registra una gran colección histórica de prompts y sus estadísticas/roles/categorías.
+- `prompts.md` consolida prompts de análisis/diseño, implementación, testing, documentación, despliegue y optimización.
+- `scripts/README.md` explica scripts de pruebas, knowledge base, vector store, setup GCP y servidor local.
+
+La utilidad para Chat2 es metodológica: muestra cómo un proyecto AI se documenta con requisitos, arquitectura, datos, API, seguridad, testing, instalación, prompts y tickets. No se copia código, estructura, clases, funciones, decisiones ni archivos. La arquitectura del proyecto SRE permanece independiente.
+
+### 5. Estado real del nuevo proyecto
+
+El repositorio `DiiegoA/Agente_SRE_DevOps_para_respuesta_a_incidentes` fue tratado como lectura. Su metadata actual corresponde a un repositorio sin contenido de código detectable en el estado recuperado. No se creó ningún artefacto allí.
+
+### 6. Determinación dinámica de pasos
+
+Se identificaron como capacidades profesionales independientes:
+1) fundamentación/mode of work;
+2) tool/mode selection;
+3) context engineering;
+4) prompt contracts;
+5) integrated workflows;
+6) three-pillar operating model;
+7) validation/iteration.
+
+Una alternativa de cinco pasos comprimía selección de herramienta, contexto/prompt y workflow/validation. Una alternativa de nueve o más fragmentaba subtítulos y generaba repetición. La de siete conserva resultados y validaciones independientes sin convertir cada tema en un paso artificial.
+
+Los pasos finales son:
+- M1-P01 — Caracterizar el trabajo de ingeniería y fijar el modelo mental de los tres pilares.
+- M1-P02 — Clasificar tareas y seleccionar/evaluar herramienta y modo de interacción.
+- M1-P03 — Diseñar el sistema de contexto mínimo suficiente y su higiene.
+- M1-P04 — Diseñar contratos de prompt y biblioteca de patrones reutilizables.
+- M1-P05 — Definir patrones integrados de planificar, ejecutar, probar, revisar y refactorizar.
+- M1-P06 — Consolidar el modelo operativo AI-assisted específico del proyecto SRE.
+- M1-P07 — Validar, documentar, controlar contaminación y establecer iteración.
+
+### 7. Clasificación tecnológica M1
+
+Durante M1:
+- Aplicar ahora por M1: tool/mode selection, context engineering, prompt contracts, workflow patterns, validation/provenance.
+- Preparar como base para futuro: repository map, AGENTS/CLAUDE context entry point, prompt library, workflow rules, validation register.
+- Reservar para módulo posterior: implementación LangChain/LangGraph, RAG productivo, FastAPI, PostgreSQL runtime, Redis, Slack, AWS, Kubernetes, observabilidad productiva, deployment.
+- Hueco/evidencia pendiente: exact LLM provider, exact executor isolation, incident corpus, SRE operating model.
+- No relevante para M1: implementación de componentes productivos que no se justifican por M1.
+
+### 8. Auditoría de calidad
+
+Las comprobaciones conceptuales y estructurales realizadas:
+- cobertura de los cinco archivos M1;
+- profundidad interna de capacidades;
+- independencia de unidades;
+- no-compresión;
+- no-fragmentación;
+- dependencias internas;
+- anti-contaminación de M2–M13;
+- M12 reference-only;
+- originalidad respecto de Example2;
+- separación PLANIFICADO/EJECUTADO;
+- trazabilidad concepto→actividad→paso→artefacto→evidencia→validación;
+- 26/26 campos en cada paso del `M1_PLAN.md`;
+- tests con prueba/entrada/resultado esperado/condición PASS;
+- ausencia de nuevas decisiones sustantivas;
+- existencia física de los cuatro artefactos Chat2 y del handoff futuro en staging.
+
+### 9. Resultado temporal
+
+Chat2 terminó en estado `PLANIFICADO`. No se ejecutó el Paso 1 del producto. No se creó código del producto. No se ejecutaron comandos del nuevo repositorio.
+
+
+# PARTE C — REGISTRO REAL DE EJECUCIÓN
+
+1. Se recibió y leyó el prompt suministrado por el usuario desde el archivo adjunto.
+2. Se borró/evitó utilizar memoria persistente previa conforme a la solicitud anterior del usuario.
+3. Se recuperaron artefactos de continuidad de Chat1 desde `Diiegoal/memory-repo` mediante la integración de GitHub, exclusivamente en lectura.
+4. Se verificó el árbol histórico y las seis decisiones existentes.
+5. Se auditó el corpus M1 de `Diiegoal/CursoIA` en `main` y se leyeron sus cinco archivos Markdown.
+6. Se leyó la referencia completa de SRE/DevOps indicada por el prompt en múltiples rangos.
+7. Se revisó el repositorio Example2 y su corpus Markdown; se distinguió claramente referencia de copia.
+8. Se verificó el estado del repositorio objetivo, sin escritura.
+9. Se realizó la determinación dinámica de siete unidades de trabajo y se construyó el `M1_PLAN.md` con 26 campos por paso.
+10. Se ejecutó una revisión de estructura, cobertura, trazabilidad, alcance y temporalidad sobre el plan.
+11. Se generaron en staging los artefactos de Chat2 y el estado acumulativo.
+12. No se creó ninguna nueva decisión sustantiva; no se creó `DEC-0007.md`.
+13. No se ejecutó el Paso 1 del proyecto ni se creó código del producto.
+14. Se realizó un gate físico sobre los archivos de Chat2 y el handoff futuro.
+15. Antes del empaquetado se dejó constancia de una limitación: el blob histórico de `chats/chat-001/transcript.md` pudo identificarse por SHA y tamaño, pero no pudo materializarse byte-a-byte en el contenedor debido a la limitación de transferencia del conector; por honestidad, la staging copy lo marca explícitamente y no afirma que sea un RAW histórico completo.
+16. Esta limitación afecta el gate de integridad histórica estricta definido por el prompt; se conserva dentro del artefacto para no presentar como ejecutado o validado algo que no pudo comprobarse físicamente.

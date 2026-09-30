@@ -1,32 +1,34 @@
-# Future Handoff Protocol
+# Future Handoff — Chat 2 → Chat 3
 
-Este archivo define únicamente la transferencia de contexto de Chat 2 hacia una futura sesión; no representa Chat 3 ni contiene resultados futuros.
+> This file is a future continuation protocol only. Chat 3 has not occurred.
 
-## Context packet
+## Current state to recover
 
-```text
-STATE.md
-→ DECISIONS.md
-→ OPEN_QUESTIONS.md
-→ chats/chat-002/HANDOFF.md
-→ chats/chat-002/M1_PLAN.md
-→ conocimiento/arquitectura relevante
-→ evidencia M1 específica
-```
+- Project: `DiiegoA/Agente_SRE_DevOps_para_respuesta_a_incidentes`
+- Active construction stage: M1 planning completed; M1 execution not started.
+- Module order: `M1 → M3 → M4 → M2 → M6 → M5 → M7 → M8 → M9 → M10 → M11 → M13`
+- M12: reference-only.
+- M1 plan: `chats/chat-002/M1_PLAN.md`.
+- New Chat 2 decisions: none.
+- Existing open questions: OQ-0001…OQ-0008.
 
-## Required checks
+## Required first reads
 
-- verificar cutoff temporal y fuentes vigentes;
-- confirmar que no existe una decisión nueva que supere a las heredadas;
-- comprobar que `M1_PLAN.md` es la única fuente canónica del plan;
-- distinguir PLANIFICADO de EJECUTADO;
-- confirmar que ningún repositorio externo fue modificado por Chat 2;
-- recuperar evidencia primaria solo cuando sea necesaria.
+`BOOTSTRAP.md → STATE.md → DECISIONS.md → OPEN_QUESTIONS.md → INDEX.md → chats/chat-002/META.md → chats/chat-002/HANDOFF.md → chats/chat-002/M1_PLAN.md`
 
-## Current handoff state
+Then retrieve selective RAW evidence from `chats/chat-002/transcript.md` and historical Chat1 artifacts only where needed.
 
-Chat 2 terminó en `PLANIFICADO`; el proyecto objetivo no ejecutó su Paso 1. El plan tiene siete pasos `M1-P01`…`M1-P07`.
+## Continuation rules
 
-## Suggested future task
+- Do not assume Chat 2 facts from model memory.
+- Do not execute project Step 1 merely because it is described in future planning.
+- Revalidate current target-repository state before any future execution.
+- Preserve the distinction PLANIFICADO/EJECUTADO.
+- Preserve historical decisions DEC-0001…DEC-0006.
+- Create a new decision record only if a future session adopts a genuinely new substantive decision.
+- Do not invent Chat 3 results.
 
-Ejecutar `M1-P01` siguiendo exactamente el plan canónico, registrar evidencia y producir continuidad incremental sin crear archivos o decisiones no autorizados.
+## Reconstruction target
+
+A future session should be able to determine from the repository alone:
+what exists, what Chat2 produced, what remains planned, which M1 step is next, what evidence validates each step, which decisions are active, and which questions remain open.

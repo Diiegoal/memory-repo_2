@@ -15,10 +15,16 @@
 | M11 | System QA | System boundaries | integration/E2E/BDD suite | M11 audited files |
 | M13 | Delivery | Infra/CI/CD | Docker/IaC/pipelines/deployment | M13 audited files + R07 |
 
----
-
 # CHAT 2 — CONTENIDO NUEVO
 
-## Chat 2 M1 layer
+## M1 artifacts planned
 
-M1 produce durante ejecución futura registros de modo, selección de herramienta, contexto, prompts, patrones y baseline integrado. En Chat 2, el artefacto canónico de planificación de todos ellos es `chats/chat-002/M1_PLAN.md`.
+| Step | Future artifact | Nature |
+|---|---|---|
+| M1-P01 | `M1_OPERATING_MODEL.md` | integrated operating baseline |
+| M1-P02 | `M1_TOOL_MATRIX.md` | task/tool/mode selection |
+| M1-P03 | `M1_CONTEXT_KIT.md`, `AGENTS.md`, optional `CLAUDE.md` | context system |
+| M1-P04 | `M1_PROMPT_LIBRARY.md` | prompt contracts |
+| M1-P05 | `M1_WORKFLOW_RULES.md` | execution/review loops |
+| M1-P06 | `M1_OPERATING_MODEL.md` consolidation | integrated model |
+| M1-P07 | `M1_VALIDATION_REGISTER.md` | gate/regression |
