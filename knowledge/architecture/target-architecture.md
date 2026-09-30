@@ -63,16 +63,3 @@ Instrument both the target system and the agent itself. Capture service telemetr
 ## Deployment maturity
 
 Local Docker first → CI test environment → containerized staging → optional Kubernetes/AWS production-like environment → IaC + deployment gates.
-
-# CHAT 2 — CONTENIDO NUEVO
-
-## M1 relationship to target architecture
-
-M1 does not instantiate any production architecture component. It establishes the engineering control layer for later design and implementation:
-- tool and mode decision criteria;
-- repository-context rules;
-- prompt contracts;
-- planning/review loops;
-- provenance and contamination controls.
-
-All runtime components remain FUTUROS relative to Chat 2.

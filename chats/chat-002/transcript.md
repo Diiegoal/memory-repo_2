@@ -1,10 +1,6 @@
-# TRANSCRIPCIÓN RAW DE CHAT-002
-
-# PARTE A — PROMPT ORIGINAL (TEXTUAL)
-
 # ORIGINAL PROMPT (verbatim, unmodified)
 
-# PROMPT ÓPTIMO — CHAT 2 — VERSIÓN CORREGIDA Y ESTABILIZADA
+# PROMPT ÓPTIMO — CHAT 2 — VERSIÓN CORREGIDA, VERIFICABLE Y RESISTENTE A DEGRADACIÓN
 ## Construcción desde cero de un Agente SRE / DevOps para respuesta a incidentes, conversacional y reflexivo — Aplicación práctica exclusiva del Módulo 1
 
 ---
@@ -24,6 +20,50 @@ chat-002-memory-repo.zip
 El ZIP debe contener el estado real de `memory-repo` después de Chat 2, conservando íntegramente el histórico de Chat 1 y añadiendo únicamente la nueva información realmente producida por Chat 2.
 
 No debes entregar explicaciones fuera del ZIP.
+
+### Contrato obligatorio de presentación de Chat 2 dentro del ZIP
+
+La información producida por Chat 2 debe quedar presentada dentro de la copia acumulativa de `memory-repo` con una separación estricta de responsabilidades documentales:
+
+```text
+M1_PLAN.md
+→ único lugar donde vive el desarrollo completo de los pasos de M1
+→ incluye la secuencia final
+→ incluye todos los pasos
+→ incluye los 26 campos de cada paso
+→ incluye el detalle práctico, dependencias, artefactos, validaciones, tests,
+   errores, diagnóstico, corrección, trazabilidad y estado de cada paso
+
+transcript.md
+→ conserva el RAW de la sesión y toda la producción sustantiva de Chat 2
+→ contiene el resumen exhaustivo de M1
+→ contiene el resumen exhaustivo de la investigación del Agente SRE / DevOps
+→ contiene el resumen exhaustivo del Repositorio Ejemplo 2 realmente revisado
+→ contiene las decisiones heredadas de Chat 1 y su impacto
+→ contiene el cruce entre M1, Chat 1, SRE, memory-repo, Ejemplo 2 y proyecto
+→ contiene investigación externa, fuentes, hallazgos, matrices, validaciones,
+   análisis, conclusiones y resultados reales de la sesión
+→ contiene además un RESUMEN de la secuencia final de pasos
+→ NO contiene el desarrollo completo de los 26 campos de los pasos
+→ NO duplica `M1_PLAN.md`
+```
+
+Esta separación es una **HARD CONSTRAINT**. Si los pasos completos aparecen duplicados en `transcript.md`, o si el resumen de pasos no aparece en `transcript.md`, la validación de salida es **FAIL**.
+
+El orden lógico obligatorio de la producción sustantiva de `transcript.md` es:
+
+```text
+1. resumen exhaustivo de M1
+2. resumen exhaustivo de la referencia del Agente SRE / DevOps
+3. decisiones heredadas de Chat 1 y su impacto
+4. cruce M1 + Chat 1 + SRE + memory-repo + Ejemplo 2 + proyecto
+5. resumen exhaustivo del Repositorio Ejemplo 2 revisado
+6. investigación externa y procedencia
+7. determinación dinámica de pasos y justificación de agrupaciones/separaciones
+8. resumen final de pasos
+9. matrices, cobertura, dependencias, validaciones y auditorías
+10. conclusiones, estado real y límites de ejecución
+```
 
 ### Principio de consistencia de calidad
 
@@ -67,6 +107,255 @@ El ZIP constituye el entregable preparado por Chat 2; no autoriza ni implica nin
 **Esta regla tiene prioridad sobre cualquier instrucción posterior de este prompt que utilice verbos como crear, actualizar, modificar o escribir sobre `memory-repo` o el proyecto nuevo: esas operaciones deben ejecutarse únicamente en la copia de trabajo independiente que posteriormente se incluirá en el ZIP.**
 
 ---
+
+# 0.1. PLANO DE CONTROL DE EJECUCIÓN, PORTABILIDAD E IDEMPOTENCIA
+
+Esta sección define el mecanismo operativo obligatorio de esta ejecución. Su objetivo es evitar que una salida parcialmente correcta pueda degradar el histórico, multiplicar overlays, comprimir pasos o declarar PASS sin evidencia suficiente.
+
+## A. Portabilidad entre chats
+
+La ejecución debe depender únicamente de:
+
+```text
+ESTE PROMPT
++
+FUENTES EXTERNAS EXPLÍCITAMENTE AUTORIZADAS
++
+ARCHIVOS / DATOS RECIBIDOS EN LA EJECUCIÓN ACTUAL
++
+SALIDAS DE HERRAMIENTAS REALMENTE OBTENIDAS DURANTE ESTA EJECUCIÓN
+```
+
+No utilices como entrada implícita:
+
+```text
+historial de otra conversación
+memoria personal del usuario
+preferencias implícitas
+resultados de una ejecución anterior no suministrados como evidencia
+candidatos o artefactos de intentos fallidos anteriores
+```
+
+Una ejecución puede variar en redacción o en resultados de búsqueda. La condición de reproducibilidad es de **calidad y cumplimiento del contrato**, no de identidad literal. Si el entorno permite fijar modelo, snapshot, herramientas, fuentes o parámetros, regístralos y mantenlos constantes para comparaciones.
+
+## B. Fuente viva única para la estructura
+
+La estructura de `memory-repo` se obtiene en tiempo de ejecución del `README.md` real del repositorio fuente:
+
+```text
+README.md
+→ Exact repository tree
+→ Complete Markdown File Structure
+```
+
+El README real es la autoridad estructural. La copia literal de la sección 13.1 de este prompt es solo un **snapshot auxiliar** y nunca puede utilizarse para inventar rutas, secciones o diferencias respecto al README real.
+
+El `Exact repository tree` del README se interpreta como el **baseline físico de Chat 1**. Para el resultado de Chat 2 se usa:
+
+```text
+BASELINE EXACTO DE CHAT 1
++
+ADICIONES EXPLÍCITAMENTE AUTORIZADAS DE CHAT 2
+```
+
+No reescribas el baseline histórico para “reflejar” Chat 2. La existencia de Chat 2 se representa únicamente mediante los artefactos de Chat 2 y las actualizaciones documentales expresamente autorizadas.
+
+## C. Baseline inmutable y candidatos totalmente desechables
+
+Antes de producir cualquier archivo nuevo o modificación:
+
+```text
+FUENTE REAL
+→ snapshot / commit de referencia
+→ manifest de rutas
+→ hash/blob SHA cuando exista
+→ contenido completo de cada archivo histórico
+→ BASELINE_STAGING INMUTABLE
+```
+
+El baseline no se edita. Cada intento de generación o reparación empieza desde ese baseline.
+
+Regla absoluta:
+
+```text
+CANDIDATO_n + FAIL
+→ abandonar CANDIDATO_n
+→ restaurar BASELINE_STAGING
+→ aplicar la corrección una sola vez
+→ producir CANDIDATO_n+1
+→ auditar CANDIDATO_n+1
+```
+
+Nunca edites acumulativamente un candidato fallido.
+
+## D. Restauración obligatoria antes de validar
+
+Antes de comenzar una auditoría final, ejecuta una comprobación de regresión del baseline:
+
+```text
+para cada ruta histórica del manifest:
+    si falta → restaurar desde BASELINE
+    si cambió sin autorización → restaurar desde BASELINE
+    si cambió con overlay autorizado → comprobar que el prefijo histórico sea idéntico
+```
+
+La restauración de un archivo histórico no debe reconstruirse con una plantilla: debe copiarse del contenido real del baseline.
+
+## E. Integridad por contenido
+
+La preservación histórica se acredita por contenido, no por afirmación. Para cada archivo histórico: ruta + contenido/hash/Blob SHA + relación con el baseline.
+
+Si no puede recuperarse o compararse de manera verificable el contenido obligatorio, el resultado es `BLOCKED / NO DEMOSTRADO`; no se puede declarar PASS.
+
+## F. Actualización transaccional
+
+No hagas `append` repetidos. Cada archivo histórico que realmente deba incorporar información de Chat 2 puede contener como máximo un único bloque:
+
+```text
+<!-- CHAT2:chat-002:BEGIN -->
+...
+<!-- CHAT2:chat-002:END -->
+```
+
+Si aparece un segundo bloque con ese identificador, el candidato es FAIL y se descarta.
+
+## G. Fail closed
+
+Cualquier condición `FAIL`, `PARTIAL`, `BLOCKED`, `NO VERIFICADO`, ruta faltante, discrepancia histórica, estructura no demostrada, test nominal o inconsistencia referencial impide cerrar el resultado como PASS.
+
+## H. Invariantes funcionales de M1
+
+Las siete fronteras funcionales de regresión son:
+
+```text
+P01 caracterización / modo
+P02 herramienta
+P03 arquitectura de contexto persistente
+P04 operación de contexto + Write / Select / Compress / Isolate
+P05 prompting
+P06 cinco patrones de ejecución
+P07 integración + casos A–E
+```
+
+No cambies estas responsabilidades salvo evidencia actual, directa y verificable del M1 real. Dentro de ellas, no basta con nombrar una subcapacidad: cada elemento diferenciado debe tener desarrollo, aplicación y validación propios.
+
+
+## I. CONTRATO DE RESTRICCIONES ATÓMICAS Y VERIFICADOR-PRIMERO
+
+Las restricciones complejas deben convertirse en comprobaciones atómicas. No dependas de una sola instrucción narrativa como “cumple todo”.
+
+Cada requisito duro debe poder expresarse como:
+
+```text
+ID
+→ alcance
+→ predicado verificable
+→ evidencia requerida
+→ verificador
+→ severidad
+```
+
+Usa esta familia de controles:
+
+```text
+H01 fuentes y adquisición exacta
+H02 manifest y conjunto de rutas
+H03 integridad histórica
+H04 overlays
+H05 estructura de 7 pasos
+H06 26 campos por paso
+H07 3 paquetes de tests por paso
+H08 cobertura atómica de subcapacidades
+H09 especificidad de errores y correcciones
+H10 transcript canónico
+H11 procedencia y estados
+H12 ausencia de ejecución/invención
+H13 consistencia referencial
+H14 ZIP y comparación post-empaquetado
+```
+
+No repitas el texto de estos requisitos en cada sección del prompt. Las secciones posteriores deben **referenciar los IDs** y explicar cómo se verifica cada uno. Esto reduce la carga de seguimiento y evita que pequeñas variaciones narrativas creen reglas contradictorias.
+
+### Principio de doble verificación
+
+Para cada gate crítico usa dos capas:
+
+```text
+VERIFICADOR DETERMINISTA
+→ rutas, conteos, IDs, orden, hashes, delimitadores, prefijos/sufijos, referencias físicas
+
+VERIFICADOR SEMÁNTICO
+→ cobertura conceptual, profundidad, independencia, calidad de aplicación,
+  errores, diagnóstico, corrección y trazabilidad
+```
+
+Nunca conviertas una afirmación del propio modelo en sustituto de la evidencia.
+
+## J. ADQUISICIÓN ROBUSTA DEL HISTÓRICO
+
+La falta de red en el shell local **no es por sí sola evidencia de que el histórico sea inaccesible**.
+
+Cuando un archivo histórico puede recuperarse íntegramente mediante una herramienta de repositorio, conector, API, `fetch_blob`, `fetch_file`, recurso raw u otro mecanismo de lectura disponible en la sesión:
+
+```text
+fuente remota exacta
+→ contenido completo obtenido
+→ materialización exacta en BASELINE_STAGING
+→ hash local
+→ comparación con Blob SHA/SHA-1 de Git cuando esté disponible
+```
+
+El contenido devuelto por una herramienta de lectura puede constituir la fuente de materialización del baseline siempre que:
+
+```text
+1. el recurso sea exactamente el archivo histórico solicitado;
+2. se haya obtenido el contenido completo;
+3. no se haya aplicado truncamiento, resumen, traducción ni reformateo;
+4. el contenido materializado conserve los bytes/UTF-8 efectivamente recuperados;
+5. el hash resultante pueda compararse con la identidad del objeto remoto cuando proceda.
+```
+
+Solo usa `BLOCKED / NO DEMOSTRADO` cuando **ningún mecanismo de lectura disponible** permita recuperar y comparar el contenido obligatorio de forma íntegra y verificable.
+
+## K. CHECKPOINTS DE CONTROL
+
+No recorras toda la ejecución como una sola cadena de razonamiento. Congela cuatro checkpoints:
+
+```text
+CHECKPOINT 1 — FUENTES
+→ fuentes críticas completas + baseline íntegro
+
+CHECKPOINT 2 — PLAN
+→ inventario M1 + fronteras + subcapacidades + cobertura
+
+CHECKPOINT 3 — CANDIDATO
+→ plan + artefactos Chat2 + overlays + transcript
+
+CHECKPOINT 4 — CIERRE
+→ auditoría determinista + auditoría semántica + reparación + ZIP
+```
+
+Un checkpoint fallido bloquea el avance al siguiente. Las reparaciones vuelven al checkpoint anterior que quedó invalidado; no continúan desde un estado parcial.
+
+
+## 0.2. PRINCIPIOS DE DISEÑO DEL PROMPT APLICADOS A ESTA EJECUCIÓN
+
+Estos principios se usan para diseñar el prompt, no como una licencia para sustituir la evidencia del repositorio:
+
+```text
+1. instrucciones claras, delimitadas y jerarquizadas;
+2. datos de entrada separados de instrucciones;
+3. restricciones atómicas con identificadores;
+4. validadores deterministas para estructura/integridad;
+5. validación semántica separada de la validación estructural;
+6. ejemplos y plantillas solo cuando reduzcan ambigüedad, no cuando creen una segunda fuente de verdad;
+7. ciclos explícitos de evaluación → diagnóstico → corrección → re-evaluación;
+8. contexto extenso organizado para minimizar pérdidas de posición y confusión;
+9. ningún juez narrativo único basta para declarar PASS;
+10. la configuración y el prompt deben tratarse como artefactos versionables y verificables.
+```
+
+La razón de esta arquitectura es práctica: la literatura de instruction-following muestra que el cumplimiento se degrada cuando aumentan y se componen restricciones; además, el orden/posición del contexto puede afectar el desempeño. Por ello este prompt concentra las reglas duras en un contrato de control, convierte requisitos complejos en verificaciones atómicas y separa los chequeos deterministas de los semánticos. La mejora buscada es **reducir la carga de seguimiento**, no prometer comportamiento matemáticamente idéntico entre modelos o sesiones.
 
 # 1. JERARQUÍA DE INSTRUCCIONES Y PRINCIPIO DE PROCEDENCIA
 
@@ -245,7 +534,7 @@ Pero no debes fragmentar artificialmente una misma actividad únicamente para in
 
 El número final debe surgir del contenido real del Módulo 1 y de su aplicación práctica.
 
-No existe un número objetivo, mínimo, máximo, esperado, preferido o predeterminado de pasos. No uses como objetivo ninguna cantidad observada en auditorías previas, ejemplos, ejecuciones anteriores, transcripciones, matrices, resultados de otros agentes ni versiones anteriores del plan. Cualquier cantidad mencionada externamente puede servir, como máximo, como evidencia diagnóstica para revisar la calidad de una descomposición, pero nunca como instrucción para replicarla.
+No fijes la cantidad de pasos antes de realizar el inventario, el análisis de capacidades y las pruebas de agrupación/separación. La cantidad no debe elegirse para satisfacer una cifra arbitraria. Después de estabilizar el análisis, aplica el control de regresión: si no existe evidencia actual, explícita y verificable que justifique cambiar una frontera previamente validada, conserva las siete unidades funcionales de referencia y sus responsabilidades. No uses ejecuciones anteriores como plantilla literal.
 
 ## Límite
 
@@ -737,354 +1026,258 @@ No finalices ni empaquetes un borrador que todavía tenga gates en FAIL.
 ---
 
 
-## 12.0.1. PROTOCOLO OBLIGATORIO DE ACTUALIZACIÓN ACUMULATIVA DE `memory-repo`
+## 12.0.1. PROTOCOLO ACUMULATIVO, IDEMPOTENTE Y TRANSACCIONAL DE `memory-repo`
 
-La finalidad del ZIP final no es únicamente conservar una copia de `memory-repo` al cierre de Chat 1. Debe contener una **versión acumulativa real de `memory-repo` después de Chat 2**, en la que el contenido histórico de Chat 1 permanezca intacto y el contenido nuevo realmente producido por Chat 2 quede incorporado en los archivos y artefactos que correspondan.
+La memoria acumulativa debe producir un resultado reproducible y auditable. La estrategia no es “añadir todo a todo”, sino **preservar el baseline y aplicar overlays solamente donde el contenido nuevo pertenece legítimamente**.
 
-Esta operación es obligatoria y debe ejecutarse después de congelar el plan y antes de crear el ZIP final.
+### 1. Captura del baseline
 
-### Regla absoluta de preservación + incorporación
-
-Primero crea una copia de trabajo exacta del estado de `memory-repo` recuperado de Chat 1.
-
-Sobre esa copia de trabajo:
+Antes de cualquier escritura en staging:
 
 ```text
-ESTADO COMPLETO DE CHAT 1
-→ conservar íntegramente
-→ no sobrescribir
-→ no truncar
-→ no resumir
-→ no reemplazar
-→ no reordenar históricamente
-→ no borrar
-→ no reconstruir de memoria
-
-+
-CONTENIDO REAL PRODUCIDO POR CHAT 2
-→ incorporar de forma acumulativa
-→ en el archivo/artefacto que corresponda
-→ siguiendo la estructura definida para ese tipo
-→ conservar trazabilidad
+1. obtener el README.md real;
+2. obtener el árbol real completo del repositorio fuente;
+3. enumerar todas las rutas históricas;
+4. recuperar el contenido completo de cada archivo histórico obligatorio;
+5. si el shell no tiene red, utilizar una herramienta de repositorio/lectura disponible para recuperar el blob exacto;
+6. registrar commit/ref, tree SHA y blob SHA cuando estén disponibles;
+7. materializar el contenido exacto en BASELINE_STAGING sin traducción ni normalización;
+8. calcular un hash local independiente de cada archivo materializado;
+9. comprobar archivo por archivo: ruta + tamaño + hash local + Blob SHA cuando aplique;
+10. construir un manifest inmutable.
 ```
 
-La copia inicial de Chat 1 debe ser el punto de partida real del ZIP. No construyas un `memory-repo` nuevo desde las plantillas ignorando los archivos recuperados.
+**Regla crítica:** un archivo remoto se considera “materializado” cuando su contenido completo ha sido obtenido por una fuente de lectura autorizada y se ha escrito sin modificación en `BASELINE_STAGING`. La incapacidad de `curl`/shell para resolver Internet no autoriza por sí sola a sustituirlo por un stub `BLOCKED`.
 
-### Regla de actualización archivo por archivo
+El manifest es la lista de existencia y de identidad contra la que se audita el candidato.
 
-Después de congelar el plan, realiza un inventario real de todos los archivos existentes en la copia de trabajo.
+### 2. Política de actualización — mínima y semánticamente autorizada
 
-Para cada archivo `.md` que deba recibir información de Chat 2:
+Los archivos históricos son inmutables por defecto. **No existe una obligación de añadir una sección Chat 2 a todos los `.md`.**
 
-1. lee el contenido completo existente;
-2. conserva ese contenido como bloque histórico inicial;
-3. no modifiques ninguna línea perteneciente al contenido histórico de Chat 1;
-4. determina qué información real de Chat 2 corresponde a ese archivo;
-5. añade debajo del contenido histórico una nueva sección identificable de Chat 2;
-6. utiliza exactamente la plantilla o estructura normativa correspondiente al tipo de archivo;
-7. incorpora contenido real, específico y completo producido por Chat 2;
-8. conserva la procedencia entre Chat 1, Chat 2 y cualquier fuente externa;
-9. valida que el contenido histórico siga presente después de la actualización.
-
-No está permitido realizar una operación equivalente a:
+Solo pueden actualizarse durante Chat 2 estos archivos históricos, y solo cuando la información nueva pertenezca realmente a su responsabilidad documental:
 
 ```text
-Chat 1 → reconstruir archivo mediante plantilla
+STATE.md
+KNOWLEDGE.md
+INDEX.md
+knowledge/facts/module-coverage.md
+knowledge/facts/external-research.md
+knowledge/architecture/artifact-matrix.md
+knowledge/references/reference-index.md
 ```
 
-La operación obligatoria es:
+Los siguientes archivos permanecen obligatoriamente idénticos al baseline:
 
 ```text
-archivo existente de Chat 1
-+
-sección nueva de Chat 2
-```
-
-Cuando un archivo de Chat 1 sea de carácter histórico/RAW e inmutable y su función no contemple actualizaciones acumulativas, debe permanecer exactamente intacto y Chat 2 debe recibir su propio archivo homólogo dentro de `chats/chat-002/` u otra ubicación específicamente establecida para la nueva sesión. No modifiques un RAW histórico solo para insertar contenido de Chat 2.
-
-### Regla de correspondencia de contenido
-
-No distribuyas el contenido de Chat 2 arbitrariamente.
-
-Cada pieza de información nueva debe tener un destino explícito según su naturaleza:
-
-```text
-estado actual posterior a Chat 2
-→ STATE.md
-
-conocimiento nuevo consolidado
-→ KNOWLEDGE.md
-
-decisiones nuevas reales
-→ DECISIONS.md
-y, si corresponde, decisions/DEC-<n>.md
-
-preguntas abiertas nuevas o cambios verificables
-→ OPEN_QUESTIONS.md
-
-navegación / nuevos artefactos
-→ INDEX.md
-
-cambios en protocolo de memoria
-→ MEMORY_PROTOCOL.md, cuando realmente correspondan
-
-cambios en bootstrap/continuidad
-→ BOOTSTRAP.md, cuando realmente correspondan
-
-visión y navegación del repositorio
-→ README.md, cuando realmente corresponda
-
-registro específico de la sesión Chat 2
-→ chats/chat-002/META.md
-→ chats/chat-002/transcript.md
-
-handoff producido por Chat 2
-→ handoffs/..., utilizando el patrón de handoff existente
-```
-
-Esta correspondencia es una regla de destino, no una orden para modificar todos los archivos en todas las ejecuciones.
-
-### Regla de creación de los artefactos propios de Chat 2
-
-Chat 2 debe producir y conservar sus propios artefactos de sesión cuando el repositorio utiliza un patrón equivalente para Chat 1.
-
-Como mínimo, cuando la estructura recuperada lo permita, debe existir una contraparte de:
-
-```text
+README.md
+MEMORY_PROTOCOL.md
+BOOTSTRAP.md
+OPEN_QUESTIONS.md
 chats/chat-001/META.md
-→ chats/chat-002/META.md
-
 chats/chat-001/transcript.md
-→ chats/chat-002/transcript.md
-
+chats/chat-001/HANDOFF.md
+decisions/DEC-0001.md … DEC-0006.md
 handoffs/chat-001-to-chat-002.md
-→ evidencia de cierre/continuidad producida por Chat 2
-   mediante el patrón de handoff correspondiente para la siguiente sesión
+indexes/references.md
+indexes/timeline.md
+indexes/topics.md
+knowledge/facts/repository-audit.md
+knowledge/architecture/agentic-sdlc.md
+knowledge/architecture/component-matrix.md
+knowledge/architecture/contribution-matrix.md
+knowledge/architecture/decision-matrix.md
+knowledge/architecture/dependency-matrix.md
+knowledge/architecture/gaps-and-roadmap.md
+knowledge/architecture/target-architecture.md
 ```
 
-`chats/chat-002/META.md` debe utilizar la misma estructura normativa que `chats/chat-001/META.md`, cambiando únicamente los datos propios de la sesión de Chat 2 y añadiendo exclusivamente información realmente producida durante Chat 2.
+Si otro `.md` histórico parece útil para actualizarlo pero no está en la lista autorizada, **no se modifica**. Su información nueva debe vivir en los artefactos propios de Chat 2.
 
-`chats/chat-002/transcript.md` debe conservar el registro real de Chat 2 y distinguir como mínimo:
+### 3. Overlay único
 
-```text
-PARTE A — PROMPT ORIGINAL (TEXTUAL)
-→ prompt realmente ejecutado
+Un archivo histórico autorizado que necesite actualización debe conservar primero su contenido histórico completo y añadir después exactamente un overlay delimitado:
 
-PARTE B — PRODUCCIÓN SUSTANTIVA
-→ contenido realmente producido por Chat 2
+```markdown
+[HISTÓRICO EXACTO DEL BASELINE]
 
-PARTE C — REGISTRO REAL DE EJECUCIÓN
-→ acciones realmente realizadas, resultados observados y estado final
+---
+
+<!-- CHAT2:chat-002:BEGIN -->
+[contenido nuevo realmente producido por Chat 2]
+<!-- CHAT2:chat-002:END -->
 ```
 
-No presentes como ejecutado aquello que quedó solamente planificado.
-
-### Regla sobre la estructura de cada `.md`
-
-La sección `Complete Markdown File Structure` define estructuras normativas y no solo títulos orientativos.
-
-Para cada `.md` existente que vaya a incorporar contenido de Chat 2:
+Valida el archivo actualizado como una construcción determinista:
 
 ```text
-1. determinar el tipo de archivo;
-2. localizar su plantilla/estructura normativa;
-3. conservar intacto el contenido histórico;
-4. añadir el bloque Chat 2 debajo;
-5. respetar la estructura correspondiente;
-6. completar todos los contenidos que realmente correspondan;
-7. no dejar placeholders;
-8. no sustituir contenido por un resumen;
-9. no convertir el archivo en una estructura libre.
-```
-
-Si la estructura real del repositorio contiene un archivo Markdown para el que esta sección no proporciona una plantilla detallada, no inventes una estructura nueva arbitraria. Inspecciona el archivo real y utiliza su estructura existente como fuente normativa de ese tipo de registro, conservándola y aplicándola al bloque nuevo de Chat 2.
-
-### Regla de completitud del contenido de Chat 2
-
-El contenido producido por Chat 2 no puede quedar únicamente:
-
-```text
-en el ZIP como archivo aislado
-```
-
-ni únicamente:
-
-```text
-en una matriz
-```
-
-ni únicamente:
-
-```text
-en un resumen final
-```
-
-La información debe quedar persistida en los archivos de memoria que conceptualmente correspondan a esa información.
-
-Por ejemplo:
-
-```text
-Plan M1
-→ debe quedar disponible en los artefactos de planificación/memoria previstos.
-
-Decisiones nuevas
-→ deben quedar en el índice de decisiones y en sus registros individuales cuando corresponda.
-
-Estado de Chat 2
-→ debe quedar reflejado en el estado de continuidad.
-
-Conocimiento nuevo
-→ debe quedar incorporado en la capa de conocimiento.
-
-Preguntas abiertas
-→ deben quedar incorporadas en la lista correspondiente.
-
-Registro de sesión
-→ debe existir en el transcript/meta de Chat 2.
-
-Handoff
-→ debe permitir que una sesión futura conozca exactamente qué quedó hecho,
-  qué quedó planificado y qué debe continuar.
-```
-
-### Regla de “no copiar solamente”
-
-Copiar íntegramente Chat 1 es una operación necesaria, pero **no constituye por sí sola la ejecución correcta de Chat 2**.
-
-El resultado no puede considerarse válido cuando:
-
-```text
-ZIP
-=
-copia de Chat 1
+contenido_candidato
+==
+contenido_baseline
 +
-ninguna incorporación real de Chat 2
+separador permitido
++
+overlay único
 ```
 
-aunque todos los archivos tengan la estructura correcta.
+No reconstruyas ni edites el prefijo histórico. No añadas un bloque “NO HAY CAMBIOS”. La ausencia de cambio se representa dejando el archivo intacto.
 
-La condición correcta es:
+### 4. Chat 2 propio
+
+Debe existir exactamente:
 
 ```text
-ZIP
-=
-copia íntegra de Chat 1
-+
-incorporación completa y verificable del contenido real de Chat 2
+chats/chat-002/
+├── META.md
+├── transcript.md
+├── HANDOFF.md
+└── M1_PLAN.md
 ```
 
-### Auditoría física obligatoria antes del ZIP
-
-Antes de empaquetar, verifica físicamente la copia de trabajo:
+Y exactamente este artefacto futuro:
 
 ```text
-A. ¿Todos los archivos históricos obligatorios de Chat 1 continúan presentes?
-B. ¿Su contenido histórico permanece intacto?
-C. ¿Existen los artefactos propios de Chat 2 que correspondan?
-D. ¿Cada actualización acumulativa tiene el bloque Chat 2 debajo del histórico?
-E. ¿Cada bloque Chat 2 utiliza la estructura correcta para su tipo?
-F. ¿El contenido nuevo refleja trabajo realmente producido?
-G. ¿Los cambios no se limitaron a copiar Chat 1?
-H. ¿Los índices apuntan a los artefactos nuevos?
-I. ¿Las decisiones y preguntas nuevas tienen destino correcto?
-J. ¿El transcript de Chat 2 contiene producción real y registro real?
-K. ¿Los estados PLANIFICADO / EJECUTADO son correctos?
-L. ¿El ZIP contiene exactamente la copia de trabajo validada?
+handoffs/chat-002-to-chat-003.md
 ```
 
-Si cualquiera de estas condiciones falla:
+No existe `chats/chat-003/`.
+
+### 5. Decisiones nuevas
+
+Solo crea `decisions/DEC-XXXX.md` si durante Chat 2 existe una **decisión sustantiva nueva realmente adoptada**. No fabriques decisiones para llenar espacio. Calcula dinámicamente el siguiente identificador secuencial a partir del mayor ID real existente.
+
+### 6. Reparación
+
+Toda reparación parte de BASELINE_STAGING. Nunca de un candidato que ya tenga FAIL.
+
+### 7. Criterio transaccional
+
+Ninguna modificación se considera real hasta que el candidato completo supere auditoría estructural, auditoría semántica y regresión del baseline.
+
+## 12.1. PLANTILLA ÚNICA Y OBLIGATORIA PARA CADA PASO## Regla adicional de completitud del paso
+
+Los 26 campos son un contrato de contenido, no un contador. Cada campo debe contener información específica del paso. Está prohibido satisfacer el campo mediante `NO APLICA`, “revisar”, “validar”, “según lo anterior” o texto genérico cuando M1 o la tarea del paso permiten aportar información concreta. `NO APLICA` solo se utiliza cuando realmente no existe aplicación para ese campo y debe justificarse brevemente.
+
+Los campos 9, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25 y 26 deben poder leerse como una cadena coherente y específica del paso.
+
+
+### Registro atómico de subcapacidades
+
+Antes de redactar los 26 campos, construye dentro de `M1_PLAN.md` un **registro atómico de cobertura** para las subcapacidades diferenciadas del paso. No es un paso adicional ni modifica el contrato de 26 campos; es un mecanismo de trazabilidad que alimenta los campos existentes.
+
+Cada registro debe tener:
 
 ```text
-NO EMPAQUETAR
-→ corregir
-→ volver a auditar
+SUBCAP_ID
+nombre de la subcapacidad
+fuente M1 exacta
+definición operativa
+escenario/proyecto al que aplica
+entrada
+acción
+salida
+criterio de éxito
+evidencia
+validación
+TEST_ID
+ASSERTION_ID
 ```
 
-### Evidencia mínima de incorporación
-
-Antes del empaquetado final, conserva internamente una comprobación de:
+Reglas:
 
 ```text
-archivo
-→ contenido histórico preservado
-→ contenido Chat 2 añadido
-→ ubicación del bloque Chat 2
-→ tipo de estructura utilizada
-→ validación
+cada subcapacidad diferenciada → un SUBCAP_ID único
+cada SUBCAP_ID → exactamente un propietario principal
+cada SUBCAP_ID → al menos una ASSERTION_ID dentro de field 18
+cada ASSERTION_ID → criterio PASS/FAIL observable
 ```
 
-Esta comprobación es evidencia de que Chat 2 realmente actualizó la memoria y no solamente copió el estado anterior.
-
-### Regla final de acumulación
-
-La arquitectura de memoria de esta sesión debe ser acumulativa:
+Para P04:
 
 ```text
-CHAT 1
-↓
-estado preservado
-↓
-CHAT 2
-↓
-nueva evidencia
-+
-nuevo conocimiento
-+
-nuevas decisiones, si existen
-+
-nuevo estado
-+
-nuevo handoff
-↓
-CHAT 2 MEMORY REPOSITORY
+P04-S01 Write
+P04-S02 Select
+P04-S03 Compress
+P04-S04 Isolate
 ```
 
-Nunca:
+Para P06:
 
 ```text
-CHAT 1
-↓
-resumen de Chat 1
-↓
-Chat 2
+P06-S01 Spec-driven
+P06-S02 Plan-then-execute
+P06-S03 Test-first
+P06-S04 Refactor con anclas
+P06-S05 Critic loops
 ```
 
-ni:
+Para P07:
 
 ```text
-CHAT 1
-↓
-reemplazo por Chat 2
+P07-S01 Caso A
+P07-S02 Caso B
+P07-S03 Caso C
+P07-S04 Caso D
+P07-S05 Caso E
+P07-S06 Integración completa
 ```
 
-ni:
+Estas listas son el mínimo de regresión para las tres familias problemáticas. No impiden añadir otras subcapacidades que M1 real demuestre como necesarias.
+
+### Regla de campos 18 y validación atómica
+
+Mantén **exactamente 3 IDs de test de alto nivel por paso**, pero cada test es un **paquete de prueba** que puede contener varias aserciones atómicas.
+
+Cada aserción debe tener:
 
 ```text
-CHAT 1
-↓
-copia sin incorporación de Chat 2
+ASSERTION_ID
+SUBCAP_ID
+qué se observa
+entrada
+resultado esperado
+criterio PASS
+criterio FAIL
+evidencia
 ```
 
-La salida válida debe permitir que una futura sesión reconstruya la continuidad de:
+Por tanto:
 
 ```text
-qué existía antes
-+
-qué produjo Chat 2
-+
-qué cambió
-+
-qué no cambió
-+
-qué quedó planificado
-+
-qué debe continuar
+3 TEST_ID de alto nivel
+≠
+3 comprobaciones totales
 ```
 
-sin depender de memoria implícita del modelo.
+La auditoría cuenta 3 paquetes de test y, dentro de ellos, comprueba que **todas las ASSERTION_ID necesarias existan y tengan veredicto propio**.
+
+Distribución mínima obligatoria:
+
+```text
+P04
+T01 → Write
+T02 → Select
+T03 → Compress + Isolate
+pero T03 contiene dos ASSERTION_ID independientes:
+      A03 = Compress
+      A04 = Isolate
+
+P06
+T01 → Spec-driven + Plan-then-execute
+T02 → Test-first + Refactor con anclas
+T03 → Critic loops
+cada subcapacidad con ASSERTION_ID propio
+
+P07
+T01 → Caso A + Caso B
+T02 → Caso C + Caso D
+T03 → Caso E + Integración completa
+cada caso con ASSERTION_ID propio
+```
+
+Un `TEST_ID` agrupado no es evidencia suficiente si las subcapacidades internas no poseen aserciones y criterios de PASS/FAIL independientes.
 
 
-## 12.1. PLANTILLA ÚNICA Y OBLIGATORIA PARA CADA PASO
 
 **Todos los pasos de Módulo 1 deben utilizar exactamente la misma plantilla documental de 26 campos.**
 
@@ -1374,7 +1567,7 @@ lectura completa de M1
 → asignación de numeración secuencial
 ```
 
-La numeración `Paso 01`, `Paso 02`, `...`, `Paso NN` se asigna **después** de estabilizar las unidades de trabajo. El valor de `NN` es una consecuencia del análisis y puede aumentar o disminuir durante las iteraciones de diseño.
+La numeración `Paso 01`, `Paso 02`, `...`, `Paso NN` se asigna **después** de estabilizar las unidades de trabajo. El valor de `NN` sigue siendo una consecuencia del análisis, pero después de aplicar el control de regresión de fronteras funcionales previamente validado, **si no existe evidencia actual que justifique una desviación, el resultado final debe conservar las siete unidades funcionales y sus responsabilidades establecidas en la referencia vinculante de regresión**.
 
 Está prohibido:
 
@@ -2164,7 +2357,7 @@ y evitar tanto la fragmentación artificial como la compresión artificial.
 
 La cantidad final es una **consecuencia del análisis**, nunca el objetivo del análisis.
 
-La cantidad final permanece abierta hasta completar las pruebas de cobertura, profundidad, independencia, integración, no consolidación, dependencias, salidas, validación, trazabilidad y proporcionalidad. No debe fijarse ni adoptarse por el mero hecho de que una auditoría previa, un ejemplo, una ejecución anterior o una expectativa externa proponga una cantidad concreta. Una auditoría previa positiva puede utilizarse como **control de regresión de las fronteras funcionales ya examinadas**, pero la cantidad final debe seguir siendo consecuencia del análisis dinámico actual. Si el análisis actual reproduce la misma descomposición por las mismas razones funcionales, esa coincidencia es válida y no constituye fijación previa de la cantidad.
+La cantidad final permanece abierta hasta completar las pruebas de cobertura, profundidad, independencia, integración, no consolidación, dependencias, salidas, validación, trazabilidad y proporcionalidad. No debe fijarse antes de ejecutar ese análisis. **Una vez completado el análisis dinámico, el control de regresión de la sección 12.5 es vinculante para las fronteras funcionales previamente validadas:** si no existe evidencia actual, explícita y verificable que justifique modificarlas, el resultado final debe conservar las siete unidades de referencia y sus responsabilidades. Por tanto, siete no es un objetivo previo; es el conjunto de referencia que debe mantenerse después del análisis cuando no exista una razón actual para cambiarlo.
 
 ## 12.3. QUALITY CONTROL AND ANTI-DEGRADATION GATES
 
@@ -2244,7 +2437,7 @@ fuente
 
 ### GATE 05 — INTERNAL TEST COVERAGE
 
-Cada capacidad diferenciada y comprobable debe quedar cubierta por una prueba observable. Puede utilizarse una prueba estructurada con múltiples filas/afirmaciones, pero no basta con decir que “todo está cubierto”.
+Cada capacidad diferenciada y comprobable debe quedar cubierta por una **aserción atómica observable** dentro de uno de los exactamente tres paquetes de test del paso. Puede utilizarse un paquete con varias aserciones, pero no basta con decir que “todo está cubierto”.
 
 Aplicación mínima obligatoria a familias concretas de M1:
 
@@ -2257,6 +2450,36 @@ Write / Select / Compress / Isolate
 5 patrones de ejecución
 casos A-E
 ```
+
+Cobertura obligatoria por familia:
+
+```text
+P04
+→ Write
+→ Select
+→ Compress
+→ Isolate
+→ cada uno con propósito, condición de uso, aplicación, entrada, salida y validación
+
+P06
+→ Spec-driven preview
+→ Plan-then-execute
+→ Test-first
+→ Refactor con anclas
+→ Critic loops
+→ cada uno con propósito, condición de uso, aplicación, entrada, salida y validación
+
+P07
+→ A — gran refactor
+→ B — greenfield feature
+→ C — debugging
+→ D — exploration
+→ E — code review
+→ cada uno con herramienta/contexto/prompt/patrón cuando corresponda,
+   resultado observable, evidencia y validación
+```
+
+Una sola prueba global que diga `4/4`, `5/5` o `A-E cubiertos` no sustituye el desarrollo necesario de cada elemento. El contenido debe permitir identificar qué se hará para cada elemento, con qué entrada, qué resultado se espera y qué condición determina PASS/FAIL.
 
 Cada prueba debe conservar la cadena:
 
@@ -2430,25 +2653,123 @@ No intentes forzar identidad textual con una ejecución anterior. La robustez se
 
 ### Control de regresión contra la descomposición funcional previamente validada
 
-Existe una **auditoría positiva previa de esta misma aplicación de M1** que validó una descomposición funcional concreta de siete unidades de trabajo. Esta referencia se utiliza exclusivamente como **control de regresión de las fronteras funcionales ya examinadas y como evidencia diagnóstica de calidad**, no como un número objetivo, una salida dorada, una plantilla literal ni una instrucción para escoger siete pasos antes de realizar el análisis dinámico.
-
-Una vez estabilizado el conjunto de unidades, contrástalo explícitamente contra esta descomposición funcional previamente validada:
+La descomposición funcional de referencia es:
 
 ```text
-01 → caracterizar la tarea y seleccionar el modo de trabajo
-02 → seleccionar y evaluar la herramienta con criterios de M1
-03 → diseñar la arquitectura de contexto persistente
-04 → gestionar operativamente la ventana y evitar context rot
-05 → diseñar y aplicar prompting fundamental
-06 → aplicar patrones de ejecución de coding
-07 → integrar los tres pilares y validar casos canónicos
+M1-P01 → caracterizar la tarea y determinar el modo de trabajo
+M1-P02 → seleccionar y evaluar la herramienta mediante criterios verificables
+M1-P03 → diseñar la arquitectura de contexto persistente del proyecto
+M1-P04 → gestionar la ventana de contexto y prevenir context rot
+M1-P05 → diseñar y aplicar prompting fundamental para trabajo de ingeniería
+M1-P06 → aplicar patrones de ejecución de coding asistido por IA
+M1-P07 → integrar los tres pilares y validar los cinco casos canónicos de M1
 ```
 
-La comprobación debe responder si alguna frontera ha vuelto a fragmentarse o fusionarse respecto de esta descomposición. No vuelvas a dividir una de estas unidades únicamente porque M1 tenga subtítulos distintos, porque una subcapacidad pueda describirse por separado, porque un mecanismo tenga una prueba propia o porque pueda formularse como actividad individual. Tampoco vuelvas a fusionar dos unidades de esta referencia si sus resultados profesionales permanecen funcionalmente distintos.
+Primero realiza el análisis dinámico del M1 real. Después, si no aparece evidencia actual, explícita y verificable que obligue a cambiar una frontera, conserva exactamente estas siete unidades y sus responsabilidades.
 
-Solo modifica una de estas fronteras cuando exista **evidencia actual, explícita y verificable** de una independencia funcional, dependencia funcional o necesidad de integración que no hubiera sido cubierta por las reglas y comprobaciones anteriores. Cuando el conjunto final difiera de esta descomposición previamente validada, debes documentar dentro del análisis la razón concreta de cada frontera modificada y demostrarla mediante resultado principal, dependencias, salida, reutilización, evidencia y validación.
+### Invariantes semánticas no negociables dentro de los pasos
 
-La auditoría positiva previa constituye una **prueba de regresión y evidencia diagnóstica**, no un objetivo numérico ni una salida que deba reproducirse literalmente. La cantidad final sigue siendo la consecuencia del análisis completo; el propósito de este control es impedir que una ejecución posterior vuelva a introducir sobrefragmentación que ya había sido descartada sin evidencia nueva que la justifique y, al mismo tiempo, detectar pérdida de contenido, profundidad o trazabilidad frente a una ejecución anterior que haya desarrollado correctamente ese contenido.
+Estas invariantes no se satisfacen con una mención nominal. Deben aparecer de manera **individual, trazable y validable** dentro del paso propietario:
+
+```text
+P04:
+  Write
+  Select
+  Compress
+  Isolate
+
+P06:
+  Spec-driven preview
+  Plan-then-execute
+  Test-first
+  Refactor con anclas
+  Critic loops
+
+P07:
+  A — gran refactor
+  B — greenfield feature
+  C — debugging
+  D — exploration
+  E — code review
+```
+
+Para cada elemento diferenciado exige, como mínimo dentro de los campos pertinentes del paso:
+
+```text
+propósito
+→ cuándo usarlo
+→ cómo aplicarlo
+→ entradas
+→ salida
+→ criterio de selección/uso
+→ evidencia
+→ validación
+→ prueba explícita
+```
+
+No conviertas todos los elementos de una familia en una sola explicación genérica. Pueden compartir un mismo paso, pero deben poder localizarse y auditarse individualmente.
+
+### Regla de pruebas por paso
+
+Cada paso debe conservar exactamente **3 TEST_ID de alto nivel** para respetar la plantilla de 26 campos, pero esos 3 TEST_ID deben contener un **mapa de cobertura explícito** que cubra todos los elementos diferenciados del paso.
+
+Ejemplo conceptual para P04:
+
+```text
+T01 → Write + su criterio de éxito
+T02 → Select + Compress + criterios independientes de ambos
+T03 → Isolate + contaminación / reintegración
+```
+
+Ejemplo conceptual para P06:
+
+```text
+T01 → Spec-driven preview + Plan-then-execute
+T02 → Test-first + Refactor con anclas
+T03 → Critic loops + comprobación cruzada de los cinco patrones
+```
+
+Ejemplo conceptual para P07:
+
+```text
+T01 → A + B
+T02 → C + D
+T03 → E + auditoría cruzada A–E
+```
+
+Esto permite mantener tres tests sin sacrificar cobertura individual.
+
+### Regla contra campos genéricos
+
+Los campos `19. Expected errors`, `20. Detection`, `21. Meaning`, `22. Diagnosis` y `23. Correction` deben ser **específicos del paso**. No está permitido repetir la misma explicación genérica entre pasos.
+
+Cada uno debe aportar información operacional nueva y relacionada directamente con el objetivo del paso. Como mínimo:
+
+```text
+Expected errors → al menos 2 fallos plausibles específicos del paso
+Detection → señal observable para cada fallo principal
+Meaning → impacto propio del paso
+Diagnosis → discriminación entre causas posibles del paso
+Correction → acción concreta de reparación para los fallos identificados
+```
+
+Una repetición literal o casi literal entre pasos en estos campos es `FAIL` salvo que la repetición sea una regla estructural inevitable y esté acompañada de una aplicación específica al paso.
+
+### Regla de cobertura semántica
+
+Para cada paso debe existir la cadena:
+
+```text
+contenido real de M1
+→ subcapacidad
+→ aplicación concreta al proyecto
+→ resultado profesional
+→ evidencia
+→ validación
+→ test
+```
+
+Si una subcapacidad sólo aparece en una lista, matriz o resumen, pero no tiene desarrollo aplicable en el paso que la posee, es `FAIL`.
 
 ### Continuidad incremental de memoria
 
@@ -2474,6 +2795,106 @@ El ZIP final `chat-002-memory-repo.zip` continúa siendo la consolidación final
 
 ---
 
+
+## 12.4. CATÁLOGO DE DEFECTOS: ERRORES, DETECCIÓN, SIGNIFICADO, DIAGNÓSTICO Y CORRECCIÓN
+
+Los campos 19–23 no son un formulario de relleno. Deben describir defectos plausibles del paso concreto.
+
+Para **cada paso**, crea como mínimo dos tuples de defecto:
+
+```text
+ERROR_ID
+→ trigger
+→ symptom
+→ detection
+→ impact/meaning
+→ diagnosis
+→ correction
+→ post-correction verification
+```
+
+El mismo `ERROR_ID` debe poder rastrearse a través de los campos:
+
+```text
+19 Expected errors
+20 Detection
+21 Meaning
+22 Diagnosis
+23 Correction
+```
+
+Reglas de especificidad:
+
+```text
+1. Cada ERROR_ID debe referirse a una subcapacidad, decisión, artefacto,
+   escenario, dependencia o salida concreta del paso.
+2. Debe explicar un mecanismo de fallo propio, no “salida incompleta”.
+3. Debe tener una señal observable concreta.
+4. Debe distinguir impacto técnico/profesional.
+5. Debe contener una causa diagnosticable.
+6. Debe contener una corrección que actúe sobre esa causa.
+7. Debe incluir una verificación posterior específica.
+8. No se permite repetir exactamente una fila, párrafo o bloque completo
+   de fields 19–23 entre pasos distintos.
+9. Las frases genéricas de procedimiento pueden aparecer solo en la instrucción
+   del prompt, no como sustituto del contenido específico de cada paso.
+```
+
+### Lint determinista de boilerplate
+
+Antes del cierre:
+
+```text
+para cada campo 19–23:
+    comparar bloques completos entre pasos
+    si existe duplicado textual sustantivo → FAIL
+
+para cada ERROR_ID:
+    verificar al menos 1 SUBCAP_ID o ancla de paso
+    verificar trigger + symptom + impact + diagnosis + correction
+    verificar evidencia/criterio observable
+```
+
+La similitud semántica no se aprueba solo porque se hayan cambiado unas palabras. Si dos pasos describen el mismo supuesto error con distinta redacción, revisa si realmente es un defecto distinto. Si no lo es, elimina la duplicación o justifica explícitamente que el mismo modo de fallo es inherente a una subcapacidad común; aun así, la detección y corrección deben ser propias del paso.
+
+## 12.5. AUDITORÍA ADVERSARIAL Y REPARACIÓN
+
+Realiza dos pasadas separadas sobre el candidato:
+
+```text
+PASADA A — CONFORMIDAD
+→ comprobar lo que debería estar presente
+
+PASADA B — REFUTACIÓN
+→ intentar demostrar que el candidato NO cumple
+```
+
+La PASADA B debe buscar deliberadamente:
+
+```text
+falta de cobertura
+compresión semántica
+tests que aparentan cubrir pero no discriminan
+errores genéricos
+referencias rotas
+duplicaciones
+cambios históricos ocultos
+estados confundidos
+artefactos futuros presentados como realizados
+```
+
+Si la PASADA B encuentra un defecto:
+
+```text
+descartar candidato
+→ restaurar baseline
+→ corregir
+→ regenerar
+→ repetir PASADA A + PASADA B
+```
+
+No reutilices contenido del candidato fallido como si fuera un baseline confiable.
+
 ## 12.6. CHECKLIST FINAL ANTI-DEGRADACIÓN
 
 Antes del empaquetado final, responde afirmativamente a todas las preguntas siguientes:
@@ -2492,7 +2913,11 @@ Antes del empaquetado final, responde afirmativamente a todas las preguntas sigu
 ¿Todos los FAIL detectados fueron reparados y re-auditados?
 ¿No se creó una decisión artificial?
 ¿No se utilizó una salida anterior como plantilla literal?
-¿La cantidad final de pasos sigue siendo consecuencia del análisis dinámico?
+¿La cantidad final de pasos sigue siendo consecuencia del análisis dinámico y, una vez aplicado el control de regresión, conserva las siete fronteras funcionales previamente validadas salvo evidencia actual documentada?
+¿P04 conserva context rot + reglas de ventana + Write / Select / Compress / Isolate?
+¿P06 conserva Spec-driven preview + Plan-then-execute + Test-first + Refactor con anclas + Critic loops?
+¿P07 conserva los casos A-E y la integración de los tres pilares?
+¿`M1_PLAN.md` contiene el desarrollo completo de los pasos y `transcript.md` solo su resumen más el resto de la producción sustantiva?
 ¿La persistencia y el ZIP se ejecutarán solo después de congelar el plan?
 ```
 
@@ -2500,75 +2925,1164 @@ Si alguna respuesta es `NO`, el proceso permanece en estado **NO CERRADO** y deb
 
 # 13. FUENTE ÚNICA DE VERDAD DE LA ESTRUCTURA DE `memory-repo`
 
-No dupliques dentro de este prompt el árbol completo de `memory-repo` ni las plantillas de sus archivos Markdown. La estructura física y documental debe obtenerse directamente del repositorio fuente.
+La estructura física y documental de la fuente se determina **en tiempo de ejecución** a partir del `README.md` real de `Diiegoal/memory-repo`.
 
-Antes de crear o actualizar cualquier artefacto de memoria, entra en modo lectura a:
+## 13.0. Autoridad estructural
 
-```text
-Diiegoal/memory-repo
-```
-
-y utiliza exclusivamente su `README.md` como fuente actual de estructura para esta sesión, consultando exactamente estas dos secciones:
+La prioridad es:
 
 ```text
-Exact repository tree
-Complete Markdown File Structure
+1. README.md real — Exact repository tree
+2. README.md real — Complete Markdown File Structure
+3. estructura real observada de un archivo cuando el README no define una plantilla detallada
+4. instrucciones de este prompt para las excepciones explícitamente autorizadas de Chat 2
 ```
 
-### Regla de estructura física
+La copia literal del bloque `Complete Markdown File Structure` incluida en `13.1` es solamente una **referencia embebida/caché** para reducir ambigüedad. No es una segunda fuente de verdad. No es un tercer nivel de aprobación.
 
-`README.md → Exact repository tree` es la fuente de verdad para:
+Si la copia embebida difiere del README real:
 
 ```text
-carpetas existentes
-archivos existentes
-rutas
-nombres
-estructura histórica
+README real
+→ prevalece
+→ registrar discrepancia
+→ usar estructura vigente en staging
+→ volver a auditar
 ```
 
-No reconstruyas, copies de memoria ni hardcodees el árbol dentro de este prompt. Extrae el árbol real del `README.md` y úsalo para construir la copia de trabajo.
+## 13.0.1. `Exact repository tree`
 
-### Regla de estructura documental
+Extrae literalmente el árbol real del README y contrástalo con el árbol real del repositorio. No reconstruyas el árbol por memoria.
 
-`README.md → Complete Markdown File Structure` es la fuente de verdad para la estructura de cada `.md` existente o permitido por la estructura del repositorio.
-
-No reproduzcas esas plantillas en otro lugar del prompt ni inventes una segunda versión de ellas.
-
-### Regla de extracción literal de la estructura del README
-
-La expresión **“estructura correspondiente”** significa la estructura **literalmente observada en la entrada correspondiente de `README.md → Complete Markdown File Structure`**, no una estructura equivalente, parecida, resumida o reconstruida por interpretación.
-
-Antes de crear o actualizar cada `.md`, ejecuta este procedimiento:
+La salida física de Chat 2 es:
 
 ```text
-README.md real
-→ localizar la entrada exacta del archivo por ruta/nombre
-→ extraer su bloque estructural correspondiente
-→ identificar literalmente:
-   encabezados y niveles
-   orden de secciones
-   nombres fijos
-   listas y etiquetas fijas
-   bloques de código y su lenguaje
-   tablas y cabeceras
-   campos/elementos estructurales
-→ utilizar ese bloque como esqueleto obligatorio
-→ sustituir únicamente placeholders por contenido real
-→ no agregar, eliminar, fusionar, renombrar ni reordenar elementos estructurales
+árbol histórico exacto de Chat 1
++
+solo el overlay explícitamente autorizado de Chat 2
 ```
 
-No conviertas la plantilla del README en una descripción semántica. Si el README contiene una plantilla, debe respetarse su estructura textual y jerárquica. Si para un archivo el README únicamente documenta un `Role` y no proporciona una plantilla detallada, **no inventes una plantilla ausente**: conserva el archivo real íntegro y utiliza como única referencia adicional la estructura efectivamente observada en ese archivo para el bloque nuevo de Chat 2.
+No modifiques `README.md` para sustituir el snapshot histórico por ese árbol ampliado.
 
-La validación debe comparar la estructura generada con la estructura fuente del README **elemento por elemento**, no por similitud visual ni por interpretación.
+## 13.0.2. `Complete Markdown File Structure`
+
+Extrae literalmente, archivo por archivo, la estructura documental vigente del README real. La validación es estructural, no aproximada:
+
+```text
+mismos encabezados
+mismos niveles
+mismo orden
+mismos nombres fijos
+mismos campos / bloques / tablas cuando formen parte de la plantilla
+```
+
+No inventes una estructura cuando el README no la define.
+
+Para los cuatro archivos propios de Chat 2 y `M1_PLAN.md`, aplica únicamente las excepciones estructurales explícitamente definidas en este prompt.
+
+## 13.0.3. Regla de cierre
+
+No declares PASS por “parecido”, “equivalencia” o inspección visual. El criterio es coincidencia estructural verificable con la fuente viva.
+
+## 13.1. COMPLETE MARKDOWN FILE STRUCTURE — COPIA LITERAL DEL README DE CHAT 1
+
+El siguiente bloque se conserva **literalmente** desde `Diiegoal/memory-repo/README.md → Complete Markdown File Structure` como referencia de formato heredada. Sus encabezados, niveles, orden, nombres fijos, tablas y bloques sirven para reducir ambigüedad, pero **no sustituyen ni superan al README.md real** observado durante la ejecución.
+
+# Complete Markdown File Structure
+
+This section documents the structural pattern of **all 33 Markdown files** present in the repository.
+
+The templates are structural templates. They do not replace the actual file contents.
+
+For files that belong to the same record type, one shared template is used instead of falsely presenting different structures.
+
+---
+
+# Root Files
+
+## 1. `README.md`
+
+### Role
+
+Repository overview and navigation document.
+
+### Template
+
+```markdown
+# <repository title>
+
+## Purpose
+<repository purpose>
+
+## Target project
+<target project>
+
+## Core result
+<principal result>
+
+## Why this order
+<numbered rationale>
+
+## Module 12 reference role
+<M12 boundary>
+
+## Stack summary
+<stack>
+
+## Agentic SDLC mapping
+<table>
+
+## Memory architecture
+<RAW / DERIVED / CONTINUITY>
+
+## Exact repository tree
+<tree>
+
+<future-chat / temporal note>
+
+## Future continuation protocol
+<continuation procedure>
+
+## Limitations
+<limitations>
+```
+
+---
+
+## 2. `MEMORY_PROTOCOL.md`
+
+### Role
+
+Memory authority, layer separation, retrieval, contamination, temporal and provenance protocol.
+
+### Template
+
+```markdown
+# Memory Protocol
+
+## 1. Authority model
+<authority model>
+
+### Source precedence inside this memory system
+<numbered precedence>
+
+## 2. RAW versus derived memory
+
+### RAW
+<RAW definition>
+
+### DERIVED
+<derived definition>
+
+### CONTINUITY
+<continuity definition>
+
+## 3. Retrieval layers
+
+### P0 — Current task/instructions
+<rule>
+
+### P1 — Current state
+<rule>
+
+### P2 — Decisions
+<rule>
+
+### P3 — Direct evidence
+<rule>
+
+### P4 — Open questions
+<rule>
+
+### P5 — Session handoff
+<rule>
+
+### P6 — Recent transcript
+<rule>
+
+### P7 — Historical/secondary
+<rule>
+
+## 4. Contamination controls
+<controls>
+
+## 5. Temporal controls
+<controls>
+
+## 6. Provenance
+<provenance model>
+
+## 7. State model
+<STATE meaning>
+
+## 8. Drift management
+<ordered drift procedure>
+
+## 9. Maturity
+<maturity statement and implementation limitation>
+```
+
+---
+
+## 3. `BOOTSTRAP.md`
+
+### Role
+
+Bootstrap protocol for a future continuation.
+
+### Template
+
+```markdown
+# Bootstrap for a Future Continuation
+
+> <future-continuation clarification>
+
+## Objective
+<objective>
+
+## Mandatory first reads
+<numbered read order>
+
+## Required behavior
+<behavior rules>
+
+## Source-of-truth order
+<source hierarchy>
+
+## Context packet assembly
+<context sequence>
+
+## Continuation test
+<questions a future session must be able to answer>
+```
+
+---
+
+## 4. `STATE.md`
+
+### Role
+
+The repository's **current-state snapshot**. It answers what is currently true for the Chat 1 research/construction state; it is not a diary.
+
+### Template
+
+```markdown
+# Current State
+
+## Snapshot
+
+- Chat: `<chat-id>`
+- State date: `<date>`
+- External research cutoff: `<date>`
+- Repository audited: `<repository>` / `<branch>`
+- Module count: `<number>`
+- Construction modules: `<number>`
+- Reference-only module: `<module>`
+
+## Current objective
+
+<current objective>
+
+## Final order
+
+`<module order>`
+
+## Current architecture stance
+
+- <agent application/runtime>
+- <service/API boundary>
+- <agent orchestration>
+- <authoritative operational storage>
+- <semantic retrieval option>
+- <queue/cache/coordination option>
+- <initial control-center UI>
+- <operational conversation/approval channel>
+- <observability/alert path>
+- <deployment/change correlation>
+- <deployment/infrastructure stage>
+- <authorization/executor boundary>
+
+## Current lifecycle
+
+`<lifecycle>`
+
+<iterative-lifecycle statement>
+
+## Active controls
+
+- <construction/reference boundary>
+- <transversal capability rule>
+- <read-only-first rule>
+- <authorization rule>
+- <memory/secret rule>
+- <temporal cutoff rule>
+
+## Current status
+
+<research / implementation status>
+
+## Last updated
+
+<date>
+```
+
+This is the complete structural pattern of `STATE.md` observed in the repository.
+
+---
+
+## 5. `KNOWLEDGE.md`
+
+### Role
+
+Consolidated knowledge layer.
+
+### Template
+
+```markdown
+# Knowledge Base
+
+## 1. Target product
+<product and core loop>
+
+## 2. Runtime state versus long-term memory
+<state / long-term memory / external memory>
+
+## 3. Operational evidence
+<operational evidence model>
+
+## 4. Safety
+<security and safety principles>
+
+## 5. Recovery
+<recovery principles>
+
+## 6. Documentation
+<documentation model>
+
+## 7. SDD
+<specification model>
+
+## 8. Testing
+<testing model>
+
+## 9. Data
+<data/retrieval model>
+
+## 10. Agentic development
+<agentic development model>
+
+## 11. Temporal integrity
+<temporal/cutoff observations>
+```
+
+---
+
+## 6. `DECISIONS.md`
+
+### Role
+
+Compact index of the active decisions.
+
+### Template
+
+```markdown
+# Decisions
+
+## Active decisions
+
+### DEC-<number> — <decision title>
+Status: <status>
+
+<decision statement>
+
+### DEC-<number> — <decision title>
+Status: <status>
+
+<decision statement>
+
+...
+
+## Decision principles
+
+- <principle>
+- <principle>
+- <principle>
+```
+
+`DECISIONS.md` is the index. The individual records live in `decisions/`.
+
+---
+
+## 7. `OPEN_QUESTIONS.md`
+
+### Role
+
+Unresolved questions.
+
+### Template
+
+```markdown
+# Open Questions
+
+## OQ-<number> — <question title>
+Status: <status>
+
+<question and current evidence boundary>
+
+## OQ-<number> — <question title>
+Status: <status>
+
+<question and current evidence boundary>
+
+...
+```
+
+The real file contains `OQ-0001` through `OQ-0008`.
+
+---
+
+## 8. `INDEX.md`
+
+### Role
+
+Top-level locator.
+
+### Template
+
+```markdown
+# Index
+
+## Core
+- <file> — <description>
+- ...
+
+## RAW
+- <file>
+- <file>
+- <file>
+
+## Derived evidence
+- <file>
+- ...
+
+## Architecture
+- <file>
+- ...
+
+## References and indexes
+- <file>
+- ...
+
+## Future handoff protocol
+- <handoff file> — <description>
+```
+
+---
+
+# `chats/chat-001/`
+
+## 9. `chats/chat-001/META.md`
+
+### Role
+
+Session metadata.
+
+### Template
+
+```markdown
+# Chat 001 Metadata
+
+- chat_id: `<chat-id>`
+- created: `<date>`
+- status: `<status>`
+- external_research_cutoff: `<cutoff>`
+- repository_audit_date: `<date>`
+- target: `<target>`
+- construction_modules: `<number>`
+- reference_only_module: `<module>`
+- final_order: <ordered modules>
+
+## Purpose
+<session purpose>
+
+## Inputs
+- <input>
+- <input>
+- ...
+
+## Output status
+<output status>
+```
+
+---
+
+## 10. `chats/chat-001/transcript.md`
+
+### Role
+
+Immutable-style RAW record.
+
+### Important boundary
+
+The structure is intentionally **general**. The real prompt and research output remain only in the RAW transcript.
+
+### Template
+
+```markdown
+# TRANSCRIPCIÓN RAW DE <CHAT-ID>
+
+> <RAW preservation statement>
+
+---
+
+# PARTE A — PROMPT ORIGINAL (TEXTUAL)
+
+<original prompt preserved exactly>
+
+---
+
+# PARTE B — SALIDA ORIGINAL COMPLETA DE INVESTIGACIÓN
+
+<complete original research output preserved exactly>
+
+<research/source/analysis/comparison/decision/reference sections as actually produced>
+
+---
+
+# PARTE C — REGISTRO REAL DE EJECUCIÓN
+
+<real execution record>
+
+<execution_log>
+# Registro real de ejecución de <CHAT-ID>
+
+## Identidad de la sesión
+
+- Sesión: `<chat-id>`
+- Fecha de ejecución: `<date>`
+- Zona horaria del usuario: `<timezone>`
+- Corte de investigación externa aplicado: `<cutoff>`
+- Repositorio auditado: `<repository>` / `<branch>`
+
+## Acciones registradas
+
+1. <real action>
+2. <real action>
+3. <real action>
+...
+
+## Nota técnica de ejecución
+
+<technical notes>
+
+## Nota de integridad temporal
+
+<temporal-integrity notes>
+
+## Resultado de integridad
+
+<integrity result>
+
+</execution_log>
+```
+
+### RAW invariants
+
+- Original executable prompt.
+- Complete original research output.
+- Real execution log.
+- No future-chat transcript fabrication.
+- Derived artifacts do not replace RAW.
+
+---
+
+## 11. `chats/chat-001/HANDOFF.md`
+
+### Role
+
+Direct continuation handoff from Chat 1.
+
+### Template
+
+```markdown
+# Handoff — <chat-id> → future continuation
+
+> <handoff-not-transcript clarification>
+
+## Objective
+<continuation objective>
+
+## Current state
+<final order and M12 boundary>
+
+## Completed
+- <completed item>
+- ...
+
+## Active decisions
+<decision references>
+
+## Open questions
+<open-question reference>
+
+## Read first
+1. <file>
+2. <file>
+3. <file>
+4. <file>
+5. <file>
+6. <file>
+
+## Evidence retrieval
+<selective evidence rule>
+
+## Immediate future work
+<next task>
+```
+
+---
+
+# `decisions/`
+
+## 12–17. `decisions/DEC-0001.md` through `decisions/DEC-0006.md`
+
+### Important structural rule
+
+These six files are **six instances of one decision-record structure**. They are not six different templates.
+
+### Single shared template
+
+```markdown
+# DEC-<number> — <Decision title>
+
+Status: <status>
+Date: <date>
+
+## Decision
+
+<accepted decision>
+
+## Reason
+
+<reason, when this record contains it>
+
+## Evidence
+
+<evidence pointers, when this record contains them>
+
+## Consequence
+
+<consequence, when this record contains it>
+```
+
+The optional sections are shown because the actual records do not all have the same optional fields.
+
+### Files covered by this one template
+
+```text
+decisions/DEC-0001.md
+decisions/DEC-0002.md
+decisions/DEC-0003.md
+decisions/DEC-0004.md
+decisions/DEC-0005.md
+decisions/DEC-0006.md
+```
+
+### Structural variation actually present
+
+| Record group | Sections present after `## Decision` |
+|---|---|
+| DEC-0001 | `## Reason`, `## Evidence` |
+| DEC-0002 | `## Reason`, `## Consequence` |
+| DEC-0003 | `## Consequence` |
+| DEC-0004 | `## Evidence` |
+| DEC-0005 | `## Reason` |
+| DEC-0006 | none |
+
+This table documents the real variation while keeping one common decision template.
+
+---
+
+# `handoffs/`
+
+## 18. `handoffs/chat-001-to-chat-002.md`
+
+### Role
+
+Future handoff protocol.
+
+### Template
+
+```markdown
+# Future Handoff Protocol
+
+<statement that chat-002 does not exist>
+
+## Context packet
+
+```text
+STATE.md
+→ DECISIONS.md
+→ OPEN_QUESTIONS.md
+→ chats/chat-001/HANDOFF.md
+→ relevant architecture/facts
+→ exact source evidence
+```
+
+## Required checks
+
+- <temporal cutoff check>
+- <decision supersession check>
+- <fact/proposal distinction>
+- <selective transcript retrieval>
+- <RAW preservation>
+
+## Suggested first task
+
+<future task>
+```
+
+---
+
+# `indexes/`
+
+## 19. `indexes/references.md`
+
+### Role
+
+Locator for research inputs and derived evidence.
+
+### Template
+
+```markdown
+# Reference Locator Index
+
+## Primary research inputs
+
+- <source/input> — <location/status>
+- ...
+
+## Derived evidence map
+
+<document → evidence mapping>
+```
+
+---
+
+## 20. `indexes/timeline.md`
+
+### Role
+
+Chronological index.
+
+### Template
+
+```markdown
+# Timeline
+
+- **<date>** — <event>.
+- **<date>** — <event>.
+- **<date>** — <event>.
+```
+
+The audited file currently has three timeline entries.
+
+---
+
+## 21. `indexes/topics.md`
+
+### Role
+
+Topic retrieval index.
+
+### Template
+
+```markdown
+# Topic Index
+
+- `<topic>` → `<document>`
+- `<topic>` → `<document>`
+- ...
+```
+
+The audited file currently maps topics including agentic SDLC, module order, repository audit, module content, SRE-agent, security, memory, continuity, testing and data.
+
+---
+
+# `knowledge/facts/`
+
+## 22. `knowledge/facts/repository-audit.md`
+
+### Role
+
+Audit record for `Diiegoal/CursoIA`.
+
+### Template
+
+```markdown
+# Repository Audit — <repository>
+
+## Repository facts
+
+- Repository: `<repository>`
+- Default branch: `<branch>`
+- Visibility: `<visibility>`
+- Audit date: `<date>`
+- Module directories: `<number>`
+- Markdown files in modules: `<number>`
+- Additional final-project Markdown files: `<number>`
+- Total Markdown files enumerated in the Git tree: `<number>`
+- Separate final-project directory: <scope>
+
+## Module inventory
+
+### M1 — <module title>
+Files: <count>
+<content focus>
+- <file>
+- ...
+
+### M2 — <module title>
+Files: <count>
+<content focus>
+- <file>
+- ...
+
+...
+
+### M13 — <module title>
+Files: <count>
+<content focus>
+- <file>
+- ...
+
+## Additional repository content
+
+<non-module content>
+
+## Integrity interpretation
+
+<scope/classification>
+```
+
+---
+
+## 23. `knowledge/facts/module-coverage.md`
+
+### Role
+
+Module content, build role and target-coverage mapping.
+
+### Template
+
+```markdown
+# Module Coverage Audit
+
+| Module | Real content focus | Role in build | Coverage of target |
+|---|---|---|---|
+| M1 | ... | ... | ... |
+| ... | ... | ... | ... |
+
+## Coverage classifications
+
+- **COVERED:** ...
+- **COVERED INDIRECTLY:** ...
+- **PARTIALLY COVERED:** ...
+- **COVERED BUT INSUFFICIENT FOR PRODUCT:** ...
+- **NOT COVERED:** ...
+
+## Target-specific gaps
+
+1. <gap>
+2. <gap>
+...
+```
+
+---
+
+## 24. `knowledge/facts/external-research.md`
+
+### Role
+
+External research register and temporal cutoff control.
+
+### Template
+
+```markdown
+# External Research Register
+
+## Cutoff rule
+
+<cutoff>
+
+## Key verified sources
+
+| ID | Source | Date | What it supports | Cutoff use |
+|---|---|---|---|---|
+| R01 | ... | ... | ... | ... |
+| ... | ... | ... | ... | ... |
+
+## Temporal exclusions
+
+<post-cutoff observations and exclusion rule>
+```
+
+---
+
+# `knowledge/architecture/`
+
+## 25. `knowledge/architecture/agentic-sdlc.md`
+
+### Template
+
+```markdown
+# Agentic SDLC
+
+## Definition
+<definition>
+
+## Construction phases
+1. <phase> — <module>
+...
+12. <phase> — <module>
+
+## Why this is agentic
+
+The agent participates in:
+- <capability>
+- <capability>
+- ...
+
+<human-gate statement>
+
+## Iterative loops
+
+- <loop>
+- <loop>
+- ...
+
+## M12 boundary
+<M12 reference-only rule>
+```
+
+---
+
+## 26. `knowledge/architecture/artifact-matrix.md`
+
+### Template
+
+```markdown
+# Module → Phase → Component → Artifact → Evidence
+
+| Module | Phase | Component | Artifact | Evidence basis |
+|---|---|---|---|---|
+| M1 | ... | ... | ... | ... |
+| ... | ... | ... | ... | ... |
+```
+
+---
+
+## 27. `knowledge/architecture/component-matrix.md`
+
+### Template
+
+```markdown
+# Module → Component Matrix
+
+| Product component | Primary modules | Secondary modules | M12 reference contribution |
+|---|---|---|---|
+| <component> | <modules> | <modules> | <reference> |
+| ... | ... | ... | ... |
+```
+
+---
+
+## 28. `knowledge/architecture/contribution-matrix.md`
+
+### Template
+
+```markdown
+# Contribution Matrix
+
+| Module | Capability | Decision enabled | Artifact produced |
+|---|---|---|---|
+| M1 | ... | ... | ... |
+| ... | ... | ... | ... |
+| M12 | Reference only | ... | Reference knowledge only |
+```
+
+---
+
+## 29. `knowledge/architecture/decision-matrix.md`
+
+### Template
+
+```markdown
+# Decision Matrix and Candidate Orders
+
+## Candidate orders
+
+### A — <candidate>
+<order>
+
+### B — <candidate>
+<order>
+
+### C — <candidate>
+<order>
+
+## Weighted evaluation
+
+| Criterion | Weight | A | B | C |
+|---|---:|---:|---:|---:|
+| <criterion> | <weight> | <value> | <value> | <value> |
+| ... | ... | ... | ... | ... |
+| **Weighted** | **100%** | ... | ... | ... |
+
+<score interpretation / caveat>
+```
+
+---
+
+## 30. `knowledge/architecture/dependency-matrix.md`
+
+### Template
+
+```markdown
+# Dependency Matrix
+
+| From | To | Dependency reason | Criticality |
+|---|---|---|---|
+| <module> | <module> | <reason> | <criticality> |
+| ... | ... | ... | ... |
+
+## Transversal edges
+
+- <module> ↔ <module>
+- <module> ↔ <module>
+- ...
+- M12 → all modules as reference information only
+```
+
+---
+
+## 31. `knowledge/architecture/gaps-and-roadmap.md`
+
+### Template
+
+```markdown
+# Gaps and Roadmap
+
+## High-priority gaps
+
+1. <gap>
+2. <gap>
+3. <gap>
+...
+
+## Roadmap
+
+### R0 — <stage title>
+<scope>
+
+### R1 — <stage title>
+<scope>
+
+### R2 — <stage title>
+<scope>
+
+### R3 — <stage title>
+<scope>
+
+### R4 — <stage title>
+<scope>
+
+### R5 — <stage title>
+<scope>
+
+### R6 — <stage title>
+<scope>
+
+### R7 — <stage title>
+<scope>
+```
+
+---
+
+## 32. `knowledge/architecture/target-architecture.md`
+
+### Template
+
+```markdown
+# Target Architecture
+
+## Logical architecture
+
+```text
+<logical architecture flow>
+```
+
+## Data/persistence
+<persistence and retrieval>
+
+## Operator surfaces
+
+- <surface>
+- <surface>
+- <surface>
+
+## Security boundary
+<security/action boundary>
+
+## Observability
+<system + agent observability>
+
+## Runtime memory
+
+- <current execution state>
+- <long-term memory>
+- <external Chat 1 memory>
+
+## Deployment maturity
+<deployment progression>
+```
+
+---
+
+# `knowledge/references/`
+
+## 33. `knowledge/references/reference-index.md`
+
+### Template
+
+```markdown
+# Reference Index
+
+- [R01] **<organization>** — *<title>* — <date> — <URL> — <what it supports>. — <evidence classification>
+- [R02] **<organization>** — *<title>* — <date> — <URL> — <what it supports>. — <evidence classification>
+- ...
+```
+
+The current file contains `R01` through `R20`.
+
+
+
+### Regla de uso de la copia literal embebida
+
+- Trátala como una **referencia de formato heredada**, no como una fuente viva.
+- Para cada archivo, localiza su entrada exacta por nombre y ruta en el `README.md` real y usa esa entrada como autoridad estructural.
+- La copia embebida solo sirve para reducir ambigüedad y comparar cambios; no crea una segunda norma.
+- Los placeholders se sustituyen únicamente por datos reales de Chat 2; no se dejan placeholders sin resolver.
+- Si una plantilla contiene secciones opcionales condicionadas por el README real, conserva la condición y la estructura.
+- Si el README real vigente difiere de esta copia, el README real prevalece; registra la discrepancia y aplica solo la versión vigente.
 
 Para un `.md` histórico:
 
 ```text
 contenido real recuperado
 → conservar íntegramente
-→ añadir Chat 2 debajo
-→ usar la estructura correspondiente del README.md
+→ actualizar solo si existe contenido sustantivo legítimo de Chat 2
+→ usar la estructura correspondiente del README.md real
 ```
 
 Para un `.md` nuevo permitido:
@@ -2615,11 +4129,11 @@ No debe existir una segunda versión completa del plan en otro archivo independi
 
 ### Regla de simplificación del prompt
 
-Este prompt define el **qué, por qué, límites, validaciones y reglas de ejecución**. El `README.md` del repositorio define el **árbol y las plantillas documentales actuales**.
+Este prompt define el **qué, por qué, límites, validaciones y reglas de ejecución** y contiene además una **copia literal explícita del bloque `Complete Markdown File Structure`** para evitar que el modelo tenga que reconstruir su forma por inferencia. El `README.md` del repositorio define el árbol físico y continúa siendo la fuente viva para detectar cualquier cambio estructural.
 
-Si el README cambia en el futuro, Chat 2 debe seguir la versión real observada en el repositorio en lugar de utilizar una estructura antigua embebida en este prompt.
+Si el README cambia en el futuro, Chat 2 debe seguir la versión real observada en el repositorio. La copia embebida no puede usarse para ocultar una diferencia del README real: cualquier discrepancia debe detectarse, documentarse y resolverse aplicando el README vigente.
 
-La simplificación del prompt no reduce el nivel de exigencia: la estructura se obtiene de una fuente de verdad viva y se valida físicamente contra ella.
+La presencia de la copia literal embebida no reduce el nivel de exigencia; añade un contrato de formato explícito y una segunda capa de comprobación para reducir desviaciones de estructura.
 
 # 14. PROFUNDIDAD, AUDIENCIA Y EXPLICACIÓN
 
@@ -2843,7 +4357,7 @@ Las reglas de memoria son contexto operativo y deben respetarse, pero sus operac
 
 # 22. ESTRUCTURA DE `memory-repo` Y ARCHIVOS PERMITIDOS
 
-La estructura física de `memory-repo` **no debe estar duplicada en este prompt**. Debe recuperarse directamente desde:
+La estructura física de `memory-repo` debe recuperarse directamente desde el `README.md` real. La sección `Complete Markdown File Structure` incluida en este prompt es una **copia de referencia no autoritativa**; la fuente viva y única de verdad es siempre el `README.md` real observado durante la ejecución.
 
 ```text
 Diiegoal/memory-repo/README.md
@@ -2859,6 +4373,8 @@ Complete Markdown File Structure
 `README.md → Exact repository tree` determina la estructura histórica real que debe copiarse a staging.
 
 `README.md → Complete Markdown File Structure` determina la estructura documental que debe utilizarse para cada `.md` sujeto a actualización o para cada `.md` nuevo que esté expresamente autorizado.
+
+La copia literal embebida en la sección 13.1 solo reduce ambigüedad y permite detectar drift; no puede prevalecer sobre el README real ni utilizarse como un tercer criterio de aprobación.
 
 ## ÚNICAS adiciones permitidas para Chat 2
 
@@ -2908,274 +4424,111 @@ La información de cobertura, alcance tecnológico, validaciones y trazabilidad 
 
 No uses la estructura histórica del README como permiso para crear archivos adicionales que no existían al iniciar Chat 2.
 
-# 23. PRESERVACIÓN LITERAL DEL CHAT 1 EN TODOS LOS `.MD` EXISTENTES
+# 23. PRESERVACIÓN LITERAL E INMUTABILIDAD DEL HISTÓRICO
 
-Esta regla es obligatoria y aplica a **todos los archivos `.md` que existan en `memory-repo` al comenzar Chat 2**, no solamente a los que parezcan requerir cambios sustantivos, **con la excepción de los archivos de decisión histórica `decisions/DEC-*.md` que ya existan al comenzar Chat 2**.
+La preservación histórica se verifica contra `BASELINE_STAGING`, no contra una versión reconstruida.
 
-Toda actualización descrita en esta sección debe realizarse **únicamente en la copia de trabajo independiente**, nunca directamente en ningún repositorio externo.
+## 23.1. Inmutables absolutos
 
-## 23.1. Copia literal previa obligatoria
-
-Antes de incorporar cualquier contenido nuevo de Chat 2 a `memory-repo`, debes:
+Estos archivos nunca se modifican durante Chat 2:
 
 ```text
-1. identificar todos los archivos `.md` existentes en el repositorio fuente;
-2. leer o recuperar su contenido actual;
-3. copiar esos archivos a la copia de trabajo independiente;
-4. conservar su contenido original exactamente como fue recuperado;
-5. utilizar esa copia como base documental de Chat 2.
+README.md
+MEMORY_PROTOCOL.md
+BOOTSTRAP.md
+OPEN_QUESTIONS.md
+chats/chat-001/META.md
+chats/chat-001/transcript.md
+chats/chat-001/HANDOFF.md
+decisions/DEC-0001.md … DEC-0006.md
+handoffs/chat-001-to-chat-002.md
+indexes/references.md
+indexes/timeline.md
+indexes/topics.md
+knowledge/facts/repository-audit.md
+knowledge/architecture/agentic-sdlc.md
+knowledge/architecture/component-matrix.md
+knowledge/architecture/contribution-matrix.md
+knowledge/architecture/decision-matrix.md
+knowledge/architecture/dependency-matrix.md
+knowledge/architecture/gaps-and-roadmap.md
+knowledge/architecture/target-architecture.md
 ```
 
-La copia inicial de cada `.md` debe ser una reproducción del contenido real del repositorio fuente.
+Cualquier diferencia contra baseline es `FAIL`.
 
-No debes:
+## 23.2. Históricos que sí pueden recibir overlay
 
-- reconstruir el archivo desde una estructura definida;
-- reemplazar el contenido real por una versión “equivalente”;
-- resumirlo;
-- normalizarlo;
-- reorganizarlo;
-- corregirlo silenciosamente;
-- traducirlo para sustituir el original;
-- omitir partes porque no parezcan relevantes para M1.
-
-La estructura definida sirve para **añadir la sección de Chat 2**; nunca para reconstruir ni reemplazar el contenido histórico.
-
-## 23.2. Regla obligatoria para cada `.md` existente sujeto a actualización
-
-Para **cada `.md` que ya exista en `memory-repo`, excepto los archivos de decisión histórica `decisions/DEC-*.md` que ya existan al comenzar Chat 2**:
+Solo pueden recibir un overlay Chat 2, si existe contenido nuevo legítimo de su tipo:
 
 ```text
-CONTENIDO ORIGINAL COMPLETO DE CHAT 1 / ESTADO HISTÓRICO DEL REPOSITORIO
-+
-SEPARADOR CLARO
-+
-SECCIÓN COMPLETA DE CHAT 2 SEGÚN LA ESTRUCTURA DEFINIDA PARA EL TIPO DE ARCHIVO
+STATE.md
+KNOWLEDGE.md
+INDEX.md
+knowledge/facts/module-coverage.md
+knowledge/facts/external-research.md
+knowledge/architecture/artifact-matrix.md
+knowledge/references/reference-index.md
 ```
 
-Esto significa que la sección de Chat 2 debe aparecer debajo del contenido original de **cada `.md` realmente existente en el repositorio al comenzar Chat 2**, excepto los registros de decisión histórica `decisions/DEC-*.md` que ya existan. La relación de archivos debe obtenerse del `README.md → Exact repository tree` y verificarse contra el repositorio real; no uses una lista histórica embebida en este prompt como sustituto de esa inspección.
+El prefijo histórico debe ser exactamente igual al baseline. El overlay es adicional y no sustituye ningún fragmento.
 
-Los archivos históricos de decisión `decisions/DEC-0001.md` hasta `decisions/DEC-0006.md` constituyen los registros de decisiones aceptadas de Chat 1 y deben conservarse **exactamente como fueron recuperados, sin agregar contenido de Chat 2, sin reescribirlos y sin convertir una nueva decisión de Chat 2 en una modificación de una decisión histórica**.
+## 23.3. Regla de ausencia de cambio
 
-Cuando Chat 2 adopte una nueva decisión sustantiva, debe crear un **nuevo archivo de decisión** con el siguiente identificador secuencial disponible, calculado automáticamente a partir del identificador numérico más alto que realmente exista en `memory-repo/decisions/` al comenzar Chat 2 y aumentado en una unidad por cada nueva decisión adoptada, sin fijar de antemano un número de inicio. Las decisiones históricas existentes no deben modificarse ni sustituirse.
+Si un archivo autorizado no necesita información nueva, permanece **byte-for-byte idéntico** al baseline. No agregues un bloque artificial de Chat 2 para señalar que no cambió.
 
-La lista anterior representa los `.md` de la estructura histórica conocida; aun así, la regla de autoridad es siempre:
+## 23.4. Decisiones históricas
+
+`DEC-0001.md` … `DEC-0006.md` son registros históricos y deben permanecer idénticos. Una nueva decisión se crea como un archivo nuevo únicamente si existe una decisión sustantiva real.
+
+## 23.5. README como snapshot estructural
+
+`README.md` permanece idéntico al baseline. Sus dos secciones:
 
 ```text
-todos los `.md` realmente encontrados en el repositorio fuente
+Exact repository tree
+Complete Markdown File Structure
 ```
 
-Si el repositorio fuente contiene un `.md` adicional dentro de la estructura permitida, debe preservarse y documentarse según estas mismas reglas, sin inventar archivos que no existan.
+son la autoridad para interpretar la estructura histórica de Chat 1 y la estructura de los tipos documentales. No las reescribas para reflejar Chat 2.
 
-## 23.3. Contenido de Chat 2 debajo de cada original sujeto a actualización
+# 24. CONSISTENCIA DOCUMENTAL Y REPARACIÓN
 
-Debajo de cada bloque original sujeto a actualización debes añadir una sección claramente identificada como contenido de Chat 2.
+## 24.1. No reconstrucción
 
-Los archivos `decisions/DEC-*.md` que ya existían al comenzar Chat 2 están excluidos de esta regla: **sus contenidos históricos no reciben una sección de Chat 2 y permanecen sin modificaciones**. Las nuevas decisiones de Chat 2 se registran mediante nuevos archivos `decisions/DEC-XXXX.md`.
+Un archivo histórico se obtiene desde el contenido real del baseline; la plantilla del README nunca reemplaza ese contenido.
 
-Ejemplo conceptual:
+## 24.2. Validación estructural determinista
 
-```markdown
-[CONTENIDO ORIGINAL DEL REPOSITORIO, ÍNTEGRO]
-
----
-
-# CHAT 2 — CONTENIDO NUEVO
-
-[estructura exacta correspondiente al tipo de archivo]
-```
-
-El bloque nuevo de Chat 2 debe respetar exactamente la estructura documental correspondiente al tipo del archivo.
-
-Cuando un archivo histórico no requiera una modificación sustantiva por el resultado de Chat 2, **no lo dejes sin sección de Chat 2**. En su lugar, utiliza la estructura correspondiente y documenta explícitamente:
+Para cada archivo nuevo o histórico autorizado con overlay:
 
 ```text
-NO HAY CAMBIOS SUSTANTIVOS EN CHAT 2
+tipo documental
+→ entrada correspondiente de Complete Markdown File Structure
+→ encabezados/niveles obligatorios
+→ orden
+→ nombres fijos
+→ bloques estructurales
+→ overlay en la ubicación autorizada
+→ ausencia de duplicados
 ```
 
-y utiliza `NO APLICA` en los campos donde corresponda.
+Para archivos históricos sin overlay se comprueba únicamente igualdad contra baseline; no se exige que el histórico sea “rellenado” de nuevo.
 
-La ausencia de cambios no autoriza a eliminar el bloque de Chat 2 ni a sustituir el contenido histórico.
+## 24.3. Gate transaccional
 
-## 23.4. Integridad literal del bloque histórico
-
-El bloque histórico debe conservarse:
-
-- íntegro;
-- en el mismo idioma;
-- sin resumen;
-- sin condensación;
-- sin paráfrasis;
-- sin traducción sustitutiva;
-- sin correcciones silenciosas;
-- sin reorganización;
-- sin eliminación parcial;
-- sin reemplazo por referencias del tipo “ver arriba”.
-
-Chat 2 se agrega **exclusivamente por debajo** del contenido histórico.
-
-No coloques Chat 2 por encima.
-
-No reemplaces el histórico por una versión “actualizada”.
-
-No reduzcas Chat 1 a un resumen.
-
-Los originales en inglés deben conservarse en inglés. La traducción o interpretación, cuando sea necesaria, se añade aparte y nunca reemplaza el original.
-
-## 23.5. Validación de cada `.md`
-
-Antes del cierre, para cada `.md` histórico sujeto a actualización debes comprobar:
+Si cualquier comprobación falla:
 
 ```text
-contenido fuente original recuperado
-→ contenido histórico completo
-→ mismo orden del contenido original
-→ ningún fragmento perdido
-→ bloque Chat 2 debajo
-→ estructura correcta del tipo
-→ campos correspondientes completos
-→ procedencia conservada
+FAIL
+→ descartar candidato
+→ restaurar baseline
+→ corregir
+→ generar candidato nuevo
+→ auditar de nuevo
 ```
 
-La validación debe hacerse **archivo por archivo**, no por muestreo.
-
-Para los archivos `decisions/DEC-0001.md` hasta `decisions/DEC-0006.md`, la validación obligatoria es distinta:
-
-```text
-contenido fuente original recuperado
-→ contenido histórico completo
-→ mismo orden y texto
-→ ningún fragmento agregado por Chat 2
-→ ningún fragmento eliminado o modificado
-→ archivo preservado como decisión histórica de Chat 1
-```
-
-
-# 24. CONSISTENCIA DOCUMENTAL
-
-La **única definición estructural documental obligatoria para los archivos existentes y las adiciones documentales derivadas del repositorio** es `README.md → Complete Markdown File Structure` del repositorio `Diiegoal/memory-repo`.
-
-No debes crear una segunda definición estructural ni modificar la estructura definida según el archivo.
-
-Para Chat 2:
-
-- `chats/chat-002/META.md` utiliza la estructura de `META.md` definida en `README.md → Complete Markdown File Structure`;
-- `chats/chat-002/transcript.md` utiliza la estructura de `transcript.md` definida en `README.md → Complete Markdown File Structure`;
-- `chats/chat-002/HANDOFF.md` utiliza la estructura de `HANDOFF.md` definida en `README.md → Complete Markdown File Structure`;
-- `handoffs/chat-002-to-chat-003.md` utiliza la estructura del archivo de transferencia definida en `README.md → Complete Markdown File Structure`;
-- cada nuevo `decisions/DEC-XXXX.md` utiliza la estructura del archivo de decisión definida en `README.md → Complete Markdown File Structure`;
-- `chats/chat-002/M1_PLAN.md` utiliza exclusivamente la estructura específica de Chat 2 autorizada en la sección 13 de este prompt y contiene los registros completos de 26 campos.
-
-Además, **cada `.md` histórico sujeto a actualización que ya exista en `memory-repo` debe recibir su sección de Chat 2 debajo del contenido original**, utilizando la estructura exacta correspondiente al tipo documental definida en `README.md → Complete Markdown File Structure`.
-
-Los archivos de decisión histórica `decisions/DEC-0001.md` hasta `decisions/DEC-0006.md` **no reciben contenido nuevo de Chat 2 y deben permanecer intactos**. Las nuevas decisiones de Chat 2 se crean como nuevos archivos `decisions/DEC-XXXX.md`, utilizando el siguiente identificador secuencial disponible calculado automáticamente a partir del identificador numérico más alto que realmente exista al comenzar Chat 2, únicamente cuando existan decisiones sustantivas realmente adoptadas.
-
-Por tanto, existen dos reglas simultáneas:
-
-```text
-archivo histórico existente
-→ conservar original completo
-→ añadir Chat 2 debajo
-→ aplicar la estructura definida para el tipo
-
-archivo nuevo permitido por Chat 2
-→ crear únicamente si está autorizado
-→ aplicar la estructura definida para el tipo desde el inicio
-```
-
-Los `.md` históricos que ya existían en Chat 1 deben conservar primero su contenido original y añadir después la sección de Chat 2, tal como establece la sección 23, **excepto los registros de decisión histórica `decisions/DEC-0001.md` hasta `decisions/DEC-0006.md`, que permanecen intactos y no reciben contenido de Chat 2**.
-
-No debes interpretar esta estructura como autorización para crear archivos fuera de la estructura fija.
-
-## 24.1. Regla de no reconstrucción
-
-Nunca utilices la estructura documental para fabricar retrospectivamente el contenido original de un archivo.
-
-El orden correcto es:
-
-```text
-REPOSITORIO FUENTE REAL
-→ COPIA LITERAL EN STAGING
-→ CONTENIDO ORIGINAL INTACTO
-→ SECCIÓN CHAT 2 SEGÚN LA ESTRUCTURA DEFINIDA
-→ VALIDACIÓN
-```
-
-Nunca:
-
-```text
-ESTRUCTURA DOCUMENTAL
-→ RECREACIÓN DEL HISTÓRICO
-```
-
-## 24.2. Validación estructural obligatoria
-
-Cada archivo debe validarse individualmente contra la estructura correspondiente a su tipo.
-
-La validación debe comprobar además que, cuando exista contenido histórico, este permanece completo y primero, y que el bloque nuevo de Chat 2 está exclusivamente después del histórico y cumple íntegramente la estructura obligatoria del tipo documental definida en `README.md → Complete Markdown File Structure`. Un resumen del contenido histórico no cuenta como preservación.
-
-No basta con que “se parezca” a la estructura definida.
-
-
-### 41.1. GATE FÍSICO Y BLOQUEANTE DE ARTEFACTOS DE CONTINUIDAD DE CHAT 2
-
-Antes de considerar terminado Chat 2, generar el ZIP final o entregar el resultado, debes verificar físicamente en la **copia de trabajo independiente** la existencia de estos cuatro archivos obligatorios dentro de `chats/chat-002/` y, por separado, del handoff futuro autorizado:
-
-```text
-memory-repo/chats/chat-002/META.md
-memory-repo/chats/chat-002/transcript.md
-memory-repo/chats/chat-002/HANDOFF.md
-memory-repo/chats/chat-002/M1_PLAN.md
-
-HANDOFF FUTURO:
-memory-repo/handoffs/chat-002-to-chat-003.md
-```
-
-Estos archivos no se consideran creados por el simple hecho de estar mencionados, listados, planificados o descritos en otro archivo. Deben existir realmente en las rutas exactas de la copia de trabajo.
-
-Para cada uno debes comprobar:
-
-```text
-ruta exacta existente
-→ archivo legible
-→ contenido no vacío
-→ estructura documental correcta
-→ contenido correspondiente a su propósito real
-→ inclusión posterior en el ZIP final
-```
-
-`chats/chat-002/` representa una **sesión real de Chat 2** y debe contener exactamente `META.md`, `transcript.md`, `HANDOFF.md` y `M1_PLAN.md`. `handoffs/chat-002-to-chat-003.md` representa únicamente la **transferencia futura** y no puede sustituir ninguno de los cuatro archivos de la sesión real.
-
-Si cualquiera de los cuatro artefactos:
-
-```text
-no existe
-o
-está vacío
-o
-está incompleto
-o
-utiliza una estructura incorrecta
-o
-no corresponde a su propósito
-o
-no está incluido en el ZIP final
-```
-
-entonces:
-
-```text
-NO se puede cerrar Chat 2
-NO se puede considerar completada la validación final
-NO se puede generar ni entregar el ZIP final
-```
-
-Debes crear o corregir primero el artefacto faltante y repetir la validación estructural, de continuidad, de reconstrucción y del ZIP.
-
-Este gate es obligatorio incluso cuando no existan nuevas decisiones de Chat 2. La ausencia de nuevas decisiones no elimina ni retrasa la creación de `META.md`, `transcript.md`, `HANDOFF.md`, `M1_PLAN.md` ni `handoffs/chat-002-to-chat-003.md`.
-
-La verificación debe realizarse contra los **archivos físicos de la copia de trabajo**, no contra afirmaciones del transcript, matrices, índices o resúmenes.
-
+Nunca edites un candidato fallido para convertirlo en PASS.
 
 # 25. CHAT 2 COMO SESIÓN REAL
 
@@ -3751,594 +5104,85 @@ Solo deben aparecer como trabajo de M1 cuando sean necesarios, estén justificad
 
 ---
 
-# 38. TRANSCRIPT DE CHAT 2: RAW COMPLETO
+# 38. TRANSCRIPT DE CHAT 2: RAW COMPLETO Y ORDEN CANÓNICO
 
-En la copia de trabajo independiente, debes crear:
+`chats/chat-002/transcript.md` es el RAW de esta sesión. Debe conservar el prompt original recibido de Chat 2, toda la producción sustantiva realmente generada que no viva exclusivamente en el desarrollo detallado de `M1_PLAN.md`, y el registro real de ejecución.
 
-```text
-memory-repo/chats/chat-002/transcript.md
-```
+## 38.1. Estructura principal obligatoria
 
-siguiendo exactamente la estructura de `transcript.md` definida en `README.md → Complete Markdown File Structure`.
-
-Debe conservar **el registro RAW completo de la sesión**, no una reconstrucción resumida de sus resultados.
-
-La estructura obligatoria del archivo es exactamente:
-El transcript debe incluir dentro de `# FULL ORIGINAL RESEARCH OUTPUT` un **resumen exhaustivo de la secuencia final de pasos**, pero **no debe reproducir los 26 campos ni el desarrollo completo del plan**. El desarrollo completo y canónico de los pasos debe existir únicamente en `M1_PLAN.md`.
-
-El resumen de pasos de `transcript.md` debe incluir, para cada paso final:
-- ID;
-- título;
-- objetivo resumido;
-- capacidad/unidad profesional principal;
-- salida principal;
-- dependencias reales relevantes;
-- estado.
-
-Debe conservar el mismo conjunto de pasos, IDs, orden y fronteras del `M1_PLAN.md`, pero sin duplicar sus 26 campos.
-
-El transcript no puede contener una segunda variante completa del plan. Si durante la sesión existen borradores, correcciones o versiones intermedias, deben distinguirse cronológicamente del plan final congelado y solo el resumen final debe representar el conjunto congelado.
-
-La convención obligatoria de identificación de los pasos es:
-
-```text
-M1-P01
-M1-P02
-...
-M1-PNN
-```
-
-`M1-S01`, `M1-S02`, `M1-S03` u otra convención distinta se considera una inconsistencia documental y debe corregirse antes del cierre.
-
+Debe contener exactamente estas tres partes principales y en este orden:
 
 ```text
 # ORIGINAL PROMPT (verbatim, unmodified)
-
-{{prompt completo recibido por Chat 2}}
-
 # FULL ORIGINAL RESEARCH OUTPUT
-
-{{toda la producción sustantiva original de Chat 2, completa y en orden cronológico, excepto el desarrollo detallado de los pasos de 26 campos, que se conserva canónicamente en M1_PLAN.md; en su lugar, aquí se conserva el resumen final de pasos}}
-
 # REAL EXECUTION LOG
-
-{{registro completo y verificable de las acciones realmente ejecutadas}}
 ```
 
-## Nivel de exhaustividad obligatorio
+No crees una cuarta parte principal.
 
-`transcript.md` debe conservar:
+## 38.2. Diez familias obligatorias
+
+Dentro de `# FULL ORIGINAL RESEARCH OUTPUT` deben existir exactamente estas diez familias, en este orden. Cualquier contenido adicional debe ser una subsección dentro de una de ellas:
 
 ```text
-PROMPT ORIGINAL COMPLETO
-+
-SALIDA ORIGINAL COMPLETA DE CHAT 2
-+
-REGISTRO REAL DE EJECUCIÓN
+1. resumen exhaustivo de M1
+2. resumen exhaustivo de la referencia del Agente SRE / DevOps
+3. decisiones heredadas de Chat 1 y su impacto
+4. cruce M1 + Chat 1 + SRE + memory-repo + Ejemplo 2 + proyecto
+5. resumen exhaustivo del Repositorio Ejemplo 2 revisado
+6. investigación externa y procedencia
+7. determinación dinámica de pasos y justificación de agrupaciones/separaciones
+8. resumen final de pasos
+9. matrices, cobertura, dependencias, validaciones y auditorías
+10. conclusiones, estado real y límites de ejecución
 ```
 
-La salida original de Chat 2 debe ser **exhaustiva, detallada, completa e íntegra en todo contenido sustantivo no canónicamente separado en `M1_PLAN.md`, cronológica, en español para el contenido producido por Chat 2 y sin resúmenes sustitutivos**, salvo el resumen explícitamente autorizado de la secuencia de pasos.
+No crees familias hermanas fuera de esas diez.
 
-Esto significa que el transcript debe funcionar como la **fuente RAW de reconstrucción de la sesión**, no como una memoria resumida de sus resultados.
+## 38.3. Resumen de pasos sincronizado
 
-Debe conservar, en la medida en que haya sido producido u observado durante la sesión:
+La familia 8 debe contener exactamente el mismo conjunto de pasos que `M1_PLAN.md`, con:
 
 ```text
-cada investigación realizada
-→ cada hallazgo material
-→ cada contenido sustantivo recuperado
-→ cada análisis utilizado para construir el resultado
-→ cada clasificación
-→ cada comparación
-→ cada matriz
-→ cada decisión
-→ cada propuesta relevante
-→ cada corrección
-→ cada validación
-→ cada resultado de herramientas
-→ cada evidencia utilizada
-→ cada cambio producido en el plan
-→ resumen final de todos los pasos
-→ cada comprobación final
+ID
+título
+objetivo resumido
+capacidad/unidad profesional principal
+salida principal
+dependencia real relevante
+estado
 ```
 
-No conserves únicamente la versión final “limpia” del resultado si durante la sesión existieron versiones, hallazgos o decisiones intermedias que cambiaron materialmente el resultado.
+El conjunto debe coincidir en IDs, orden y títulos. No copies los 26 campos.
 
-Cuando una herramienta devuelva contenido sustantivo utilizado por Chat 2, conserva el resultado relevante con suficiente detalle para reconstruir qué se observó y cómo se utilizó.
+## 38.4. Único desarrollo detallado
 
-Cuando una fuente externa sea consultada, conserva:
+`M1_PLAN.md` es el único documento donde reside el desarrollo completo de los 26 campos de cada paso. No produzcas una segunda versión completa del plan dentro de transcript, README, matrices o cualquier otro archivo.
+
+## 38.5. Exhaustividad del RAW
+
+La producción sustantiva realmente generada durante la sesión debe quedar registrada dentro de las diez familias, incluyendo cuando exista:
 
 ```text
-fuente
-→ URL o identificador
-→ fecha, cuando esté disponible
-→ versión, cuando aplique
-→ afirmación o contenido utilizado
-→ resultado relevante
+hallazgos
+análisis
+comparaciones
+clasificaciones
+matrices
+correcciones
+validaciones
+resultados reales de herramientas
+fuentes externas
+conclusiones
+límites
 ```
 
-Cuando se produzcan tablas o matrices, deben quedar completas, no reemplazadas por una descripción narrativa.
+No sustituyas material sustantivo por “ver arriba”. Sí puedes evitar duplicar el desarrollo de los 26 campos.
 
-Cuando se produzca una secuencia de pasos, `transcript.md` debe conservar el **resumen completo de la secuencia** —ID, título, objetivo, capacidad principal, salida, dependencias y estado—, pero los 26 campos completos pertenecen exclusivamente a `M1_PLAN.md` y no deben duplicarse en el transcript.
+## 38.6. Registro real de ejecución
 
-Cuando una sección del plan sea corregida durante la sesión, conserva la información material necesaria para reconstruir esa evolución; no elimines la existencia de la corrección simplemente porque al final exista una versión posterior.
+El `REAL EXECUTION LOG` debe contener solamente acciones verdaderamente realizadas. Todo lo que se diseñó para una ejecución futura debe permanecer identificado como `PLANIFICADO` o `FUTURO`, nunca como ejecutado.
 
-## 38.1. Registro del contenido de Chat 2 en español
-
-Todo contenido **derivado y producido por Chat 2** para documentación, análisis, planificación, explicación, clasificación, validación, handoff o memoria debe redactarse en español.
-
-## 38.1.1. Resumen exhaustivo de todo el Módulo 1
-
-Dentro de `# FULL ORIGINAL RESEARCH OUTPUT` debes incluir un **resumen exhaustivo, detallado y completo de todo el contenido leído del Módulo 1**, redactado en español.
-
-Este resumen no reemplaza el contenido fuente de M1 ni pretende reproducirlo literalmente. Su función es dejar en `transcript.md` una síntesis documental amplia que permita comprender:
-
-```text
-cada archivo leído
-→ cada sección relevante
-→ conceptos
-→ metodologías
-→ procedimientos
-→ prácticas
-→ ejemplos
-→ recomendaciones
-→ herramientas
-→ advertencias
-→ actividades
-→ dependencias
-→ relaciones entre temas
-→ contenido práctico aplicable
-→ contenido conceptual que requiera traducción a práctica
-→ límites o huecos detectados
-→ relación con el proyecto
-```
-
-No reduzcas este resumen a una lista superficial de títulos o temas. Debe cubrir **todo el contenido de M1 que realmente haya sido leído y utilizado**, de forma suficientemente detallada para comprender cómo se transforma posteriormente en la secuencia de pasos.
-
-## 38.1.2. Resumen exhaustivo del proyecto objetivo y de su stack
-
-Dentro de `# FULL ORIGINAL RESEARCH OUTPUT` debes incluir un **resumen exhaustivo, detallado y completo** del archivo:
-
-```text
-Diiegoal/CursoIA/tree/main/Módulo_12_Lab_1_Crea_tu_propio_chatbot_de_documentación_técnica_con_Langchain_y_Streamlit/6. Agente SRE DevOps Respuesta Incidentes.md
-```
-
-El resumen debe estar redactado en español y debe representar únicamente lo realmente leído de la fuente.
-
-Debe documentar, sin omitir información material:
-
-```text
-qué es el Agente SRE / DevOps
-→ objetivo
-→ flujo de respuesta a incidentes
-→ comportamiento conversacional
-→ comportamiento reflexivo
-→ arquitectura conceptual
-→ componentes
-→ incident intake y webhooks
-→ deduplicación y correlación
-→ gestión del estado del incidente
-→ herramientas del agente
-→ FastAPI
-→ LangChain
-→ LangGraph
-→ Streamlit
-→ Slack / Slack API
-→ RAG
-→ recuperación semántica
-→ PostgreSQL
-→ bases de datos vectoriales
-→ pgvector cuando aparezca
-→ Redis
-→ Pydantic
-→ SQLAlchemy
-→ Alembic
-→ Uvicorn
-→ HTTPX
-→ Kubernetes Python Client
-→ Prometheus
-→ Alertmanager
-→ Grafana
-→ Loki
-→ OpenTelemetry
-→ OTLP
-→ Tempo
-→ GitHub API
-→ AWS APIs
-→ CloudWatch
-→ ECS
-→ EKS
-→ EC2
-→ Lambda
-→ RDS
-→ ElastiCache
-→ ALB
-→ CloudTrail
-→ Docker
-→ Kubernetes
-→ PagerDuty / incident.io
-→ ArgoCD
-→ workers y ejecución asíncrona
-→ runbooks
-→ historial y memoria de incidentes
-→ persistencia y checkpoints
-→ human-in-the-loop
-→ aprobación
-→ executor separado
-→ recovery verification
-→ postmortem
-→ CI/CD
-→ IaC
-→ evaluación del agente
-→ LangSmith
-→ React / Next.js cuando aparezcan como evolución
-→ Python 3.14+
-→ uv
-→ AWS Bedrock Agents Classic / AgentCore cuando aparezcan
-→ cualquier otra tecnología, biblioteca, servicio, API, herramienta, mecanismo o componente nombrado explícitamente en la fuente
-```
-
-Debes distinguir explícitamente entre:
-
-```text
-STACK DESCRITO EN LA FUENTE
-DECISIÓN ACEPTADA EN CHAT 1
-OPCIÓN / ALTERNATIVA
-EVALUAR
-OPCIONAL
-RESERVADO PARA FUTURO
-NO DETERMINADO
-```
-
-No agregues tecnologías por conocimiento externo que no aparezcan en la fuente, y no conviertas alternativas de la fuente en decisiones del nuevo proyecto.
-
-## 38.1.3. Decisiones de Chat 1 relevantes para M1 y la construcción inicial
-
-Dentro de `# FULL ORIGINAL RESEARCH OUTPUT` debes registrar las decisiones aceptadas de Chat 1 que sean relevantes para:
-
-```text
-la aplicación práctica de M1
-la base inicial del proyecto
-la seguridad
-la arquitectura inicial
-la persistencia
-la interfaz / superficie operativa
-la continuidad
-los límites de alcance
-```
-
-Como mínimo, debe recuperarse y documentarse la evidencia correspondiente a:
-
-```text
-DEC-0001 — orden profesional de construcción
-DEC-0002 — exclusión de M12 de la construcción
-DEC-0003 — seguridad y documentación como gates + loops
-DEC-0004 — read-only-first
-DEC-0005 — PostgreSQL + evaluación de pgvector
-DEC-0006 — Streamlit opcional
-```
-
-También debe utilizarse `chats/chat-001/HANDOFF.md` como evidencia de continuidad.
-
-No basta con enumerar las decisiones: para cada una, documenta:
-
-```text
-decisión
-→ estado
-→ evidencia
-→ impacto sobre M1
-→ impacto sobre la construcción inicial
-→ restricción que debe respetarse en los pasos
-```
-
-No reabras como nueva decisión aquello que Chat 1 ya dejó aceptado, salvo que exista evidencia posterior verificable que obligue a documentar una discrepancia.
-
-## 38.1.4. Cruce M1 → Decisiones Chat 1 → Proyecto SRE → Memoria → Ejemplo 2
-
-Después de los resúmenes anteriores y de la recuperación de decisiones de Chat 1, el transcript debe documentar el cruce real:
-
-```text
-M1 = fuente principal del contenido y de los pasos
-Chat 1 = decisiones heredadas y restricciones aceptadas
-Agente SRE de referencia = definición del producto objetivo y stack de referencia
-memory-repo = continuidad y trazabilidad
-Ejemplo 2 = referencia de aprendizaje
-nuevo proyecto = contexto real de aplicación
-```
-
-La totalidad de los pasos debe surgir de esta alineación sin permitir que la referencia del Agente SRE ni el Ejemplo 2 sustituyan el contenido real de M1.
-
-## 38.1.5. Resumen exhaustivo de todo el Repositorio Ejemplo 2
-
-Dentro de `# FULL ORIGINAL RESEARCH OUTPUT` debes incluir también un **resumen exhaustivo, detallado y completo del contenido del Repositorio Ejemplo 2 que haya sido revisado durante Chat 2**, redactado en español.
-
-El resumen debe cubrir, en la medida en que exista y haya sido revisado:
-
-```text
-estructura
-→ archivos
-→ componentes
-→ organización
-→ prácticas observadas
-→ decisiones observadas
-→ patrones relevantes
-→ flujo observado
-→ herramientas
-→ relaciones entre componentes
-→ aprendizajes útiles
-→ limitaciones o aspectos no transferibles
-→ elementos que sirven únicamente como referencia
-```
-
-Debe quedar explícitamente identificado como **referencia del Ejemplo 2** y no como arquitectura, código, estructura o decisión del nuevo proyecto.
-
-No copies su implementación ni lo conviertas en plantilla.
-
-## 38.1.6. Relación entre los resúmenes, las decisiones heredadas y el plan de pasos
-
-Después de los resúmenes y de la recuperación de decisiones de Chat 1, el transcript debe documentar cómo se realizó el cruce:
-
-```text
-M1 = fuente principal del contenido y flujo
-Chat 1 = decisiones heredadas y restricciones aceptadas
-Agente SRE de referencia = producto objetivo y stack de referencia
-memory-repo = continuidad y trazabilidad
-Ejemplo 2 = referencia de aprendizaje
-nuevo proyecto = contexto real de aplicación
-```
-
-A partir de ese cruce se determina la cantidad total de pasos razonable y necesaria y se explica por qué los contenidos fueron agrupados o separados.
-
-Los pasos deben utilizar las decisiones aceptadas de Chat 1 como condiciones de partida y deben identificar explícitamente el o los temas de M1 que toman como fundamento.
-
-## 38.1.7. Resumen canónico de la secuencia de pasos
-
-Dentro de `# FULL ORIGINAL RESEARCH OUTPUT`, después del cruce anterior, debes incluir una sección específica:
-
-```markdown
-## Resumen de pasos de M1
-
-| ID | Título | Objetivo resumido | Capacidad/unidad principal | Salida principal | Dependencias reales | Estado |
-|---|---|---|---|---|---|---|
-| M1-P{{NN}} | ... | ... | ... | ... | ... | PLANIFICADO |
-```
-
-La tabla debe contener **todos los pasos finales**, en el mismo orden que `M1_PLAN.md`.
-
-Esta sección es un **resumen de continuidad**, no una segunda copia del plan. No debe contener los 26 campos, ni los bloques `1–26`, ni repetir el desarrollo detallado de `M1_PLAN.md`.
-
-El resumen debe:
-- coincidir exactamente con el conjunto final de IDs de `M1_PLAN.md`;
-- conservar los mismos títulos y el mismo orden;
-- resumir el objetivo y la capacidad principal sin introducir contenido nuevo;
-- indicar únicamente dependencias reales;
-- conservar el estado real de cada paso;
-- permitir identificar rápidamente qué paso existe y qué resultado produce;
-- permanecer sincronizado con `M1_PLAN.md` después de cualquier reparación final.
-
-El contenido completo de cada paso, incluidos sus 26 campos, pertenece **exclusivamente** a `chats/chat-002/M1_PLAN.md`.
-
-Nunca uses el resumen para sustituir una parte faltante de `M1_PLAN.md`. Si un paso no está completo en `M1_PLAN.md`, el problema debe corregirse allí antes del cierre.
-
-La excepción es el contenido que deba preservarse literalmente como RAW o como evidencia fuente.
-
-Por tanto:
-
-```text
-contenido generado por Chat 2
-→ español
-
-contenido fuente / RAW que deba conservarse literalmente
-→ idioma original
-```
-
-Nunca traduzcas el original para reemplazarlo.
-
-## 38.2. Exhaustividad sin sustituciones
-
-No sustituyas contenido material por:
-
-```text
-“resumen”
-“ver arriba”
-“ver salida anterior”
-“se conserva igual”
-“etc.”
-“y demás”
-“continúa”
-“contenido omitido”
-```
-
-si cualquiera de esas expresiones está ocultando información que debería quedar conservada. Esta regla no prohíbe el **resumen de pasos expresamente definido en la sección 38.1.7**, porque el desarrollo completo de esos pasos está conservado canónicamente en `M1_PLAN.md`.
-
-Si el contenido existe y forma parte de la producción sustantiva de la sesión, consérvalo.
-
-## 38.3. Secuencia cronológica
-
-La conservación del transcript debe respetar el orden real de producción:
-
-```text
-entrada / investigación
-→ resultado observado
-→ análisis
-→ clasificación
-→ decisión o no decisión
-→ diseño
-→ ejecución de comprobación
-→ corrección, si ocurrió
-→ resultado actualizado
-→ cierre
-```
-
-No reordenes retrospectivamente el material para que parezca que el plan siempre fue conocido desde el principio.
-
-La salida final puede contener una consolidación derivada en otros `.md`, pero `transcript.md` debe conservar la evolución RAW que condujo a ella.
-
-## 38.4. Distinción entre contenido de usuario, Chat 2 y herramientas
-
-Cuando sea posible dentro del registro real de la sesión, identifica claramente:
-
-```text
-[USER]
-[CHAT 2]
-[TOOL / SOURCE]
-[VALIDATION]
-```
-
-No inventes mensajes ni resultados para completar una secuencia.
-
-No incluyas razonamiento interno privado como si fuera una transcripción pública. Conserva únicamente contenido observable, resultados de herramientas, decisiones, justificaciones verificables y productos de trabajo realmente generados.
-
-
-Esto significa que debes conservar, cuando hayan ocurrido durante la sesión:
-
-- investigaciones completas y sus hallazgos;
-- resultados derivados de lecturas de repositorios y archivos;
-- inventarios;
-- tablas;
-- matrices;
-- comparaciones;
-- análisis;
-- clasificaciones;
-- decisiones;
-- propuestas;
-- preguntas abiertas;
-- limitaciones;
-- incertidumbres;
-- fuentes y referencias;
-- citas o enlaces usados;
-- diseño del plan;
-- totalidad de pasos;
-- los 26 campos de cada paso;
-- validaciones;
-- criterios de aceptación;
-- pruebas;
-- errores encontrados;
-- diagnósticos;
-- correcciones;
-- resultados de las comprobaciones;
-- conclusiones de cierre;
-- cualquier otro contenido sustantivo que haya sido producido y haya influido en el resultado.
-
-## Orden RAW obligatorio
-
-La conservación debe seguir el orden real en el que la información fue producida:
-
-```text
-interacción / investigación
-→ hallazgo
-→ análisis
-→ decisión o clasificación
-→ construcción del resultado
-→ validación
-→ corrección, si ocurrió
-→ cierre
-```
-
-No reemplaces varias respuestas o etapas por una sola explicación retrospectiva.
-
-No conviertas la sesión completa en un “resumen final”.
-
-No reconstruyas el transcript únicamente a partir de `HANDOFF.md`, `STATE.md`, `KNOWLEDGE.md`, `DECISIONS.md` ni otros derivados.
-
-El `transcript.md` debe conservar la fuente RAW de Chat 2 y los derivados deben considerarse documentación complementaria.
-
-## Reglas contra la omisión
-
-No reduzcas la información para ahorrar espacio.
-
-No sustituyas contenido por:
-
-```text
-[resumen]
-[contenido omitido]
-[se omitió el resto]
-[ver resultados anteriores]
-[continúa]
-...
-```
-
-No utilices expresiones equivalentes que oculten contenido material.
-
-Cuando existan tablas, matrices, pasos, fuentes, decisiones, validaciones, limitaciones, advertencias, comandos, resultados o errores, deben conservarse **completos**.
-
-Si el mismo dato aparece en diferentes etapas de la sesión y forma parte del RAW de esas etapas, no lo elimines únicamente porque esté repetido.
-
-## Registro real de ejecución
-
-El `REAL EXECUTION LOG` debe ser suficientemente detallado para reconstruir qué hizo realmente Chat 2.
-
-Para cada acción relevante registra, cuando esté disponible:
-
-```text
-- secuencia o número de acción;
-- fecha/hora, si está disponible;
-- objetivo de la acción;
-- herramienta o mecanismo utilizado;
-- repositorio, archivo, URL o recurso consultado;
-- consulta, comando o instrucción ejecutada;
-- resultado obtenido;
-- evidencia recuperada;
-- error, si ocurrió;
-- diagnóstico, si ocurrió;
-- corrección, si ocurrió;
-- estado posterior.
-```
-
-Distingue explícitamente:
-
-```text
-PLANIFICADO
-```
-
-de:
-
-```text
-EJECUTADO
-```
-
-No presentes una acción futura, un comando futuro, un archivo futuro o una validación futura como si hubiera ocurrido.
-
-No presentes como ejecución una operación que solo fue descrita o propuesta.
-
-## Relación con las herramientas
-
-Cuando una herramienta haya sido utilizada para obtener evidencia sustantiva, conserva en el transcript el resultado relevante completo y la referencia necesaria para reconstruir su procedencia.
-
-No sustituyas la evidencia por una sola frase de conclusión.
-
-No conviertas una lista de URLs en sustituto de los hallazgos que realmente produjo la investigación.
-
-## Idioma
-
-El bloque `ORIGINAL PROMPT` y cualquier contenido RAW que deba conservarse literalmente deben mantenerse en su idioma original.
-
-La redacción derivada en otras partes del `memory-repo` puede seguir las reglas de idioma de la sección 39, pero nunca debe sustituir el RAW.
-
-## Criterio de integridad del transcript
-
-Antes de cerrar debes poder responder afirmativamente:
-
-```text
-¿Está el prompt original completo?
-¿Está toda la producción sustantiva original de Chat 2?
-¿Está en orden cronológico?
-¿Están completas las tablas y matrices?
-¿Están completos todos los pasos y sus 26 campos?
-¿Está documentada la salida de memoria incremental prevista para cada paso?
-¿Están las decisiones y su contexto?
-¿Están las fuentes y evidencias?
-¿Está el registro real de ejecución?
-¿Se distingue planificación de ejecución?
-¿Se evitó todo resumen sustitutivo?
-¿Puede reconstruirse la sesión sin depender del chat original?
-```
-
-Si alguna respuesta es “NO”, el transcript no está terminado y debe corregirse antes de generar el ZIP.
-
-No confundas el plan con el registro de ejecución.
-
----
 
 # 39. SALIDA EN ESPAÑOL Y PRESERVACIÓN DEL ORIGINAL
 
@@ -4360,244 +5204,202 @@ Nunca elimines el original para conservar solo la traducción.
 
 # 40. CRITERIOS DE ÉXITO
 
-Chat 2 solo se considera terminado cuando se cumple todo lo siguiente:
+Chat 2 solo puede cerrarse como PASS cuando todos los grupos siguientes estén en PASS:
 
-- se realizó el bootstrap;
-- se leyó el contexto de continuidad necesario;
-- se recuperó el orden desde `chat-001/HANDOFF.md`;
-- se auditó directamente M1;
-- se leyó todo M1;
-- todos los temas relevantes fueron clasificados;
-- se determinó la cantidad razonable y necesaria de pasos a partir de la sinergia entre M1, las decisiones aceptadas de Chat 1, la referencia del Agente SRE / DevOps, memory-repo, el Repositorio Ejemplo 2 y las necesidades reales del proyecto;
-- ningún tema relevante de M1 quedó sin cobertura;
-- el 100 % del contenido práctico relevante de M1 está convertido en actividades de uno o más pasos;
-- cada paso contiene el contenido práctico de M1 necesario para ejecutar y validar su unidad de trabajo;
-- la cantidad de pasos fue determinada después de construir un inventario de cobertura práctica de M1 y analizar las unidades profesionales, dependencias, resultados y validaciones;
-- ninguna unidad profesional práctica independiente fue comprimida dentro de un paso más amplio únicamente para reducir el número total de pasos;
-- ningún paso quedó tan resumido que su contenido práctico dependa de matrices, índices, resúmenes o menciones auxiliares para poder entender qué debe ejecutarse;
-- las agrupaciones de contenidos dentro de cada paso fueron justificadas por una finalidad práctica común, una salida común o estrechamente integrada y una validación coherente;
-- cuando un mismo archivo de M1 contiene varias prácticas que constituyen unidades profesionales independientes, estas fueron separadas cuando sus resultados principales, artefactos, dependencias o validaciones lo justifican; las subcapacidades que pertenecen a una misma unidad profesional permanecen agrupadas aunque puedan describirse o validarse por separado;
-- ninguna agrupación se justificó únicamente por compartir archivo, pilar, tema, documento o artefacto;
-- cada paso tiene un único objetivo profesional principal y no concentra objetivos independientes únicamente para reducir el número total;
-- cuando dos capacidades constituyen unidades profesionales independientes y pueden ejecutarse, reutilizarse, validarse o corregirse de manera independiente, fueron tratadas como pasos diferentes salvo que exista una razón funcional explícita que justifique su integración; las subcapacidades de una misma unidad profesional no se separaron únicamente por poder ejecutarse o validarse aisladamente;
-- los contenidos relacionados se integraron cuando existe una unidad profesional coherente;
-- cada capacidad práctica compleja de M1 conserva dentro de sus pasos correspondientes las subcapacidades, procedimientos, criterios, variantes y validaciones que M1 desarrolla explícitamente;
-- ningún agrupador como “criterios”, “estrategias”, “partes”, “patrones”, “casos”, “framework” o “playbook” fue utilizado como sustituto del desarrollo de los elementos internos que M1 realmente contiene;
-- las actividades se separaron únicamente cuando existen dependencias, resultados, evidencias o validaciones que lo justifican;
-- no existen pasos que sean únicamente teóricos cuando M1 permite una aplicación práctica;
-- no existen pasos artificiales innecesarios;
-- todos los pasos utilizan una sola plantilla común;
-- todos los pasos contienen exactamente los 26 campos, en el mismo orden y con los mismos nombres;
-- ningún campo de la plantilla de pasos fue omitido, fusionado, renombrado o reordenado;
-- cada paso identifica explícitamente el tema o temas concretos de M1 que toma como fundamento;
-- el transcript contiene un resumen exhaustivo en español de todo M1, otro resumen exhaustivo en español de la referencia del Agente SRE / DevOps revisada y otro resumen exhaustivo en español de todo el Repositorio Ejemplo 2 revisado;
-- la cantidad de pasos fue determinada después de comprender y resumir M1, la referencia del Agente SRE / DevOps, las decisiones relevantes de Chat 1 y el Ejemplo 2, y no antes;
-- el flujo entre pasos está gobernado principalmente por el contenido práctico de M1;
-- cada paso tiene una salida definida para la continuidad y una memoria incremental prevista para su ejecución futura; cuando existe una dependencia real, esa salida alimenta al paso dependiente; los pasos independientes no crean dependencias artificiales;
-- cada `.md` nuevo utiliza literalmente la estructura correspondiente definida en **Complete Markdown File Structure**;
-- cada `.md` existente en el repositorio fuente fue llevado a staging conservando íntegramente su contenido original;
-- cada `.md` histórico sujeto a actualización contiene primero el contenido original y después una sección completa de Chat 2 según la estructura definida para su tipo;
-- los archivos `decisions/DEC-0001.md` hasta `decisions/DEC-0006.md` conservan exactamente el contenido histórico de Chat 1 y no incorporan contenido de Chat 2;
-- las nuevas decisiones sustantivas de Chat 2, cuando existan, se registran exclusivamente mediante nuevos archivos `decisions/DEC-XXXX.md`, utilizando en cada caso el siguiente identificador secuencial disponible;
-- cada `.md` histórico sujeto a actualización conserva primero íntegramente Chat 1 y después incorpora Chat 2 sin reescribir el histórico;
-- existen dependencias;
-- existen validaciones;
-- existen criterios de aceptación;
-- existen pruebas;
-- cada `Tests` contiene contenido sustantivo y verificable, no iniciales, letras sueltas, placeholders ni nombres nominales de prueba;
-- las pruebas de cada paso son coherentes con su objetivo, capacidades, resultado esperado y criterios de aceptación;
-- existen errores y diagnóstico;
-- existe trazabilidad;
-- existe matriz de cobertura;
-- existe control de alcance;
-- existe prueba de completitud;
-- existe prueba de no contaminación;
-- existe prueba de originalidad;
-- cada paso tiene definida su continuidad mediante un ZIP de memoria incremental para su ejecución futura;
-- se verificó el estado real del nuevo repositorio en modo lectura;
-- el Repositorio Ejemplo 2 fue tratado solo como referencia;
-- ningún repositorio externo recibió escrituras, creaciones, modificaciones, eliminaciones, movimientos, renombrados, commits ni pushes;
-- se revisaron explícitamente las decisiones de Chat 2;
-- las nuevas decisiones reales fueron registradas cuando correspondía;
-- la ausencia de nuevas decisiones fue documentada cuando correspondía;
-- `chat-002/` fue creado siguiendo las estructuras correspondientes de **Complete Markdown File Structure**;
-- `handoffs/chat-002-to-chat-003.md` fue creado;
-- `chats/chat-002/META.md`, `chats/chat-002/transcript.md`, `chats/chat-002/HANDOFF.md` y `handoffs/chat-002-to-chat-003.md` existen físicamente en la copia de trabajo, son legibles, no están vacíos, cumplen su estructura correspondiente y están incluidos en el ZIP final;
-- no se creó `chat-003/`;
-- no se crearon archivos fuera de la estructura fija y sus adiciones explícitas;
-- los `.md` históricos mantienen primero todo Chat 1 y luego Chat 2;
-- el RAW Chat 2 está completo, exhaustivo, detallado, cronológico, en español para el contenido derivado y sin resúmenes sustitutivos;
-- el transcript permite reconstruir la producción sustantiva de Chat 2 y sus validaciones;
-- no se ejecutó el Paso 1 del proyecto;
-- el ZIP final contiene el estado real.
+```text
+A. FUENTES
+B. ESTRUCTURA
+C. HISTÓRICO
+D. PLAN
+E. TRANSCRIPT
+F. PROCEDENCIA
+G. EJECUCIÓN
+H. REPARACIÓN
+I. ZIP
+```
 
----
+La condición es conjuntiva: si un solo grupo queda `FAIL`, `PARTIAL`, `BLOCKED` o `NO DEMOSTRADO`, el estado global es `NO CERRADO`.
 
 # 41. VALIDACIÓN FINAL DEL REPOSITORIO
 
-Antes de generar el ZIP verifica:
+La validación final se ejecuta sobre el candidato congelado y debe incluir comprobaciones positivas y negativas. No basta con buscar que “exista” algo; también debe demostrarse que no existen las clases de defectos conocidas.
 
-## Estructura
+## 41.1. MANIFEST FÍSICO Y REGRESIÓN DEL BASELINE
 
-Debe existir:
+Comprueba el conjunto completo de rutas:
 
 ```text
-estructura histórica exacta de Chat 1 obtenida del README.md
+MANIFEST BASELINE
+↕
+MANIFEST CANDIDATO
+```
+
+El conjunto final es exactamente:
+
+```text
+árbol histórico real de Chat 1
 +
 chats/chat-002/META.md
-+
 chats/chat-002/transcript.md
-+
 chats/chat-002/HANDOFF.md
-+
 chats/chat-002/M1_PLAN.md
-+
 handoffs/chat-002-to-chat-003.md
 +
-decisions/ con nuevas decisiones solo si existen
+decisions/DEC-XXXX.md solo si hubo una decisión nueva sustantiva real
 ```
 
-No debe existir:
+No se permite ninguna otra ruta.
+
+Para toda ruta histórica:
 
 ```text
-chat-003/
+si es inmutable → contenido_candidato == contenido_baseline exactamente
+si es autorizada con overlay →
+    contenido_candidato ==
+    contenido_baseline + overlay único válido
 ```
 
-ni ninguna carpeta o archivo adicional.
+La comparación debe hacerse sobre el contenido materializado, no únicamente sobre la narrativa del modelo.
 
-## Integridad histórica
+## 41.2. README
 
-Para **cada `.md` existente en la fuente**, no por muestreo:
+Debe ser idéntico al baseline. Verifica literalmente que permanecen intactas:
 
 ```text
-¿Fue copiado desde el repositorio real?
-¿El contenido original completo permanece primero?
-¿El contenido original conserva el mismo orden y texto?
-¿La sección completa de Chat 2 está después?
-¿La sección de Chat 2 utiliza la estructura correcta?
-¿Se evitó toda pérdida, resumen o reconstrucción del histórico?
+Exact repository tree
+Complete Markdown File Structure
 ```
 
-Para `decisions/DEC-0001.md` hasta `decisions/DEC-0006.md` verifica en cambio:
+La existencia física de Chat 2 se demuestra por el manifest final, no modificando el snapshot del README.
+
+## 41.3. HISTÓRICO RAW Y DOCUMENTAL
+
+Comprueba específicamente:
 
 ```text
-¿El contenido original permanece exactamente igual?
-¿No se agregó ninguna sección de Chat 2?
-¿La decisión histórica permanece separada de las nuevas decisiones de Chat 2?
+chats/chat-001/transcript.md → idéntico al baseline
+handoffs/chat-001-to-chat-002.md → idéntico al baseline
+MEMORY_PROTOCOL.md → idéntico al baseline
+BOOTSTRAP.md → idéntico al baseline
+README.md → idéntico al baseline
 ```
 
-No aceptes una validación basada únicamente en títulos, tamaños aproximados o similitud visual.
+Si alguno falta o cambia, `FAIL CRÍTICO`.
 
-### Comprobación literal de estructura documental
+## 41.4. OVERLAYS
 
-Para cada `.md` sujeto a actualización o creación, la validación final debe comprobar contra el `README.md` real:
+Para cada archivo autorizado con Chat 2:
 
 ```text
-archivo
-→ entrada exacta en Complete Markdown File Structure
-→ esqueleto estructural extraído literalmente
-→ mismos encabezados y niveles
-→ mismo orden
-→ mismos nombres fijos
-→ mismos campos/elementos estructurales
-→ mismos bloques de código/tablas cuando formen parte de la plantilla
-→ sin secciones inventadas
-→ sin secciones omitidas
-→ sin renombrados
-→ sin reordenamientos
+0 o 1 overlay
+1 BEGIN máximo
+1 END máximo
+BEGIN antes de END
+histórico exacto antes del overlay
+contenido del overlay realmente producido
 ```
 
-La comparación debe realizarse **archivo por archivo y de forma determinista**, usando una extracción estructural reproducible del README y del archivo generado. Una estructura que solo “se parezca” al README es `FAIL`.
+Un overlay duplicado es FAIL. Un overlay en un archivo no autorizado es FAIL.
 
-Para archivos cuyo README no proporcione una plantilla detallada, no inventes una estructura ausente; valida contra la estructura real del archivo fuente y contra las indicaciones literales que el README sí proporcione.
-
-## Cobertura práctica de M1
+## 41.5. PLAN — ESTRUCTURA Y PROFUNDIDAD
 
 Verifica:
 
 ```text
-cada archivo/sección relevante de M1
-→ contenido práctico
-→ uno o más pasos
-→ aplicación real
-→ artefacto/resultado
-→ evidencia
-→ validación
+7 pasos bajo el control de regresión, salvo evidencia actual documentada en contrario
+26/26 campos por paso
+orden 1→26 exacto
+3 TEST_ID de alto nivel por paso
+21 TEST_ID de alto nivel totales + ASSERTION_ID atómicas necesarias
+ID de paso M1-P01 … M1-P07
+estado PLANIFICADO
 ```
 
-No debe existir contenido práctico relevante de M1 que solo aparezca en una matriz o resumen sin estar integrado en un paso aplicable.
-
-## Consistencia documental
-
-Comprueba cada `.md`, uno por uno:
+Además ejecuta una **auditoría semántica por elemento**:
 
 ```text
-tipo de archivo
-→ estructura correspondiente
-→ encabezados correctos
-→ orden correcto
-→ campos completos
-→ estructura sin alteraciones
+P04 → Write + Select + Compress + Isolate, cada uno desarrollado y validado
+P06 → cinco patrones, cada uno desarrollado y validado
+P07 → A + B + C + D + E, cada uno desarrollado y validado
 ```
 
-Para los pasos, verifica explícitamente:
+No aceptes un PASS por simple presencia de palabras.
+
+### 41.5.a. Lint de campos 19–23
+
+Compara esos campos entre los siete pasos. Si son iguales o casi iguales sin justificar por qué, `FAIL`. Comprueba que cada paso tenga fallos, señales, impacto, diagnóstico y corrección propios.
+
+### 41.5.b. Lint de tests
+
+Para cada paso, verifica que los 3 TEST_ID cubran conjuntamente todas las subcapacidades diferenciadas del paso y que cada test tenga:
 
 ```text
-cada paso
-→ 26/26 campos
-→ mismo orden
-→ mismos nombres
-→ ningún campo omitido
-→ `Tests` sustantivos y verificables
-→ cada prueba tiene Prueba + Entrada + Resultado esperado + Condición de aprobación
+Prueba
+Entrada
+Resultado esperado
+Condición de aprobación
 ```
 
-No aceptes como válida una prueba compuesta únicamente por iniciales, letras sueltas, placeholders, etiquetas o formulaciones que no permitan determinar qué se ejecutará, con qué entrada, qué resultado se espera y qué condición define la aprobación.
+Un test que solo diga “revisar”, “validar” o “comprobar” sin determinar qué se observa y qué define PASS/FAIL es `FAIL`.
 
-Para `chats/chat-002/transcript.md`, verifica adicionalmente la integridad RAW exigida en la sección 38.
+## 41.6. TRANSCRIPT
 
-
-## Plan canónico de M1
-
-Verifica físicamente `chats/chat-002/M1_PLAN.md`:
+Comprueba usando **el alcance estructural de las partes**, no una búsqueda global de encabezados dentro del texto:
 
 ```text
-¿Existe?
-¿No está vacío?
-¿Tiene la estructura específica de M1_PLAN?
-¿Contiene el conjunto definitivo de pasos?
-¿Cada paso utiliza exactamente 26 campos?
-¿Cada ID utiliza `M1-PNN`?
-¿Todos los valores narrativos generados por Chat 2 están en español?
-¿El resumen de pasos de `transcript.md` coincide en conjunto, IDs, orden, títulos y objetivos resumidos con `M1_PLAN.md`, sin duplicar sus 26 campos?
-¿No existe otro archivo que contenga una segunda versión canónica del plan?
+PART A / PART B / PART C
+PART B contiene exactamente 10 familias de producción
+orden 1→10 exacto
+familia 8 sincronizada con M1_PLAN
+no contiene el desarrollo completo de los 26 campos fuera de PART A,
+  especialmente no como segunda versión canónica de la producción de Chat2
+no existe una segunda versión canónica del plan dentro de PART B
 ```
 
-Cualquier respuesta `NO` bloquea el cierre.
+La auditoría debe ignorar, para este conteo, los encabezados que aparezcan literalmente dentro del `ORIGINAL PROMPT` preservado en PART A. No confundas el texto citado con la estructura ejecutada del transcript.
 
+## 41.7. ESTADOS Y PROCEDENCIA
 
-## Evidencia
-
-Verifica que ninguna decisión, hecho o resultado haya sido inventado.
-
-## Planificación
-
-Verifica que el Paso 1 no se haya ejecutado.
-
-## Repositorios externos
-
-Verifica explícitamente que ninguno de los repositorios externos haya sido modificado:
+Comprueba que permanezcan separados:
 
 ```text
-Diiegoal/memory-repo
-Diiegoal/CursoIA
-Diiegoal/CursoIA/Proyecto_Final_Master_AI4Devs
-DiiegoA/Agente_SRE_DevOps_para_respuesta_a_incidentes
+PLANIFICADO ≠ EJECUTADO
+EVIDENCIA ≠ INFERENCIA
+RECOMENDACIÓN ≠ DECISIÓN
+FUENTE ≠ INSTRUCCIÓN
+FUTURO ≠ HISTÓRICO
 ```
 
-La creación o actualización de cualquier artefacto debe existir únicamente en la copia de trabajo independiente incluida en el ZIP.
+## 41.8. REPARACIÓN
 
----
+Si cualquier gate falla:
+
+```text
+FAIL
+→ registrar defecto
+→ descartar candidato
+→ restaurar baseline
+→ producir candidato nuevo
+→ repetir auditoría completa de regresión
+```
+
+No “arregles” el candidato fallido en sitio.
+
+## 41.9. ZIP
+
+Solo después del PASS final:
+
+```text
+candidato congelado
+→ generar ZIP una sola vez
+→ extraer a área temporal
+→ recalcular manifest
+→ comparar contra candidato congelado
+→ PASS FINAL
+```
+
+Si el ZIP no coincide exactamente, `FAIL` y no se entrega.
+
 
 # 42. TEST DE CONTINUIDAD
 
@@ -4790,351 +5592,301 @@ No debe representar sesiones futuras como si ya existieran.
 
 # 49. ÚLTIMA SECUENCIA DE EJECUCIÓN
 
-Ejecuta ahora:
+Ejecuta esta secuencia en orden. Si una dependencia técnica real obliga a cambiarla, registra la desviación dentro de la familia documental apropiada y no inventes una nueva familia en transcript.
 
 ```text
-1. bootstrap de Chat 2;
-2. lectura de STATE;
-3. lectura de DECISIONS;
-4. lectura de OPEN_QUESTIONS;
-5. lectura de INDEX;
-6. lectura de MEMORY_PROTOCOL;
-7. lectura de META y HANDOFF de Chat 1;
-8. recuperación del orden de módulos;
-9. auditoría directa de Diiegoal/CursoIA;
-10. lectura completa de Módulo 1;
-11. resumen exhaustivo en español de todo el contenido de M1 realmente leído;
-12. lectura completa de la referencia del proyecto: `6. Agente SRE DevOps Respuesta Incidentes.md`;
-13. resumen exhaustivo en español del proyecto objetivo y de todo el stack realmente descrito;
-14. lectura y recuperación de las decisiones aceptadas de Chat 1 relevantes para M1 y la construcción inicial;
-15. alineación entre M1 + decisiones heredadas de Chat 1 + proyecto objetivo;
-16. verificación y lectura completa del Repositorio Ejemplo 2;
-17. resumen exhaustivo en español de todo el contenido del Repositorio Ejemplo 2 realmente revisado;
-18. verificación del estado real del nuevo repositorio;
-19. identificación de todo contenido relevante de M1;
-20. clasificación de cada contenido;
-21. conversión del contenido práctico de M1 en actividades aplicables al proyecto;
-22. extracción y conservación literal en staging de todos los `.md` existentes del repositorio fuente;
-23. construcción de dependencias;
-24. cruce de M1 + decisiones Chat 1 + referencia del Agente SRE / DevOps + memory-repo + Ejemplo 2 + necesidades reales del proyecto;
-25. determinación de la cantidad total razonable y necesaria de pasos a partir de ese cruce, dejándola emerger dinámicamente de la cobertura, profundidad, independencia, integración, dependencias, resultados y validaciones, sin fijar una cantidad previa;
-26. diseño del flujo de ejecución entre pasos, con M1 como eje principal y con las salidas alimentando a los pasos dependientes cuando exista una dependencia real;
-27. aplicación de la plantilla única común a todos los pasos;
-28. comprobación de cobertura completa del contenido práctico de M1 distribuido entre los pasos, evitando fragmentación o duplicación artificial y verificando que cada paso produzca una salida definida para la continuidad, que alimente a otro paso cuando exista una dependencia real, incluida la continuidad mediante ZIP de memoria incremental para su ejecución futura;
-29. construcción de matrices;
-30. definición de validaciones y criterios de aceptación;
-31. definición de errores y diagnóstico;
-32. prueba de completitud;
-33. prueba de cobertura;
-34. prueba de no contaminación;
-35. prueba de originalidad;
-36. revisión explícita y exhaustiva de todas las decisiones de Chat 2;
-37. determinación de si existen decisiones sustantivas nuevas;
-38. creación de `DEC-XXXX.md` únicamente para decisiones sustantivas realmente adoptadas;
-39. documentación explícita de la ausencia de nuevas decisiones cuando corresponda, sin crear `DEC-XXXX.md` artificialmente;
-40. adición de la sección de Chat 2 debajo del contenido original de cada `.md` histórico sujeto a actualización, utilizando la estructura correspondiente y excluyendo los registros de decisión histórica ya existentes;
-41. creación de `chats/chat-002/META.md` solo en la copia de trabajo independiente;
-42. creación de `chats/chat-002/transcript.md` solo en la copia de trabajo independiente;
-43. creación de `chats/chat-002/HANDOFF.md` solo en la copia de trabajo independiente;
-43A. creación de `chats/chat-002/M1_PLAN.md` solo en la copia de trabajo independiente;
-44. creación de `handoffs/chat-002-to-chat-003.md` solo en la copia de trabajo independiente;
-45. actualización de STATE, KNOWLEDGE, DECISIONS, OPEN_QUESTIONS e INDEX solo en la copia de trabajo independiente, cuando corresponda;
-46. construcción del transcript RAW completo, exhaustivo, detallado, cronológico y sin resúmenes sustitutivos;
-47. validación de estructura fija;
-48. validación de integridad histórica de todos los `.md`, uno por uno;
-49. validación de procedencia;
-50. validación estructural de todos los `.md` contra `README.md → Complete Markdown File Structure`;
-51. validación 26/26 campos de todos los pasos y validación sustantiva de todos los `Tests` según su estructura obligatoria;
-52. validación de cobertura práctica de M1;
-53. prueba de continuidad;
-53A. gate físico y bloqueante de los cuatro archivos obligatorios de `chats/chat-002/` y del handoff futuro autorizado, incluida su existencia en staging y su inclusión en el ZIP final;
-54. prueba de reconstrucción;
-55. auditoría final de decisiones;
-56. verificación explícita de que el Paso 1 NO fue ejecutado;
-57. construcción del ZIP;
-58. inspección del ZIP;
-59. verificación de que ningún repositorio externo fue modificado;
-60. entrega única del ZIP.
+01. iniciar en modo read-only respecto de repositorios externos;
+02. fijar/registrar modelo, modo y herramientas disponibles cuando el entorno lo permita;
+03. leer README.md real de memory-repo;
+04. extraer Exact repository tree;
+05. extraer Complete Markdown File Structure;
+06. enumerar el árbol físico real completo;
+07. recuperar todos los archivos históricos del manifest;
+08. si el shell no tiene red, recuperar los blobs exactos mediante la herramienta de repositorio disponible;
+09. materializar el contenido completo en BASELINE_STAGING sin reformatearlo;
+10. registrar commit/ref/tree SHA/blob SHA y hash local cuando estén disponibles;
+11. ejecutar CHECKPOINT 1 — FUENTES;
+12. recuperar BOOTSTRAP, STATE, DECISIONS, OPEN_QUESTIONS, INDEX, MEMORY_PROTOCOL y handoff de Chat 1;
+13. recuperar el orden y las decisiones heredadas desde las fuentes reales;
+14. leer completamente los cinco archivos de M1;
+15. leer completamente la referencia SRE/DevOps;
+16. revisar Ejemplo 2 solo como referencia;
+17. auditar el proyecto objetivo sin escribir;
+18. ejecutar la investigación externa permitida y registrar procedencia/corte;
+19. construir inventario de capacidades y subcapacidades de M1;
+20. construir SUBCAP_ID por cada capacidad diferenciada;
+21. determinar fronteras funcionales y contrastarlas con P01–P07;
+22. ejecutar prueba de cobertura, profundidad, independencia, integración y anti-fragmentación;
+23. congelar el conjunto de pasos solo después del análisis;
+24. ejecutar CHECKPOINT 2 — PLAN;
+25. redactar cada paso con 26 campos exactos;
+26. completar el registro atómico de subcapacidades dentro de M1_PLAN;
+27. desarrollar individualmente las subcapacidades de P04, P06 y P07;
+28. crear exactamente 3 TEST_ID de alto nivel por paso;
+29. crear todas las ASSERTION_ID necesarias dentro de esos 3 paquetes;
+30. crear al menos 2 ERROR_ID específicos por paso;
+31. mapear cada ERROR_ID a fields 19→23;
+32. ejecutar auditoría de cobertura M1;
+33. ejecutar auditoría de profundidad/subcapacidad;
+34. ejecutar auditoría de independencia y anti-fragmentación;
+35. ejecutar auditoría de dependencias y resultados;
+36. ejecutar auditoría de trazabilidad;
+37. ejecutar auditoría semántica;
+38. ejecutar auditoría determinista estructural;
+39. ejecutar PASADA A — CONFORMIDAD;
+40. ejecutar PASADA B — REFUTACIÓN;
+41. si existe cualquier FAIL/PARTIAL/BLOCKED/NO VERIFICADO → descartar candidato completo;
+42. restaurar BASELINE_STAGING;
+43. producir candidato nuevo corregido;
+44. repetir desde el gate invalidado hasta superar PASADA A + PASADA B;
+45. ejecutar CHECKPOINT 3 — CANDIDATO;
+46. generar los cuatro artefactos propios de Chat 2;
+47. actualizar únicamente los históricos autorizados y solo si corresponde semánticamente;
+48. preservar todos los históricos inmutables byte-for-byte;
+49. generar handoffs/chat-002-to-chat-003.md como protocolo futuro;
+50. validar que no exista chats/chat-003/;
+51. validar manifest físico completo;
+52. validar README idéntico;
+53. validar cada histórico inmutable idéntico;
+54. validar cada overlay autorizado y único;
+55. validar 7/7 pasos + 26/26 campos;
+56. validar 3 TEST_ID por paso + ASSERTION_ID completas;
+57. validar P04, P06 y P07 por SUBCAP_ID individual;
+58. validar ERROR_ID y fields 19→23 sin boilerplate;
+59. validar transcript de 3 partes + 10 familias + resumen sincronizado usando el alcance PART A/B/C;
+60. validar procedencia, estados y ausencia de invención;
+61. validar continuidad y reconstrucción;
+62. ejecutar CHECKPOINT 4 — CIERRE;
+63. congelar candidato final;
+64. crear ZIP una sola vez;
+65. extraer ZIP y comparar contra manifest del candidato congelado;
+66. si coincide exactamente → PASS FINAL;
+67. si no coincide → FAIL, descartar ZIP y no entregar;
+68. entregar únicamente chat-002-memory-repo.zip.
 ```
 
----
+# 50. REGLAS INNEGOCIABLES — INVARIANTES CANÓNICAS
 
-# 50. REGLAS INNEGOCIABLES
+```text
+I01. No modificar repositorios externos.
+I02. Trabajar únicamente en staging independiente.
+I03. No utilizar memoria/historial ajeno como entrada implícita.
+I04. README.md real es la autoridad estructural.
+I05. La copia de 13.1 es solo snapshot auxiliar.
+I06. El baseline histórico es inmutable.
+I07. README.md histórico permanece idéntico.
+I08. `chats/chat-001/transcript.md` permanece idéntico.
+I09. `handoffs/chat-001-to-chat-002.md` permanece idéntico.
+I10. DEC-0001 … DEC-0006 permanecen idénticos.
+I11. Solo 7 históricos autorizados pueden recibir overlay.
+I12. Los archivos autorizados sin cambio sustantivo permanecen idénticos.
+I13. Cada archivo actualizado puede tener como máximo un overlay CHAT2 de chat-002.
+I14. Los candidatos fallidos se descartan.
+I15. Toda reparación parte del baseline.
+I16. Solo existen los cuatro archivos de chats/chat-002 autorizados.
+I17. `handoffs/chat-002-to-chat-003.md` es futuro, no una sesión ejecutada.
+I18. No crear otras rutas salvo nuevas decisiones sustantivas reales.
+I19. M1 conserva las siete fronteras funcionales validadas salvo evidencia actual en contrario.
+I20. Cada paso usa exactamente 26 campos, en orden y con nombres idénticos.
+I21. Cada paso tiene exactamente 3 TEST_ID de alto nivel.
+I22. Cada TEST_ID es un paquete que contiene una o más ASSERTION_ID; cada ASSERTION_ID tiene Prueba + Entrada + Resultado esperado + Condición PASS + Condición FAIL + Evidencia.
+I23. P04 desarrolla y valida individualmente Write, Select, Compress e Isolate mediante SUBCAP_ID/ASSERTION_ID propios.
+I24. P06 desarrolla y valida individualmente los cinco patrones de coding mediante SUBCAP_ID/ASSERTION_ID propios.
+I25. P07 desarrolla y valida individualmente los casos A–E y la integración completa mediante SUBCAP_ID/ASSERTION_ID propios.
+I26. Cada paso contiene al menos 2 ERROR_ID específicos y los fields 19–23 los desarrollan sin duplicar boilerplate entre pasos.
+I27. `M1_PLAN.md` es el único desarrollo detallado de los pasos.
+I28. `transcript.md` contiene el resumen de pasos, no una segunda copia de 26 campos.
+I29. `transcript.md` contiene exactamente 3 partes principales y 10 familias de producción dentro de PART B.
+I30. La familia 8 de transcript coincide en conjunto, IDs, orden y títulos con M1_PLAN.
+I31. Hecho, inferencia, decisión, recomendación, planificación y ejecución permanecen diferenciados.
+I32. No inventar datos, fuentes, acciones, ejecuciones, resultados, decisiones ni archivos.
+I33. Si algo no puede verificarse, no se declara PASS.
+I34. El Paso 1 del proyecto no se ejecuta durante Chat 2.
+I35. El ZIP solo se crea después del PASS final.
+I36. El contenido del ZIP debe coincidir exactamente con el candidato congelado.
+I37. Ningún PASS puede basarse solo en una afirmación narrativa del propio modelo.
+I38. La inaccesibilidad del shell local no convierte en `BLOCKED` a una fuente si un mecanismo de lectura autorizado puede recuperar su contenido exacto.
+I39. El baseline materializado se verifica con identidad de fuente + hash local + contenido completo.
+I40. Los candidatos fallidos son artefactos desechables completos; ninguna reparación parte de un candidato fallido.
+I41. Los conteos de transcript se calculan por el alcance estructural de PART A/B/C y no por una búsqueda global que mezcle prompt citado con producción ejecutada.
+I42. Los gates críticos se verifican primero de forma determinista y después semánticamente; una capa no sustituye a la otra.
+I43. El cierre solo ocurre tras PASADA A — CONFORMIDAD y PASADA B — REFUTACIÓN sin defectos abiertos.
+```
 
-**No escribas, crees, modifiques, elimines, muevas, renombres, confirmes ni publiques ningún artefacto directamente en ninguno de los repositorios externos.**
-
-**Todos los artefactos de Chat 2 deben construirse únicamente en una copia de trabajo independiente fuera de los repositorios y posteriormente incluirse en el ZIP.**
-
-**No inventes datos.**
-
-**No inventes decisiones.**
-
-**No inventes resultados.**
-
-**No confundas evidencia con inferencia.**
-
-**No confundas recomendación con decisión.**
-
-**No confundas planificación con ejecución.**
-
-**No confundas memoria con resumen.**
-
-**No reemplaces RAW por derivados.**
-
-**No borres información histórica de Chat 1.**
-
-**Las decisiones históricas de Chat 1 `decisions/DEC-0001.md` hasta `decisions/DEC-0006.md` deben permanecer exactamente como fueron recuperadas, sin agregar contenido de Chat 2 ni modificar su contenido.**
-
-**Toda decisión sustantiva nueva adoptada por Chat 2 debe registrarse mediante un nuevo archivo `decisions/DEC-XXXX.md` utilizando automáticamente el siguiente identificador secuencial disponible, nunca modificando una decisión histórica existente.**
-
-**En todos los `.md` que ya existan en el repositorio fuente al iniciar Chat 2 y que estén sujetos a actualización, debe conservarse primero el contenido original completo y agregarse debajo una sección completa de Chat 2 según la estructura definida para el tipo de archivo en **Complete Markdown File Structure**.**
-
-**No copies el Repositorio Ejemplo 2.**
-
-**No inventes el siguiente módulo.**
-
-**No adelantes contenido posterior como trabajo de M1.**
-
-**Todos los pasos utilizan una sola plantilla común de 26 campos, en el mismo orden y con los mismos nombres, sin omisiones, fusiones, renombrados ni reordenamientos.**
-
-**El campo `Tests` de cada paso debe contener pruebas futuras concretas y verificables; nunca iniciales, letras sueltas, placeholders, nombres nominales o formulaciones que no permitan determinar qué se probará, con qué entrada, qué resultado se espera y qué condición define la aprobación.**
-
-**Cuando una capacidad agrupada contenga variantes, categorías, criterios, patrones, casos, etapas o mecanismos diferenciados por M1, cada elemento debe quedar desarrollado explícitamente dentro del paso correspondiente utilizando los campos existentes de la plantilla; no basta con mencionar un playbook, framework, matriz, kit o lista como sustituto.**
-
-**Cada `.md` nuevo debe utilizar exactamente la estructura documental correspondiente a su tipo de archivo, tal como está definida en **Complete Markdown File Structure**.**
-
-**La estructura documental nunca puede utilizarse para reconstruir el histórico: primero se copia el contenido real del repositorio y únicamente después se añade Chat 2.**
-
-**La cantidad de pasos debe determinarse después de comprender y resumir M1, la referencia del Agente SRE / DevOps, las decisiones relevantes de Chat 1 y el Repositorio Ejemplo 2, mediante la sinergia entre M1, las decisiones aceptadas de Chat 1, la referencia del Agente SRE / DevOps, memory-repo, el Repositorio Ejemplo 2 y las necesidades reales del proyecto. Debe emerger dinámicamente del análisis como la cantidad total razonable y necesaria para obtener la mayor cobertura práctica posible de M1 sin fragmentación artificial ni compresión artificial. No existe una cantidad objetivo o predeterminada y ninguna auditoría, ejemplo o ejecución anterior puede fijarla.**
-
-**M1 es el eje principal del flujo de pasos. Cada paso debe indicar explícitamente qué tema o temas de M1 toma como fundamento, producir una salida definida para la continuidad y, cuando exista una dependencia real, hacer que esa salida alimente al paso dependiente; los pasos independientes no deben recibir ni crear dependencias artificiales. Cuando sea ejecutado posteriormente, cada paso debe generar su ZIP de memoria incremental y acumulativo.**
-
-**El Repositorio Ejemplo 2 es únicamente una referencia de aprendizaje y diseño; no determina por sí mismo la estructura ni el contenido de los pasos del nuevo proyecto.**
-
-**El transcript.md debe incluir, en español para el contenido derivado, un resumen exhaustivo de todo M1, un resumen exhaustivo de la referencia del Agente SRE / DevOps revisada y un resumen exhaustivo de todo el Repositorio Ejemplo 2 revisado, además del registro RAW, las decisiones relevantes de Chat 1 y un resumen exhaustivo de la secuencia final de pasos. El desarrollo completo de los pasos y sus 26 campos pertenece exclusivamente a `M1_PLAN.md`.**
-
-**Durante Chat 2 no ejecutes el Paso 1 del proyecto.**
-
-**La estructura de `memory-repo` es fija.**
-
-**Solo se permiten las adiciones de `chats/chat-002/`, `handoffs/chat-002-to-chat-003.md` y nuevas decisiones reales dentro de `decisions/`.**
-
-**Los cuatro artefactos obligatorios de continuidad de Chat 2 (`chats/chat-002/META.md`, `chats/chat-002/transcript.md`, `chats/chat-002/HANDOFF.md` y `handoffs/chat-002-to-chat-003.md`) deben existir físicamente en la copia de trabajo, validarse contra su estructura correspondiente y estar incluidos en el ZIP final antes de cerrar la sesión; su mera mención en otros archivos no cuenta como creación.**
-
-**No crees ningún otro archivo ni ninguna otra carpeta.**
-
-**Si no existe una decisión nueva, documenta válidamente su ausencia; no fabriques una.**
-
-**El transcript de Chat 2 debe conservar el RAW completo de la sesión en todo aquello que no quede canónicamente separado en `M1_PLAN.md`: prompt original íntegro, producción sustantiva, investigaciones, hallazgos, tablas, matrices, resumen final de pasos, decisiones, validaciones, resultados de herramientas y registro real de ejecución, en orden cronológico, con la documentación derivada en español y sin omisiones deliberadas ni sustituciones por referencias como “ver arriba”. El desarrollo de los 26 campos de los pasos no se duplica en el transcript porque pertenece exclusivamente a `M1_PLAN.md`.**
-
-**Conserva el contenido fuente original en su idioma cuando sea necesario para preservar evidencia.**
-
-**Si falta información, decláralo en lugar de rellenarla por suposición.**
-
-**Mantén siempre la procedencia y la trazabilidad.**
-
-**La salida final visible debe ser únicamente `chat-002-memory-repo.zip`.**
-
----
 
 
 ---
-
-
-**`chats/chat-002/` debe contener exactamente cuatro archivos: `META.md`, `transcript.md`, `HANDOFF.md` y `M1_PLAN.md`. No puede contener ningún otro archivo.**
-
-**`M1_PLAN.md` es el único archivo canónico del plan de M1 dentro de `chat-002`. No crees un archivo separado para `M1 Technology Scope`, `12-m1-coverage-matrix`, matrices de M1 o resúmenes equivalentes.**
-
-**Los pasos del plan definitivo deben utilizar exactamente los IDs `M1-P01`, `M1-P02`, …, `M1-PNN`; esos mismos IDs deben aparecer en `M1_PLAN.md` y en el resumen de pasos de `transcript.md`, manteniendo el mismo conjunto, orden y títulos, sin reproducir los 26 campos en el transcript.**
-
-**El plan definitivo debe estar en español para todo contenido generado por Chat 2, excepto identificadores técnicos y las excepciones documentales/RAW expresamente permitidas.**
-
-
 
 # FULL ORIGINAL RESEARCH OUTPUT
 
-## PARTE B — PRODUCCIÓN SUSTANTIVA
+## 1. Resumen exhaustivo de M1
 
-### 1. Bootstrap y estado heredado de Chat 1
+### 1.1 Modelo mental
+M1 organiza el trabajo asistido por IA alrededor de tres pilares co-iguales: Herramienta, Contexto y Prompt. Herramienta incluye modelo y harness/scaffolding; Contexto es la información que el modelo puede usar en una tarea concreta; Prompt fija tarea, outcome, éxito y restricciones. El orden práctico recomendado es caracterizar la tarea → elegir herramienta → preparar contexto → escribir prompt → ejecutar/revisar. El módulo insiste en que ninguno de los tres pilares debe tratarse como sustituto de los otros.
 
-Se recuperaron desde `Diiegoal/memory-repo`:
-`BOOTSTRAP.md`, `STATE.md`, `DECISIONS.md`, `OPEN_QUESTIONS.md`, `INDEX.md`, `MEMORY_PROTOCOL.md`, `chats/chat-001/META.md`, `chats/chat-001/HANDOFF.md`, `handoffs/chat-001-to-chat-002.md` y las decisiones DEC-0001…DEC-0006.
+### 1.2 Pilar 1 — La Herramienta
+Se distinguen cuatro categorías: A IDE-integrated, B Terminal/CLI agentic, C cloud/autonomous y D specialized. Además se distingue completion vs agentic como dimensión de modo: completion para unidades pequeñas/contained; agentic para tareas multiarchivo, por capas o con ejecución/comandos. La selección depende de cinco criterios: tamaño/forma del codebase, lenguaje, privacidad/compliance, presupuesto y estilo del developer. M1 explica que benchmarks como SWE-Bench Verified/Pro, Aider Polyglot y Terminal-Bench deben leerse considerando el harness y el scaffolding, no solo el score. Anti-patrones: elegir por moda/disponibilidad, cambiar de herramienta sin diagnosticar si el problema está en contexto o prompt, y confundir un benchmark con una prueba universal.
 
-Orden recuperado desde `chats/chat-001/HANDOFF.md`:
-`M1 → M3 → M4 → M2 → M6 → M5 → M7 → M8 → M9 → M10 → M11 → M13`.
+### 1.3 Pilar 2 — El Contexto
+El concepto central es context rot: la calidad puede degradarse antes de alcanzar el máximo de la ventana. M1 distingue lost in the middle, attention dilution y distractor interference. Los umbrales 50/70/90 aparecen como heurísticas operativas, no garantías de proveedor. Tipos de contexto: código relevante, convenciones, estado actual, intent/spec, restricciones, memoria persistente, documentación externa e historial de sesión. El estándar persistente principal es AGENTS.md; se comparan CLAUDE.md y otros mecanismos. La recomendación es una fuente de verdad corta, de alta señal, con profundidad en docs y sin duplicación. Las cuatro operaciones obligatorias son Write, Select, Compress e Isolate: persistir fuera de la ventana, traer solo lo necesario, compactar estado y delegar exploración a subagentes.
 
-M12 se confirmó como reference-only. Los seis decision records históricos se conservaron sin cambios.
+### 1.4 Pilar 3 — Prompt e integración
+M1 replantea prompting para modelos razonadores: evitar cadenas de pensamiento impuestas si no aportan valor, preferir claridad y outcome, probar 0-shot antes de few-shot y usar delimitadores/formato cuando ayudan. La anatomía del prompt técnico contiene contexto mínimo, objetivo, criterios de éxito, restricciones/antipatrones, referencias, formato y clarificación. Los anti-patrones incluyen vaguedad, megaprompts, micro-especificación, falta de éxito y repetición de contexto persistente.
+M1 desarrolla cinco patrones: Spec-driven preview, Plan-then-execute, Test-first, Refactor con anclas y Critic loops. Cada patrón tiene finalidad, precondiciones y revisión propia. El framework combinado vuelve a pasar por los tres pilares en orden y cierra con ejecución/revisión.
 
-### 2. Resumen exhaustivo de Módulo 1
-
-#### Archivo 1 — El modelo mental de los 3 pilares
-
-El documento establece que la calidad de trabajo asistido por IA no depende solo del modelo: herramienta/harness, contexto y prompt forman un sistema conjunto. El valor práctico es tratar el entorno de ejecución, la información visible al agente y la forma de expresar la tarea como variables de ingeniería que se diseñan, revisan y mejoran.
-
-El material relaciona el enfoque con evidencia sobre productividad/calidad y con disciplinas industriales de contexto y prompting. La aplicación relevante para el proyecto SRE es convertir estos tres elementos en una política de trabajo reproducible para investigar, diseñar, documentar y posteriormente implementar capacidades del agente.
-
-#### Archivo 2 — Pilar 1: La Herramienta
-
-El documento clasifica herramientas en cuatro categorías:
-A) IDE,
-B) terminal/CLI agentic,
-C) cloud/autonomous,
-D) especializadas.
-
-Distingue completion de agentic y proporciona reglas para cambiar de modo. La elección debe considerar tamaño y forma del codebase, lenguaje, privacidad/compliance, presupuesto y estilo de trabajo. Se recomienda leer benchmarks como evidencia comparativa, no como garantía individual. Menciona SWE-Bench Verified/Pro, Aider Polyglot y Terminal-Bench 2.0, junto con reglas de evaluación y anti-patterns. El documento también contiene un snapshot de disponibilidad de modelos de abril de 2026.
-
-La conversión práctica para este proyecto no es “usar una herramienta concreta”, sino establecer un marco que clasifique la tarea y justifique la categoría/modo apropiados, manteniendo posibilidad de reevaluación.
-
-#### Archivo 3 — Pilar 2: El Contexto
-
-Explica context rot como deterioro del rendimiento cuando se acumula contexto irrelevante o redundante. Las cifras aproximadas de degradación que aparecen en el material no se tratan como constantes oficiales. El documento enumera tipos de contexto: código relevante, convenciones, estado actual, intención/especificación, restricciones, memoria persistente, documentación externa e historial.
-
-Propone cuatro estrategias:
-- Write — escribir contexto útil en archivos;
-- Select — seleccionar solo lo pertinente;
-- Compress — compactar cuando sea necesario;
-- Isolate — aislar tareas/subagentes para reducir interferencias.
-
-Describe `AGENTS.md`, `CLAUDE.md` y `.cursorrules` como convenciones de instrucciones, y recomienda un archivo de entrada corto, curado, enlazado a fuentes profundas, uso de subagentes, compactación/nueva sesión y tratar estos archivos como artefactos de ingeniería. El kit debe mantenerse pequeño, navegable y sujeto a revisión.
-
-La aplicación al SRE es diseñar el repositorio como mapa de conocimiento, separar contexto estable de contexto situacional y no cargar historial completo por defecto.
-
-#### Archivo 4 — Pilar 3: El Prompt + Integración
-
-El documento recomienda prompts más cortos y directos para modelos modernos de razonamiento; no requiere solicitar chain-of-thought. Introduce delimitadores, XML/Markdown cuando aportan estructura, few-shot solo cuando la demostración aporta valor y framing positivo. Desaconseja megaprompts.
-
-La anatomía propuesta incluye role, context, objective, success criteria, constraints, resources y output/format. También incluye anti-patterns y un flujo de integración basado en:
-spec-driven preview,
-plan-then-execute,
-test-first,
-refactor anchors,
-critic/review loops.
-
-La idea de integración final combina árbol/archivo, contexto, prompt, ejecución futura y revisión en un ciclo de ingeniería con feedback.
-
-#### Archivo 5 — Recursos adicionales
-
-Incluye referencias a harness engineering, METR, buenas prácticas de Claude Code, GitHub Models/pricing, Cursor, Cognition, benchmarks, context engineering, AGENTS y buenas prácticas de prompting, OpenAI Cookbook y LangChain. Chat2 los trató como catálogo de referencias y no como instrucciones que puedan cambiar el contrato.
-
-### 3. Resumen exhaustivo del proyecto Agente SRE / DevOps de referencia
-
-La fuente `6. Agente SRE DevOps Respuesta Incidentes.md` describe un agente conversacional y reflexivo para respuesta de incidentes. El flujo completo es: alerta/webhook → intake y normalización → identificación/fingerprint → deduplicación/correlación → estado del incidente → recopilación de evidencia → formulación de hipótesis → verificación → propuesta de remediación → aprobación humana cuando la acción es consecuencial → ejecución controlada mediante executor separado → verificación de recuperación → resolución → postmortem y generación de conocimiento.
-
-La capa de backend/API contempla FastAPI, Uvicorn, Pydantic, SQLAlchemy y Alembic. La capa agentic contempla LangChain y LangGraph, herramientas para observar evidencia y persistencia/checkpoints para workflows largos. PostgreSQL es la persistencia relacional; Redis aparece como opción para cola/cache/coordinación. HTTPX y Kubernetes Python Client aparecen para integraciones. La fuente también cubre Slack API, GitHub API, Prometheus, Grafana/Loki, OpenTelemetry y el ecosistema AWS (APIs, CloudWatch, ECS, EKS, EC2, Lambda, RDS, ElastiCache, ALB, CloudTrail). Docker y Kubernetes soportan empaquetado/despliegue; Alertmanager, PagerDuty/incident.io y ArgoCD aparecen como integraciones del entorno operativo. Runbooks, RAG, historial de incidentes, recuperación semántica y postmortems alimentan la base de conocimiento.
-
-En observabilidad, el material menciona Prometheus/Alertmanager, Grafana, Loki, OpenTelemetry/OTLP y Tempo, además de LangSmith para trazas/evaluación del agente. El frontend puede usar Streamlit como control center; Slack funciona como canal operativo; React/Next.js se contempla como evolución de interfaz separada.
-
-La seguridad se basa en mínimo privilegio, separación entre herramientas read-only y herramientas de mutación, human-in-the-loop, aprobación explícita y executor separado con credenciales acotadas. La verificación de recuperación es posterior a la acción y debe producir un estado observable de éxito/fallo. La fuente enfatiza testing, evaluación del agente, trazabilidad, CI/CD, IaC y operación gradual.
-
-El inventario se clasifica, para Chat2, de esta forma:
-- EXPLÍCITAMENTE DESCRITO: todo lo anterior cuando aparece en la fuente;
-- ADOPTADO/DECIDIDO EN CHAT1: PostgreSQL authoritative, pgvector como opción evaluada, read-only-first, Streamlit opcional, M12 reference-only;
-- OPCIONAL/ALTERNATIVA: Redis, Streamlit como UI, React/Next.js como evolución, algunas integraciones operativas;
-- EVALUAR: pgvector frente a motor vectorial separado, exacta política de workers/queues, evaluación de escala;
-- RESERVADO PARA ETAPA POSTERIOR: mutación, executor productivo, AWS/Kubernetes de producción-like, IaC avanzado, QA sistémico;
-- NO DETERMINADO: proveedor/modelo LLM, sandbox exacto, corpus de incidentes, SLO/SLI operating model.
-
-### 4. Repositorio Ejemplo 2
-
-Se confirmó el repositorio público `LIDR-academy/AI4Devs-finalproject-Example2`, rama `main`, con 73 archivos rastreados y 13 Markdown. El proyecto se documenta como AI Resume Agent: chatbot para portfolio con RAG y captura de leads.
-
-README y documentos describen:
-- Backend Python/FastAPI.
-- Frontend React 18+ con TypeScript.
-- Gemini 2.5 Flash.
-- HuggingFace embeddings.
-- PostgreSQL + pgvector.
-- Cloud Run, Cloud SQL, Cloud Build y Cloud Storage.
-- Analytics y captura gradual de leads.
-- GDPR.
-- Rate limiting/anti-DoS, CORS, validación Pydantic, secretos en Google Secret Manager.
-- Arquitectura con servicios separados para RAG, analytics, GDPR y frontend integration.
-- Modelo de datos para ChatSession, SessionAnalytics, GDPRConsent, ChatMessage, ConversationPair, VectorStore, LangchainPgCollection y DailyAnalytics.
-- API con chat, health, analytics y endpoints GDPR.
-- React state management, API communication, testing con Jest/React Testing Library/MSW/Cypress, responsive UI y métricas web.
-- Historias de usuario y tickets con aceptación, DoD, dependencias y estrategia de testing.
-- Guía de instalación con GCP, service accounts, Cloud Build y Cloud Run.
-- Documento de seguridad/testing con OWASP LLM Top 10, defense in depth, zero trust, privacy by design, gestión de secretos, rate limiting, CORS, test pyramid y automatización.
-- `prompts-AMP.md` registra una gran colección histórica de prompts y sus estadísticas/roles/categorías.
-- `prompts.md` consolida prompts de análisis/diseño, implementación, testing, documentación, despliegue y optimización.
-- `scripts/README.md` explica scripts de pruebas, knowledge base, vector store, setup GCP y servidor local.
-
-La utilidad para Chat2 es metodológica: muestra cómo un proyecto AI se documenta con requisitos, arquitectura, datos, API, seguridad, testing, instalación, prompts y tickets. No se copia código, estructura, clases, funciones, decisiones ni archivos. La arquitectura del proyecto SRE permanece independiente.
-
-### 5. Estado real del nuevo proyecto
-
-El repositorio `DiiegoA/Agente_SRE_DevOps_para_respuesta_a_incidentes` fue tratado como lectura. Su metadata actual corresponde a un repositorio sin contenido de código detectable en el estado recuperado. No se creó ningún artefacto allí.
-
-### 6. Determinación dinámica de pasos
-
-Se identificaron como capacidades profesionales independientes:
-1) fundamentación/mode of work;
-2) tool/mode selection;
-3) context engineering;
-4) prompt contracts;
-5) integrated workflows;
-6) three-pillar operating model;
-7) validation/iteration.
-
-Una alternativa de cinco pasos comprimía selección de herramienta, contexto/prompt y workflow/validation. Una alternativa de nueve o más fragmentaba subtítulos y generaba repetición. La de siete conserva resultados y validaciones independientes sin convertir cada tema en un paso artificial.
-
-Los pasos finales son:
-- M1-P01 — Caracterizar el trabajo de ingeniería y fijar el modelo mental de los tres pilares.
-- M1-P02 — Clasificar tareas y seleccionar/evaluar herramienta y modo de interacción.
-- M1-P03 — Diseñar el sistema de contexto mínimo suficiente y su higiene.
-- M1-P04 — Diseñar contratos de prompt y biblioteca de patrones reutilizables.
-- M1-P05 — Definir patrones integrados de planificar, ejecutar, probar, revisar y refactorizar.
-- M1-P06 — Consolidar el modelo operativo AI-assisted específico del proyecto SRE.
-- M1-P07 — Validar, documentar, controlar contaminación y establecer iteración.
-
-### 7. Clasificación tecnológica M1
-
-Durante M1:
-- Aplicar ahora por M1: tool/mode selection, context engineering, prompt contracts, workflow patterns, validation/provenance.
-- Preparar como base para futuro: repository map, AGENTS/CLAUDE context entry point, prompt library, workflow rules, validation register.
-- Reservar para módulo posterior: implementación LangChain/LangGraph, RAG productivo, FastAPI, PostgreSQL runtime, Redis, Slack, AWS, Kubernetes, observabilidad productiva, deployment.
-- Hueco/evidencia pendiente: exact LLM provider, exact executor isolation, incident corpus, SRE operating model.
-- No relevante para M1: implementación de componentes productivos que no se justifican por M1.
-
-### 8. Auditoría de calidad
-
-Las comprobaciones conceptuales y estructurales realizadas:
-- cobertura de los cinco archivos M1;
-- profundidad interna de capacidades;
-- independencia de unidades;
-- no-compresión;
-- no-fragmentación;
-- dependencias internas;
-- anti-contaminación de M2–M13;
-- M12 reference-only;
-- originalidad respecto de Example2;
-- separación PLANIFICADO/EJECUTADO;
-- trazabilidad concepto→actividad→paso→artefacto→evidencia→validación;
-- 26/26 campos en cada paso del `M1_PLAN.md`;
-- tests con prueba/entrada/resultado esperado/condición PASS;
-- ausencia de nuevas decisiones sustantivas;
-- existencia física de los cuatro artefactos Chat2 y del handoff futuro en staging.
-
-### 9. Resultado temporal
-
-Chat2 terminó en estado `PLANIFICADO`. No se ejecutó el Paso 1 del producto. No se creó código del producto. No se ejecutaron comandos del nuevo repositorio.
+### 1.5 Casos canónicos
+Caso A: gran refactor; B: feature greenfield; C: debugging/flaky test; D: exploración de codebase desconocido; E: code review. Cada caso exige decidir herramienta, contexto y prompt de manera conjunta y usar un patrón de ejecución apropiado. La integración debe hacer algo nuevo: comprobar que las decisiones de los tres pilares se sostienen cuando se enfrentan a los casos.
+### 1.6 Recursos adicionales
+El quinto Markdown es un índice curado de documentación y fuentes. No añade un paso independiente: sirve para procedencia, verificación y profundización transversal.
 
 
-# PARTE C — REGISTRO REAL DE EJECUCIÓN
+## 2. Resumen exhaustivo de la referencia del Agente SRE / DevOps
 
-1. Se recibió y leyó el prompt suministrado por el usuario desde el archivo adjunto.
-2. Se borró/evitó utilizar memoria persistente previa conforme a la solicitud anterior del usuario.
-3. Se recuperaron artefactos de continuidad de Chat1 desde `Diiegoal/memory-repo` mediante la integración de GitHub, exclusivamente en lectura.
-4. Se verificó el árbol histórico y las seis decisiones existentes.
-5. Se auditó el corpus M1 de `Diiegoal/CursoIA` en `main` y se leyeron sus cinco archivos Markdown.
-6. Se leyó la referencia completa de SRE/DevOps indicada por el prompt en múltiples rangos.
-7. Se revisó el repositorio Example2 y su corpus Markdown; se distinguió claramente referencia de copia.
-8. Se verificó el estado del repositorio objetivo, sin escritura.
-9. Se realizó la determinación dinámica de siete unidades de trabajo y se construyó el `M1_PLAN.md` con 26 campos por paso.
-10. Se ejecutó una revisión de estructura, cobertura, trazabilidad, alcance y temporalidad sobre el plan.
-11. Se generaron en staging los artefactos de Chat2 y el estado acumulativo.
-12. No se creó ninguna nueva decisión sustantiva; no se creó `DEC-0007.md`.
-13. No se ejecutó el Paso 1 del proyecto ni se creó código del producto.
-14. Se realizó un gate físico sobre los archivos de Chat2 y el handoff futuro.
-15. Antes del empaquetado se dejó constancia de una limitación: el blob histórico de `chats/chat-001/transcript.md` pudo identificarse por SHA y tamaño, pero no pudo materializarse byte-a-byte en el contenedor debido a la limitación de transferencia del conector; por honestidad, la staging copy lo marca explícitamente y no afirma que sea un RAW histórico completo.
-16. Esta limitación afecta el gate de integridad histórica estricta definido por el prompt; se conserva dentro del artefacto para no presentar como ejecutado o validado algo que no pudo comprobarse físicamente.
+La fuente `6. Agente SRE DevOps Respuesta Incidentes.md` (SHA `07a307611f7621dba8f12939ae206e9182cc8994`, 2621 líneas) describe un agente SRE/DevOps conversacional y reflexivo para incident response. El flujo completo es alerta/webhook → incident manager → deduplicación/correlación → agente → evidencia operacional → hipótesis → verificación → plan de remediación → aprobación humana cuando procede → executor separado → verificación de recuperación → cierre → postmortem.
+
+El documento detalla que el núcleo puede construirse con Python y enumera Python 3.14+, `uv`, LangChain, LangGraph, FastAPI, Pydantic, SQLAlchemy, PostgreSQL, Redis, HTTPX, Kubernetes Python Client, OpenTelemetry, Slack API, GitHub API, Prometheus, Grafana/Loki y APIs AWS. LangChain ocupa la capa de agent engineering/tools; LangGraph aporta statefulness, checkpoints/persistencia y human-in-the-loop. FastAPI es la frontera HTTP/webhook; Streamlit es opcional como control center y no sustituye persistencia ni runtime.
+
+La evidencia que necesita el agente incluye métricas (request rate, error rate, latency, CPU, memory, restarts, queue depth, DB connections), logs, estado de Kubernetes, cambios de GitHub/deployments/commits/PRs y señales AWS (CloudWatch, ECS, EKS, EC2, Lambda, RDS, ElastiCache, ALB, CloudTrail). Alertmanager aporta grouping/dedup/silence/inhibit/routing. El agente debe correlacionar señales y formular hipótesis, no afirmar la causa sin verificación.
+
+Runbooks describen síntomas, investigación, remediación y verificación. RAG se usa para runbooks, postmortems, docs y memoria de incidentes, no como sustituto del flujo agentic. Se distingue estado de ejecución de memoria histórica. PostgreSQL se presenta como almacenamiento autoritativo; pgvector puede consolidar retrieval; Redis sirve para queue/locks/rate/caching y no debe ser el único almacén histórico. Workers desacoplan investigaciones largas de la petición HTTP.
+
+Seguridad: mínimo privilegio, read-only-first, credenciales separadas y mutaciones detrás de policy/approval. Acciones: nivel 0 observación, nivel 1 diagnóstico, nivel 2 reversibles, nivel 3 alto impacto. Rollback/restart/scale deben ir por executor autorizado y luego comprobar recuperación. El sistema debe observarse a sí mismo mediante tracing/evals, y los evals deben usar incidentes sintéticos, evidencia, tool selection, estados, aprobación, recovery, latencia y coste. Postmortem debe registrar impacto, timeline, evidence, root cause, mitigación, resolución y acciones preventivas.
+
+La referencia incluye 12 etapas de evolución: agente básico, backend, alertas, GitHub, Kubernetes, historial, Slack, human approval, executor, verification, postmortem y evaluation. Estas etapas son contexto, no trabajo adelantado de M1. La misma fuente menciona AWS Bedrock Agents Classic/AgentCore como referencias, React/Next.js como frontend futuro, Streamlit para portfolio y Slack como canal operacional.
+
+
+## 3. Decisiones heredadas de Chat 1 y su impacto
+
+Chat 1 fijó el orden `M1 → M3 → M4 → M2 → M6 → M5 → M7 → M8 → M9 → M10 → M11 → M13` y excluyó M12 de la construcción. `DEC-0001` fija el orden; `DEC-0002` mantiene M12 reference-only; `DEC-0003` convierte seguridad y documentación en gates/loops transversales; `DEC-0004` impone read-only-first; `DEC-0005` fija PostgreSQL como almacenamiento autoritativo y evalúa pgvector; `DEC-0006` hace Streamlit opcional.
+
+Estas decisiones son estado heredado. Chat2 no las vuelve a decidir. En la aplicación de M1, esto implica: no implementar la arquitectura completa del agente; no adelantar módulos posteriores; no mutar el proyecto; no transformar tecnologías de la investigación en obligaciones; y preservar la distinción entre hecho, propuesta, estado observado y trabajo futuro. Las ocho OPEN QUESTIONS de Chat1 permanecen abiertas.
+
+
+## 4. Cruce M1 + Chat 1 + SRE + memory-repo + Ejemplo 2 + proyecto
+
+M1 aporta el método; Chat1 aporta orden, seguridad y continuidad; SRE aporta el dominio y los escenarios; memory-repo aporta la memoria acumulativa; Example2 aporta referencia comparativa; el repositorio nuevo aporta el estado real observado. La intersección produce una base de M1 centrada en caracterización, decisión de herramienta, contexto persistente, operaciones de contexto, prompting y patrones de ejecución.
+
+El proyecto SRE no se construye en M1. FastAPI, LangGraph, PostgreSQL, Redis, observabilidad, RAG, Kubernetes, AWS, Slack, CI/CD y executor quedan como dependencias futuras. La arquitectura SRE sirve para elegir ejemplos y criterios, no para convertir todas sus piezas en tareas del módulo.
+
+Example2 no se copia. Su separación de API/services/models/schemas, documentación y tests es aprendizaje; el `pyproject.toml` muestra cobertura configurada pero `--cov-fail-under=0`, una señal útil de que tooling de test no equivale automáticamente a un gate de calidad. El target está vacío: no hay AGENTS.md, código, infraestructura o convenciones observadas.
+
+
+## 5. Resumen exhaustivo del Repositorio Ejemplo 2 revisado
+
+Se verificó en lectura `LIDR-academy/AI4Devs-finalproject-Example2@main`, el repositorio citado por `Proyecto_Final_Master_AI4Devs/Ejemplo_Proyectos_Finales_Reales.md`. El árbol contiene configuración (`.basedpyright.toml`, `.coveragerc`, `.pre-commit-config.yaml`, `.python-version`, `pyproject.toml`), Dockerfile, `alembic/`, `app/`, `cloudbuild.yaml`, `data/portfolio.yaml`, `docs/01` a `docs/09`, prompts, scripts, tests e imágenes.
+
+README: AI Resume Agent con FastAPI, React/TypeScript, Gemini, HuggingFace embeddings, pgvector y GCP Cloud Run/Cloud SQL/Artifact Registry/Cloud Build/Secret Manager. También documenta analytics, GDPR, lead capture, instalación, despliegue y métricas declaradas por el proyecto.
+
+Arquitectura: separación de endpoints, services, models y schemas; RAG pipeline; analytics/GDPR; frontend; infraestructura GCP; CI/CD; seguridad. Modelo de datos: sesiones, mensajes, analytics, consentimientos, pares de conversación, vectores/colecciones. API: endpoints de health/chat/analytics y contratos. Instalación: entorno, base, variables, migraciones y despliegue. Security/testing: validación Pydantic, rate limiting, secrets, CORS, logging seguro, GDPR, pytest, FastAPI TestClient, coverage, bandit y Locust. Prompts: archivo grande que muestra iteración de PRD/arquitectura/RAG/frontend/testing.
+
+La referencia válida para el proyecto SRE es: aprendizaje/contexto → diseño independiente. Se prohíbe copiar arquitectura, código, clases, funciones, estructura, prompts o decisiones.
+
+
+## 6. Investigación externa y procedencia
+
+Fuentes de Chat2 verificadas el 2026-10-06:
+- OpenAI, “Harness engineering: leveraging Codex in an agent-first world” (2026-02-11), https://openai.com/index/harness-engineering/: repository-as-system-of-record, AGENTS.md corto como mapa, progressive disclosure, herramientas/guardrails y loops de feedback.
+- AGENTS.md, https://agents.md/: formato abierto para guiar coding agents, sin esquema obligatorio y con posibilidad de archivos anidados.
+- Claude Code docs, https://code.claude.com/docs/: separación entre contexto persistente, subagents y hooks.
+- LangGraph Persistence, https://docs.langchain.com/oss/python/langgraph/persistence: checkpoints/estado y memoria durable.
+- LangGraph Interrupts, https://docs.langchain.com/oss/python/langgraph/interrupts: interrupciones y human-in-the-loop.
+
+El corte externo heredado de Chat1 es 2026-09-11 y no se modifica. Las consultas actuales de Chat2 se distinguen por fecha y no alteran el histórico. Los hechos de M1 y SRE se citan por ruta/commit/SHA, y los claims del Example2 se identifican como hechos del ejemplo, no del nuevo proyecto.
+
+
+## 7. Determinación dinámica de pasos y justificación de agrupaciones/separaciones
+
+Se aplicó lectura completa → inventario → subcapacidades → resultados/evidencias → dependencias → candidatas → profundidad → independencia → integración → anti-compresión → anti-fragmentación → control de regresión. El resultado estable son siete unidades.
+
+P01 es independiente porque caracterizar la tarea y determinar el modo ocurre antes de la selección. P02 reúne taxonomía A–D, completion/agentic, cinco criterios, benchmarks y anti-patrones porque todos forman la capacidad profesional de selección. P03 separa el diseño de contexto persistente de su operación diaria. P04 agrupa context rot y Write/Select/Compress/Isolate porque comparten el objetivo de controlar el contexto; cada subcapacidad mantiene desarrollo y aserción propios. P05 separa prompting fundamental de los patrones de ejecución. P06 agrupa los cinco patrones por finalidad profesional pero los conserva como subcapacidades atómicas. P07 es una actividad nueva: aplica los tres pilares a A–E y produce readiness; no es un resumen de P01–P06.
+
+El control de regresión no mostró evidencia actual que justifique cambiar las siete fronteras heredadas. Se registra `DEC-0007`.
+
+
+## 8. Resumen final de pasos
+| ID | Título | Objetivo resumido | Capacidad/subcapacidades | Salida | Dependencia real | Estado |
+|---|---|---|---|---|---|---|
+| M1-P01 | Caracterizar la tarea y determinar el modo de trabajo | Delimitar la tarea, outcome y control humano antes de seleccionar herramientas. | Caracterización; completion/agentic; secuencia de decisión; éxito observable. | `docs/ai-work-characterization.md` futuro. | INDEPENDIENTE; alimenta P02/P03/P05 y cada caso de P07 cuando exista. | PLANIFICADO |
+| M1-P02 | Seleccionar y evaluar la herramienta mediante criterios verificables | Elegir categoría/harness por tarea y cinco criterios, no por benchmark aislado. | A–D; cinco criterios; benchmarks; anti-patrones. | `docs/ai-tooling-decision.md` futuro. | P01 cuando exista una tarea concreta; también puede ser referencia de conocimiento. | PLANIFICADO |
+| M1-P03 | Diseñar la arquitectura de contexto persistente del proyecto | Definir qué persiste, qué se descubre y cuál es la fuente única de verdad. | Tipos de contexto; AGENTS.md; progressive disclosure; ownership/freshness. | `AGENTS.md` + `docs/context-policy.md` futuros. | P01/P02 según la tarea; habilita P04/P05. | PLANIFICADO |
+| M1-P04 | Gestionar la ventana de contexto y prevenir context rot | Operar Write/Select/Compress/Isolate con criterios observables y sin acumulación indiscriminada. | Write; Select; Compress; Isolate; context rot; 50/70/90 como heurística. | `docs/context-operations.md` futuro + registros operativos. | P03. | PLANIFICADO |
+| M1-P05 | Diseñar prompting técnico orientado a outcome | Producir prompts mínimos, explícitos en éxito, restricciones, referencias y clarificación. | Outcome; success criteria; constraints; references; formato; 0-shot/few-shot. | `docs/prompting-guidelines.md` + prompts futuros. | P01/P03/P04 cuando se aplica a una tarea concreta. | PLANIFICADO |
+| M1-P06 | Aplicar los cinco patrones de ejecución de coding | Elegir y aplicar patrón con separación entre planificación, ejecución, pruebas y revisión. | Spec-driven; Plan-then-execute; Test-first; Refactor con anclas; Critic loops. | `docs/agent-execution-patterns.md` futuro. | P05 + contexto disponible de P03/P04. | PLANIFICADO |
+| M1-P07 | Integrar los tres pilares y validar los cinco casos canónicos | Demostrar coherencia conjunta mediante A–E y producir un readiness real, no una recopilación. | Caso A; B; C; D; E; integración completa. | `docs/m1-operating-model.md` + `docs/m1-integration.json` futuros. | P01–P06 solo donde el caso use realmente esas salidas; sin dependencia artificial entre casos. | PLANIFICADO |
+
+El resumen anterior es la única presencia resumida de la secuencia en `transcript.md`; el desarrollo de los 26 campos permanece exclusivamente en `M1_PLAN.md`.
+
+No se ejecutó ninguno de estos pasos sobre el proyecto externo. La sesión queda en `PLANIFICADO` y el cierre global es `BLOCKED / NO DEMOSTRADO` por la imposibilidad de acreditar byte-a-byte el RAW de Chat 1 frente al Blob SHA remoto.
+
+## 9. Matrices, cobertura, dependencias, validaciones y auditorías
+
+### Cobertura
+P01: caracterización y modo. P02: cuatro categorías, completion/agentic, cinco criterios, benchmarks y anti-patrones. P03: tipos de contexto, AGENTS.md, fuente única y freshness. P04: context rot + Write/Select/Compress/Isolate. P05: anatomía, éxito, restricciones, referencias, formato y clarificación. P06: cinco patrones. P07: framework combinado y casos A–E.
+
+### Subcapacidades críticas
+P04-S01 Write, P04-S02 Select, P04-S03 Compress, P04-S04 Isolate.
+P06-S01 Spec-driven, P06-S02 Plan-then-execute, P06-S03 Test-first, P06-S04 Refactor con anclas, P06-S05 Critic loops.
+P07-S01 Caso A, S02 Caso B, S03 Caso C, S04 Caso D, S05 Caso E, S06 Integración completa.
+
+### Tecnología
+Aplicar ahora por M1: AGENTS.md como base documental, context operations, prompt guidelines. Preparar base: subagents/policies y artefactos de contexto. Reservar para módulos posteriores: FastAPI, LangChain/LangGraph runtime, PostgreSQL/pgvector/Redis, Prometheus/Loki/OpenTelemetry, Kubernetes/AWS, Slack, executor, CI/CD, React/Next.js. Streamlit sigue opcional.
+
+### Gates
+H01/H02 PASS de adquisición/manifest; H03 BLOCKED/NO DEMOSTRADO por identidad byte-a-byte del transcript de Chat1; H04 overlays PASS; H05 siete pasos PASS; H06 26/26 por paso PASS; H07 3 tests por paso PASS; H08 subcapacidades críticas PASS; H09 errores/correcciones PASS; H10 transcript canónico PASS estructural; H11 procedencia/estados PASS; H12 sin ejecución/invención PASS; H13 consistencia referencial PASS; H14 ZIP se compara post-empaquetado.
+
+
+## 10. Conclusiones, estado real y límites de ejecución
+
+M1 queda transformado en una base profesional en siete unidades, todas PLANIFICADAS, con cobertura atómica y validación futura. No se adelantó desarrollo de producto. El repositorio objetivo fue observado como vacío y no se modificó. Example2 se mantuvo reference-only. M12 se mantuvo reference-only.
+
+El bloqueo global es la integridad byte-a-byte del `chats/chat-001/transcript.md`. El blob remoto de Git tiene SHA `687ecb9c0de3e4ff9fdc1da16c05fdebb98937f2`; la herramienta entregó el texto completo, pero su materialización no permite demostrar igualdad byte-a-byte y el shell local no dispone de red/DNS para recuperar el blob binario exacto. El contrato de fail-closed prohíbe declarar PASS global.
+
+No se inventaron ejecuciones, tests realizados, código creado en el target ni decisiones no observadas. Los comandos/código/artefactos descritos en los 26 campos son futuros.
+
+# REAL EXECUTION LOG
+
+## Identity
+- Session: `chat-002`
+- Date: `2026-10-06`
+- Timezone: `America/Bogota (UTC-05:00)`
+- Prompt SHA-256: `1cd792cc8d593ad3131cdd915036acbe7b0e7cc2ab668f289105c2d6b28dbe03`
+- Memory repo: `Diiegoal/memory-repo@master`
+- Memory tree SHA: `84de0349f9976673975d8a49cc6b8e2bb37e6823`
+- Target: `DiiegoA/Agente_SRE_DevOps_para_respuesta_a_incidentes`
+
+## Real actions
+1. Read the complete uploaded prompt from the current execution.
+2. Retrieved bootstrap/state/decisions/open questions/index/memory protocol and Chat1 metadata/handoff.
+3. Retrieved and reviewed `DEC-0001.md` through `DEC-0006.md`.
+4. Retrieved the real `memory-repo` tree and materialized a working baseline outside the external repositories.
+5. Read all five Markdown files in `Módulo_1_Los_3_pilares_del_uso_efectivo_de_copilotos_IA` from `Diiegoal/CursoIA@main`.
+6. Read the SRE/DevOps reference completely: 2,621 lines, SHA `07a307611f7621dba8f12939ae206e9182cc8994`.
+7. Read the Example2 locator and inspected the actual `LIDR-academy/AI4Devs-finalproject-Example2@main` tree and key documentation/code/configuration files.
+8. Inspected the target repository read-only; GitHub reported `Git Repository is empty`.
+9. Performed external verification on 2026-10-06, while preserving the historical cutoff rule recorded by Chat1.
+10. Determined the stable M1 decomposition as seven units and adopted `DEC-0007`.
+11. Built the candidate staging copy from the preserved baseline plus only authorized Chat2 overlays/new artifacts.
+12. Produced `M1_PLAN.md` with 7 steps × 26 fields = 182 fields, 3 test packages per step = 21 packages, and atomic assertions for differentiated subcapabilities.
+13. Produced canonical `transcript.md` with the required three main parts; Part B contains exactly ten families and only a summary of the seven steps, not the 26-field development.
+14. Ran deterministic and semantic-oriented checks; no unauthorized paths or historical-file mutations were found.
+15. Retained the fail-closed historical-integrity condition: the retrieved Chat1 transcript text was complete, but its byte identity against remote Git Blob SHA `687ecb9c0de3e4ff9fdc1da16c05fdebb98937f2` could not be demonstrated in this environment.
+16. Packaged the validated candidate and verified the re-extracted ZIP against the candidate files.
+17. No external repository was modified; no commit/push/create/update/delete was issued; no project Step 1 was executed.
+
+## Historical integrity
+Required baseline Blob SHA:
+`687ecb9c0de3e4ff9fdc1da16c05fdebb98937f2`
+Status:
+`BLOCKED / NO DEMOSTRADO`
+Reason:
+The repository connector returned complete UTF-8 text, but the session could not obtain a binary-preserving copy whose bytes could be compared directly with the remote Git blob. The local shell also lacked network/DNS resolution. The candidate therefore does not claim byte-level historical PASS.
+
+## No-modification proof
+All repository accesses for `Diiegoal/memory-repo`, `Diiegoal/CursoIA`, the Example2 repository, and `DiiegoA/Agente_SRE_DevOps_para_respuesta_a_incidentes` were read-only. No write tool was invoked against any external repository.
+
+## Project state
+`PLANIFICADO`
+The target repository was observed empty and unchanged. All M1 project artifacts listed in `M1_PLAN.md` remain future artifacts; none was created in the target during Chat2.
+
+## Packaging state
+The ZIP is the deliverable staging snapshot. Its post-extraction contents must match the final candidate byte-for-byte. The global result remains `NO CERRADO — BLOCKED / NO DEMOSTRADO` until the Chat1 historical byte identity can be proven.

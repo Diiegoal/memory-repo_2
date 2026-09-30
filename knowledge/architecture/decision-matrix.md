@@ -25,11 +25,3 @@
 | **Weighted** | **100%** | **4.95** | **4.78** | **3.78** |
 
 These are professional judgement scores, not empirical measurements.
-
-# CHAT 2 — CONTENIDO NUEVO
-
-## Planning note
-
-The candidate order above is historical Chat 1 evidence and is preserved. Chat 2 did not alter it.
-
-For M1 step count, Chat 2 used a separate dynamic decomposition; three candidate decompositions were reviewed and the seven-unit decomposition was retained as the most coherent balance between depth and fragmentation. This is a planning outcome, not a new product architecture decision.

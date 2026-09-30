@@ -37,10 +37,11 @@ Use Streamlit as a practical first operator UI/demo, but keep the underlying pro
 - Decisions describe what Chat 1 adopted; recommendations remain distinguishable in knowledge documents.
 - Changes require a new decision record and temporal context.
 
-# CHAT 2 — CONTENIDO NUEVO
 
-### Estado de decisiones de Chat 2
-- Nuevas decisiones sustantivas adoptadas: `0`.
-- No se crea ningún `DEC-0007.md`.
-- Las decisiones DEC-0001…DEC-0006 permanecen activas e históricamente independientes.
-- El conjunto de 7 pasos de M1 se documenta como resultado de planificación, no como una nueva decisión de arquitectura del producto.
+---
+
+<!-- CHAT2:chat-002:BEGIN -->
+## DEC-0007 — M1 Step Decomposition for Chat 2
+Status: accepted
+Conservar las siete unidades M1-P01…M1-P07 tras el análisis dinámico. Ver `decisions/DEC-0007.md`.
+<!-- CHAT2:chat-002:END -->

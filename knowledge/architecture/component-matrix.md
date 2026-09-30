@@ -11,10 +11,4 @@
 | Secure executor | M6, M9, M13 | M7, M11 | separate executor reference |
 | Recovery verification | M2, M7, M8, M9, M11 | M13 | verify after action |
 | Agent observability | M3, M5, M11, M13 | M7 | LangSmith/OTel pattern |
-| Postmortem | M5, M8, M9, M11 | M13 | M12 postmortem reference |
-
-# CHAT 2 — CONTENIDO NUEVO
-
-## M1 boundary by component
-
-M1 touches the AI engineering control layer only. All production components listed in the historical matrix remain future implementation concerns. M1 provides their eventual engineering interface: context, prompts, tool selection, review gates and provenance.
+| Postmortem | M5, M8, M9, M11 | M13 | SRE postmortem reference |

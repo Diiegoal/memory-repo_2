@@ -15,9 +15,3 @@
 | M11 | System QA | How integrated behavior is verified | Integration/E2E/BDD suite |
 | M13 | Delivery | How the system is shipped and operated | CI/CD/IaC/release controls |
 | M12 | Reference only | What the target SRE architecture looks like | Reference knowledge only |
-
-# CHAT 2 — CONTENIDO NUEVO
-
-## M1 contribution
-
-M1 contributes an AI-assisted engineering operating system rather than product runtime code. Its outputs are planning/context/prompt/workflow/validation artifacts that can later be consumed by M3 and subsequent modules.

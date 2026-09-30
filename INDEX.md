@@ -16,10 +16,6 @@
 - `chats/chat-001/META.md`
 - `chats/chat-001/transcript.md`
 - `chats/chat-001/HANDOFF.md`
-- `chats/chat-002/META.md`
-- `chats/chat-002/transcript.md`
-- `chats/chat-002/HANDOFF.md`
-- `chats/chat-002/M1_PLAN.md`
 
 ## Derived evidence
 
@@ -38,14 +34,26 @@
 - `knowledge/architecture/artifact-matrix.md`
 - `knowledge/architecture/gaps-and-roadmap.md`
 
-## Chat 2 plan and continuity
+## References and indexes
 
-- `chats/chat-002/M1_PLAN.md` — canonical 26-field plan for M1.
-- `chats/chat-002/HANDOFF.md` — direct continuation handoff.
-- `handoffs/chat-002-to-chat-003.md` — future handoff protocol; Chat 3 does not exist.
+- `knowledge/references/reference-index.md`
+- `indexes/timeline.md`
+- `indexes/topics.md`
+- `indexes/references.md`
 
-# CHAT 2 — CONTENIDO NUEVO
+## Future handoff protocol
 
-## Navigation update
+- `handoffs/chat-001-to-chat-002.md` — future continuity protocol only.
 
-The Chat 2 session, its canonical M1 plan, its transcript, its handoff, and the future handoff protocol are now indexed as the active continuation layer.
+
+---
+
+<!-- CHAT2:chat-002:BEGIN -->
+## Chat 2 overlay — localizadores
+- `chats/chat-002/META.md`
+- `chats/chat-002/transcript.md`
+- `chats/chat-002/M1_PLAN.md`
+- `chats/chat-002/HANDOFF.md`
+- `handoffs/chat-002-to-chat-003.md`
+- `decisions/DEC-0007.md`
+<!-- CHAT2:chat-002:END -->

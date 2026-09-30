@@ -9,6 +9,7 @@ A conversational, reflective SRE/DevOps agent should operate as an evidence-driv
 ## 2. Runtime state versus long-term memory
 
 LangGraph's current persistence documentation distinguishes thread-scoped checkpoints from cross-thread stores. This maps naturally to:
+
 - current incident execution state;
 - long-term incident history/runbooks/knowledge.
 
@@ -50,22 +51,10 @@ M1 + M3 supply the harness and context model. OpenAI's Feb 2026 harness-engineer
 
 The supplied M12 document contains some release information published after the executable prompt's Sep 11 cutoff. Those values are retained as source statements but not promoted to cutoff-current state.
 
-# CHAT 2 — CONTENIDO NUEVO
 
-## New consolidated knowledge
+---
 
-Chat2 operationalized M1 as the first AI-engineering foundation for the SRE target. The useful M1 knowledge is represented by the seven canonical steps in `chats/chat-002/M1_PLAN.md`. The plan distinguishes source facts, inherited decisions, proposals and future execution.
-
-## M1 practical rules derived from source
-
-1. Tool choice and mode are explicit decisions, not defaults.
-2. Context is a managed engineering resource; use minimum-sufficient selection and isolation.
-3. Prompts are contracts with observable success criteria.
-4. Workflows use plan/execute/test/review/refactor loops.
-5. Repository-local knowledge should be structured for progressive disclosure.
-6. Validation and feedback are part of the operating method, not only a final step.
-7. M1 does not implement product runtime components.
-
-## Temporal/provenance note
-
-OpenAI Harness Engineering (2026-02-11) corroborates the repository-knowledge/system-of-record and progressive-disclosure approach. It is within the mandatory cutoff.
+<!-- CHAT2:chat-002:BEGIN -->
+## Chat 2 overlay — conocimiento derivado de M1
+M1 deja siete unidades: caracterización, herramienta, contexto persistente, operaciones de contexto, prompting, patrones de ejecución e integración A–E. La aplicación al SRE usa el dominio como contexto real y no implementa su arquitectura completa. AGENTS.md se trata como mapa de alta señal; el detalle vive en documentación profunda. El proyecto usa read-only-first y conserva separación entre contexto de ejecución, memoria de proyecto y memoria de continuidad.
+<!-- CHAT2:chat-002:END -->
