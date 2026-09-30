@@ -37,10 +37,15 @@ Use Streamlit as a practical first operator UI/demo, but keep the underlying pro
 - Decisions describe what Chat 1 adopted; recommendations remain distinguishable in knowledge documents.
 - Changes require a new decision record and temporal context.
 
+---
+
 # CHAT 2 — CONTENIDO NUEVO
 
-### Estado de decisiones de Chat 2
-- Nuevas decisiones sustantivas adoptadas: `0`.
-- No se crea ningún `DEC-0007.md`.
-- Las decisiones DEC-0001…DEC-0006 permanecen activas e históricamente independientes.
-- El conjunto de 7 pasos de M1 se documenta como resultado de planificación, no como una nueva decisión de arquitectura del producto.
+## Chat 2 decision status
+
+No substantive new decision was adopted. The existing Chat 1 decisions remain authoritative for this session, including module order, M12 reference-only status, security/documentation gates, read-only-first plus human approval/executor controls, PostgreSQL/pgvector evaluation and optional Streamlit/Slack stance.
+
+# CHAT 2 — CUMULATIVE UPDATE
+
+No substantive new decision was adopted during Chat2. DEC-0001 through DEC-0006 remain the active historical decisions and the individual decision records remain untouched.
+

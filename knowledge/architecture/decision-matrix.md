@@ -26,10 +26,15 @@
 
 These are professional judgement scores, not empirical measurements.
 
+---
+
 # CHAT 2 — CONTENIDO NUEVO
 
-## Planning note
+## M1 regression
 
-The candidate order above is historical Chat 1 evidence and is preserved. Chat 2 did not alter it.
+The module-order decision from Chat 1 was not reopened. The seven M1 functional boundaries were retained because no current evidence justified a deviation from the binding regression reference in the Chat 2 prompt.
 
-For M1 step count, Chat 2 used a separate dynamic decomposition; three candidate decompositions were reviewed and the seven-unit decomposition was retained as the most coherent balance between depth and fragmentation. This is a planning outcome, not a new product architecture decision.
+# CHAT 2 — CUMULATIVE UPDATE
+
+Chat2 retained the inherited module-order decision and did not introduce a new numerical ranking. The seven M1 step boundaries were retained as the prompt’s regression reference after dynamic capability analysis.
+

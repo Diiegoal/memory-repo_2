@@ -25,19 +25,15 @@
 - M11 ↔ M13
 - M12 → all modules as reference information only
 
+---
+
 # CHAT 2 — CONTENIDO NUEVO
 
-## M1 internal dependency graph
+## M1 step dependencies
 
-| From | To | Reason |
-|---|---|---|
-| P01 | P02 | shared task/mode model |
-| P01 | P03 | shared context/problem model |
-| P01 | P04 | shared prompt/problem model |
-| P02 | P05 | workflow uses selected mode/tool |
-| P03 | P04 | prompt depends on selected context |
-| P04 | P05 | workflow needs prompt contract |
-| P05 | P06 | integration consolidates the operating loop |
-| P06 | P07 | final gate validates the integrated system |
+`P01 → P02 → P03 → P04 → P05 → P06 → P07` represents the practical M1 flow. Each edge is based on the output of the preceding unit; no dependency is invented for unrelated later modules.
 
-No additional dependency is asserted where a step can run independently.
+# CHAT 2 — CUMULATIVE UPDATE
+
+Within M1, the functional dependency chain is `P01 → P02 → P03 → P04 → P05 → P06 → P07`. P01 produces caracterización de tarea; P02 tool selection; P03 context architecture; P04 context hygiene; P05 prompt contract; P06 execution-pattern controls; P07 integrated cases. These are M1 execution dependencies only and do not alter the inherited 12-module product order.
+

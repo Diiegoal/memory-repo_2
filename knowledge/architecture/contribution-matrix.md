@@ -16,8 +16,15 @@
 | M13 | Delivery | How the system is shipped and operated | CI/CD/IaC/release controls |
 | M12 | Reference only | What the target SRE architecture looks like | Reference knowledge only |
 
+---
+
 # CHAT 2 — CONTENIDO NUEVO
 
 ## M1 contribution
 
-M1 contributes an AI-assisted engineering operating system rather than product runtime code. Its outputs are planning/context/prompt/workflow/validation artifacts that can later be consumed by M3 and subsequent modules.
+M1 contributes a reusable engineering workflow with explicit inputs, outputs, evidence and validation; it is the foundation for later specification, implementation and agent-runtime work.
+
+# CHAT 2 — CUMULATIVE UPDATE
+
+M1 contributes the AI-engineering workflow rather than runtime SRE functionality. P01–P07 create the operating discipline that later modules use while building specifications, architecture, data, backend, UI, tests and delivery.
+

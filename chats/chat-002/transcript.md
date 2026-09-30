@@ -1,6 +1,6 @@
-# TRANSCRIPCIÓN RAW DE CHAT-002
+# Chat 2 RAW Transcript
 
-# PARTE A — PROMPT ORIGINAL (TEXTUAL)
+# PART A — ORIGINAL PROMPT (TEXTUAL)
 
 # ORIGINAL PROMPT (verbatim, unmodified)
 
@@ -24,6 +24,50 @@ chat-002-memory-repo.zip
 El ZIP debe contener el estado real de `memory-repo` después de Chat 2, conservando íntegramente el histórico de Chat 1 y añadiendo únicamente la nueva información realmente producida por Chat 2.
 
 No debes entregar explicaciones fuera del ZIP.
+
+### Contrato obligatorio de presentación de Chat 2 dentro del ZIP
+
+La información producida por Chat 2 debe quedar presentada dentro de la copia acumulativa de `memory-repo` con una separación estricta de responsabilidades documentales:
+
+```text
+M1_PLAN.md
+→ único lugar donde vive el desarrollo completo de los pasos de M1
+→ incluye la secuencia final
+→ incluye todos los pasos
+→ incluye los 26 campos de cada paso
+→ incluye el detalle práctico, dependencias, artefactos, validaciones, tests,
+   errores, diagnóstico, corrección, trazabilidad y estado de cada paso
+
+transcript.md
+→ conserva el RAW de la sesión y toda la producción sustantiva de Chat 2
+→ contiene el resumen exhaustivo de M1
+→ contiene el resumen exhaustivo de la investigación del Agente SRE / DevOps
+→ contiene el resumen exhaustivo del Repositorio Ejemplo 2 realmente revisado
+→ contiene las decisiones heredadas de Chat 1 y su impacto
+→ contiene el cruce entre M1, Chat 1, SRE, memory-repo, Ejemplo 2 y proyecto
+→ contiene investigación externa, fuentes, hallazgos, matrices, validaciones,
+   análisis, conclusiones y resultados reales de la sesión
+→ contiene además un RESUMEN de la secuencia final de pasos
+→ NO contiene el desarrollo completo de los 26 campos de los pasos
+→ NO duplica `M1_PLAN.md`
+```
+
+Esta separación es una **HARD CONSTRAINT**. Si los pasos completos aparecen duplicados en `transcript.md`, o si el resumen de pasos no aparece en `transcript.md`, la validación de salida es **FAIL**.
+
+El orden lógico obligatorio de la producción sustantiva de `transcript.md` es:
+
+```text
+1. resumen exhaustivo de M1
+2. resumen exhaustivo de la referencia del Agente SRE / DevOps
+3. decisiones heredadas de Chat 1 y su impacto
+4. cruce M1 + Chat 1 + SRE + memory-repo + Ejemplo 2 + proyecto
+5. resumen exhaustivo del Repositorio Ejemplo 2 revisado
+6. investigación externa y procedencia
+7. determinación dinámica de pasos y justificación de agrupaciones/separaciones
+8. resumen final de pasos
+9. matrices, cobertura, dependencias, validaciones y auditorías
+10. conclusiones, estado real y límites de ejecución
+```
 
 ### Principio de consistencia de calidad
 
@@ -1374,7 +1418,7 @@ lectura completa de M1
 → asignación de numeración secuencial
 ```
 
-La numeración `Paso 01`, `Paso 02`, `...`, `Paso NN` se asigna **después** de estabilizar las unidades de trabajo. El valor de `NN` es una consecuencia del análisis y puede aumentar o disminuir durante las iteraciones de diseño.
+La numeración `Paso 01`, `Paso 02`, `...`, `Paso NN` se asigna **después** de estabilizar las unidades de trabajo. El valor de `NN` sigue siendo una consecuencia del análisis, pero después de aplicar el control de regresión de fronteras funcionales previamente validado, **si no existe evidencia actual que justifique una desviación, el resultado final debe conservar las siete unidades funcionales y sus responsabilidades establecidas en la referencia vinculante de regresión**.
 
 Está prohibido:
 
@@ -2164,7 +2208,7 @@ y evitar tanto la fragmentación artificial como la compresión artificial.
 
 La cantidad final es una **consecuencia del análisis**, nunca el objetivo del análisis.
 
-La cantidad final permanece abierta hasta completar las pruebas de cobertura, profundidad, independencia, integración, no consolidación, dependencias, salidas, validación, trazabilidad y proporcionalidad. No debe fijarse ni adoptarse por el mero hecho de que una auditoría previa, un ejemplo, una ejecución anterior o una expectativa externa proponga una cantidad concreta. Una auditoría previa positiva puede utilizarse como **control de regresión de las fronteras funcionales ya examinadas**, pero la cantidad final debe seguir siendo consecuencia del análisis dinámico actual. Si el análisis actual reproduce la misma descomposición por las mismas razones funcionales, esa coincidencia es válida y no constituye fijación previa de la cantidad.
+La cantidad final permanece abierta hasta completar las pruebas de cobertura, profundidad, independencia, integración, no consolidación, dependencias, salidas, validación, trazabilidad y proporcionalidad. No debe fijarse antes de ejecutar ese análisis. **Una vez completado el análisis dinámico, el control de regresión de la sección 12.5 es vinculante para las fronteras funcionales previamente validadas:** si no existe evidencia actual, explícita y verificable que justifique modificarlas, el resultado final debe conservar las siete unidades de referencia y sus responsabilidades. Por tanto, siete no es un objetivo previo; es el conjunto de referencia que debe mantenerse después del análisis cuando no exista una razón actual para cambiarlo.
 
 ## 12.3. QUALITY CONTROL AND ANTI-DEGRADATION GATES
 
@@ -2257,6 +2301,36 @@ Write / Select / Compress / Isolate
 5 patrones de ejecución
 casos A-E
 ```
+
+Cobertura obligatoria por familia:
+
+```text
+P04
+→ Write
+→ Select
+→ Compress
+→ Isolate
+→ cada uno con propósito, condición de uso, aplicación, entrada, salida y validación
+
+P06
+→ Spec-driven preview
+→ Plan-then-execute
+→ Test-first
+→ Refactor con anclas
+→ Critic loops
+→ cada uno con propósito, condición de uso, aplicación, entrada, salida y validación
+
+P07
+→ A — gran refactor
+→ B — greenfield feature
+→ C — debugging
+→ D — exploration
+→ E — code review
+→ cada uno con herramienta/contexto/prompt/patrón cuando corresponda,
+   resultado observable, evidencia y validación
+```
+
+Una sola prueba global que diga `4/4`, `5/5` o `A-E cubiertos` no sustituye el desarrollo necesario de cada elemento. El contenido debe permitir identificar qué se hará para cada elemento, con qué entrada, qué resultado se espera y qué condición determina PASS/FAIL.
 
 Cada prueba debe conservar la cadena:
 
@@ -2448,7 +2522,24 @@ La comprobación debe responder si alguna frontera ha vuelto a fragmentarse o fu
 
 Solo modifica una de estas fronteras cuando exista **evidencia actual, explícita y verificable** de una independencia funcional, dependencia funcional o necesidad de integración que no hubiera sido cubierta por las reglas y comprobaciones anteriores. Cuando el conjunto final difiera de esta descomposición previamente validada, debes documentar dentro del análisis la razón concreta de cada frontera modificada y demostrarla mediante resultado principal, dependencias, salida, reutilización, evidencia y validación.
 
-La auditoría positiva previa constituye una **prueba de regresión y evidencia diagnóstica**, no un objetivo numérico ni una salida que deba reproducirse literalmente. La cantidad final sigue siendo la consecuencia del análisis completo; el propósito de este control es impedir que una ejecución posterior vuelva a introducir sobrefragmentación que ya había sido descartada sin evidencia nueva que la justifique y, al mismo tiempo, detectar pérdida de contenido, profundidad o trazabilidad frente a una ejecución anterior que haya desarrollado correctamente ese contenido.
+La auditoría positiva previa constituye una **prueba de regresión y evidencia diagnóstica**. El análisis dinámico sigue siendo obligatorio y debe ocurrir antes de numerar los pasos; sin embargo, **una vez estabilizado ese análisis, esta descomposición funcional previamente validada pasa a ser la referencia vinculante de regresión**. Si no existe evidencia actual, explícita y verificable que justifique una frontera diferente, el plan final **debe conservar exactamente estas siete unidades funcionales, en este orden y con estas responsabilidades**. La cantidad de siete no se elige antes del análisis: se verifica y se aplica únicamente después de que el análisis dinámico haya confirmado que no existe una razón funcional actual para cambiarla. Si existe una razón funcional actual para cambiar una frontera, debe documentarse de forma concreta dentro de la auditoría y demostrarse mediante resultado principal, dependencias, salida, reutilización, evidencia y validación.
+
+No está permitido que una ejecución posterior mantenga el número siete pero desplace responsabilidades entre pasos, fusione dos de estas unidades funcionales o introduzca una nueva unidad de consolidación sin justificarlo. Los siete límites funcionales de referencia son:
+```text
+M1-P01 → caracterizar la tarea y determinar el modo de trabajo
+M1-P02 → seleccionar y evaluar la herramienta mediante criterios verificables
+M1-P03 → diseñar la arquitectura de contexto persistente del proyecto
+M1-P04 → gestionar la ventana de contexto y prevenir context rot
+M1-P05 → diseñar y aplicar prompting fundamental para trabajo de ingeniería
+M1-P06 → aplicar patrones de ejecución de coding asistido por IA
+M1-P07 → integrar los tres pilares y validar los cinco casos canónicos de M1
+```
+
+Dentro de esas fronteras, **P04 debe conservar explícitamente** context rot, mecanismos del rot, reglas prácticas de ventana y Write / Select / Compress / Isolate; **P06 debe conservar explícitamente** Spec-driven preview, Plan-then-execute, Test-first, Refactor con anclas y Critic loops; y **P07 debe conservar explícitamente** los casos A — gran refactor, B — greenfield feature, C — debugging, D — exploration y E — code review, además de la cadena tool → context → prompt → patrón → resultado → evidencia → validación cuando corresponda.
+
+Esta asignación de responsabilidad es una **invariante semántica de los pasos**. No basta con mencionar los nombres. En la salida final: P04 debe desarrollar y validar individualmente las cuatro estrategias `Write`, `Select`, `Compress` e `Isolate`; P06 debe desarrollar y validar individualmente los cinco patrones `Spec-driven preview`, `Plan-then-execute`, `Test-first`, `Refactor con anclas` y `Critic loops`; P07 debe desarrollar y validar individualmente los cinco casos `A — gran refactor`, `B — greenfield feature`, `C — debugging`, `D — exploration` y `E — code review`. Si una ejecución devuelve siete pasos pero desplaza cualquiera de estas responsabilidades a otro paso, esa ejecución es **FAIL** salvo que exista evidencia actual, explícita y verificable que obligue a modificar una frontera.
+
+La auditoría positiva previa sigue sin ser una plantilla literal de redacción: obliga a conservar **fronteras y responsabilidades funcionales ya validadas**, no frases ni formato accidental.
 
 ### Continuidad incremental de memoria
 
@@ -2492,7 +2583,11 @@ Antes del empaquetado final, responde afirmativamente a todas las preguntas sigu
 ¿Todos los FAIL detectados fueron reparados y re-auditados?
 ¿No se creó una decisión artificial?
 ¿No se utilizó una salida anterior como plantilla literal?
-¿La cantidad final de pasos sigue siendo consecuencia del análisis dinámico?
+¿La cantidad final de pasos sigue siendo consecuencia del análisis dinámico y, una vez aplicado el control de regresión, conserva las siete fronteras funcionales previamente validadas salvo evidencia actual documentada?
+¿P04 conserva context rot + reglas de ventana + Write / Select / Compress / Isolate?
+¿P06 conserva Spec-driven preview + Plan-then-execute + Test-first + Refactor con anclas + Critic loops?
+¿P07 conserva los casos A-E y la integración de los tres pilares?
+¿`M1_PLAN.md` contiene el desarrollo completo de los pasos y `transcript.md` solo su resumen más el resto de la producción sustantiva?
 ¿La persistencia y el ZIP se ejecutarán solo después de congelar el plan?
 ```
 
@@ -2500,7 +2595,7 @@ Si alguna respuesta es `NO`, el proceso permanece en estado **NO CERRADO** y deb
 
 # 13. FUENTE ÚNICA DE VERDAD DE LA ESTRUCTURA DE `memory-repo`
 
-No dupliques dentro de este prompt el árbol completo de `memory-repo` ni las plantillas de sus archivos Markdown. La estructura física y documental debe obtenerse directamente del repositorio fuente.
+No reconstruyas por interpretación el árbol completo de `memory-repo`. La estructura física debe obtenerse directamente del repositorio fuente. La estructura documental de `Complete Markdown File Structure` se incluye **literalmente en este prompt** como snapshot normativo para hacer explícito el formato requerido y reducir la ambigüedad de seguimiento; aun así, debe contrastarse con el `README.md` real antes del cierre.
 
 Antes de crear o actualizar cualquier artefacto de memoria, entra en modo lectura a:
 
@@ -2531,9 +2626,25 @@ No reconstruyas, copies de memoria ni hardcodees el árbol dentro de este prompt
 
 ### Regla de estructura documental
 
-`README.md → Complete Markdown File Structure` es la fuente de verdad para la estructura de cada `.md` existente o permitido por la estructura del repositorio.
+`README.md → Complete Markdown File Structure` es la fuente viva de verdad para la estructura de cada `.md` existente o permitido por la estructura del repositorio.
 
-No reproduzcas esas plantillas en otro lugar del prompt ni inventes una segunda versión de ellas.
+Además, el bloque completo de `Complete Markdown File Structure` incluido literalmente más adelante en este prompt constituye el **snapshot normativo explícito de esta ejecución**. No debes convertirlo en una interpretación resumida, una estructura equivalente, una plantilla simplificada ni una descripción libre. Debe tratarse como un esquema documental literal.
+
+La comparación obligatoria durante la auditoría final es:
+
+```text
+README.md real
+↔
+snapshot literal embebido en este prompt
+↔
+archivo generado en staging
+```
+
+Los tres deben corresponder estructuralmente. Una diferencia de encabezado, nivel, orden, nombre de campo, lista, tabla, bloque o sección que no esté expresamente justificada por una divergencia documentada del README real produce **FAIL** y obliga a reparar antes del ZIP.
+
+Si el README real ha cambiado respecto del snapshot embebido, no sustituyas silenciosamente una estructura por otra: registra la discrepancia, utiliza la versión vigente del README para la corrección de la copia de trabajo y deja la divergencia explícitamente documentada en la auditoría de la sesión.
+
+Para reducir la ambigüedad de interpretación, este prompt incorpora más adelante una **copia literal del bloque `Complete Markdown File Structure` del README de Chat 1**. Esa copia embebida es un **snapshot normativo de referencia para esta ejecución** y debe utilizarse como plantilla explícita, pero antes del cierre debes contrastarla con el `README.md` real del repositorio. Si el README real difiere, el README real prevalece y la discrepancia debe documentarse y aplicarse en la salida.
 
 ### Regla de extracción literal de la estructura del README
 
@@ -2561,6 +2672,1100 @@ README.md real
 No conviertas la plantilla del README en una descripción semántica. Si el README contiene una plantilla, debe respetarse su estructura textual y jerárquica. Si para un archivo el README únicamente documenta un `Role` y no proporciona una plantilla detallada, **no inventes una plantilla ausente**: conserva el archivo real íntegro y utiliza como única referencia adicional la estructura efectivamente observada en ese archivo para el bloque nuevo de Chat 2.
 
 La validación debe comparar la estructura generada con la estructura fuente del README **elemento por elemento**, no por similitud visual ni por interpretación.
+
+## 13.1. COMPLETE MARKDOWN FILE STRUCTURE — COPIA LITERAL DEL README DE CHAT 1
+
+El siguiente bloque se incorpora **literalmente**, sin resumirlo ni reinterpretarlo, desde `Diiegoal/memory-repo/README.md → Complete Markdown File Structure`. Sus encabezados, niveles, orden, nombres fijos, tablas y bloques de código forman parte del contrato documental de esta ejecución.
+
+# Complete Markdown File Structure
+
+This section documents the structural pattern of **all 33 Markdown files** present in the repository.
+
+The templates are structural templates. They do not replace the actual file contents.
+
+For files that belong to the same record type, one shared template is used instead of falsely presenting different structures.
+
+---
+
+# Root Files
+
+## 1. `README.md`
+
+### Role
+
+Repository overview and navigation document.
+
+### Template
+
+```markdown
+# <repository title>
+
+## Purpose
+<repository purpose>
+
+## Target project
+<target project>
+
+## Core result
+<principal result>
+
+## Why this order
+<numbered rationale>
+
+## Module 12 reference role
+<M12 boundary>
+
+## Stack summary
+<stack>
+
+## Agentic SDLC mapping
+<table>
+
+## Memory architecture
+<RAW / DERIVED / CONTINUITY>
+
+## Exact repository tree
+<tree>
+
+<future-chat / temporal note>
+
+## Future continuation protocol
+<continuation procedure>
+
+## Limitations
+<limitations>
+```
+
+---
+
+## 2. `MEMORY_PROTOCOL.md`
+
+### Role
+
+Memory authority, layer separation, retrieval, contamination, temporal and provenance protocol.
+
+### Template
+
+```markdown
+# Memory Protocol
+
+## 1. Authority model
+<authority model>
+
+### Source precedence inside this memory system
+<numbered precedence>
+
+## 2. RAW versus derived memory
+
+### RAW
+<RAW definition>
+
+### DERIVED
+<derived definition>
+
+### CONTINUITY
+<continuity definition>
+
+## 3. Retrieval layers
+
+### P0 — Current task/instructions
+<rule>
+
+### P1 — Current state
+<rule>
+
+### P2 — Decisions
+<rule>
+
+### P3 — Direct evidence
+<rule>
+
+### P4 — Open questions
+<rule>
+
+### P5 — Session handoff
+<rule>
+
+### P6 — Recent transcript
+<rule>
+
+### P7 — Historical/secondary
+<rule>
+
+## 4. Contamination controls
+<controls>
+
+## 5. Temporal controls
+<controls>
+
+## 6. Provenance
+<provenance model>
+
+## 7. State model
+<STATE meaning>
+
+## 8. Drift management
+<ordered drift procedure>
+
+## 9. Maturity
+<maturity statement and implementation limitation>
+```
+
+---
+
+## 3. `BOOTSTRAP.md`
+
+### Role
+
+Bootstrap protocol for a future continuation.
+
+### Template
+
+```markdown
+# Bootstrap for a Future Continuation
+
+> <future-continuation clarification>
+
+## Objective
+<objective>
+
+## Mandatory first reads
+<numbered read order>
+
+## Required behavior
+<behavior rules>
+
+## Source-of-truth order
+<source hierarchy>
+
+## Context packet assembly
+<context sequence>
+
+## Continuation test
+<questions a future session must be able to answer>
+```
+
+---
+
+## 4. `STATE.md`
+
+### Role
+
+The repository's **current-state snapshot**. It answers what is currently true for the Chat 1 research/construction state; it is not a diary.
+
+### Template
+
+```markdown
+# Current State
+
+## Snapshot
+
+- Chat: `<chat-id>`
+- State date: `<date>`
+- External research cutoff: `<date>`
+- Repository audited: `<repository>` / `<branch>`
+- Module count: `<number>`
+- Construction modules: `<number>`
+- Reference-only module: `<module>`
+
+## Current objective
+
+<current objective>
+
+## Final order
+
+`<module order>`
+
+## Current architecture stance
+
+- <agent application/runtime>
+- <service/API boundary>
+- <agent orchestration>
+- <authoritative operational storage>
+- <semantic retrieval option>
+- <queue/cache/coordination option>
+- <initial control-center UI>
+- <operational conversation/approval channel>
+- <observability/alert path>
+- <deployment/change correlation>
+- <deployment/infrastructure stage>
+- <authorization/executor boundary>
+
+## Current lifecycle
+
+`<lifecycle>`
+
+<iterative-lifecycle statement>
+
+## Active controls
+
+- <construction/reference boundary>
+- <transversal capability rule>
+- <read-only-first rule>
+- <authorization rule>
+- <memory/secret rule>
+- <temporal cutoff rule>
+
+## Current status
+
+<research / implementation status>
+
+## Last updated
+
+<date>
+```
+
+This is the complete structural pattern of `STATE.md` observed in the repository.
+
+---
+
+## 5. `KNOWLEDGE.md`
+
+### Role
+
+Consolidated knowledge layer.
+
+### Template
+
+```markdown
+# Knowledge Base
+
+## 1. Target product
+<product and core loop>
+
+## 2. Runtime state versus long-term memory
+<state / long-term memory / external memory>
+
+## 3. Operational evidence
+<operational evidence model>
+
+## 4. Safety
+<security and safety principles>
+
+## 5. Recovery
+<recovery principles>
+
+## 6. Documentation
+<documentation model>
+
+## 7. SDD
+<specification model>
+
+## 8. Testing
+<testing model>
+
+## 9. Data
+<data/retrieval model>
+
+## 10. Agentic development
+<agentic development model>
+
+## 11. Temporal integrity
+<temporal/cutoff observations>
+```
+
+---
+
+## 6. `DECISIONS.md`
+
+### Role
+
+Compact index of the active decisions.
+
+### Template
+
+```markdown
+# Decisions
+
+## Active decisions
+
+### DEC-<number> — <decision title>
+Status: <status>
+
+<decision statement>
+
+### DEC-<number> — <decision title>
+Status: <status>
+
+<decision statement>
+
+...
+
+## Decision principles
+
+- <principle>
+- <principle>
+- <principle>
+```
+
+`DECISIONS.md` is the index. The individual records live in `decisions/`.
+
+---
+
+## 7. `OPEN_QUESTIONS.md`
+
+### Role
+
+Unresolved questions.
+
+### Template
+
+```markdown
+# Open Questions
+
+## OQ-<number> — <question title>
+Status: <status>
+
+<question and current evidence boundary>
+
+## OQ-<number> — <question title>
+Status: <status>
+
+<question and current evidence boundary>
+
+...
+```
+
+The real file contains `OQ-0001` through `OQ-0008`.
+
+---
+
+## 8. `INDEX.md`
+
+### Role
+
+Top-level locator.
+
+### Template
+
+```markdown
+# Index
+
+## Core
+- <file> — <description>
+- ...
+
+## RAW
+- <file>
+- <file>
+- <file>
+
+## Derived evidence
+- <file>
+- ...
+
+## Architecture
+- <file>
+- ...
+
+## References and indexes
+- <file>
+- ...
+
+## Future handoff protocol
+- <handoff file> — <description>
+```
+
+---
+
+# `chats/chat-001/`
+
+## 9. `chats/chat-001/META.md`
+
+### Role
+
+Session metadata.
+
+### Template
+
+```markdown
+# Chat 001 Metadata
+
+- chat_id: `<chat-id>`
+- created: `<date>`
+- status: `<status>`
+- external_research_cutoff: `<cutoff>`
+- repository_audit_date: `<date>`
+- target: `<target>`
+- construction_modules: `<number>`
+- reference_only_module: `<module>`
+- final_order: <ordered modules>
+
+## Purpose
+<session purpose>
+
+## Inputs
+- <input>
+- <input>
+- ...
+
+## Output status
+<output status>
+```
+
+---
+
+## 10. `chats/chat-001/transcript.md`
+
+### Role
+
+Immutable-style RAW record.
+
+### Important boundary
+
+The structure is intentionally **general**. The real prompt and research output remain only in the RAW transcript.
+
+### Template
+
+```markdown
+# TRANSCRIPCIÓN RAW DE <CHAT-ID>
+
+> <RAW preservation statement>
+
+---
+
+# PARTE A — PROMPT ORIGINAL (TEXTUAL)
+
+<original prompt preserved exactly>
+
+---
+
+# PARTE B — SALIDA ORIGINAL COMPLETA DE INVESTIGACIÓN
+
+<complete original research output preserved exactly>
+
+<research/source/analysis/comparison/decision/reference sections as actually produced>
+
+---
+
+# PARTE C — REGISTRO REAL DE EJECUCIÓN
+
+<real execution record>
+
+<execution_log>
+# Registro real de ejecución de <CHAT-ID>
+
+## Identidad de la sesión
+
+- Sesión: `<chat-id>`
+- Fecha de ejecución: `<date>`
+- Zona horaria del usuario: `<timezone>`
+- Corte de investigación externa aplicado: `<cutoff>`
+- Repositorio auditado: `<repository>` / `<branch>`
+
+## Acciones registradas
+
+1. <real action>
+2. <real action>
+3. <real action>
+...
+
+## Nota técnica de ejecución
+
+<technical notes>
+
+## Nota de integridad temporal
+
+<temporal-integrity notes>
+
+## Resultado de integridad
+
+<integrity result>
+
+</execution_log>
+```
+
+### RAW invariants
+
+- Original executable prompt.
+- Complete original research output.
+- Real execution log.
+- No future-chat transcript fabrication.
+- Derived artifacts do not replace RAW.
+
+---
+
+## 11. `chats/chat-001/HANDOFF.md`
+
+### Role
+
+Direct continuation handoff from Chat 1.
+
+### Template
+
+```markdown
+# Handoff — <chat-id> → future continuation
+
+> <handoff-not-transcript clarification>
+
+## Objective
+<continuation objective>
+
+## Current state
+<final order and M12 boundary>
+
+## Completed
+- <completed item>
+- ...
+
+## Active decisions
+<decision references>
+
+## Open questions
+<open-question reference>
+
+## Read first
+1. <file>
+2. <file>
+3. <file>
+4. <file>
+5. <file>
+6. <file>
+
+## Evidence retrieval
+<selective evidence rule>
+
+## Immediate future work
+<next task>
+```
+
+---
+
+# `decisions/`
+
+## 12–17. `decisions/DEC-0001.md` through `decisions/DEC-0006.md`
+
+### Important structural rule
+
+These six files are **six instances of one decision-record structure**. They are not six different templates.
+
+### Single shared template
+
+```markdown
+# DEC-<number> — <Decision title>
+
+Status: <status>
+Date: <date>
+
+## Decision
+
+<accepted decision>
+
+## Reason
+
+<reason, when this record contains it>
+
+## Evidence
+
+<evidence pointers, when this record contains them>
+
+## Consequence
+
+<consequence, when this record contains it>
+```
+
+The optional sections are shown because the actual records do not all have the same optional fields.
+
+### Files covered by this one template
+
+```text
+decisions/DEC-0001.md
+decisions/DEC-0002.md
+decisions/DEC-0003.md
+decisions/DEC-0004.md
+decisions/DEC-0005.md
+decisions/DEC-0006.md
+```
+
+### Structural variation actually present
+
+| Record group | Sections present after `## Decision` |
+|---|---|
+| DEC-0001 | `## Reason`, `## Evidence` |
+| DEC-0002 | `## Reason`, `## Consequence` |
+| DEC-0003 | `## Consequence` |
+| DEC-0004 | `## Evidence` |
+| DEC-0005 | `## Reason` |
+| DEC-0006 | none |
+
+This table documents the real variation while keeping one common decision template.
+
+---
+
+# `handoffs/`
+
+## 18. `handoffs/chat-001-to-chat-002.md`
+
+### Role
+
+Future handoff protocol.
+
+### Template
+
+```markdown
+# Future Handoff Protocol
+
+<statement that chat-002 does not exist>
+
+## Context packet
+
+```text
+STATE.md
+→ DECISIONS.md
+→ OPEN_QUESTIONS.md
+→ chats/chat-001/HANDOFF.md
+→ relevant architecture/facts
+→ exact source evidence
+```
+
+## Required checks
+
+- <temporal cutoff check>
+- <decision supersession check>
+- <fact/proposal distinction>
+- <selective transcript retrieval>
+- <RAW preservation>
+
+## Suggested first task
+
+<future task>
+```
+
+---
+
+# `indexes/`
+
+## 19. `indexes/references.md`
+
+### Role
+
+Locator for research inputs and derived evidence.
+
+### Template
+
+```markdown
+# Reference Locator Index
+
+## Primary research inputs
+
+- <source/input> — <location/status>
+- ...
+
+## Derived evidence map
+
+<document → evidence mapping>
+```
+
+---
+
+## 20. `indexes/timeline.md`
+
+### Role
+
+Chronological index.
+
+### Template
+
+```markdown
+# Timeline
+
+- **<date>** — <event>.
+- **<date>** — <event>.
+- **<date>** — <event>.
+```
+
+The audited file currently has three timeline entries.
+
+---
+
+## 21. `indexes/topics.md`
+
+### Role
+
+Topic retrieval index.
+
+### Template
+
+```markdown
+# Topic Index
+
+- `<topic>` → `<document>`
+- `<topic>` → `<document>`
+- ...
+```
+
+The audited file currently maps topics including agentic SDLC, module order, repository audit, module content, SRE-agent, security, memory, continuity, testing and data.
+
+---
+
+# `knowledge/facts/`
+
+## 22. `knowledge/facts/repository-audit.md`
+
+### Role
+
+Audit record for `Diiegoal/CursoIA`.
+
+### Template
+
+```markdown
+# Repository Audit — <repository>
+
+## Repository facts
+
+- Repository: `<repository>`
+- Default branch: `<branch>`
+- Visibility: `<visibility>`
+- Audit date: `<date>`
+- Module directories: `<number>`
+- Markdown files in modules: `<number>`
+- Additional final-project Markdown files: `<number>`
+- Total Markdown files enumerated in the Git tree: `<number>`
+- Separate final-project directory: <scope>
+
+## Module inventory
+
+### M1 — <module title>
+Files: <count>
+<content focus>
+- <file>
+- ...
+
+### M2 — <module title>
+Files: <count>
+<content focus>
+- <file>
+- ...
+
+...
+
+### M13 — <module title>
+Files: <count>
+<content focus>
+- <file>
+- ...
+
+## Additional repository content
+
+<non-module content>
+
+## Integrity interpretation
+
+<scope/classification>
+```
+
+---
+
+## 23. `knowledge/facts/module-coverage.md`
+
+### Role
+
+Module content, build role and target-coverage mapping.
+
+### Template
+
+```markdown
+# Module Coverage Audit
+
+| Module | Real content focus | Role in build | Coverage of target |
+|---|---|---|---|
+| M1 | ... | ... | ... |
+| ... | ... | ... | ... |
+
+## Coverage classifications
+
+- **COVERED:** ...
+- **COVERED INDIRECTLY:** ...
+- **PARTIALLY COVERED:** ...
+- **COVERED BUT INSUFFICIENT FOR PRODUCT:** ...
+- **NOT COVERED:** ...
+
+## Target-specific gaps
+
+1. <gap>
+2. <gap>
+...
+```
+
+---
+
+## 24. `knowledge/facts/external-research.md`
+
+### Role
+
+External research register and temporal cutoff control.
+
+### Template
+
+```markdown
+# External Research Register
+
+## Cutoff rule
+
+<cutoff>
+
+## Key verified sources
+
+| ID | Source | Date | What it supports | Cutoff use |
+|---|---|---|---|---|
+| R01 | ... | ... | ... | ... |
+| ... | ... | ... | ... | ... |
+
+## Temporal exclusions
+
+<post-cutoff observations and exclusion rule>
+```
+
+---
+
+# `knowledge/architecture/`
+
+## 25. `knowledge/architecture/agentic-sdlc.md`
+
+### Template
+
+```markdown
+# Agentic SDLC
+
+## Definition
+<definition>
+
+## Construction phases
+1. <phase> — <module>
+...
+12. <phase> — <module>
+
+## Why this is agentic
+
+The agent participates in:
+- <capability>
+- <capability>
+- ...
+
+<human-gate statement>
+
+## Iterative loops
+
+- <loop>
+- <loop>
+- ...
+
+## M12 boundary
+<M12 reference-only rule>
+```
+
+---
+
+## 26. `knowledge/architecture/artifact-matrix.md`
+
+### Template
+
+```markdown
+# Module → Phase → Component → Artifact → Evidence
+
+| Module | Phase | Component | Artifact | Evidence basis |
+|---|---|---|---|---|
+| M1 | ... | ... | ... | ... |
+| ... | ... | ... | ... | ... |
+```
+
+---
+
+## 27. `knowledge/architecture/component-matrix.md`
+
+### Template
+
+```markdown
+# Module → Component Matrix
+
+| Product component | Primary modules | Secondary modules | M12 reference contribution |
+|---|---|---|---|
+| <component> | <modules> | <modules> | <reference> |
+| ... | ... | ... | ... |
+```
+
+---
+
+## 28. `knowledge/architecture/contribution-matrix.md`
+
+### Template
+
+```markdown
+# Contribution Matrix
+
+| Module | Capability | Decision enabled | Artifact produced |
+|---|---|---|---|
+| M1 | ... | ... | ... |
+| ... | ... | ... | ... |
+| M12 | Reference only | ... | Reference knowledge only |
+```
+
+---
+
+## 29. `knowledge/architecture/decision-matrix.md`
+
+### Template
+
+```markdown
+# Decision Matrix and Candidate Orders
+
+## Candidate orders
+
+### A — <candidate>
+<order>
+
+### B — <candidate>
+<order>
+
+### C — <candidate>
+<order>
+
+## Weighted evaluation
+
+| Criterion | Weight | A | B | C |
+|---|---:|---:|---:|---:|
+| <criterion> | <weight> | <value> | <value> | <value> |
+| ... | ... | ... | ... | ... |
+| **Weighted** | **100%** | ... | ... | ... |
+
+<score interpretation / caveat>
+```
+
+---
+
+## 30. `knowledge/architecture/dependency-matrix.md`
+
+### Template
+
+```markdown
+# Dependency Matrix
+
+| From | To | Dependency reason | Criticality |
+|---|---|---|---|
+| <module> | <module> | <reason> | <criticality> |
+| ... | ... | ... | ... |
+
+## Transversal edges
+
+- <module> ↔ <module>
+- <module> ↔ <module>
+- ...
+- M12 → all modules as reference information only
+```
+
+---
+
+## 31. `knowledge/architecture/gaps-and-roadmap.md`
+
+### Template
+
+```markdown
+# Gaps and Roadmap
+
+## High-priority gaps
+
+1. <gap>
+2. <gap>
+3. <gap>
+...
+
+## Roadmap
+
+### R0 — <stage title>
+<scope>
+
+### R1 — <stage title>
+<scope>
+
+### R2 — <stage title>
+<scope>
+
+### R3 — <stage title>
+<scope>
+
+### R4 — <stage title>
+<scope>
+
+### R5 — <stage title>
+<scope>
+
+### R6 — <stage title>
+<scope>
+
+### R7 — <stage title>
+<scope>
+```
+
+---
+
+## 32. `knowledge/architecture/target-architecture.md`
+
+### Template
+
+```markdown
+# Target Architecture
+
+## Logical architecture
+
+```text
+<logical architecture flow>
+```
+
+## Data/persistence
+<persistence and retrieval>
+
+## Operator surfaces
+
+- <surface>
+- <surface>
+- <surface>
+
+## Security boundary
+<security/action boundary>
+
+## Observability
+<system + agent observability>
+
+## Runtime memory
+
+- <current execution state>
+- <long-term memory>
+- <external Chat 1 memory>
+
+## Deployment maturity
+<deployment progression>
+```
+
+---
+
+# `knowledge/references/`
+
+## 33. `knowledge/references/reference-index.md`
+
+### Template
+
+```markdown
+# Reference Index
+
+- [R01] **<organization>** — *<title>* — <date> — <URL> — <what it supports>. — <evidence classification>
+- [R02] **<organization>** — *<title>* — <date> — <URL> — <what it supports>. — <evidence classification>
+- ...
+```
+
+The current file contains `R01` through `R20`.
+
+
+
+### Regla de uso de la copia literal embebida
+
+- No trates este bloque como una explicación; trátalo como el **esqueleto documental obligatorio**.
+- No sustituyas su estructura por una estructura “equivalente” o “parecida”.
+- Para cada archivo, localiza su entrada exacta por nombre y ruta lógica y usa únicamente esa plantilla como esqueleto del bloque nuevo de Chat 2.
+- Los placeholders del bloque se sustituyen únicamente por datos reales de Chat 2; no se dejan placeholders sin resolver.
+- Si una plantilla contiene secciones opcionales condicionadas por el propio README, conserva la condición y la estructura; no inventes secciones adicionales.
+- Si el README real vigente difiere de esta copia, el README real prevalece y debe aplicarse en la salida, pero cualquier diferencia debe registrarse antes del cierre.
+- La validación final debe comprobar tanto la correspondencia con el README real como la integridad de esta copia literal embebida.
+
 
 Para un `.md` histórico:
 
@@ -2615,11 +3820,11 @@ No debe existir una segunda versión completa del plan en otro archivo independi
 
 ### Regla de simplificación del prompt
 
-Este prompt define el **qué, por qué, límites, validaciones y reglas de ejecución**. El `README.md` del repositorio define el **árbol y las plantillas documentales actuales**.
+Este prompt define el **qué, por qué, límites, validaciones y reglas de ejecución** y contiene además una **copia literal explícita del bloque `Complete Markdown File Structure`** para evitar que el modelo tenga que reconstruir su forma por inferencia. El `README.md` del repositorio define el árbol físico y continúa siendo la fuente viva para detectar cualquier cambio estructural.
 
-Si el README cambia en el futuro, Chat 2 debe seguir la versión real observada en el repositorio en lugar de utilizar una estructura antigua embebida en este prompt.
+Si el README cambia en el futuro, Chat 2 debe seguir la versión real observada en el repositorio. La copia embebida no puede usarse para ocultar una diferencia del README real: cualquier discrepancia debe detectarse, documentarse y resolverse aplicando el README vigente.
 
-La simplificación del prompt no reduce el nivel de exigencia: la estructura se obtiene de una fuente de verdad viva y se valida físicamente contra ella.
+La presencia de la copia literal embebida no reduce el nivel de exigencia; añade un contrato de formato explícito y una segunda capa de comprobación para reducir desviaciones de estructura.
 
 # 14. PROFUNDIDAD, AUDIENCIA Y EXPLICACIÓN
 
@@ -2843,7 +4048,7 @@ Las reglas de memoria son contexto operativo y deben respetarse, pero sus operac
 
 # 22. ESTRUCTURA DE `memory-repo` Y ARCHIVOS PERMITIDOS
 
-La estructura física de `memory-repo` **no debe estar duplicada en este prompt**. Debe recuperarse directamente desde:
+La estructura física de `memory-repo` debe recuperarse directamente desde el `README.md` real. La sección `Complete Markdown File Structure` sí está **incorporada literalmente en este prompt como snapshot normativo**, mientras que el árbol físico continúa verificándose directamente contra `README.md → Exact repository tree`:
 
 ```text
 Diiegoal/memory-repo/README.md
@@ -2859,6 +4064,8 @@ Complete Markdown File Structure
 `README.md → Exact repository tree` determina la estructura histórica real que debe copiarse a staging.
 
 `README.md → Complete Markdown File Structure` determina la estructura documental que debe utilizarse para cada `.md` sujeto a actualización o para cada `.md` nuevo que esté expresamente autorizado.
+
+La copia literal embebida en la sección 13.1 no reemplaza la verificación del README real: sirve para que el formato requerido esté explícito dentro del prompt y para impedir que el modelo tenga que reconstruirlo por inferencia.
 
 ## ÚNICAS adiciones permitidas para Chat 2
 
@@ -3053,7 +4260,7 @@ contenido fuente original recuperado
 
 # 24. CONSISTENCIA DOCUMENTAL
 
-La **única definición estructural documental obligatoria para los archivos existentes y las adiciones documentales derivadas del repositorio** es `README.md → Complete Markdown File Structure` del repositorio `Diiegoal/memory-repo`.
+La **única definición estructural documental obligatoria para los archivos existentes y las adiciones documentales derivadas del repositorio** es `README.md → Complete Markdown File Structure`, complementada en este prompt por su **copia literal embebida** como snapshot normativo de esta ejecución.
 
 No debes crear una segunda definición estructural ni modificar la estructura definida según el archivo.
 
@@ -3117,7 +4324,37 @@ La validación debe comprobar además que, cuando exista contenido histórico, e
 No basta con que “se parezca” a la estructura definida.
 
 
-### 41.1. GATE FÍSICO Y BLOQUEANTE DE ARTEFACTOS DE CONTINUIDAD DE CHAT 2
+### 41.0. GATE BLOQUEANTE DE PROPIEDAD DEL CONTENIDO DE CHAT 2
+
+Antes del gate físico, comprueba de manera determinista la propiedad de cada bloque de información:
+
+```text
+PASOS COMPLETOS
+→ únicamente `chats/chat-002/M1_PLAN.md`
+
+RESUMEN DE PASOS
+→ `chats/chat-002/transcript.md`
+
+RESUMEN EXHAUSTIVO DE M1
+→ `chats/chat-002/transcript.md`
+
+RESUMEN EXHAUSTIVO DEL SRE / DEVOPS
+→ `chats/chat-002/transcript.md`
+
+RESUMEN EXHAUSTIVO DE EJEMPLO 2
+→ `chats/chat-002/transcript.md`
+
+RESTO DE PRODUCCIÓN SUSTANTIVA DE CHAT 2
+→ `chats/chat-002/transcript.md`
+```
+
+Debe verificarse que `transcript.md` no contenga una segunda copia de los 26 campos de ningún paso. La aparición de un segundo bloque completo de un paso fuera de `M1_PLAN.md` es **FAIL**.
+
+Debe verificarse también que `M1_PLAN.md` contiene el conjunto completo de pasos y que `transcript.md` contiene el mismo conjunto mediante el resumen, con idénticos IDs, títulos y orden.
+
+---
+
+# 41.1. GATE FÍSICO Y BLOQUEANTE DE ARTEFACTOS DE CONTINUIDAD DE CHAT 2
 
 Antes de considerar terminado Chat 2, generar el ZIP final o entregar el resultado, debes verificar físicamente en la **copia de trabajo independiente** la existencia de estos cuatro archivos obligatorios dentro de `chats/chat-002/` y, por separado, del handoff futuro autorizado:
 
@@ -4078,6 +5315,23 @@ No copies su implementación ni lo conviertas en plantilla.
 
 Después de los resúmenes y de la recuperación de decisiones de Chat 1, el transcript debe documentar cómo se realizó el cruce:
 
+### Orden obligatorio de presentación de la producción sustantiva de Chat 2
+
+Dentro de `# FULL ORIGINAL RESEARCH OUTPUT`, presenta la información en este orden lógico, salvo que una evidencia cronológica real obligue a conservar un orden diferente dentro de una subsección:
+
+1. **Resumen exhaustivo de todo M1.**
+2. **Resumen exhaustivo del proyecto Agente SRE / DevOps y de todo su stack realmente descrito.**
+3. **Decisiones aceptadas de Chat 1 relevantes para M1 y la construcción inicial.**
+4. **Cruce M1 → decisiones Chat 1 → proyecto SRE → memory-repo → Ejemplo 2.**
+5. **Resumen exhaustivo de todo el Repositorio Ejemplo 2 realmente revisado.**
+6. **Investigación externa, fuentes verificadas y límites temporales.**
+7. **Determinación dinámica de las unidades de trabajo y justificación de sus fronteras.**
+8. **Resumen canónico de pasos de M1**, usando exclusivamente la tabla definida en `38.1.7`.
+9. **Matrices, cobertura, dependencias, trazabilidad, auditorías y demás producción sustantiva realmente realizada.**
+10. **Conclusiones de planificación, estado real y límites de ejecución.**
+
+No cambies este orden para colocar el desarrollo detallado de los pasos dentro del transcript. El desarrollo detallado pertenece exclusivamente a `M1_PLAN.md`.
+
 ```text
 M1 = fuente principal del contenido y flujo
 Chat 1 = decisiones heredadas y restricciones aceptadas
@@ -4117,6 +5371,17 @@ El resumen debe:
 - permanecer sincronizado con `M1_PLAN.md` después de cualquier reparación final.
 
 El contenido completo de cada paso, incluidos sus 26 campos, pertenece **exclusivamente** a `chats/chat-002/M1_PLAN.md`.
+
+`chats/chat-002/transcript.md` **NO debe reproducir los pasos completos**. En su sección `FULL ORIGINAL RESEARCH OUTPUT` solo debe contener el **resumen de continuidad de los pasos** definido en `## 38.1.7. Resumen canónico de la secuencia de pasos`, junto con el resto de la producción sustantiva de la sesión: resumen exhaustivo de M1, resumen exhaustivo del proyecto SRE/DevOps, decisiones heredadas, cruce de fuentes, resumen de Ejemplo 2, investigación externa, hallazgos, análisis, matrices, auditorías, validaciones y demás contenido realmente producido por Chat 2.
+
+Por tanto, dentro de `transcript.md` queda prohibido crear una segunda copia detallada de cualquiera de estos elementos del plan:
+```text
+### 1. Identification
+### 2. Objective
+...
+### 26. State
+```
+o bloques equivalentes de campos completos por paso. Esos contenidos deben vivir únicamente en `M1_PLAN.md`. Cuando el transcript necesite referirse a un paso, debe hacerlo mediante su ID y su resumen, no reproduciendo sus 26 campos.
 
 Nunca uses el resumen para sustituir una parte faltante de `M1_PLAN.md`. Si un paso no está completo en `M1_PLAN.md`, el problema debe corregirse allí antes del cierre.
 
@@ -4391,12 +5656,14 @@ Chat 2 solo se considera terminado cuando se cumple todo lo siguiente:
 - ningún campo de la plantilla de pasos fue omitido, fusionado, renombrado o reordenado;
 - cada paso identifica explícitamente el tema o temas concretos de M1 que toma como fundamento;
 - el transcript contiene un resumen exhaustivo en español de todo M1, otro resumen exhaustivo en español de la referencia del Agente SRE / DevOps revisada y otro resumen exhaustivo en español de todo el Repositorio Ejemplo 2 revisado;
+- el transcript contiene únicamente el resumen canónico de los pasos y no duplica los 26 campos detallados, que pertenecen exclusivamente a `M1_PLAN.md`;
 - la cantidad de pasos fue determinada después de comprender y resumir M1, la referencia del Agente SRE / DevOps, las decisiones relevantes de Chat 1 y el Ejemplo 2, y no antes;
+- una vez completado ese análisis dinámico, la descomposición final conserva las siete fronteras funcionales previamente validadas salvo evidencia actual, explícita y verificable que justifique un cambio;
 - el flujo entre pasos está gobernado principalmente por el contenido práctico de M1;
 - cada paso tiene una salida definida para la continuidad y una memoria incremental prevista para su ejecución futura; cuando existe una dependencia real, esa salida alimenta al paso dependiente; los pasos independientes no crean dependencias artificiales;
-- cada `.md` nuevo utiliza literalmente la estructura correspondiente definida en **Complete Markdown File Structure**;
+- cada `.md` nuevo utiliza literalmente la estructura correspondiente definida en la **copia literal embebida de `Complete Markdown File Structure`**, validada contra el `README.md` real;
 - cada `.md` existente en el repositorio fuente fue llevado a staging conservando íntegramente su contenido original;
-- cada `.md` histórico sujeto a actualización contiene primero el contenido original y después una sección completa de Chat 2 según la estructura definida para su tipo;
+- cada `.md` histórico sujeto a actualización contiene primero el contenido original y después una sección completa de Chat 2 según la estructura literal definida para su tipo en la copia embebida de **Complete Markdown File Structure** y validada contra el README real;
 - los archivos `decisions/DEC-0001.md` hasta `decisions/DEC-0006.md` conservan exactamente el contenido histórico de Chat 1 y no incorporan contenido de Chat 2;
 - las nuevas decisiones sustantivas de Chat 2, cuando existan, se registran exclusivamente mediante nuevos archivos `decisions/DEC-XXXX.md`, utilizando en cada caso el siguiente identificador secuencial disponible;
 - cada `.md` histórico sujeto a actualización conserva primero íntegramente Chat 1 y después incorpora Chat 2 sin reescribir el histórico;
@@ -4420,7 +5687,7 @@ Chat 2 solo se considera terminado cuando se cumple todo lo siguiente:
 - se revisaron explícitamente las decisiones de Chat 2;
 - las nuevas decisiones reales fueron registradas cuando correspondía;
 - la ausencia de nuevas decisiones fue documentada cuando correspondía;
-- `chat-002/` fue creado siguiendo las estructuras correspondientes de **Complete Markdown File Structure**;
+- `chat-002/` fue creado siguiendo literalmente las estructuras correspondientes de **Complete Markdown File Structure** embebidas en este prompt y verificadas contra el `README.md` real;
 - `handoffs/chat-002-to-chat-003.md` fue creado;
 - `chats/chat-002/META.md`, `chats/chat-002/transcript.md`, `chats/chat-002/HANDOFF.md` y `handoffs/chat-002-to-chat-003.md` existen físicamente en la copia de trabajo, son legibles, no están vacíos, cumplen su estructura correspondiente y están incluidos en el ZIP final;
 - no se creó `chat-003/`;
@@ -4428,6 +5695,8 @@ Chat 2 solo se considera terminado cuando se cumple todo lo siguiente:
 - los `.md` históricos mantienen primero todo Chat 1 y luego Chat 2;
 - el RAW Chat 2 está completo, exhaustivo, detallado, cronológico, en español para el contenido derivado y sin resúmenes sustitutivos;
 - el transcript permite reconstruir la producción sustantiva de Chat 2 y sus validaciones;
+- el transcript no contiene una segunda copia detallada de los pasos; los 26 campos completos de cada paso aparecen exclusivamente en `M1_PLAN.md`;
+- el transcript contiene el resumen canónico de pasos y, además, el resto de la producción sustantiva exigida;
 - no se ejecutó el Paso 1 del proyecto;
 - el ZIP final contiene el estado real.
 
@@ -4507,7 +5776,14 @@ archivo
 → sin reordenamientos
 ```
 
-La comparación debe realizarse **archivo por archivo y de forma determinista**, usando una extracción estructural reproducible del README y del archivo generado. Una estructura que solo “se parezca” al README es `FAIL`.
+La comparación debe realizarse **archivo por archivo y de forma determinista**, usando:
+1. la entrada literal correspondiente de la copia embebida en `13.1`;
+2. la entrada correspondiente del `README.md` real;
+3. el archivo generado.
+
+La validación debe comprobar coincidencia estructural entre los tres niveles. Una estructura que solo “se parezca” al README es `FAIL`.
+
+La comprobación estructural debe ser bloqueante: si el archivo generado introduce o elimina una sección, cambia un nivel de encabezado, renombra un campo fijo, cambia el orden, omite un bloque estructural del template o inventa una sección que no existe en la plantilla correspondiente, el resultado es `FAIL` y no puede empaquetarse.
 
 Para archivos cuyo README no proporcione una plantilla detallada, no inventes una estructura ausente; valida contra la estructura real del archivo fuente y contra las indicaciones literales que el README sí proporcione.
 
@@ -4570,6 +5846,10 @@ Verifica físicamente `chats/chat-002/M1_PLAN.md`:
 ¿Cada ID utiliza `M1-PNN`?
 ¿Todos los valores narrativos generados por Chat 2 están en español?
 ¿El resumen de pasos de `transcript.md` coincide en conjunto, IDs, orden, títulos y objetivos resumidos con `M1_PLAN.md`, sin duplicar sus 26 campos?
+¿`M1-P01` a `M1-P07` conservan las siete fronteras funcionales de regresión validadas, salvo evidencia actual documentada que justifique un cambio?
+¿P04 conserva context rot + ventana + Write/Select/Compress/Isolate?
+¿P06 conserva los cinco patrones de ejecución?
+¿P07 conserva los casos canónicos A-E y su integración tool → context → prompt → patrón → resultado → evidencia → validación?
 ¿No existe otro archivo que contenga una segunda versión canónica del plan?
 ```
 
@@ -4832,7 +6112,9 @@ Ejecuta ahora:
 37. determinación de si existen decisiones sustantivas nuevas;
 38. creación de `DEC-XXXX.md` únicamente para decisiones sustantivas realmente adoptadas;
 39. documentación explícita de la ausencia de nuevas decisiones cuando corresponda, sin crear `DEC-XXXX.md` artificialmente;
-40. adición de la sección de Chat 2 debajo del contenido original de cada `.md` histórico sujeto a actualización, utilizando la estructura correspondiente y excluyendo los registros de decisión histórica ya existentes;
+40. adición de la sección de Chat 2 debajo del contenido original de cada `.md` histórico sujeto a actualización, utilizando literalmente la estructura correspondiente de `Complete Markdown File Structure` y excluyendo los registros de decisión histórica ya existentes;
+40A. comprobación de que `transcript.md` contiene el resumen de pasos y el resto de la producción sustantiva, pero no una copia detallada de los 26 campos;
+40B. comprobación de que `M1_PLAN.md` es el único archivo que contiene los pasos completos con los 26 campos;
 41. creación de `chats/chat-002/META.md` solo en la copia de trabajo independiente;
 42. creación de `chats/chat-002/transcript.md` solo en la copia de trabajo independiente;
 43. creación de `chats/chat-002/HANDOFF.md` solo en la copia de trabajo independiente;
@@ -4927,6 +6209,12 @@ Ejecuta ahora:
 
 **El transcript de Chat 2 debe conservar el RAW completo de la sesión en todo aquello que no quede canónicamente separado en `M1_PLAN.md`: prompt original íntegro, producción sustantiva, investigaciones, hallazgos, tablas, matrices, resumen final de pasos, decisiones, validaciones, resultados de herramientas y registro real de ejecución, en orden cronológico, con la documentación derivada en español y sin omisiones deliberadas ni sustituciones por referencias como “ver arriba”. El desarrollo de los 26 campos de los pasos no se duplica en el transcript porque pertenece exclusivamente a `M1_PLAN.md`.**
 
+**El `transcript.md` debe presentar la información de Chat 2 en el orden lógico obligatorio definido en el contrato de presentación; el resumen de pasos debe ser una síntesis real y completa de la secuencia final, mientras que `M1_PLAN.md` conserva en exclusiva el desarrollo operativo de cada paso.**
+
+**La estructura documental de los `.md` se debe aplicar literalmente a partir del bloque completo `Complete Markdown File Structure` incorporado en este prompt y contrastado con el `README.md` real. Una estructura solamente equivalente o aproximada es FAIL.**
+
+**La ejecución de siete pasos solo es válida si mantiene las siete fronteras funcionales validadas: P01 caracterización/modo; P02 herramienta; P03 arquitectura de contexto persistente; P04 operación de contexto + W/S/C/I; P05 prompting; P06 cinco patrones; P07 integración + casos A-E.**
+
 **Conserva el contenido fuente original en su idioma cuando sea necesario para preservar evidencia.**
 
 **Si falta información, decláralo en lugar de rellenarla por suposición.**
@@ -4951,190 +6239,206 @@ Ejecuta ahora:
 
 
 
-# FULL ORIGINAL RESEARCH OUTPUT
+# PART B — PRODUCCIÓN SUSTANTIVA
 
-## PARTE B — PRODUCCIÓN SUSTANTIVA
+## Investigación, análisis y resultados reales de Chat 2
 
-### 1. Bootstrap y estado heredado de Chat 1
+Esta sección conserva la producción sustantiva de la sesión en el orden exigido por el contrato: M1 → SRE/DevOps → decisiones Chat1 → cruce integral → Ejemplo2 → investigación externa → determinación dinámica → resumen de pasos → matrices/auditorías → conclusiones y límites.
 
-Se recuperaron desde `Diiegoal/memory-repo`:
-`BOOTSTRAP.md`, `STATE.md`, `DECISIONS.md`, `OPEN_QUESTIONS.md`, `INDEX.md`, `MEMORY_PROTOCOL.md`, `chats/chat-001/META.md`, `chats/chat-001/HANDOFF.md`, `handoffs/chat-001-to-chat-002.md` y las decisiones DEC-0001…DEC-0006.
+## 1. Resumen exhaustivo de M1
 
-Orden recuperado desde `chats/chat-001/HANDOFF.md`:
-`M1 → M3 → M4 → M2 → M6 → M5 → M7 → M8 → M9 → M10 → M11 → M13`.
+M1 organiza el uso eficaz de copilotos alrededor de tres pilares co-iguales: Tool/Harness, Context y Prompt. Tool/Harness no es solo un editor: comprende modelo/capacidad, herramientas, políticas de seguridad, workflows e integraciones disponibles para ejecutar el trabajo. Context es la información efectivamente presentada al modelo y su curaduría; el tamaño del contexto no equivale a que toda la historia sea útil. Prompt define tarea, contexto, criterios de éxito, restricciones, referencias y salida.
 
-M12 se confirmó como reference-only. Los seis decision records históricos se conservaron sin cambios.
+El Pilar 1 describe cuatro familias de herramientas: copilotos integrados en IDE, herramientas de terminal/CLI, herramientas autónomas/cloud y herramientas especializadas. Distingue completion de comportamiento agentic. La selección debe hacerse con cinco criterios: tamaño/forma del codebase, lenguaje, privacidad/compliance, presupuesto y estilo de desarrollo. M1 propone un árbol de decisión y advierte contra elegir una herramienta por potencia nominal, contra delegar sin contexto y contra usar capacidades agentic donde una interacción más controlada es suficiente.
 
-### 2. Resumen exhaustivo de Módulo 1
+El Pilar 2 trata el contexto como un cuello de botella. Describe context rot y mecanismos relacionados como pérdida de atención, información perdida en el centro y distractores. Presenta tipos de contexto y recomienda archivos persistentes de instrucciones como `AGENTS.md`/`CLAUDE.md` cuando sean apropiados, con contenido mínimo y de alta señal. Propone cuatro estrategias operativas que Chat2 conserva individualmente en P04: Write, Select, Compress e Isolate. Write externaliza información útil; Select recupera solo lo necesario; Compress reduce volumen preservando señal; Isolate separa subproblemas o contextos. M1 también trata compactación/reinicio y uso de subagentes/context isolation como mecanismos cuando la tarea lo justifica.
 
-#### Archivo 1 — El modelo mental de los 3 pilares
+El Pilar 3 define la anatomía del prompt: contexto corto/rol cuando ayude, tarea, criterios de éxito explícitos, restricciones, recursos/referencias y formato de salida; la aclaración es preferible cuando falta una condición esencial. El contenido insiste en instrucciones concretas, delimitadores/Markdown/XML útiles, zero-shot primero y few-shot cuando los ejemplos realmente controlan el resultado. Para modelos de razonamiento, la guía no trata “think step by step” como requisito universal; se privilegia pedir una salida y justificación útil y verificable. Identifica anti-patrones como instrucciones vagas, micro-especificación, megaprompts, ausencia de criterios de éxito y múltiples tareas sin frontera.
 
-El documento establece que la calidad de trabajo asistido por IA no depende solo del modelo: herramienta/harness, contexto y prompt forman un sistema conjunto. El valor práctico es tratar el entorno de ejecución, la información visible al agente y la forma de expresar la tarea como variables de ingeniería que se diseñan, revisan y mejoran.
+La integración de M1 culmina en cinco patrones de coding que P06 desarrolla por separado: Spec-driven preview, Plan-then-execute, Test-first, Refactor con anclas y Critic loops. No son simples nombres: cada patrón debe tener condición de uso, entradas, actividad, resultado y validación. La secuencia integrada es caracterizar tarea → elegir herramienta → preparar contexto → escribir prompt → ejecutar/revisar. Los casos canónicos que P07 conserva individualmente son A gran refactor, B greenfield feature, C debugging, D exploration y E code review. El criterio integrador es `tool → context → prompt → pattern → result → evidence → validation`.
 
-El material relaciona el enfoque con evidencia sobre productividad/calidad y con disciplinas industriales de contexto y prompting. La aplicación relevante para el proyecto SRE es convertir estos tres elementos en una política de trabajo reproducible para investigar, diseñar, documentar y posteriormente implementar capacidades del agente.
+## 2. Contexto y arquitectura de memoria externa
 
-#### Archivo 2 — Pilar 1: La Herramienta
+El documento de memoria externa recuperado de Library explica la separación entre memoria paramétrica del modelo, contexto de llamada, memoria gestionada por la aplicación y memoria externa controlada por el usuario. Su arquitectura propuesta trata el transcript como registro primario y añade STATE, DECISIONS, KNOWLEDGE, OPEN_QUESTIONS, HANDOFF e índices/retrieval para hacer la continuidad portable. Destaca event log conceptual, procedencia, identificadores estables, temporalidad, supersession, contradicciones, context packet y mínimo contexto suficiente. También separa memoria episódica y semántica, y distingue el estado vigente de la historia.
 
-El documento clasifica herramientas en cuatro categorías:
-A) IDE,
-B) terminal/CLI agentic,
-C) cloud/autonomous,
-D) especializadas.
+La guía de prompt recuperada de Library desarrolla una arquitectura equivalente de prompt profesional: empezar por el resultado; distinguir objetivo de contexto; escribir instrucciones específicas; usar restricciones y criterios de aceptación; definir salida; verificar; seleccionar few-shot/zero-shot; separar instrucciones de datos; evitar megaprompts; y evaluar iterativamente. También cubre archivos, herramientas, agentes, prompt injection, contenido no confiable, proyectos, evals, meta-prompting y optimización.
 
-Distingue completion de agentic y proporciona reglas para cambiar de modo. La elección debe considerar tamaño y forma del codebase, lenguaje, privacidad/compliance, presupuesto y estilo de trabajo. Se recomienda leer benchmarks como evidencia comparativa, no como garantía individual. Menciona SWE-Bench Verified/Pro, Aider Polyglot y Terminal-Bench 2.0, junto con reglas de evaluación y anti-patterns. El documento también contiene un snapshot de disponibilidad de modelos de abril de 2026.
+## 3. Resumen exhaustivo del Agente SRE / DevOps de referencia
 
-La conversión práctica para este proyecto no es “usar una herramienta concreta”, sino establecer un marco que clasifique la tarea y justifique la categoría/modo apropiados, manteniendo posibilidad de reevaluación.
+El documento `6. Agente SRE DevOps Respuesta Incidentes.md` fue leído completo desde `Diiegoal/CursoIA` en `main` y tiene 52,590 caracteres. Su sistema de referencia es un agente conversacional/reflexivo orientado a incident response. El flujo conceptual parte de incident intake/webhook, pasa por gestión y deduplicación/correlación del incidente, investigación y recopilación de evidencia, gestión explícita de hipótesis y verificación, formulación de remediation, aprobación humana para acciones consecuenciales, ejecución controlada en un executor separado, recuperación/verificación y generación de postmortem/conocimiento operativo.
 
-#### Archivo 3 — Pilar 2: El Contexto
+La arquitectura referencia una capa de agente con LangChain/LangGraph, FastAPI como boundary de servicio, Streamlit como UI posible, Slack como superficie operativa/aprobación y workers para procesamiento asíncrono. Los datos operacionales se apoyan en PostgreSQL; pgvector aparece como opción de retrieval semántico a evaluar; Redis se reserva para colas/cache/coordinación cuando las necesidades lo justifiquen. SQLAlchemy/Alembic gestionan persistencia; Pydantic estructura datos; HTTPX sirve a integraciones HTTP; Kubernetes Python Client a interacción con Kubernetes.
 
-Explica context rot como deterioro del rendimiento cuando se acumula contexto irrelevante o redundante. Las cifras aproximadas de degradación que aparecen en el material no se tratan como constantes oficiales. El documento enumera tipos de contexto: código relevante, convenciones, estado actual, intención/especificación, restricciones, memoria persistente, documentación externa e historial.
+La capa de evidencia integra fuentes como Prometheus/Alertmanager, Loki, GitHub y AWS/CloudWatch, y la observabilidad incluye Prometheus, Grafana, Loki, OpenTelemetry/OTLP y Tempo según el alcance del documento. El proyecto también contempla runbooks, incident history, RAG, checkpoints/memoria, herramientas del agente y evaluación/traicing mediante LangSmith. GitHub, CI/CD, Docker, Kubernetes y AWS permiten correlacionar cambios y operaciones. El documento trata human-in-the-loop, aprobación, minimum privilege, credenciales separadas y secure executor como controles para que un agente no convierta una sugerencia en mutación no autorizada. Recovery verification debe comprobar el retorno del sistema después de una remediación; postmortems convierten el incidente en conocimiento operativo.
 
-Propone cuatro estrategias:
-- Write — escribir contexto útil en archivos;
-- Select — seleccionar solo lo pertinente;
-- Compress — compactar cuando sea necesario;
-- Isolate — aislar tareas/subagentes para reducir interferencias.
+El stack completo observado en la referencia es el inventario anterior, pero Chat2 conserva la distinción entre explícitamente descrito, adoptado por Chat1, opcional, alternativa, evaluable y futuro. Por ejemplo: PostgreSQL es la decisión de Chat1 para almacenamiento autoritativo; pgvector está en evaluación; Redis es opcional; Streamlit es opcional a nivel de producto; Slack es un canal operativo posible; React/Next.js es evolución potencial; AWS/Kubernetes/IaC son posteriores al MVP read-only. El documento no autoriza por sí mismo a implementar cualquiera de ellos durante M1.
 
-Describe `AGENTS.md`, `CLAUDE.md` y `.cursorrules` como convenciones de instrucciones, y recomienda un archivo de entrada corto, curado, enlazado a fuentes profundas, uso de subagentes, compactación/nueva sesión y tratar estos archivos como artefactos de ingeniería. El kit debe mantenerse pequeño, navegable y sujeto a revisión.
+## 4. Decisiones heredadas de Chat1 y su impacto
 
-La aplicación al SRE es diseñar el repositorio como mapa de conocimiento, separar contexto estable de contexto situacional y no cargar historial completo por defecto.
+`DEC-0001`: orden profesional `M1 → M3 → M4 → M2 → M6 → M5 → M7 → M8 → M9 → M10 → M11 → M13`. Esta es una decisión histórica, no una recomendación inventada en Chat2.
 
-#### Archivo 4 — Pilar 3: El Prompt + Integración
+`DEC-0002`: M12 queda fuera del Agentic SDLC y fuera del orden de construcción; se usa como fuente de información y referencia del Agente SRE.
 
-El documento recomienda prompts más cortos y directos para modelos modernos de razonamiento; no requiere solicitar chain-of-thought. Introduce delimitadores, XML/Markdown cuando aportan estructura, few-shot solo cuando la demostración aporta valor y framing positivo. Desaconseja megaprompts.
+`DEC-0003`: seguridad y documentación son gates y loops. Para M1 significa que el workflow de herramientas y contexto debe asumir restricciones de seguridad, mientras M5/M6 posteriormente cristalizan arquitectura/documentación y controles.
 
-La anatomía propuesta incluye role, context, objective, success criteria, constraints, resources y output/format. También incluye anti-patterns y un flujo de integración basado en:
-spec-driven preview,
-plan-then-execute,
-test-first,
-refactor anchors,
-critic/review loops.
+`DEC-0004`: read-only-first. La aplicación inicial del agente recopila evidencia y propone; las mutaciones requieren autorización, aprobación humana y executor separado. Chat2 no habilita ninguna mutación.
 
-La idea de integración final combina árbol/archivo, contexto, prompt, ejecución futura y revisión en un ciclo de ingeniería con feedback.
+`DEC-0005`: PostgreSQL autoritativo y evaluación de pgvector antes de una base vectorial separada. M1 solo documenta esta decisión como contexto; no implementa almacenamiento.
 
-#### Archivo 5 — Recursos adicionales
+`DEC-0006`: Streamlit es opcional a nivel de producto; puede servir como UI inicial; Slack puede ser superficie operacional. M1 no implementa UI.
 
-Incluye referencias a harness engineering, METR, buenas prácticas de Claude Code, GitHub Models/pricing, Cursor, Cognition, benchmarks, context engineering, AGENTS y buenas prácticas de prompting, OpenAI Cookbook y LangChain. Chat2 los trató como catálogo de referencias y no como instrucciones que puedan cambiar el contrato.
+## 5. Cruce M1 + Chat1 + SRE + memory-repo + Example2 + proyecto
 
-### 3. Resumen exhaustivo del proyecto Agente SRE / DevOps de referencia
+M1 aporta el método de ingeniería asistida; Chat1 fija la secuencia de construcción y los controles; la referencia SRE aporta el sistema que finalmente deberá someterse a ese método; `memory-repo` aporta continuidad y procedencia; Example2 aporta un patrón real de proyecto full-stack/AI que sirve para comparar artefactos, pero no se copia; el repositorio target está vacío (`size: 0`, `main`) y por ello M1 debe preparar una base de trabajo futura sin ejecutar el primer paso.
 
-La fuente `6. Agente SRE DevOps Respuesta Incidentes.md` describe un agente conversacional y reflexivo para respuesta de incidentes. El flujo completo es: alerta/webhook → intake y normalización → identificación/fingerprint → deduplicación/correlación → estado del incidente → recopilación de evidencia → formulación de hipótesis → verificación → propuesta de remediación → aprobación humana cuando la acción es consecuencial → ejecución controlada mediante executor separado → verificación de recuperación → resolución → postmortem y generación de conocimiento.
+El cruce operativo es: los tres pilares gobiernan cómo un agente de coding debe interactuar con el repositorio y sus fuentes; la memoria externa del proyecto mantiene contexto estable/estado/histórico; la arquitectura SRE requiere evidencia operativa separada de instrucciones; y los controles de Chat1 limitan autonomía y almacenamiento. M1 por tanto crea la disciplina de trabajo, no el runtime SRE.
 
-La capa de backend/API contempla FastAPI, Uvicorn, Pydantic, SQLAlchemy y Alembic. La capa agentic contempla LangChain y LangGraph, herramientas para observar evidencia y persistencia/checkpoints para workflows largos. PostgreSQL es la persistencia relacional; Redis aparece como opción para cola/cache/coordinación. HTTPX y Kubernetes Python Client aparecen para integraciones. La fuente también cubre Slack API, GitHub API, Prometheus, Grafana/Loki, OpenTelemetry y el ecosistema AWS (APIs, CloudWatch, ECS, EKS, EC2, Lambda, RDS, ElastiCache, ALB, CloudTrail). Docker y Kubernetes soportan empaquetado/despliegue; Alertmanager, PagerDuty/incident.io y ArgoCD aparecen como integraciones del entorno operativo. Runbooks, RAG, historial de incidentes, recuperación semántica y postmortems alimentan la base de conocimiento.
+## 6. Resumen del Repositorio Ejemplo 2 realmente revisado
 
-En observabilidad, el material menciona Prometheus/Alertmanager, Grafana, Loki, OpenTelemetry/OTLP y Tempo, además de LangSmith para trazas/evaluación del agente. El frontend puede usar Streamlit como control center; Slack funciona como canal operativo; React/Next.js se contempla como evolución de interfaz separada.
+Se revisó la referencia `LIDR-academy/AI4Devs-finalproject-Example2`, identificada desde el material `Diiegoal/CursoIA/Proyecto_Final_Master_AI4Devs`. Su árbol contiene 90 entradas. Entre los archivos relevantes observados están `README.md`, `pyproject.toml`, `requirements.txt`, `Dockerfile`, `alembic.ini`, `cloudbuild.yaml`, `prompts.md`, `prompts-AMP.md`; backend FastAPI bajo `app/` con endpoints analytics/chat, core config/secrets, modelos, schemas y services; migraciones Alembic; documentación `docs/01-PROJECT-OVERVIEW.md` a `docs/09-SECURITY-TESTING.md`; data/portfolio.yaml; scripts de setup y tests. La app utiliza un backend Python/FastAPI, RAG, PostgreSQL/pgvector, integración frontend React/TypeScript, analytics y prácticas GDPR/security. La infraestructura de referencia incluye Docker y Cloud Build/Cloud Run/Cloud SQL/Secret Manager según sus documentos.
 
-La seguridad se basa en mínimo privilegio, separación entre herramientas read-only y herramientas de mutación, human-in-the-loop, aprobación explícita y executor separado con credenciales acotadas. La verificación de recuperación es posterior a la acción y debe producir un estado observable de éxito/fallo. La fuente enfatiza testing, evaluación del agente, trazabilidad, CI/CD, IaC y operación gradual.
+El valor para Chat2 es comparativo: demuestra la importancia de documentación de proyecto, separación app/docs/tests, migraciones, configuración, secrets y pipelines, pero está prohibido copiar arquitectura, código, clases, funciones, archivos o decisiones al nuevo proyecto. El diseño del Agente SRE debe ser independiente.
 
-El inventario se clasifica, para Chat2, de esta forma:
-- EXPLÍCITAMENTE DESCRITO: todo lo anterior cuando aparece en la fuente;
-- ADOPTADO/DECIDIDO EN CHAT1: PostgreSQL authoritative, pgvector como opción evaluada, read-only-first, Streamlit opcional, M12 reference-only;
-- OPCIONAL/ALTERNATIVA: Redis, Streamlit como UI, React/Next.js como evolución, algunas integraciones operativas;
-- EVALUAR: pgvector frente a motor vectorial separado, exacta política de workers/queues, evaluación de escala;
-- RESERVADO PARA ETAPA POSTERIOR: mutación, executor productivo, AWS/Kubernetes de producción-like, IaC avanzado, QA sistémico;
-- NO DETERMINADO: proveedor/modelo LLM, sandbox exacto, corpus de incidentes, SLO/SLI operating model.
+## 7. Auditoría actual de CursoIA y sus módulos
 
-### 4. Repositorio Ejemplo 2
+El árbol `main` actual contiene los 13 directorios esperados y 68 Markdown dentro de ellos. Chat2 recuperó íntegramente los 68 Markdown mediante el conector de GitHub, verificando contenido/longitud/sha. M1 contiene cinco archivos. M2 contiene seis; M3 seis; M4 seis; M5 seis; M6 cinco; M7 siete; M8 cinco; M9 cuatro; M10 tres; M11 cuatro; M12 seis; M13 cinco.
 
-Se confirmó el repositorio público `LIDR-academy/AI4Devs-finalproject-Example2`, rama `main`, con 73 archivos rastreados y 13 Markdown. El proyecto se documenta como AI Resume Agent: chatbot para portfolio con RAG y captura de leads.
+El enfoque real observado por módulo es: M1 herramientas/contexto/prompts; M2 SDD/OpenSpec; M3 sistema operativo de copilotos, Explore-Plan-Execute, gobernanza y subagentes/tooling; M4 planificación, backlog AI-ready, estimación, PM tools y planificación continua; M5 documentación/ADR/C4/API/docs-as-code/docs para LLM; M6 ética, regulación, riesgos y seguridad/privacidad de LLM; M7 TDD/unit testing/fakes/buenas prácticas/asistencia IA; M8 buenas prácticas BBDD, SQL/IA sobre BBDD; M9 refactorización, backend y ticket→PR; M10 frontend asistido por IA y diseño→código; M11 integración/E2E, BDD, QA asistido por IA; M12 laboratorio LLM/RAG y referencia SRE; M13 PR/code review, infraestructura aumentada por IA y CI/CD/DevSecOps. Los archivos con contenido especialmente corto fueron tratados como hechos del repositorio, no rellenados con contenido inventado.
 
-README y documentos describen:
-- Backend Python/FastAPI.
-- Frontend React 18+ con TypeScript.
-- Gemini 2.5 Flash.
-- HuggingFace embeddings.
-- PostgreSQL + pgvector.
-- Cloud Run, Cloud SQL, Cloud Build y Cloud Storage.
-- Analytics y captura gradual de leads.
-- GDPR.
-- Rate limiting/anti-DoS, CORS, validación Pydantic, secretos en Google Secret Manager.
-- Arquitectura con servicios separados para RAG, analytics, GDPR y frontend integration.
-- Modelo de datos para ChatSession, SessionAnalytics, GDPRConsent, ChatMessage, ConversationPair, VectorStore, LangchainPgCollection y DailyAnalytics.
-- API con chat, health, analytics y endpoints GDPR.
-- React state management, API communication, testing con Jest/React Testing Library/MSW/Cypress, responsive UI y métricas web.
-- Historias de usuario y tickets con aceptación, DoD, dependencias y estrategia de testing.
-- Guía de instalación con GCP, service accounts, Cloud Build y Cloud Run.
-- Documento de seguridad/testing con OWASP LLM Top 10, defense in depth, zero trust, privacy by design, gestión de secretos, rate limiting, CORS, test pyramid y automatización.
-- `prompts-AMP.md` registra una gran colección histórica de prompts y sus estadísticas/roles/categorías.
-- `prompts.md` consolida prompts de análisis/diseño, implementación, testing, documentación, despliegue y optimización.
-- `scripts/README.md` explica scripts de pruebas, knowledge base, vector store, setup GCP y servidor local.
+## 8. Orden profesional y candidatos
 
-La utilidad para Chat2 es metodológica: muestra cómo un proyecto AI se documenta con requisitos, arquitectura, datos, API, seguridad, testing, instalación, prompts y tickets. No se copia código, estructura, clases, funciones, decisiones ni archivos. La arquitectura del proyecto SRE permanece independiente.
+Se conservó el orden histórico de Chat1 después de comprobar nuevamente las fronteras y dependencias. Candidato A (empresarial desde cero): `M1 → M3 → M4 → M2 → M6 → M5 → M7 → M8 → M9 → M10 → M11 → M13`, con M1/M3 como operating foundation, M4 planning, M2 specification, M6 security, M5 documentation/architecture, M7 testing early, M8 data, M9 backend, M10 frontend, M11 system QA, M13 delivery. Candidato B (Agentic/AI-native): adelanta SDD/documentation/testing/AI operating loops y enfatiza herramientas y evals antes de la infraestructura. Candidato C (pedagógico): prioriza progresión de conocimiento y puede introducir BD/backend/frontend/testing según continuidad de aprendizaje.
 
-### 5. Estado real del nuevo proyecto
+La matriz de decisión de Chat1 ya asignó criterios y pesos. Chat2 no reabrió la decisión porque la instrucción de continuidad exigía recuperar las decisiones aceptadas y el control de regresión del prompt no mostró evidencia de una frontera nueva. La conclusión descriptiva es que A mantiene mejor la lógica de construcción profesional ya justificada; B es una perspectiva útil del Agentic SDLC; C es útil para prerrequisitos pedagógicos. No se presenta como una puntuación o ranking nuevo en Chat2; se conserva la decisión histórica como tal.
 
-El repositorio `DiiegoA/Agente_SRE_DevOps_para_respuesta_a_incidentes` fue tratado como lectura. Su metadata actual corresponde a un repositorio sin contenido de código detectable en el estado recuperado. No se creó ningún artefacto allí.
+## 9. Matriz resumida módulo → rol de construcción
 
-### 6. Determinación dinámica de pasos
+| Módulo | Rol principal | Aplicación transversal | Limitación/gap
+|---|---|---|---|
+| M1 | AI engineering foundation | workflow, context, prompting, pattern | no SRE runtime
+| M3 | AI copilot operating system | harness/tooling | no full product architecture
+| M4 | product planning | continuous planning | incident domain supplied by project
+| M2 | specification contract | acceptance/changes | exact SRE implementation later
+| M6 | security/privacy gate | security throughout | executor isolation needs project work
+| M5 | architecture/documentation | docs-as-code/knowledge | target domain artifacts need authoring
+| M7 | unit quality/TDD | tests during implementation | Python-specific adaptation
+| M8 | data | persistence/retrieval decisions | scale validation
+| M9 | backend | implementation | Python/FastAPI target adaptation
+| M10 | frontend | operator UX | Streamlit option complicates direct applicability
+| M11 | system QA/evaluation | E2E/BDD/AI QA | SRE eval corpus must be built
+| M13 | delivery/operations | CI/CD/DevSecOps | full deployment later
+| M12 | reference only | target context | excluded from SDLC construction
 
-Se identificaron como capacidades profesionales independientes:
-1) fundamentación/mode of work;
-2) tool/mode selection;
-3) context engineering;
-4) prompt contracts;
-5) integrated workflows;
-6) three-pillar operating model;
-7) validation/iteration.
+## 10. Technology treatment for M1
 
-Una alternativa de cinco pasos comprimía selección de herramienta, contexto/prompt y workflow/validation. Una alternativa de nueve o más fragmentaba subtítulos y generaba repetición. La de siete conserva resultados y validaciones independientes sin convertir cada tema en un paso artificial.
+| Tecnología/capacidad | Tratamiento | Razón
+|---|---|---|
+| Claude Code / coding agent | APLICAR AHORA POR MÓDULO 1 | M1/M3 directly address tool/harness workflow, but no runtime project execution in Chat2.
+| Python/uv/FastAPI/LangChain/LangGraph | PREPARAR COMO BASE PARA FUTURO | Product stack context from reference; M1 does not build it.
+| PostgreSQL/pgvector/Redis | PREPARAR COMO BASE PARA FUTURO | Inherited decisions; data implementation belongs later.
+| Streamlit/Slack | PREPARAR COMO BASE PARA FUTURO | optional interfaces.
+| RAG/memory/runtime state | RESERVAR PARA MÓDULOS POSTERIORES | M1 teaches context engineering, not full product memory/RAG runtime.
+| Prometheus/Alertmanager/Loki/OTel/Grafana/Tempo | RESERVAR PARA MÓDULO POSTERIOR | SRE reference context; not M1 implementation.
+| GitHub/AWS/Kubernetes/Docker/CI/CD | RESERVAR PARA ETAPAS POSTERIORES | target operations/DevSecOps.
+| Security/read-only/approval | PREPARAR COMO BASE PARA FUTURO | M1 workflow must respect inherited safety boundaries.
 
-Los pasos finales son:
-- M1-P01 — Caracterizar el trabajo de ingeniería y fijar el modelo mental de los tres pilares.
-- M1-P02 — Clasificar tareas y seleccionar/evaluar herramienta y modo de interacción.
-- M1-P03 — Diseñar el sistema de contexto mínimo suficiente y su higiene.
-- M1-P04 — Diseñar contratos de prompt y biblioteca de patrones reutilizables.
-- M1-P05 — Definir patrones integrados de planificar, ejecutar, probar, revisar y refactorizar.
-- M1-P06 — Consolidar el modelo operativo AI-assisted específico del proyecto SRE.
-- M1-P07 — Validar, documentar, controlar contaminación y establecer iteración.
+## 11. Curriculum gaps / not implied by M1
 
-### 7. Clasificación tecnológica M1
+M1 cannot by itself deliver FastAPI production architecture, LangGraph incident orchestration, SRE-specific domain modeling, exact SLO/SLI/error-budget/on-call operating model, secure executor sandboxing, Slack approval mechanics, production observability, incident corpus/evals, full deployment, or the complete agent runtime. Those remain later-module work or project-specific gaps. The existing Chat1 gap taxonomy also identifies partial coverage of Kubernetes/AWS integrations, runtime memory policy, vector scale, frontend choice, and evaluation rubric.
 
-Durante M1:
-- Aplicar ahora por M1: tool/mode selection, context engineering, prompt contracts, workflow patterns, validation/provenance.
-- Preparar como base para futuro: repository map, AGENTS/CLAUDE context entry point, prompt library, workflow rules, validation register.
-- Reservar para módulo posterior: implementación LangChain/LangGraph, RAG productivo, FastAPI, PostgreSQL runtime, Redis, Slack, AWS, Kubernetes, observabilidad productiva, deployment.
-- Hueco/evidencia pendiente: exact LLM provider, exact executor isolation, incident corpus, SRE operating model.
-- No relevante para M1: implementación de componentes productivos que no se justifican por M1.
+## 12. External research and currentness
 
-### 8. Auditoría de calidad
+The external evidence reinforces that agent-first engineering shifts value toward harness/context/feedback loops, that AGENTS.md is a portable pattern for agent instructions, that observability depends on emitted metrics/logs/traces, and that excessive agency can arise from excessive functionality, permissions or autonomy. These sources are supporting context, not replacements for M1. The Chat2 cutoff for current assertions is 2026-09-11, even though some current web pages were viewed on 2026-09-30.
 
-Las comprobaciones conceptuales y estructurales realizadas:
-- cobertura de los cinco archivos M1;
-- profundidad interna de capacidades;
-- independencia de unidades;
-- no-compresión;
-- no-fragmentación;
-- dependencias internas;
-- anti-contaminación de M2–M13;
-- M12 reference-only;
-- originalidad respecto de Example2;
-- separación PLANIFICADO/EJECUTADO;
-- trazabilidad concepto→actividad→paso→artefacto→evidencia→validación;
-- 26/26 campos en cada paso del `M1_PLAN.md`;
-- tests con prueba/entrada/resultado esperado/condición PASS;
-- ausencia de nuevas decisiones sustantivas;
-- existencia física de los cuatro artefactos Chat2 y del handoff futuro en staging.
+## 13. Dynamic step determination and regression
 
-### 9. Resultado temporal
+The inventory was decomposed by capability/result/dependency rather than by heading count. Candidate boundaries were checked for independence, depth, integration and anti-fragmentation. The result was the seven-unit functional sequence required by the prompt's regression gate: P01 task/mode; P02 tool; P03 contexto persistente architecture; P04 context operations/W-S-C-I; P05 prompting; P06 five coding patterns; P07 integration + A-E. P04 and P06 keep their internal elements explicitly; P07 keeps all cases A-E and the complete chain.
 
-Chat2 terminó en estado `PLANIFICADO`. No se ejecutó el Paso 1 del producto. No se creó código del producto. No se ejecutaron comandos del nuevo repositorio.
+## 14. Canonical final sequence summary
 
+| ID | Title | Objective | Main capability | Main output | Dependency | State |
+|---|---|---|---|---|---|---|
+| M1-P01 | Caracterizar la tarea y determinar el modo de trabajo | definir trabajo, riesgo y modo | caracterización de tarea | ficha de caracterización | ninguna dentro de M1 | PLANIFICADO |
+| M1-P02 | Seleccionar y evaluar la herramienta mediante criterios verificables | seleccionar Tool/Harness | evaluación de herramienta | decisión de tooling | P01 | PLANIFICADO |
+| M1-P03 | Diseñar la arquitectura de contexto persistente del proyecto | estructurar contexto | contexto persistente | diseño de contexto | P02 | PLANIFICADO |
+| M1-P04 | Gestionar la ventana de contexto y prevenir context rot | operar contexto | W/S/C/I | procedimiento de higiene contextual | P03 | PLANIFICADO |
+| M1-P05 | Diseñar y aplicar prompting fundamental para trabajo de ingeniería | crear prompt contractual | prompting | prompt version record | P04 | PLANIFICADO |
+| M1-P06 | Aplicar patrones de ejecución de coding asistido por IA | controlar ejecución | cinco patrones | pattern evidence | P05 | PLANIFICADO |
+| M1-P07 | Integrar los tres pilares y validar los cinco casos canónicos de M1 | comprobar método completo | casos integrados A-E | integrated method/evidence | P06 | PLANIFICADO |
 
-# PARTE C — REGISTRO REAL DE EJECUCIÓN
+## 15. Matrices, validaciones y auditorías
 
-1. Se recibió y leyó el prompt suministrado por el usuario desde el archivo adjunto.
-2. Se borró/evitó utilizar memoria persistente previa conforme a la solicitud anterior del usuario.
-3. Se recuperaron artefactos de continuidad de Chat1 desde `Diiegoal/memory-repo` mediante la integración de GitHub, exclusivamente en lectura.
-4. Se verificó el árbol histórico y las seis decisiones existentes.
-5. Se auditó el corpus M1 de `Diiegoal/CursoIA` en `main` y se leyeron sus cinco archivos Markdown.
-6. Se leyó la referencia completa de SRE/DevOps indicada por el prompt en múltiples rangos.
-7. Se revisó el repositorio Example2 y su corpus Markdown; se distinguió claramente referencia de copia.
-8. Se verificó el estado del repositorio objetivo, sin escritura.
-9. Se realizó la determinación dinámica de siete unidades de trabajo y se construyó el `M1_PLAN.md` con 26 campos por paso.
-10. Se ejecutó una revisión de estructura, cobertura, trazabilidad, alcance y temporalidad sobre el plan.
-11. Se generaron en staging los artefactos de Chat2 y el estado acumulativo.
-12. No se creó ninguna nueva decisión sustantiva; no se creó `DEC-0007.md`.
-13. No se ejecutó el Paso 1 del proyecto ni se creó código del producto.
-14. Se realizó un gate físico sobre los archivos de Chat2 y el handoff futuro.
-15. Antes del empaquetado se dejó constancia de una limitación: el blob histórico de `chats/chat-001/transcript.md` pudo identificarse por SHA y tamaño, pero no pudo materializarse byte-a-byte en el contenedor debido a la limitación de transferencia del conector; por honestidad, la staging copy lo marca explícitamente y no afirma que sea un RAW histórico completo.
-16. Esta limitación afecta el gate de integridad histórica estricta definido por el prompt; se conserva dentro del artefacto para no presentar como ejecutado o validado algo que no pudo comprobarse físicamente.
+Cobertura M1: 100% de las cinco fuentes Markdown de M1 auditadas; sus contenidos prácticos fueron mapeados a siete unidades sin crear una octava unidad artificial. Dependencias: P01→P02→P03→P04→P05→P06→P07 dentro de M1 son dependencias funcionales, mientras que la secuencia posterior de módulos del proyecto permanece gobernada por Chat1. No se inventaron dependencias laterales para capacidades futuras. Tests: cada paso tiene tres pruebas planificadas con entradas, resultados y condiciones PASS/FAIL; P04 añade validación individual de W/S/C/I dentro del mismo paso; P06 valida cinco patrones; P07 valida A-E. Plan vs ejecutado: ningún paso fue ejecutado. Estructura de memoria: Chat1 histórico permanece separado de Chat2; las decisiones DEC-0001..0006 no se reescriben ni se sustituyen.
+
+## 16. Conclusiones y límites reales
+
+Chat2 completó la investigación y planificación de M1, no la implementación del producto. El target repository se verificó como público, rama `main`, tamaño `0`. No se escribió allí. No se creó código del producto ni `chat-003`. No se creó decisión formal nueva. Las ocho preguntas abiertas de Chat1 continúan abiertas.
+
+## 17. Fuentes externas
+
+### Fuentes externas consultadas/contrastadas
+
+- OpenAI, “Harness engineering: leveraging Codex in an agent-first world”, 2026-02-11, https://openai.com/index/harness-engineering/ — evidencia contextual para repository-as-system-of-record, harness y feedback loops en desarrollo agent-first.
+- OpenAI Cookbook, “Build an SRE agent for incident response”, 2026-09-10, https://developers.openai.com/cookbook/examples/agents_api/apps/sev_bot/readme — referencia directamente relacionada con un agente SRE para incident response y dentro del corte 2026-09-11.
+- AGENTS.md, https://agents.md/ — formato abierto para contexto/instrucciones de coding agents; consultado 2026-09-30.
+- OpenTelemetry, Observability primer, https://opentelemetry.io/docs/concepts/observability-primer/ — traces, metrics y logs como señales de observabilidad; consultado 2026-09-30 para contraste conceptual.
+- Prometheus Alertmanager, https://prometheus.io/docs/alerting/latest/alertmanager/ — deduplicación, grouping y routing; utilizado por Chat1 y el marco SRE.
+- OWASP GenAI Security, LLM06:2025 Excessive Agency, https://genai.owasp.org/llmrisk/llm062025-excessive-agency/ — exceso de funcionalidad, permisos o autonomía como riesgo de agencia.
+- OWASP Top 10 for LLM and GenAI, https://genai.owasp.org/initiatives/top-10-for-llm-and-genai/ — prompt injection, sensitive information disclosure, supply chain, improper output handling, excessive agency, vector/embedding weaknesses, misinformation y unbounded consumption.
+
+Temporalidad: el prompt de Chat2 exige corte obligatorio 2026-09-11. Cuando una página se observó después, se utilizó solo como contraste conceptual, no para convertir cambios posteriores al 11 de septiembre en estado vigente a esa fecha. En particular, los releases posteriores del 15/18/21 de septiembre de 2026 se consideran fuera de corte para assertions actuales.
+
+# RESUMEN DE LOS PASOS (no duplica los 26 campos)
+
+M1-P01 — Caracterizar la tarea y determinar el modo de trabajo — Objetivo: Convertir una necesidad de ingeniería del Agente SRE en una unidad de trabajo caracterizada: tipo de tarea, resultado esperado, riesgo, grado de autonomía aceptable y modo de trabajo antes de seleccionar herramienta, contexto o prompt. — Capacidad: Caracterización / decisión de workflow — Salida: Ficha de caracterización reproducible que permite tomar las siguientes decisiones sin adivinación. — Dependencia: Chat 1 heredado; no depende de otro paso M1. — Estado: PLANIFICADO.
+M1-P02 — Seleccionar y evaluar la herramienta mediante criterios verificables — Objetivo: Seleccionar el Tool/Harness apropiado para el escenario caracterizado, aplicando explícitamente los cinco criterios de M1 y distinguiendo herramienta de capacidad agentic. — Capacidad: Selección / evaluación de herramienta — Salida: Decisión/registro de Tool/Harness seleccionada y sus límites. — Dependencia: M1-P01; decisiones heredadas de Chat 1 sobre seguridad/read-only-first deben actuar como restricciones, no como sustitutos de evaluación. — Estado: PLANIFICADO.
+M1-P03 — Diseñar la arquitectura de contexto persistente del proyecto — Objetivo: Definir qué contexto persistente necesita el proyecto para que el agente/cobot opere con señales de alto valor y bajo ruido, separando instrucciones estables, hechos del proyecto, convenciones, estado y evidencia histórica. — Capacidad: Diseño / arquitectura documental — Salida: Diseño de arquitectura de contexto persistente y política de carga. — Dependencia: M1-P02; decisiones de Chat1 sobre memoria externa y contaminación. — Estado: PLANIFICADO.
+M1-P04 — Gestionar la ventana de contexto y prevenir context rot — Objetivo: Aplicar las cuatro estrategias de M1 — Write, Select, Compress e Isolate — junto con las señales de context rot, mecanismos de degradación y reglas prácticas de ventana, para mantener sesiones utilizables y trazables. — Capacidad: Operación / control de contexto — Salida: Procedimiento de higiene contextual reproducible. — Dependencia: M1-P03 — Estado: PLANIFICADO.
+M1-P05 — Diseñar y aplicar prompting fundamental para trabajo de ingeniería — Objetivo: Aplicar la arquitectura de prompt de M1 a tareas de ingeniería: contexto corto, tarea, criterios de éxito, restricciones, recursos/referencias, formato de salida y aclaraciones cuando sean necesarias. — Capacidad: Diseño / ejecución controlada de prompts — Salida: Prompt ejecutable y versionable con criterios de aceptación. — Dependencia: M1-P04 — Estado: PLANIFICADO.
+M1-P06 — Aplicar patrones de ejecución de coding asistido por IA — Objetivo: Aplicar y validar individualmente los cinco patrones de coding de M1 dentro de una misma unidad profesional: Spec-driven preview, Plan-then-execute, Test-first, Refactor con anclas y Critic loops. — Capacidad: Ejecución controlada / feedback loop — Salida: Procedimientos de patrones respaldados por evidencia y resultados futuros de código/pruebas/revisión. — Dependencia: M1-P05 — Estado: PLANIFICADO.
+M1-P07 — Integrar los tres pilares y validar los cinco casos canónicos de M1 — Objetivo: Integrar Tool/Harness, Context y Prompt con el patrón de ejecución apropiado y validar el flujo completo en los cinco casos canónicos: A gran refactor, B greenfield feature, C debugging, D exploration y E code review. — Capacidad: Integración / validación end-to-end del método M1 — Salida: Método operativo integrado de M1 con evidencia específica por caso y criterios de aceptación reutilizables. — Dependencia: M1-P06; integra todas las unidades anteriores de M1. — Estado: PLANIFICADO.
+
+# PART C — REGISTRO REAL DE EJECUCIÓN
+
+## Session identity
+
+- chat_id: `chat-002`
+- execution date: 2026-09-30
+- timezone: America/Bogota (UTC-05:00)
+- target project repository: `DiiegoA/Agente_SRE_DevOps_para_respuesta_a_incidentes`
+- target branch: `main`
+- target state observed: public repository, size 0, no project files observed, no writes performed.
+
+## Actual actions completed
+
+1. Persistent user memory had been deleted before Chat2 per explicit user request; no prior personal memory was used as project evidence.
+2. The complete uploaded Chat2 prompt was read from the provided local attachment.
+3. Chat1 continuity files were recovered from `Diiegoal/memory-repo` using the GitHub connector in read-only mode: root state/protocol/index files, Chat1 metadata/handoff, the Chat1→Chat2 handoff, decisions DEC-0001..DEC-0006, knowledge/facts and architecture derivatives, and indexes.
+4. The current `Diiegoal/CursoIA` tree on `main` was queried. The M1 directory contains exactly five Markdown files; the 13 module directories contain 68 Markdown files in total.
+5. All 68 Markdown files under the 13 module directories were retrieved through the GitHub connector during this session, including all five M1 files and all six M12 files. Content length and blob SHA were observed for each retrieved file; no source file was written.
+6. The required SRE reference file `6. Agente SRE DevOps Respuesta Incidentes.md` was retrieved completely; observed length: 52,590 characters; blob SHA: `07a307611f7621dba8f12939ae206e9182cc8994`.
+7. The Example2 reference was identified as `LIDR-academy/AI4Devs-finalproject-Example2`; its current `main` tree contains 90 entries and was read as reference only.
+8. The two context documents required by the prompt were located in Library and materialized into the working container: `memoria_externa_llm_sin_memoria_chatgpt_septiembre_2026.md` (85,570 bytes) and `guia_prompt_optimo_chatgpt_septiembre_2026.md` (80,484 bytes). Their complete local byte contents were available for inspection.
+9. External web evidence was consulted for harness engineering, AGENTS.md, OpenAI SRE agent reference, OpenTelemetry, Prometheus Alertmanager and OWASP agent/LLM security. Sources were recorded with dates/URLs and cutoff notes.
+10. The seven M1 functional boundaries were reconstructed from the executable prompt's regression section after capability/dependency analysis. No evidence was found that required changing the previously validated seven boundaries.
+11. `chats/chat-002/M1_PLAN.md` was generated in independent staging only, with seven steps and 26 fields per step; every step is PLANIFICADO and every test is PLANIFICADA.
+12. Chat2-specific memory updates were incorporated into the independent staging copy; historical decision records DEC-0001..DEC-0006 remain untouched.
+13. No target project Step 1 was executed. No external repository was modified, committed or pushed.
+14. A physical validation of the staging tree and ZIP is performed after creation by the checks below.
+
+## Evidence identifiers
+
+- CursoIA M1 tree SHA: `abf778918c31ccf66c6608d98198a7e0ac43370e`
+- SRE reference blob SHA: `07a307611f7621dba8f12939ae206e9182cc8994`
+- Chat1 transcript remote blob SHA observed: `687ecb9c0de3e4ff9fdc1da16c05fdebb98937f2`
+- Target project repository API state: size 0, default branch `main`.
+
+## Integridad de Chat1 RAW
+
+La copia de `chats/chat-001/transcript.md` incluida en el staging fue restaurada desde una captura histórica disponible en Library y su Git blob SHA local coincide exactamente con el SHA remoto observado: `687ecb9c0de3e4ff9fdc1da16c05fdebb98937f2`. Por tanto, el RAW histórico incluido en el ZIP es byte-a-byte consistente con esa referencia remota.
+
+No se modificaron `chats/chat-001/META.md`, `chats/chat-001/HANDOFF.md` ni `chats/chat-001/transcript.md` durante la incorporación de Chat2.
+
+## Final execution state
+
+`PLANIFICADO`; product implementation not started; project Step 1 not executed; Chat2-specific decision count: zero; future `chat-003` directory not created.

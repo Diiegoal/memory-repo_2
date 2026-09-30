@@ -17,6 +17,7 @@
 | M13 | PR review/IaC/CI/CD/DevSecOps | Delivery/operations | Strong delivery foundation; SRE runtime depth still requires project work |
 
 ## Coverage classifications
+
 - **COVERED:** core capability is materially taught.
 - **COVERED INDIRECTLY:** transferable patterns exist, but exact target implementation differs.
 - **PARTIALLY COVERED:** only a significant subset is taught.
@@ -24,6 +25,7 @@
 - **NOT COVERED:** no material curriculum evidence found in the audited modules.
 
 ## Target-specific gaps
+
 1. FastAPI/Python production implementation is not fully covered by the backend module.
 2. LangGraph incident orchestration and SRE-specific tool design are reference-driven rather than taught as a dedicated construction module.
 3. Exact SLO/SLI/error-budget/on-call practices need a project-specific SRE layer.
@@ -32,17 +34,19 @@
 6. Slack event and approval mechanics need an integration lab.
 7. Runtime agent memory policy needs an explicit retention/provenance design.
 
+---
+
 # CHAT 2 — CONTENIDO NUEVO
 
-## M1 practical coverage update
+## M1 coverage
 
-| Archivo M1 | Tema/sección | Concepto | Aplicación práctica | Paso | Artefacto | Validación | Estado |
-|---|---|---|---|---|---|---|---|
-| `1. El modelo mental de los 3 pilares.md` | Modelo mental / integración de pilares | Herramienta + contexto + prompt como sistema | Definir operating model de ingeniería AI para el proyecto SRE | M1-P01, M1-P06, M1-P07 | `M1_OPERATING_MODEL.md` | Checklist de coherencia de los tres pilares | PLANIFICADO |
-| `2. Pilar 1 — La Herramienta.md` | Clasificación y selección | Categorías A-D, completion/agentic, criterios, benchmarks, anti-patterns | Clasificar cada tipo de tarea y seleccionar/reevaluar herramienta y modo | M1-P02 | `M1_TOOL_MATRIX.md` | Casos canónicos de selección PASS/FAIL | PLANIFICADO |
-| `3. Pilar 2 — El Contexto.md` | Context engineering | context rot, tipos de contexto, Write/Select/Compress/Isolate, AGENTS/CLAUDE, subagentes | Diseñar contexto mínimo suficiente, mapa de repo y reglas de sesión | M1-P03 | `M1_CONTEXT_KIT.md` | Recuperación selectiva + prueba de contaminación | PLANIFICADO |
-| `4. Pilar 3 — El Prompt + Integración.md` | Prompting e integración | anatomía, restricciones, éxito, delimitadores, anti-patterns, workflows y loops | Plantillas de tareas, criterios y ciclos plan/review/test/refactor | M1-P04, M1-P05 | `M1_PROMPT_LIBRARY.md`, `M1_WORKFLOW_RULES.md` | Pruebas de prompts sobre casos representativos sin ejecución del proyecto | PLANIFICADO |
-| `5. Recursos adicionales.md` | Recursos / fuentes | enlaces a harness, METR, Anthropic, GitHub, Cursor, benchmarks, context engineering, AGENTS y prompt guidance | Definir registro de fuentes y política de revalidación temporal | M1-P07 | `M1_VALIDATION_REGISTER.md` | Cada afirmación externa debe tener fuente y fecha | PLANIFICADO |
+The practical M1 inventory is represented by seven stable functional units in `chats/chat-002/M1_PLAN.md`. Each unit has 26 fields. P04 explicitly covers context rot and W/S/C/I; P06 explicitly covers the five coding patterns; P07 explicitly covers A–E.
 
-## Cobertura por capacidad
-La cobertura se considera completa a nivel de planificación cuando cada archivo de M1 tiene una cadena `contenido → capacidad → paso → artefacto → evidencia → validación`. El contenido predominantemente conceptual que no genera un artefacto independiente queda incorporado como fundamento en los pasos y explícitamente justificado allí.
+# CHAT 2 — CUMULATIVE UPDATE
+
+## Current repository verification
+Chat2 re-queried `Diiegoal/CursoIA` on `main` and retrieved all 68 Markdown files across the 13 module directories. The current M1 directory contains exactly five Markdown files with current Git blob identifiers. No module name was silently corrected.
+
+## M1 step mapping
+The five M1 source files map to seven stable work units. P04 owns context rot plus Write/Select/Compress/Isolate. P06 owns all five coding patterns. P07 owns cases A–E and the integrated evidence chain.
+

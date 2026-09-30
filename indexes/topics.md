@@ -11,9 +11,20 @@
 - `testing` → `knowledge/architecture/contribution-matrix.md`, `knowledge/architecture/artifact-matrix.md`
 - `data` → `knowledge/architecture/component-matrix.md`
 
+---
+
 # CHAT 2 — CONTENIDO NUEVO
 
-- `chat-002` → `chats/chat-002/META.md`, `transcript.md`, `HANDOFF.md`, `M1_PLAN.md`
-- `m1-plan` → `chats/chat-002/M1_PLAN.md`
-- `m1-coverage` → `knowledge/facts/module-coverage.md`, `chats/chat-002/M1_PLAN.md`
-- `example2` → `chats/chat-002/transcript.md`
+## Added topics
+
+- M1 practical construction plan
+- Context rot
+- Write / Select / Compress / Isolate
+- Five coding execution patterns
+- Integrated three-pillar cases A–E
+- Chat 2 continuity
+
+# CHAT 2 — CUMULATIVE UPDATE
+
+Topics added/revalidated: M1 Tool/Harness; context rot; Write/Select/Compress/Isolate; prompt contracts; five coding patterns; canonical cases A–E; Agentic SDLC; SRE incident workflow; memory continuity.
+

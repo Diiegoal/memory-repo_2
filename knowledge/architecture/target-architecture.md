@@ -64,15 +64,15 @@ Instrument both the target system and the agent itself. Capture service telemetr
 
 Local Docker first → CI test environment → containerized staging → optional Kubernetes/AWS production-like environment → IaC + deployment gates.
 
+---
+
 # CHAT 2 — CONTENIDO NUEVO
 
-## M1 relationship to target architecture
+## M1 foundation
 
-M1 does not instantiate any production architecture component. It establishes the engineering control layer for later design and implementation:
-- tool and mode decision criteria;
-- repository-context rules;
-- prompt contracts;
-- planning/review loops;
-- provenance and contamination controls.
+Chat 2 adds no runtime implementation. It adds only the operating foundation for selecting tools, maintaining context, composing prompts and using controlled coding patterns against the future SRE product.
 
-All runtime components remain FUTUROS relative to Chat 2.
+# CHAT 2 — CUMULATIVE UPDATE
+
+M1 establishes the context and tooling foundation used by the future target architecture. The target remains read-only-first with evidence gathering, hypothesis verification, human approval and a separate executor for consequential actions. Chat2 did not create the runtime.
+

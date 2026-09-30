@@ -2,25 +2,41 @@
 
 - [R01] **OpenAI** — *Harness engineering: leveraging Codex in an agent-first world* — 2026-02-11 — https://openai.com/index/harness-engineering/ — Repository knowledge as system of record; agent legibility; architecture/throughput implications of agent-first development. — HECHO EXTERNO
 - [R02] **OpenAI Cookbook** — *Build an SRE agent for incident response* — 2026-09-10 — https://developers.openai.com/cookbook/examples/agents_api/apps/sev_bot/readme — Direct evidence for alert intake, persistent incident sessions, read-only evidence gathering, GitHub/AWS context, Slack approval, and separation of executor permissions. — HECHO EXTERNO
-- [R03] **LangChain** — *Persistence* — Consulted 2026-09-25; page undated — https://docs.langchain.com/oss/python/langgraph/persistence — Checkpointers for short-term thread state; stores for long-term cross-thread memory. — HECHO EXTERNO
-- [R04] **LangChain** — *Interrupts* — Consulted 2026-09-25; page undated — https://docs.langchain.com/oss/python/langgraph/interrupts — Pause/resume workflows and human approval. — HECHO EXTERNO
-- [R05] **Prometheus** — *Alertmanager* — current docs — https://prometheus.io/docs/alerting/latest/alertmanager/ — Deduplication, grouping and routing. — HECHO EXTERNO
-- [R06] **OpenTelemetry** — *Observability primer* — current docs — https://opentelemetry.io/docs/concepts/observability-primer/ — Traces, metrics and logs for observability. — HECHO EXTERNO
-- [R07] **AWS** — *Automate recovery - Reliability Pillar* — https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_planning_for_recovery_auto_recovery.html — Tested/observable/reproducible/stoppable recovery automation and IaC guidance. — HECHO EXTERNO
-- [R08] **Google SRE** — *Postmortem culture* — https://sre.google/sre-book/postmortem-culture/ — Institutional learning through postmortems. — HECHO EXTERNO
-- [R09] **OWASP GenAI Security Project** — *Top 10 for LLM and GenAI* — 2025 — https://genai.owasp.org/initiatives/top-10-for-llm-and-genai/ — Prompt injection, excessive agency and other LLM security risks. — HECHO EXTERNO
-- [R10] **NIST** — *SP 800-218 Rev. 1 Initial Public Draft — SSDF 1.2* — 2025-12-17 — https://csrc.nist.gov/pubs/sp/800/218/r1/ipd — Secure software development integrated into SDLC. — HECHO EXTERNO
-- [R11] **GitHub** — *REST API endpoints for deployments / deployment statuses* — current docs — https://docs.github.com/en/rest/deployments/deployments — Machine-readable deployment states/events. — HECHO EXTERNO
-- [R12] **Slack** — *Socket Mode* — current docs — https://api.slack.com/apis/connections/socket — Event and interactive app connectivity. — HECHO EXTERNO
-- [R13] **Grafana** — *Loki HTTP API* — current docs — https://grafana.com/docs/loki/latest/reference/loki-http-api/ — Log query/tail. — HECHO EXTERNO
-- [R14] **Kubernetes** — *Python client* — 36.0.3, 2026-07-13 — https://pypi.org/project/kubernetes/ — Official Python client release within cutoff. — HECHO EXTERNO
-- [R15] **LangChain** — PyPI 1.4.0, 2026-09-03 — https://pypi.org/project/langchain/ — Cutoff-compatible release. — HECHO EXTERNO
-- [R16] **LangGraph** — PyPI 1.2.11, 2026-08-11 — https://pypi.org/project/langgraph/ — Cutoff-compatible release. — HECHO EXTERNO
-- [R17] **Streamlit** — PyPI 1.63.0, 2026-09-01 — https://pypi.org/project/streamlit/ — Cutoff-compatible release. — HECHO EXTERNO
-- [R18] **FastAPI** — PyPI release history — https://pypi.org/project/fastapi/ — Production releases observed in 2026; no exact Sep-11 latest version asserted. — HECHO EXTERNO
-- [R19] **pgvector** — project documentation — https://github.com/pgvector/pgvector — Vector search in Postgres; evaluated consolidation option. — HECHO EXTERNO
-- [R20] **GitHub Spec Kit** — current page observed 2026-09-25; last update 2026-09-14 — https://github.github.com/spec-kit/ — temporal-control observation only.
+- [R03] **LangChain** — *Persistence* — Consulted 2026-09-25; page undated — https://docs.langchain.com/oss/python/langgraph/persistence — Checkpointers for short-term thread state; stores for long-term cross-thread memory; durable persistence for production; distinction between state and long-term memory. — HECHO EXTERNO
+- [R04] **LangChain** — *Interrupts* — Consulted 2026-09-25; page undated — https://docs.langchain.com/oss/python/langgraph/interrupts — Pause/resume workflows, human approval, persistent thread_id, and interrupt-driven human-in-the-loop. — HECHO EXTERNO
+- [R05] **Prometheus** — *Alertmanager* — Consulted 2026-09-25; page undated — https://prometheus.io/docs/alerting/latest/alertmanager/ — Deduplication, grouping, routing, silencing and inhibition of alerts. — HECHO EXTERNO
+- [R06] **OpenTelemetry** — *Observability primer* — Consulted 2026-09-25; page undated — https://opentelemetry.io/docs/concepts/observability-primer/ — Observability via emitted traces, metrics and logs; support for troubleshooting unknown problems. — HECHO EXTERNO
+- [R07] **AWS** — *Automate recovery - Reliability Pillar* — Consulted 2026-09-25; base guidance predates cutoff — https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_planning_for_recovery_auto_recovery.html — Recovery automation should be tested, observable, reproducible, stoppable, and paired with playbooks; IaC is recommended for recovery workflows. — HECHO EXTERNO
+- [R08] **Google SRE** — *Postmortem culture* — Consulted 2026-09-25; classic SRE guidance — https://sre.google/sre-book/postmortem-culture/ — Postmortems as an institutional learning mechanism that records incident facts, impact, causes, actions and follow-up. — HECHO EXTERNO
+- [R09] **OWASP GenAI Security Project** — *Top 10 for LLM and GenAI* — 2025 — https://genai.owasp.org/initiatives/top-10-for-llm-and-genai/ — Prompt injection, sensitive information disclosure, supply-chain risk, improper output handling, excessive agency, vector/embedding weaknesses, misinformation and unbounded consumption. — HECHO EXTERNO
+- [R10] **NIST** — *SP 800-218 Rev. 1 Initial Public Draft — SSDF 1.2* — 2025-12-17 — https://csrc.nist.gov/pubs/sp/800/218/r1/ipd — Secure development practices are intended to integrate into each SDLC; relevant for AI-assisted secure development. — HECHO EXTERNO
+- [R11] **GitHub** — *REST API endpoints for deployments / deployment statuses* — Consulted 2026-09-25; current API docs — https://docs.github.com/en/rest/deployments/deployments — Deployments and deployment statuses provide machine-readable states and events that external systems can consume. — HECHO EXTERNO
+- [R12] **Slack** — *Socket Mode* — Consulted 2026-09-25; page undated — https://api.slack.com/apis/connections/socket — Socket Mode enables Events API and interactive features without exposing a public HTTP endpoint; uses WebSocket connection. — HECHO EXTERNO
+- [R13] **Grafana** — *Loki HTTP API* — Consulted 2026-09-25; page undated — https://grafana.com/docs/loki/latest/reference/loki-http-api/ — Query and tail log APIs; range queries for historical retrieval; near-real-time tail is not complete-history retrieval. — HECHO EXTERNO
+- [R14] **Kubernetes** — *Python client / project* — 2026-07-13 release 36.0.3 — https://pypi.org/project/kubernetes/ — Official Python client; stable release 36.0.3 within cutoff and Python >=3.10. — HECHO EXTERNO
+- [R15] **LangChain** — *PyPI release history* — 2026-09-03 for LangChain 1.4.0 — https://pypi.org/project/langchain/ — LangChain 1.4.0 was released on Sep 3, 2026; later 1.4.1/1.4.2 releases were after the mandated Sep 11 cutoff and were excluded from cutoff-state claims. — HECHO EXTERNO
+- [R16] **LangGraph** — *PyPI release history* — 2026-08-11 for LangGraph 1.2.11 — https://pypi.org/project/langgraph/ — LangGraph 1.2.11 released Aug 11, 2026; later 1.2.12 released Sep 21 and was excluded from cutoff-state claims. — HECHO EXTERNO
+- [R17] **Streamlit** — *PyPI release history* — 2026-09-01 for Streamlit 1.63.0 — https://pypi.org/project/streamlit/ — Streamlit 1.63.0 released Sep 1, 2026; 1.64.0 on Sep 15 was excluded from cutoff-state claims. — HECHO EXTERNO
+- [R18] **FastAPI** — *PyPI release history* — 2026-04-23 for 0.136.1 in retrieved history — https://pypi.org/project/fastapi/ — FastAPI has production-relevant releases in 2026; the artifact avoids asserting an exact Sep-11 latest version because the retrieved page excerpt did not establish it. — HECHO EXTERNO
+- [R19] **pgvector** — *Open-source vector similarity search for Postgres* — Consulted 2026-09-25; current project page — https://github.com/pgvector/pgvector — Vectors can be stored with relational data in Postgres with exact/approximate nearest-neighbor search and transactional database features; used as an evaluated consolidation option, not a mandatory choice. — HECHO EXTERNO
+- [R20] **GitHub Spec Kit** — *Spec-Driven Development* — Current page observed 2026-09-25; last updated 2026-09-14 — https://github.github.com/spec-kit/ — Illustrates structured spec-led workflows; because the page is updated after the 2026-09-11 cutoff, it is not used as cutoff-current evidence. It is retained only as a temporal control observation. — HECHO EXTERNO
+
+---
 
 # CHAT 2 — CONTENIDO NUEVO
 
-- [R21] **OpenAI** — *Harness engineering: leveraging Codex in an agent-first world* — 2026-02-11 — https://openai.com/index/harness-engineering/ — Chat 2 corroboration for repository knowledge as a map/system of record, progressive disclosure, plans as first-class artifacts and mechanical validation. — HECHO EXTERNO
+## Chat 2 references
+
+The M1 five-file source set is the primary basis for the plan. The SRE reference file is domain context. Example 2 is learning/design reference only. Current external sources were consulted for temporal and methodology cross-checks.
+
+# CHAT 2 — CUMULATIVE UPDATE
+
+## Additional Chat2 references
+
+- OpenAI — Harness engineering, 2026-02-11 — https://openai.com/index/harness-engineering/ — harness/repository/feedback-loop context.
+- OpenAI Cookbook — Build an SRE agent for incident response, 2026-09-10 — https://developers.openai.com/cookbook/examples/agents_api/apps/sev_bot/readme — SRE agent/incident response reference.
+- AGENTS.md — current open format description — https://agents.md/ — agent-focused repository instructions.
+- OpenTelemetry — Observability primer — https://opentelemetry.io/docs/concepts/observability-primer/ — telemetry conceptual grounding.
+- Prometheus — Alertmanager — https://prometheus.io/docs/alerting/latest/alertmanager/ — alert dedup/grouping/routing.
+- OWASP GenAI — LLM06:2025 Excessive Agency — https://genai.owasp.org/llmrisk/llm062025-excessive-agency/ — tool/permission/autonomy risk.
+

@@ -15,16 +15,23 @@
 | M11 | System QA | System boundaries | integration/E2E/BDD suite | M11 audited files |
 | M13 | Delivery | Infra/CI/CD | Docker/IaC/pipelines/deployment | M13 audited files + R07 |
 
+---
+
 # CHAT 2 — CONTENIDO NUEVO
 
-## M1 artifacts planned
+## M1 planned artifacts
 
-| Step | Future artifact | Nature |
+| Unit | Planned result | Status |
 |---|---|---|
-| M1-P01 | `M1_OPERATING_MODEL.md` | integrated operating baseline |
-| M1-P02 | `M1_TOOL_MATRIX.md` | task/tool/mode selection |
-| M1-P03 | `M1_CONTEXT_KIT.md`, `AGENTS.md`, optional `CLAUDE.md` | context system |
-| M1-P04 | `M1_PROMPT_LIBRARY.md` | prompt contracts |
-| M1-P05 | `M1_WORKFLOW_RULES.md` | execution/review loops |
-| M1-P06 | `M1_OPERATING_MODEL.md` consolidation | integrated model |
-| M1-P07 | `M1_VALIDATION_REGISTER.md` | gate/regression |
+| M1-P01 | task/work-mode record | PLANIFICADO |
+| M1-P02 | tool/harness choice and criteria | PLANIFICADO |
+| M1-P03 | persistent context design | PLANIFICADO |
+| M1-P04 | context hygiene rules/evidence | PLANIFICADO |
+| M1-P05 | prompt contract artifacts | PLANIFICADO |
+| M1-P06 | five pattern procedures/tests | PLANIFICADO |
+| M1-P07 | A–E integrated case evidence | PLANIFICADO |
+
+# CHAT 2 — CUMULATIVE UPDATE
+
+The canonical M1 artifacts are represented only in `chats/chat-002/M1_PLAN.md`; no separate M1 plan or coverage file was created. The plan defines future task/tool/context/prompt/pattern/case evidence records and the incremental memory ZIP concept to be generated only when a step is executed in a future session.
+

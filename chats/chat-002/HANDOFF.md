@@ -1,60 +1,51 @@
-# Handoff — chat-002 → future continuation
-
-> This is a handoff artifact for the continuation after Chat 2, not a Chat 3 transcript.
+# Handoff: chat-002 → next session
 
 ## Objective
+Continue the target project from the M1 plan while preserving Chat1 decisions and the M12 reference-only boundary.
 
-Continue the professional construction of the SRE/DevOps incident-response agent from the completed Chat 2 M1 planning stage.
+## What was completed
+- Re-audited current `Diiegoal/CursoIA` tree and all 68 Markdown files under the 13 module directories.
+- Read all five M1 files completely.
+- Read the full SRE/DevOps reference file.
+- Reviewed Example2 as reference only.
+- Recovered Chat1 state, decisions, handoff and memory architecture.
+- Produced canonical seven-step M1 plan with 26 fields per step.
+- Per-step tests are future tests; none were executed.
+- No product code or project Step 1 was executed.
 
 ## Current state
+- Module order remains `M1 → M3 → M4 → M2 → M6 → M5 → M7 → M8 → M9 → M10 → M11 → M13`.
+- M12 remains reference-only.
+- Agent remains read-only-first.
+- PostgreSQL remains authoritative; pgvector remains evaluation-first.
+- Streamlit remains optional; Slack is an operational option.
+- State: `PLANIFICADO`.
 
-M1 has a canonical seven-step plan:
-`M1-P01 → M1-P02 → M1-P03 → M1-P04 → M1-P05 → M1-P06 → M1-P07`
-
-The global construction order remains:
-`M1 → M3 → M4 → M2 → M6 → M5 → M7 → M8 → M9 → M10 → M11 → M13`
-
-M12 is reference-only.
-
-## Completed
-
-- Chat 1 bootstrap and decision recovery.
-- Direct audit of the five M1 Markdown files.
-- Full read of the SRE/DevOps reference.
-- Review of Example2 documentation/repository structure.
-- Dynamic determination of M1 step count.
-- Canonical 26-field plan for all seven steps.
-- Coverage/dependency/traceability/contamination/originality checks.
-- Decision audit with zero new substantive decisions.
-- Staging artifacts and physical Chat2 session gate.
-
-## Active decisions
-
-See `DECISIONS.md` and `decisions/DEC-0001.md` through `DEC-0006.md`.
+## Decisions
+No substantive new Chat2 decision was adopted. Chat1 DEC-0001..DEC-0006 remain active.
 
 ## Open questions
+OQ-0001..OQ-0008 remain open; no evidence was sufficient to close them.
 
-See `OPEN_QUESTIONS.md`.
+## Critical artifacts
+- `chats/chat-002/M1_PLAN.md` — only canonical full M1 step plan.
+- `chats/chat-002/transcript.md` — Chat2 RAW and production, with step summary only.
+- `chats/chat-002/META.md` — session metadata.
+- `chats/chat-002/HANDOFF.md` — this continuation record.
+- `handoffs/chat-002-to-chat-003.md` — future handoff protocol only; it does not mean chat-003 exists.
 
-## Read first
-
+## Files to read first
 1. `BOOTSTRAP.md`
 2. `STATE.md`
 3. `DECISIONS.md`
 4. `OPEN_QUESTIONS.md`
-5. `INDEX.md`
-6. `chats/chat-002/META.md`
-7. `chats/chat-002/M1_PLAN.md`
-8. `chats/chat-002/HANDOFF.md`
+5. `chats/chat-002/HANDOFF.md`
+6. `chats/chat-002/M1_PLAN.md`
+7. Relevant `knowledge/architecture/*.md`
+8. Relevant source sections from Chat2 transcript; never load the entire RAW automatically.
 
-## Evidence retrieval
-
-Read selective sections of `chats/chat-002/transcript.md` and historical Chat1 RAW only when required. `M1_PLAN.md` is the sole canonical full plan; do not reconstruct it from the transcript.
-
-## Immediate future work
-
-Before executing any project step, revalidate the target repository and current source state, then execute only the first M1 work unit if the future task explicitly authorizes execution.
-
-## Integrity limitation carried forward
-
-The historical Chat1 transcript's source blob is known (`sha 687ecb9c0de3e4ff9fdc1da16c05fdebb98937f2`, 153999 bytes), but the current container could not materialize that raw blob byte-for-byte through the available connector. Future sessions must retrieve the authoritative historical RAW directly from the source repository when exact byte-level preservation is required.
+## Conditions for continuity
+- Keep all external repos read-only unless a future user instruction explicitly authorizes normal work; this Chat2 artifact itself remains historical evidence.
+- Do not reinterpret M12 as a construction stage.
+- Do not execute project Step 1 until a future session explicitly begins implementation.
+- Keep plan/test states distinct from executed evidence.

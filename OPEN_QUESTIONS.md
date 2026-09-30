@@ -40,9 +40,17 @@ Status: open
 
 Create and version a synthetic incident dataset representative of the target operating environment.
 
+---
+
 # CHAT 2 — CONTENIDO NUEVO
 
-### Estado de preguntas
-- No se añadieron nuevas preguntas abiertas sustantivas durante Chat 2.
-- Las OQ-0001…OQ-0008 continúan abiertas y siguen siendo las preguntas vigentes para las etapas posteriores.
-- Los detalles de ejecución de M1 se formularon contra estas preguntas existentes; no se duplicaron IDs.
+## Chat 2 review
+
+No inherited open question was closed. `OQ-0001` through `OQ-0008` remain open because Chat 2 did not obtain sufficient evidence to resolve them without inventing project decisions.
+
+No additional formal open question was created.
+
+# CHAT 2 — CUMULATIVE UPDATE
+
+No inherited open question was closed. `OQ-0001` through `OQ-0008` remain open because Chat2 did not obtain enough evidence to resolve them without inventing project policy or implementation decisions. No new formal open question was created.
+

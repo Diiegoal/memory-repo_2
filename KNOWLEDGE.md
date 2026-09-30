@@ -9,6 +9,7 @@ A conversational, reflective SRE/DevOps agent should operate as an evidence-driv
 ## 2. Runtime state versus long-term memory
 
 LangGraph's current persistence documentation distinguishes thread-scoped checkpoints from cross-thread stores. This maps naturally to:
+
 - current incident execution state;
 - long-term incident history/runbooks/knowledge.
 
@@ -50,22 +51,21 @@ M1 + M3 supply the harness and context model. OpenAI's Feb 2026 harness-engineer
 
 The supplied M12 document contains some release information published after the executable prompt's Sep 11 cutoff. Those values are retained as source statements but not promoted to cutoff-current state.
 
+---
+
 # CHAT 2 — CONTENIDO NUEVO
 
-## New consolidated knowledge
+## M1 consolidated knowledge
 
-Chat2 operationalized M1 as the first AI-engineering foundation for the SRE target. The useful M1 knowledge is represented by the seven canonical steps in `chats/chat-002/M1_PLAN.md`. The plan distinguishes source facts, inherited decisions, proposals and future execution.
+M1 establishes three co-equal pillars — Tool/Harness, Context and Prompt. Practical application requires: characterizing the task; choosing a tool by task, codebase, language, privacy/compliance, budget and developer style; designing persistent high-signal context; managing context rot through `Write / Select / Compress / Isolate`; composing prompts with explicit success criteria; and applying five coding patterns (`Spec-driven preview`, `Plan-then-execute`, `Test-first`, `Refactor con anclas`, `Critic loops`).
 
-## M1 practical rules derived from source
+For the SRE product, this knowledge is applied to read-only investigation workflows, operational context, runbooks, observability evidence and guarded engineering actions later in the lifecycle.
 
-1. Tool choice and mode are explicit decisions, not defaults.
-2. Context is a managed engineering resource; use minimum-sufficient selection and isolation.
-3. Prompts are contracts with observable success criteria.
-4. Workflows use plan/execute/test/review/refactor loops.
-5. Repository-local knowledge should be structured for progressive disclosure.
-6. Validation and feedback are part of the operating method, not only a final step.
-7. M1 does not implement product runtime components.
+# CHAT 2 — CUMULATIVE UPDATE
 
-## Temporal/provenance note
+## M1 knowledge consolidated
+M1 establishes a three-pillar engineering method: Tool/Harness, Context and Prompt. Practical execution is task-driven and uses tool selection criteria, persistent high-signal context, context-rot hygiene (`Write / Select / Compress / Isolate`), explicit prompt contracts and five execution patterns. Chat2 maps these concepts into seven canonical units without implementing the target product.
 
-OpenAI Harness Engineering (2026-02-11) corroborates the repository-knowledge/system-of-record and progressive-disclosure approach. It is within the mandatory cutoff.
+## Product boundary
+The target remains an evidence-driven SRE incident-response agent with read-only-first operation, human approval and separated execution for consequential actions. M1 prepares the engineering method; it does not implement incident orchestration, RAG runtime, persistence, UI, observability, deployment or agent runtime.
+

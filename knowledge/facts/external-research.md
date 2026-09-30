@@ -24,22 +24,28 @@ The executable prompt's cutoff is **2026-09-11**. External claims used as curren
 | R12 | Slack Socket Mode | current docs | Event/interactive app connectivity | stable capability |
 | R13 | Grafana Loki HTTP API | current docs | Log query/tail | stable capability |
 | R19 | pgvector | current project docs | Vector search inside Postgres | stable capability |
-| R21 | OpenAI — Harness engineering (Chat 2 corroboration) | 2026-02-11 | Repository knowledge as a map/system of record, progressive disclosure, mechanical validation | valid |
 
 ## Temporal exclusions
 
 The following observations were seen after the cutoff and were therefore excluded from cutoff-current claims:
+
 - LangChain 1.4.1/1.4.2 releases after Sep 11.
 - LangGraph 1.2.12 on Sep 21.
 - Streamlit 1.64.0 on Sep 15.
 - GitHub Spec Kit page showing last update Sep 14.
 
-## Chat 2 consultation note
+These are documented as temporal-control evidence only.
 
-Web consultation on 2026-09-30 confirmed the OpenAI February 11, 2026 harness-engineering article as a source within the cutoff. No post-cutoff web observation was promoted to a cutoff-current technology-state claim. The plan relies on the actual M1 files for primary construction content.
+---
 
 # CHAT 2 — CONTENIDO NUEVO
 
-## Chat2 external corroboration
+## Temporal supplement
 
-OpenAI's `Harness engineering: leveraging Codex in an agent-first world`, published 2026-02-11, was consulted as an in-cutoff corroborating source. It describes repository knowledge as a system of record, a short AGENTS.md as a map, progressive disclosure, first-class execution plans and mechanical validation of knowledge/architecture. These observations support the M1 context-engineering plan but do not override the M1 source files or Chat1 decisions.
+The mandated historical cutoff is `2026-09-11`. Current pages/releases inspected on `2026-09-30` were separated into post-cutoff observations and were not used to rewrite the historical cutoff state.
+
+# CHAT 2 — CUMULATIVE UPDATE
+
+## External research used in Chat2
+See `chats/chat-002/transcript.md` for the chronological research record and `knowledge/references/reference-index.md` for the source register. Current-state assertions were bounded by the 2026-09-11 cutoff required by the prompt; later observations are marked as post-cutoff context rather than promoted to cutoff-current state.
+
