@@ -42,7 +42,10 @@ Create and version a synthetic incident dataset representative of the target ope
 
 ---
 
-## Chat 2 status
+# CHAT 2 — CONTENIDO NUEVO
 
-No new open question was created solely for Chat 2. OQ-0001 through OQ-0008 remain open and continue to bound decisions such as exact SRE operating model, model/provider, runtime queue, retrieval scale, executor isolation, future UI, evaluation rubric and incident corpus.
+## Chat 2 review
 
+No new open question was added. OQ-0001 through OQ-0008 remain open because Chat 2 did not obtain evidence sufficient to close them.
+
+Canonical M1 planning did not require resolving any of these questions to execute the planning task.

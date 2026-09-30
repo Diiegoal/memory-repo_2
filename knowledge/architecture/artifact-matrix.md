@@ -14,3 +14,11 @@
 | M10 | Frontend | Operator surface | Streamlit/React UI | M10 audited files + M12 |
 | M11 | System QA | System boundaries | integration/E2E/BDD suite | M11 audited files |
 | M13 | Delivery | Infra/CI/CD | Docker/IaC/pipelines/deployment | M13 audited files + R07 |
+
+---
+
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 M1 layer
+
+M1 produce durante ejecución futura registros de modo, selección de herramienta, contexto, prompts, patrones y baseline integrado. En Chat 2, el artefacto canónico de planificación de todos ellos es `chats/chat-002/M1_PLAN.md`.

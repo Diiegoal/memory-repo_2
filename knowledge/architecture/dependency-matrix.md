@@ -24,3 +24,11 @@
 - M8 ↔ M9
 - M11 ↔ M13
 - M12 → all modules as reference information only
+
+---
+
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 M1 dependencies
+
+La cadena interna de M1 es P01 → P02 → P03 → P04 → P05 → P06 → P07, con P07 como integración. Esta secuencia no modifica el orden intermodular heredado.

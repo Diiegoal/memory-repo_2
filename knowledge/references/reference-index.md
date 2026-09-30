@@ -20,3 +20,13 @@
 - [R18] **FastAPI** — *PyPI release history* — 2026-04-23 for 0.136.1 in retrieved history — https://pypi.org/project/fastapi/ — FastAPI has production-relevant releases in 2026; the artifact avoids asserting an exact Sep-11 latest version because the retrieved page excerpt did not establish it. — HECHO EXTERNO
 - [R19] **pgvector** — *Open-source vector similarity search for Postgres* — Consulted 2026-09-25; current project page — https://github.com/pgvector/pgvector — Vectors can be stored with relational data in Postgres with exact/approximate nearest-neighbor search and transactional database features; used as an evaluated consolidation option, not a mandatory choice. — HECHO EXTERNO
 - [R20] **GitHub Spec Kit** — *Spec-Driven Development* — Current page observed 2026-09-25; last updated 2026-09-14 — https://github.github.com/spec-kit/ — Illustrates structured spec-led workflows; because the page is updated after the 2026-09-11 cutoff, it is not used as cutoff-current evidence. It is retained only as a temporal control observation. — HECHO EXTERNO
+
+---
+
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 sources
+
+- OpenAI Harness Engineering — consulta 2026-09-30 — https://openai.com/index/harness-engineering/ — HECHO EXTERNO.
+- AGENTS.md — consulta 2026-09-30 — https://agents.md/ — HECHO EXTERNO.
+- Claude Code memory docs — consulta 2026-09-30 — https://docs.anthropic.com/en/docs/claude-code/memory — HECHO EXTERNO.

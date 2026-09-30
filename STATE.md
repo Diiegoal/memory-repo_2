@@ -58,20 +58,15 @@ Chat 1 research and memory consolidation are complete. Product implementation ha
 
 ---
 
-## Chat 2 Update
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 state
 
 - Chat: `chat-002`
 - State date: 2026-09-30
-- External research cutoff retained: `2026-09-11`
-- M1 plan: frozen / `PLANIFICADO`
-- M1 steps: `M1-P01` … `M1-P07`
-- Target project state observed: empty Git repository; no write performed.
-- External repositories: unchanged.
-- New Chat 2 decision: none.
-- Chat 1 decisions: DEC-0001…DEC-0006 remain accepted.
-- Chat 1 open questions: OQ-0001…OQ-0008 remain open.
-
-### Chat 2 completion boundary
-
-Chat 2 completed source auditing, plan construction, quality gates, cumulative memory preparation and packaging. It did not execute the project Step 1.
-
+- M1 plan status: PLANIFICADO / CONGELADO
+- M1 steps: 7
+- Project Step 1 execution: NO EJECUTADO
+- External repositories written: NO
+- New substantive decisions: 0
+- Canonical plan: `chats/chat-002/M1_PLAN.md`

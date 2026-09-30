@@ -1,27 +1,32 @@
-# Handoff — chat-002 → future continuation
+# Future Handoff Protocol
 
-## Current state
+Este archivo define únicamente la transferencia de contexto de Chat 2 hacia una futura sesión; no representa Chat 3 ni contiene resultados futuros.
 
-- Chat 2 planning and memory consolidation are complete.
-- M1 plan frozen at `PLANIFICADO` with steps `M1-P01` … `M1-P07`.
-- Target project repository was observed empty and remains unmodified.
-- M12 remains reference-only.
-- Chat 1 RAW transcript remains historical and untouched.
+## Context packet
 
-## Completed in Chat 2
+```text
+STATE.md
+→ DECISIONS.md
+→ OPEN_QUESTIONS.md
+→ chats/chat-002/HANDOFF.md
+→ chats/chat-002/M1_PLAN.md
+→ conocimiento/arquitectura relevante
+→ evidencia M1 específica
+```
 
-- Chat 1 order and accepted decisions recovered and revalidated.
-- Five M1 Markdown files read completely.
-- Full SRE reference file read completely.
-- Target project state checked.
-- Dynamic M1 plan constructed.
-- Structural and semantic audits passed.
-- Cumulative memory update prepared in staging.
+## Required checks
 
-## Continue with
+- verificar cutoff temporal y fuentes vigentes;
+- confirmar que no existe una decisión nueva que supere a las heredadas;
+- comprobar que `M1_PLAN.md` es la única fuente canónica del plan;
+- distinguir PLANIFICADO de EJECUTADO;
+- confirmar que ningún repositorio externo fue modificado por Chat 2;
+- recuperar evidencia primaria solo cuando sea necesaria.
 
-Read `STATE.md`, `DECISIONS.md`, `OPEN_QUESTIONS.md`, `chats/chat-002/META.md`, `chats/chat-002/M1_PLAN.md`, `knowledge/facts/chat-002-source-audit.md`, `knowledge/facts/chat-002-sre-reference.md` and `knowledge/facts/chat-002-plan-audit.md` before a future M1 execution.
+## Current handoff state
 
-## Important boundary
+Chat 2 terminó en `PLANIFICADO`; el proyecto objetivo no ejecutó su Paso 1. El plan tiene siete pasos `M1-P01`…`M1-P07`.
 
-Do not infer that any project artifact described in M1-P01..P07 already exists. All step state is PLANIFICADO. A future execution may only modify the independent project working copy and must preserve external-repository read-only rules.
+## Suggested future task
+
+Ejecutar `M1-P01` siguiendo exactamente el plan canónico, registrar evidencia y producir continuidad incremental sin crear archivos o decisiones no autorizados.

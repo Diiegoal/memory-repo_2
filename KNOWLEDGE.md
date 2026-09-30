@@ -53,21 +53,16 @@ The supplied M12 document contains some release information published after the 
 
 ---
 
-## 12. Chat 2 — M1 practical application
+# CHAT 2 — CONTENIDO NUEVO
 
-M1 is converted into seven professional units of work without treating the target SRE implementation as if it were already built:
+## 12. Chat 2 — M1 construction knowledge
 
-1. task characterization and completion/agentic mode selection;
-2. tool/harness selection by M1 criteria;
-3. persistent context architecture and `AGENTS.md` policy;
-4. operational context management and context-rot mitigation;
-5. fundamental technical prompting;
-6. coding execution patterns: spec-driven preview, plan-then-execute, test-first, refactor with anchors and critic loops;
-7. integrated three-pillar application to the five canonical cases A-E.
+M1 is operationalized as a seven-step method: characterize task/mode; select tool; design context; manage context rot; construct prompts; select coding pattern; integrate the three pillars through cases A-E. The project-specific SRE reference is context, not a substitute for M1.
 
-The plan remains future work. No target-project artifact was executed in Chat 2.
+## 13. Chat 2 — External context verification
 
-### Target-product context
+Current sources consulted on 2026-09-30 included OpenAI Harness Engineering, AGENTS.md and Claude Code documentation. They are used as supporting external facts about repository context and tool/context mechanisms, not as replacements for M1 or as new historical decisions.
 
-The audited SRE reference describes an evidence-driven incident-response workflow with incident intake/correlation, state, evidence gathering, hypotheses and verification, remediation proposal, human approval, separate execution, recovery verification, resolution, postmortem and durable operational knowledge. M1 supplies the AI-assisted engineering operating model that will be used when those capabilities are built later.
+## 14. Chat 2 — Decision review
 
+No new substantive decision was adopted. Chat 1 decisions remain the controlling inherited state.

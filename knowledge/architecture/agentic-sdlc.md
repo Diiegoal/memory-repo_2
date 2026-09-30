@@ -49,3 +49,11 @@ But human gates remain where the impact or ambiguity requires them.
 ## M12 boundary
 
 M12 is a source of information about the target SRE/DevOps system. It is not one of these phases.
+
+---
+
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 application to M1
+
+M1 actúa como foundation del Agentic SDLC y no como implementación del runtime SRE. P01-P02 fijan cómo operar y elegir herramienta; P03-P04 fijan cómo controlar contexto; P05-P06 fijan prompting y ejecución; P07 integra la práctica.

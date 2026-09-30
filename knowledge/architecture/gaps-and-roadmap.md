@@ -43,3 +43,11 @@ Kubernetes/AWS integration, OpenTelemetry, Alertmanager, Docker, CI/CD/IaC.
 ### R7 — Evaluation and continuous improvement
 
 Incident dataset, regression runs, trace review, tool-use evaluation, cost/latency monitoring, postmortem-derived runbook updates.
+
+---
+
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 M1 boundary
+
+Las brechas identificadas por Chat 1 permanecen abiertas: implementación Python/FastAPI, diseño de LangGraph SRE, SLO/SLI, executor aislado, dataset/evals, Slack approval y observabilidad. No se adelantaron dentro de M1.

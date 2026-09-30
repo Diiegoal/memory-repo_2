@@ -63,3 +63,11 @@ Instrument both the target system and the agent itself. Capture service telemetr
 ## Deployment maturity
 
 Local Docker first → CI test environment → containerized staging → optional Kubernetes/AWS production-like environment → IaC + deployment gates.
+
+---
+
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 M1 boundary
+
+La arquitectura objetivo del agente SRE fue utilizada como contexto de aplicación: incident intake → agent → evidence → hypothesis/verify → approval → executor → recovery → postmortem. Chat 2 no implementó ni modificó esos componentes; M1 solo define el método de trabajo con IA para construirlos posteriormente.

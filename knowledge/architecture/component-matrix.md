@@ -12,3 +12,11 @@
 | Recovery verification | M2, M7, M8, M9, M11 | M13 | verify after action |
 | Agent observability | M3, M5, M11, M13 | M7 | LangSmith/OTel pattern |
 | Postmortem | M5, M8, M9, M11 | M13 | SRE postmortem reference |
+
+---
+
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 M1 boundary
+
+Los componentes SRE del producto se usan como escenarios y contexto para M1, pero la implementación de incident intake, evidencia, RAG, approval, executor, recovery y observabilidad queda para etapas posteriores justificadas por el orden de módulos.

@@ -9,7 +9,7 @@ The executable prompt's cutoff is **2026-09-11**. External claims used as curren
 | ID | Source | Date | What it supports | Cutoff use |
 |---|---|---|---|---|
 | R01 | OpenAI — Harness engineering | 2026-02-11 | Repository knowledge, agent-first engineering, architecture legibility | valid |
-| R02 | OpenAI Cookbook — SRE incident-response agent | 2026-09-10 | Direct SRE-agent architecture corroboration | valid |
+| R02 | OpenAI Cookbook — SRE agent | 2026-09-10 | Direct SRE-agent architecture corroboration | valid |
 | R09 | OWASP GenAI Top 10 | 2025 | Prompt injection, excessive agency, vector/embedding risks, unbounded consumption | valid |
 | R10 | NIST SSDF 1.2 IPD | 2025-12-17 | Secure software development integrated into SDLC | valid |
 | R14 | Kubernetes Python client 36.0.3 | 2026-07-13 | Official Python client release and support | valid |
@@ -20,14 +20,12 @@ The executable prompt's cutoff is **2026-09-11**. External claims used as curren
 | R08 | Google SRE postmortem culture | classic/current docs | Postmortem practice | stable capability |
 | R05 | Prometheus Alertmanager | current docs | Dedup/group/routing | stable capability |
 | R06 | OpenTelemetry | current docs | metrics/logs/traces | stable capability |
-| R11 | GitHub deployment API | current docs | Deployment status/event correlation | stable capability |
+| R11 | GitHub deployment API | current docs | Deployment/change correlation | stable capability |
 | R12 | Slack Socket Mode | current docs | Event/interactive app connectivity | stable capability |
 | R13 | Grafana Loki HTTP API | current docs | Log query/tail | stable capability |
 | R19 | pgvector | current project docs | Vector search inside Postgres | stable capability |
 
 ## Temporal exclusions
-
-The following observations were seen after the cutoff and were therefore excluded from cutoff-current claims:
 
 - LangChain 1.4.1/1.4.2 releases after Sep 11.
 - LangGraph 1.2.12 on Sep 21.
@@ -35,3 +33,15 @@ The following observations were seen after the cutoff and were therefore exclude
 - GitHub Spec Kit page showing last update Sep 14.
 
 These are documented as temporal-control evidence only.
+
+---
+
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 additions
+
+- OpenAI Harness Engineering — consulta 2026-09-30; fuente primaria; https://openai.com/index/harness-engineering/; soporta repositorio como fuente de conocimiento, legibilidad y feedback loops.
+- AGENTS.md — consulta 2026-09-30; documentación del formato de instrucciones para agentes; https://agents.md/; soporta uso de archivos de instrucciones persistentes.
+- Claude Code memory/context documentation — consulta 2026-09-30; https://docs.anthropic.com/en/docs/claude-code/memory; soporta el uso de archivos como contexto persistente y mecanismos de contexto.
+
+Estas fuentes no se promovieron a decisiones de arquitectura nuevas.

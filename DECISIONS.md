@@ -39,9 +39,12 @@ Use Streamlit as a practical first operator UI/demo, but keep the underlying pro
 
 ---
 
-## Chat 2 validation
+# CHAT 2 — CONTENIDO NUEVO
 
-No new substantive decision was created in Chat 2. DEC-0001 through DEC-0006 were revalidated against the recovered handoff, STATE and direct evidence and remain accepted.
+## Chat 2 review
 
-The M1 plan therefore carries inherited decisions as constraints; it does not create DEC-0007 merely to populate memory.
+### New substantive decisions
 
+**0** — No new substantive decision was adopted during Chat 2.
+
+Chat 2 confirmed the applicability of DEC-0001 through DEC-0006 but did not create a new decision record.

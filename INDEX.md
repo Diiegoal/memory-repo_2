@@ -47,19 +47,12 @@
 
 ---
 
+# CHAT 2 — CONTENIDO NUEVO
+
 ## Chat 2 additions
 
-### Session
-- `chats/chat-002/META.md` — Chat 2 metadata.
-- `chats/chat-002/transcript.md` — Chat 2 RAW prompt, production and execution log.
-- `chats/chat-002/M1_PLAN.md` — frozen M1 plan with 26 fields per step.
-- `chats/chat-002/memory-update-audit.md` — cumulative memory physical audit.
-
-### Evidence
-- `knowledge/facts/chat-002-source-audit.md` — continuity/source audit.
-- `knowledge/facts/chat-002-sre-reference.md` — SRE reference summary.
-- `knowledge/facts/chat-002-plan-audit.md` — quality gates and checklist.
-
-### Handoff
-- `handoffs/chat-002-to-chat-003.md` — future continuation only; it does not assert that Chat 3 exists.
-
+- `chats/chat-002/META.md` — metadata de la sesión real.
+- `chats/chat-002/transcript.md` — RAW de Chat 2.
+- `chats/chat-002/HANDOFF.md` — handoff de Chat 2.
+- `chats/chat-002/M1_PLAN.md` — plan canónico M1.
+- `handoffs/chat-002-to-chat-003.md` — protocolo de transferencia futura.

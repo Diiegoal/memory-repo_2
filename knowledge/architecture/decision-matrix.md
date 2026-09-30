@@ -25,3 +25,19 @@
 | **Weighted** | **100%** | **4.95** | **4.78** | **3.78** |
 
 These are professional judgement scores, not empirical measurements.
+
+---
+
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 validation
+
+La descomposición de M1 se estabilizó en siete pasos. El resultado no se convirtió en una nueva decisión histórica porque DEC-0001 ya fija el orden de módulos y las decisiones de seguridad, almacenamiento y UI siguen siendo heredadas.
+
+---
+
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 decision review
+
+No new decision record was created. The seven-step M1 plan is a plan outcome, not a new module-order decision.

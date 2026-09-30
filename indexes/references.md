@@ -14,11 +14,12 @@ Use `knowledge/facts/repository-audit.md` for repository/module facts and `knowl
 
 ---
 
-## Chat 2 evidence additions
+# CHAT 2 — CONTENIDO NUEVO
 
-- `chats/chat-002/transcript.md` — prompt actually executed plus substantive production and real execution record.
-- `chats/chat-002/M1_PLAN.md` — plan derived from complete M1 audit.
-- `knowledge/facts/chat-002-source-audit.md` — source and repository-state evidence.
-- `knowledge/facts/chat-002-sre-reference.md` — target-project reference read completely in Chat 2.
-- `knowledge/facts/chat-002-plan-audit.md` — validation evidence.
+## Chat 2 references
 
+- M1: cinco archivos leídos completamente.
+- SRE reference: `6. Agente SRE DevOps Respuesta Incidentes.md` leído completamente.
+- OpenAI Harness Engineering: https://openai.com/index/harness-engineering/ — consulta 2026-09-30.
+- AGENTS.md: https://agents.md/ — consulta 2026-09-30.
+- Claude Code documentation: https://docs.anthropic.com/en/docs/claude-code/memory — consulta 2026-09-30.

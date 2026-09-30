@@ -33,3 +33,11 @@
 5. Secure executor isolation and credential separation need dedicated implementation work.
 6. Slack event and approval mechanics need an integration lab.
 7. Runtime agent memory policy needs an explicit retention/provenance design.
+
+---
+
+# CHAT 2 — CONTENIDO NUEVO
+
+## Chat 2 — M1 planning coverage
+
+M1 quedó transformado en siete unidades profesionales: P01 modo/tarea, P02 herramienta, P03 arquitectura de contexto, P04 higiene de ventana, P05 prompting, P06 patrones de coding y P07 integración/casos. La clasificación mantiene M12 fuera de construcción.

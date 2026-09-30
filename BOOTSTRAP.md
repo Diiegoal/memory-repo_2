@@ -64,9 +64,10 @@ A future session should be able to answer from this repository alone:
 
 ---
 
-## Chat 2 continuation update
+# CHAT 2 — CONTENIDO NUEVO
 
-For continuation after Chat 2, read `STATE.md`, `DECISIONS.md`, `OPEN_QUESTIONS.md`, `chats/chat-002/META.md`, `chats/chat-002/M1_PLAN.md`, `knowledge/facts/chat-002-source-audit.md`, `knowledge/facts/chat-002-sre-reference.md` and `knowledge/facts/chat-002-plan-audit.md` before any project execution.
+## Chat 2 continuation
 
-The M1 plan is frozen but every project step remains `PLANIFICADO`. A future session must not infer execution from the plan.
-
+- Chat 2 ya existe y su sesión real está en `chats/chat-002/`.
+- First read adicional para continuar M1: `chats/chat-002/M1_PLAN.md`.
+- El plan canónico es siete pasos y permanece PLANIFICADO.
