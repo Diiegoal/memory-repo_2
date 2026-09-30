@@ -12,10 +12,13 @@
 
 Use `knowledge/facts/repository-audit.md` for repository/module facts and `knowledge/facts/external-research.md` for external evidence. Use `knowledge/architecture/*` for all derived comparisons and decisions.
 
-## Adiciones de Chat 2
+---
 
-- Auditoría completa de M1: `knowledge/facts/FACT-0001-chat-002-m1-source-audit.md`.
-- Estado observado del repositorio objetivo: `knowledge/facts/FACT-0002-chat-002-target-repository-state.md`.
-- Registro real de ejecución de Chat 2: `knowledge/facts/FACT-0003-chat-002-execution-record.md`.
-- Plan M1 y gates de calidad: `knowledge/architecture/11-m1-construction-plan.md` y `knowledge/architecture/12-m1-quality-gates.md`.
-- Verificación externa actual: `knowledge/facts/external-research.md` y `knowledge/references/reference-index.md`.
+## Chat 2 evidence additions
+
+- `chats/chat-002/transcript.md` — prompt actually executed plus substantive production and real execution record.
+- `chats/chat-002/M1_PLAN.md` — plan derived from complete M1 audit.
+- `knowledge/facts/chat-002-source-audit.md` — source and repository-state evidence.
+- `knowledge/facts/chat-002-sre-reference.md` — target-project reference read completely in Chat 2.
+- `knowledge/facts/chat-002-plan-audit.md` — validation evidence.
+

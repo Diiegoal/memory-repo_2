@@ -37,6 +37,11 @@ Use Streamlit as a practical first operator UI/demo, but keep the underlying pro
 - Decisions describe what Chat 1 adopted; recommendations remain distinguishable in knowledge documents.
 - Changes require a new decision record and temporal context.
 
-## Adenda de decisiones de Chat 2
+---
 
-No se creó ninguna nueva decisión sustantiva durante Chat 2. La descomposición de M1 en siete unidades es un resultado de planificación derivado del análisis actual; no modifica el orden profesional ni las decisiones `DEC-0001` a `DEC-0006`.
+## Chat 2 validation
+
+No new substantive decision was created in Chat 2. DEC-0001 through DEC-0006 were revalidated against the recovered handoff, STATE and direct evidence and remain accepted.
+
+The M1 plan therefore carries inherited decisions as constraints; it does not create DEC-0007 merely to populate memory.
+

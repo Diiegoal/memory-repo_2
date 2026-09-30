@@ -63,11 +63,3 @@ Instrument both the target system and the agent itself. Capture service telemetr
 ## Deployment maturity
 
 Local Docker first → CI test environment → containerized staging → optional Kubernetes/AWS production-like environment → IaC + deployment gates.
-
-## Chat 2 boundary
-
-The architecture remains inherited from Chat 1. M1 work only prepares the AI-assisted operating discipline required to build this architecture later; it does not instantiate the architecture in the target repository.
-
-## Adenda de regresión de Chat 2
-
-La arquitectura objetivo heredada permanece sin cambios. Chat 2 prepara únicamente la capa de ingeniería asistida por IA de M1 y no crea ni configura componentes del producto.

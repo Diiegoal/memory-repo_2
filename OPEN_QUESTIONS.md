@@ -40,6 +40,9 @@ Status: open
 
 Create and version a synthetic incident dataset representative of the target operating environment.
 
-## Límite de aclaración de Chat 2
+---
 
-Chat 2 no resolvió ni transformó `OQ-0001` a `OQ-0008` en decisiones del proyecto. Permanecen abiertas porque M1 aporta metodología de ingeniería asistida por IA, pero no aporta por sí solo los contratos operativos SRE, elecciones de runtime, aislamiento del executor, escala de recuperación o corpus de evaluación necesarios para cerrarlas.
+## Chat 2 status
+
+No new open question was created solely for Chat 2. OQ-0001 through OQ-0008 remain open and continue to bound decisions such as exact SRE operating model, model/provider, runtime queue, retrieval scale, executor isolation, future UI, evaluation rubric and incident corpus.
+

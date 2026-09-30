@@ -35,20 +35,3 @@ The following observations were seen after the cutoff and were therefore exclude
 - GitHub Spec Kit page showing last update Sep 14.
 
 These are documented as temporal-control evidence only.
-
-## Verificación de Chat 2
-
-El 2026-09-29 se volvió a inspeccionar un subconjunto focalizado de fuentes oficiales manteniendo el corte 2026-09-11 para afirmaciones de estado al corte:
-
-- OpenAI Agents cookbook: `https://developers.openai.com/cookbook/topic/agents` — el índice lista `Build an SRE agent for incident response` con fecha 2026-09-10.
-- AGENTS.md: `https://agents.md/` — formato Markdown abierto para contexto dirigido a agentes de coding.
-- OpenTelemetry Python: `https://opentelemetry.io/docs/languages/python/` — soporte de Python y estado de señales.
-- Prometheus Alertmanager: `https://next.prometheus.io/docs/alerting/latest/alertmanager/` — deduplicación, agrupación, routing, silenciamiento e inhibición.
-- Grafana Loki HTTP API: `https://grafana.com/docs/loki/latest/reference/loki-http-api/` — consultas `query`, `query_range` y `tail`, con diferencia entre tail y recuperación histórica completa.
-- LangChain: `https://docs.langchain.com/` — documentación actual usada solo como contexto estable de capacidad, no como afirmación de versión al corte.
-
-Ninguna observación posterior al 2026-09-11 se convirtió en una afirmación de “latest” al corte.
-
-## Adenda temporal y de procedencia de Chat 2
-
-Las fuentes anteriores fueron consultadas como verificación puntual actual. No constituyen nuevas decisiones del proyecto.

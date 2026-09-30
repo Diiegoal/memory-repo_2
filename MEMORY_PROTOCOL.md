@@ -93,6 +93,17 @@ When later evidence contradicts a derived claim:
 
 This Chat 1 repository reaches the equivalent of a **Level 7-style memory architecture conceptually** (transcript + state + decisions + questions + indexes + layered retrieval + temporal/provenance rules), while its actual implementation remains Markdown-first/manual. It does not claim to have implemented an automated vector/graph/MCP retrieval engine.
 
-## Chat 2 Addendum
+---
 
-This Chat 2 staging copy preserves the Chat 1 content first and adds only derived planning evidence below. The M1 plan and Chat 2 fact records do not replace the RAW Chat 1 transcript. No future `chat-002/` transcript is fabricated, and no target-project implementation is recorded as executed.
+## 10. Chat 2 cumulative update
+
+Chat 2 follows the same layered memory model: historical RAW remains authoritative and unchanged; new session RAW is written under `chats/chat-002/`; derived Chat 2 state is appended to the appropriate current-state/knowledge/index files; no future session transcript is created.
+
+### Append rule applied
+
+For every updated Markdown file, the original Chat 1 block remains intact and Chat 2 content is appended below it. Historical `chats/chat-001/transcript.md` is not rewritten.
+
+### Verification rule applied
+
+The physical staging audit verifies that the historical transcript's Git blob SHA remains `687ecb9c0de3e4ff9fdc1da16c05fdebb98937f2` and that updated historical files retain their pre-Chat-2 content as an unchanged prefix.
+

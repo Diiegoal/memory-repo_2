@@ -56,38 +56,22 @@ Chat 1 research and memory consolidation are complete. Product implementation ha
 
 2026-09-25
 
-## Adenda de estado de Chat 2 — Plan congelado
+---
 
-### Alcance
+## Chat 2 Update
 
-Chat 2 tradujo el contenido práctico completo de M1 en siete unidades profesionales ejecutables en el futuro para el proyecto SRE/DevOps. No se ejecutó el Paso 1 del proyecto, no se modificó ningún repositorio externo y todo el trabajo sobre el producto permanece planificado.
+- Chat: `chat-002`
+- State date: 2026-09-30
+- External research cutoff retained: `2026-09-11`
+- M1 plan: frozen / `PLANIFICADO`
+- M1 steps: `M1-P01` … `M1-P07`
+- Target project state observed: empty Git repository; no write performed.
+- External repositories: unchanged.
+- New Chat 2 decision: none.
+- Chat 1 decisions: DEC-0001…DEC-0006 remain accepted.
+- Chat 1 open questions: OQ-0001…OQ-0008 remain open.
 
-### Estado del plan M1
+### Chat 2 completion boundary
 
-- Unidades finales planificadas: 7.
-- Estado de cada unidad: `PLANIFICADO`.
-- Auditoría estructural: PASS.
-- Auditoría semántica: PASS después del ciclo de reparación.
-- Estado de empaquetado: copia de staging congelada y validada para crear el ZIP.
+Chat 2 completed source auditing, plan construction, quality gates, cumulative memory preparation and packaging. It did not execute the project Step 1.
 
-### Unidades planificadas
-
-1. `M1-P01` — establecer el modelo de los tres pilares y caracterizar el modo de trabajo de la tarea.
-2. `M1-P02` — seleccionar y evaluar la categoría de herramienta con los criterios de M1 y lectura responsable de benchmarks.
-3. `M1-P03` — diseñar el contexto persistente del proyecto y la base de `AGENTS.md`.
-4. `M1-P04` — definir la gestión operativa del contexto, `context rot` y las operaciones Write/Select/Compress/Isolate.
-5. `M1-P05` — definir el contrato de prompting técnico fundamental.
-6. `M1-P06` — definir patrones de ejecución de coding y ciclos de revisión.
-7. `M1-P07` — integrar herramienta, contexto y prompt mediante los casos canónicos A–E de M1.
-
-### Estado externo verificado durante Chat 2
-
-Se revisaron fuentes oficiales actuales el 2026-09-29. La investigación con corte 2026-09-11 se conserva como frontera temporal para afirmaciones de estado al corte; las observaciones posteriores no se promueven a ese estado.
-
-### Delta de decisiones
-
-No se creó ninguna nueva decisión sustantiva del proyecto. Las decisiones aceptadas `DEC-0001` a `DEC-0006` permanecen activas y no fueron reinterpretadas como recomendaciones nuevas.
-
-## Registro de ejecución de Chat 2
-
-Consultar `knowledge/facts/FACT-0003-chat-002-execution-record.md` para el registro de acciones reales y los límites de ejecución.

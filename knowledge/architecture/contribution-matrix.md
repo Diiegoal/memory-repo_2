@@ -15,11 +15,3 @@
 | M11 | System QA | How integrated behavior is verified | Integration/E2E/BDD suite |
 | M13 | Delivery | How the system is shipped and operated | CI/CD/IaC/release controls |
 | M12 | Reference only | What the target SRE architecture looks like | Reference knowledge only |
-
-## Chat 2 M1 contribution
-
-M1's practical contribution is an AI-assisted engineering operating layer that is reused by all twelve construction modules. It should not be mistaken for an additional product stage beyond M1.
-
-## Adenda de regresión de Chat 2
-
-No cambia la asignación de contribuciones de los módulos. Chat 2 añade únicamente el desarrollo detallado del método práctico de M1.

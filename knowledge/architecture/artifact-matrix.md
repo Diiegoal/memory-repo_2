@@ -14,11 +14,3 @@
 | M10 | Frontend | Operator surface | Streamlit/React UI | M10 audited files + M12 |
 | M11 | System QA | System boundaries | integration/E2E/BDD suite | M11 audited files |
 | M13 | Delivery | Infra/CI/CD | Docker/IaC/pipelines/deployment | M13 audited files + R07 |
-
-## Chat 2 extension
-
-The M1 executable construction plan is recorded separately in `11-m1-construction-plan.md`. Its artifacts are future outputs of the seven planned units, not artifacts already created in the target project.
-
-## Adenda de regresión de Chat 2
-
-La contribución de M1 se mantiene orientada al método de trabajo, contexto, prompting, selección y validación. Los artefactos de implementación del producto siguen asignados a los módulos posteriores.

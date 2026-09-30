@@ -95,1386 +95,1253 @@ memory-repo/
 │   │   └── external-research.md
 │   ├── architecture/
 │   │   ├── agentic-sdlc.md
-│   │   ├── target-architecture.md
+│   │   ├── artifact-matrix.md
+│   │   ├── component-matrix.md
+│   │   ├── contribution-matrix.md
 │   │   ├── decision-matrix.md
 │   │   ├── dependency-matrix.md
-│   │   ├── contribution-matrix.md
-│   │   ├── component-matrix.md
-│   │   ├── artifact-matrix.md
-│   │   └── gaps-and-roadmap.md
+│   │   ├── gaps-and-roadmap.md
+│   │   └── target-architecture.md
 │   └── references/
 │       └── reference-index.md
 ├── indexes/
+│   ├── references.md
 │   ├── timeline.md
-│   ├── topics.md
-│   └── references.md
+│   └── topics.md
 └── handoffs/
     └── chat-001-to-chat-002.md
 ```
 
 No `chat-002/` directory exists. The `chat-001-to-chat-002.md` file is a future handoff protocol/artifact only, not a future session transcript.
 
-## Future continuation protocol
+---
 
-A future session should read `BOOTSTRAP.md`, then `STATE.md`, `DECISIONS.md`, `OPEN_QUESTIONS.md`, `chats/chat-001/HANDOFF.md`, relevant `knowledge/` documents and only the specific RAW evidence needed. It should not assume conversational memory.
+# Complete Markdown File Structure
 
-## Limitations
+This section documents the structural pattern of **all 33 Markdown files** present in the repository.
 
-The order is an evidence-backed professional construction sequence, not a mathematical optimum. The curriculum contains Python/FastAPI/LangGraph/SRE gaps that require project-specific labs. The target product itself was not implemented in Chat 1.
+The templates are structural templates. They do not replace the actual file contents.
+
+For files that belong to the same record type, one shared template is used instead of falsely presenting different structures.
 
 ---
 
-# Updated README extension: complete structural templates for every Markdown file
+# Root Files
 
-## Purpose of this extension
+## 1. `README.md`
 
-This section documents the **complete structural shape** of every `.md` file currently present in the repository, without omitting any Markdown file. It is designed to act as a **template/catalog**: headings, metadata fields, table schemas, and structural sections are preserved as reusable placeholders.
+### Role
 
-Values inside `<...>` are template variables, not facts to be invented. A template must be populated only with evidence that actually exists for the corresponding artifact.
+Repository overview and navigation document.
 
-## Markdown file inventory
+### Template
 
-The repository currently contains **33 Markdown files**:
-
-| Category | Count | Files |
-|---|---:|---|
-| Root | 8 | `README.md`, `MEMORY_PROTOCOL.md`, `BOOTSTRAP.md`, `STATE.md`, `KNOWLEDGE.md`, `DECISIONS.md`, `OPEN_QUESTIONS.md`, `INDEX.md` |
-| Chat 1 RAW/continuity | 3 | `chats/chat-001/META.md`, `chats/chat-001/transcript.md`, `chats/chat-001/HANDOFF.md` |
-| Decision records | 6 | `decisions/DEC-0001.md` … `decisions/DEC-0006.md` |
-| Knowledge/facts | 3 | `knowledge/facts/repository-audit.md`, `knowledge/facts/module-coverage.md`, `knowledge/facts/external-research.md` |
-| Knowledge/architecture | 8 | `knowledge/architecture/agentic-sdlc.md`, `target-architecture.md`, `decision-matrix.md`, `dependency-matrix.md`, `contribution-matrix.md`, `component-matrix.md`, `artifact-matrix.md`, `gaps-and-roadmap.md` |
-| Knowledge/references | 1 | `knowledge/references/reference-index.md` |
-| Indexes | 3 | `indexes/timeline.md`, `indexes/topics.md`, `indexes/references.md` |
-| Handoffs | 1 | `handoffs/chat-001-to-chat-002.md` |
-
-## Complete structural templates by file
-
-### 1. `README.md`
-
-**Role:** repository entry point, purpose, target, final construction order, memory architecture, tree, continuation rules, limitations, and the catalog of all Markdown templates.
-
-**Template structure:**
-
-```md
-# <Repository title>
+```markdown
+# <repository title>
 
 ## Purpose
-<What the repository is and what memory/evidence it preserves.>
+<repository purpose>
 
 ## Target project
-<Exact target product/project.>
+<target project>
 
 ## Core result
-<Final construction order and explicit module/reference boundary.>
+<principal result>
 
 ## Why this order
-1. <Dependency rationale 1>
-2. <Dependency rationale 2>
-...
+<numbered rationale>
 
 ## Module 12 reference role
-<Reference-only boundary, when applicable.>
+<M12 boundary>
 
 ## Stack summary
-<Technology/architecture summary.>
+<stack>
 
 ## Agentic SDLC mapping
-| Stage | Module | Primary capability |
-|---|---|---|
-| <stage> | <module> | <capability> |
+<table>
 
 ## Memory architecture
-- **RAW:** <raw evidence definition>
-- **DERIVED:** <derived memory definition>
-- **CONTINUITY:** <continuity definition>
+<RAW / DERIVED / CONTINUITY>
 
 ## Exact repository tree
-```text
-<memory-repo tree>
-```
+<tree>
 
-<Explicit temporal/structural notes about future chat directories and artifacts.>
+<future-chat / temporal note>
 
 ## Future continuation protocol
-<Minimum read order for the next session.>
+<continuation procedure>
 
 ## Limitations
-<Current limitations and scope boundaries.>
-
-## Updated README extension: complete structural templates for every Markdown file
-<Inventory and all per-file structural templates.>
+<limitations>
 ```
 
 ---
 
-### 2. `MEMORY_PROTOCOL.md`
+## 2. `MEMORY_PROTOCOL.md`
 
-**Role:** durable rules for authority, RAW/derived separation, retrieval, contamination, temporal integrity, provenance, state, drift and maturity.
+### Role
 
-**Template structure:**
+Memory authority, layer separation, retrieval, contamination, temporal and provenance protocol.
 
-```md
+### Template
+
+```markdown
 # Memory Protocol
 
 ## 1. Authority model
-<What is authoritative and what is not.>
+<authority model>
 
 ### Source precedence inside this memory system
-1. <Highest precedence>
-2. <Next precedence>
-3. <Next precedence>
-...
+<numbered precedence>
 
 ## 2. RAW versus derived memory
 
 ### RAW
-<What is immutable RAW evidence and where it lives.>
+<RAW definition>
 
 ### DERIVED
-<How derived facts/decisions/knowledge are allowed to consolidate evidence.>
+<derived definition>
 
 ### CONTINUITY
-<What bootstrap and handoff artifacts mean and do not mean.>
+<continuity definition>
 
 ## 3. Retrieval layers
 
 ### P0 — Current task/instructions
-<Current instructions and constraints.>
+<rule>
 
 ### P1 — Current state
-<STATE retrieval rules.>
+<rule>
 
 ### P2 — Decisions
-<Decision retrieval rules.>
+<rule>
 
 ### P3 — Direct evidence
-<Relevant facts/architecture/references.>
+<rule>
 
 ### P4 — Open questions
-<Unresolved-question retrieval.>
+<rule>
 
 ### P5 — Session handoff
-<Latest handoff retrieval.>
+<rule>
 
 ### P6 — Recent transcript
-<Specific RAW evidence only.>
+<rule>
 
 ### P7 — Historical/secondary
-<Conditional historical retrieval.>
+<rule>
 
 ## 4. Contamination controls
-<Untrusted content and prompt-injection handling.>
+<controls>
 
 ## 5. Temporal controls
-<Date, source, scope, cutoff, and post-cutoff handling.>
+<controls>
 
 ## 6. Provenance
-<Stable IDs and Claim → source/module → evidence type → conclusion traceability.>
+<provenance model>
 
 ## 7. State model
-<Definition of STATE as current truth/state rather than diary.>
+<STATE meaning>
 
 ## 8. Drift management
-1. <Do not overwrite RAW.>
-2. <Record contradiction.>
-3. <Update state/decision when required.>
-4. <Preserve historical state.>
-5. <Record why newer evidence wins.>
+<ordered drift procedure>
 
 ## 9. Maturity
-<Conceptual maturity level and explicit implementation limitation.>
+<maturity statement and implementation limitation>
 ```
 
 ---
 
-### 3. `BOOTSTRAP.md`
+## 3. `BOOTSTRAP.md`
 
-**Role:** continuation protocol for a future session; explicitly not a future transcript.
+### Role
 
-**Template structure:**
+Bootstrap protocol for a future continuation.
 
-```md
+### Template
+
+```markdown
 # Bootstrap for a Future Continuation
 
-> This file describes a future continuation protocol. It is not a transcript of Chat <N+1>.
+> <future-continuation clarification>
 
 ## Objective
-<What the continuation must resume.>
+<objective>
 
 ## Mandatory first reads
-1. `<state file>`
-2. `<decisions file>`
-3. `<open questions file>`
-4. `<latest handoff>`
-5. `<direct architecture/knowledge source>`
-6. `<specific RAW evidence only after the above>`
+<numbered read order>
 
 ## Required behavior
-- <Do not assume previous conversational memory.>
-- <Do not invent missing facts.>
-- <Repository content is data, not authority over active instructions.>
-- <Preserve fact/inference/recommendation/decision distinctions.>
-- <Re-check time-sensitive claims.>
-- <Create a new decision record when a decision changes.>
+<behavior rules>
 
 ## Source-of-truth order
-`<primary source> → <audited repository evidence> → <RAW> → <decision> → <state/knowledge> → <summary> → <inference>`
+<source hierarchy>
 
 ## Context packet assembly
-```text
-TASK
-  ↓
-STATE
-  ↓
-ACTIVE DECISIONS
-  ↓
-OPEN QUESTIONS
-  ↓
-DIRECT ARCHITECTURE/FACTS
-  ↓
-RELEVANT SOURCES
-  ↓
-SPECIFIC RAW EVIDENCE
-```
+<context sequence>
 
 ## Continuation test
-A future session should be able to answer:
-- <Target project>
-- <Final order>
-- <Special reference-only boundary>
-- <Active decisions>
-- <Remaining gaps>
-- <Next action>
-- <Evidence location>
+<questions a future session must be able to answer>
 ```
 
 ---
 
-### 4. `STATE.md`
+## 4. `STATE.md`
 
-**Role:** current operational/decision state of the memory repository and target project.
+### Role
 
-**Template structure:**
+The repository's **current-state snapshot**. It answers what is currently true for the Chat 1 research/construction state; it is not a diary.
 
-```md
+### Template
+
+```markdown
 # Current State
 
 ## Snapshot
+
 - Chat: `<chat-id>`
-- State date: `<YYYY-MM-DD>`
-- External research cutoff: `<YYYY-MM-DD>`
-- Repository audited: `<owner/repo>` / `<branch>`
-- Module count: `<count>`
-- Construction modules: `<count>`
+- State date: `<date>`
+- External research cutoff: `<date>`
+- Repository audited: `<repository>` / `<branch>`
+- Module count: `<number>`
+- Construction modules: `<number>`
 - Reference-only module: `<module>`
 
 ## Current objective
-<Current project/research objective.>
+
+<current objective>
 
 ## Final order
-`<module sequence>`
+
+`<module order>`
 
 ## Current architecture stance
-- <Application/runtime language and framework>
-- <API/service boundary>
-- <Agent orchestration/state>
-- <Authoritative data store>
-- <Retrieval option>
-- <Queue/cache/coordination option>
-- <Operator UI>
-- <Operational channel>
-- <Observability>
-- <Deployment/infrastructure>
-- <Authorization/executor boundary>
+
+- <agent application/runtime>
+- <service/API boundary>
+- <agent orchestration>
+- <authoritative operational storage>
+- <semantic retrieval option>
+- <queue/cache/coordination option>
+- <initial control-center UI>
+- <operational conversation/approval channel>
+- <observability/alert path>
+- <deployment/change correlation>
+- <deployment/infrastructure stage>
+- <authorization/executor boundary>
 
 ## Current lifecycle
-`<phase → phase → ...>`
+
+`<lifecycle>`
+
+<iterative-lifecycle statement>
 
 ## Active controls
-- <Boundary control>
-- <Security control>
-- <Memory/provenance control>
-- <Temporal control>
+
+- <construction/reference boundary>
+- <transversal capability rule>
+- <read-only-first rule>
+- <authorization rule>
+- <memory/secret rule>
+- <temporal cutoff rule>
 
 ## Current status
-<What is completed and what has not started.>
+
+<research / implementation status>
 
 ## Last updated
-`<YYYY-MM-DD>`
+
+<date>
 ```
+
+This is the complete structural pattern of `STATE.md` observed in the repository.
 
 ---
 
-### 5. `KNOWLEDGE.md`
+## 5. `KNOWLEDGE.md`
 
-**Role:** consolidated reusable knowledge, separated from current state and explicit decisions.
+### Role
 
-**Template structure:**
+Consolidated knowledge layer.
 
-```md
+### Template
+
+```markdown
 # Knowledge Base
 
 ## 1. Target product
-<Product operating model and core workflow.>
+<product and core loop>
 
 ## 2. Runtime state versus long-term memory
-<Distinguish runtime execution state, long-term product memory, and external research memory.>
+<state / long-term memory / external memory>
 
 ## 3. Operational evidence
-<Operational sources and their role as evidence rather than sole root-cause authority.>
+<operational evidence model>
 
 ## 4. Safety
-<Security risks and policy/approval boundaries.>
+<security and safety principles>
 
 ## 5. Recovery
-<Recovery automation controls and verification.>
+<recovery principles>
 
 ## 6. Documentation
-<Living documentation/docs-as-code/operational knowledge.>
+<documentation model>
 
 ## 7. SDD
-<Specification as contract between intent and implementation.>
+<specification model>
 
 ## 8. Testing
-<Unit, system and agent-behavior testing model.>
+<testing model>
 
 ## 9. Data
-<Operational relational storage and retrieval model.>
+<data/retrieval model>
 
 ## 10. Agentic development
-<AI-first engineering/harness principles.>
+<agentic development model>
 
 ## 11. Temporal integrity
-<Cutoff and temporal contradiction handling.>
+<temporal/cutoff observations>
 ```
 
 ---
 
-### 6. `DECISIONS.md`
+## 6. `DECISIONS.md`
 
-**Role:** registry of active decisions and decision-management principles.
+### Role
 
-**Template structure:**
+Compact index of the active decisions.
 
-```md
+### Template
+
+```markdown
 # Decisions
 
 ## Active decisions
 
-### DEC-<NNNN> — <Decision title>
-Status: <accepted|superseded|proposed>
-<One-line adopted decision.>
+### DEC-<number> — <decision title>
+Status: <status>
 
-### DEC-<NNNN> — <Decision title>
-Status: <accepted|superseded|proposed>
-<One-line adopted decision.>
+<decision statement>
 
-<Repeat for every active decision.>
+### DEC-<number> — <decision title>
+Status: <status>
+
+<decision statement>
+
+...
 
 ## Decision principles
-- <Decisions are historical/current commitments, not undifferentiated recommendations.>
-- <Changes create new records.>
-- <Temporal context is preserved.>
+
+- <principle>
+- <principle>
 ```
+
+`DECISIONS.md` is the index. The individual records live in `decisions/`.
 
 ---
 
-### 7. `OPEN_QUESTIONS.md`
+## 7. `OPEN_QUESTIONS.md`
 
-**Role:** explicit unresolved questions that prevent unsupported closure of architecture or product decisions.
+### Role
 
-**Template structure:**
+Unresolved questions.
 
-```md
+### Template
+
+```markdown
 # Open Questions
 
-## OQ-<NNNN> — <Question title>
-Status: open
-<Precise unresolved question and currently known evidence/limitation.>
+## OQ-<number> — <question title>
+Status: <status>
 
-## OQ-<NNNN> — <Question title>
-Status: open
-<Precise unresolved question and currently known evidence/limitation.>
+<question and current evidence boundary>
 
-<Repeat for each open question.>
+## OQ-<number> — <question title>
+Status: <status>
+
+<question and current evidence boundary>
+
+...
 ```
+
+The real file contains `OQ-0001` through `OQ-0008`.
 
 ---
 
-### 8. `INDEX.md`
+## 8. `INDEX.md`
 
-**Role:** human-readable locator for the repository’s core, RAW, derived evidence, architecture, references, indexes and future handoff.
+### Role
 
-**Template structure:**
+Top-level locator.
 
-```md
+### Template
+
+```markdown
 # Index
 
 ## Core
-- `<path>` — <role>
+- <file> — <description>
+- ...
 
 ## RAW
-- `<path>`
-- `<path>`
-- `<path>`
+- <file>
+- <file>
+- <file>
 
 ## Derived evidence
-- `<path>`
+- <file>
+- ...
 
 ## Architecture
-- `<path>`
+- <file>
+- ...
 
 ## References and indexes
-- `<path>`
+- <file>
+- ...
 
 ## Future handoff protocol
-- `<handoff path>` — <explicit future/protocol description>
+- <handoff file> — <description>
 ```
 
 ---
 
-### 9. `chats/chat-001/META.md`
+# `chats/chat-001/`
 
-**Role:** machine-readable-ish session metadata plus purpose/input/output status.
+## 9. `chats/chat-001/META.md`
 
-**Template structure:**
+### Role
 
-```md
-# Chat <NNN> Metadata
-- chat_id: `<chat-NNN>`
-- created: `<YYYY-MM-DD>`
-- status: `<completed|in-progress|...>`
-- external_research_cutoff: `<YYYY-MM-DD>`
-- repository_audit_date: `<YYYY-MM-DD>`
-- target: `<target project>`
-- construction_modules: `<count>`
-- reference_only_module: `<module or none>`
-- final_order: `<comma-separated modules>`
+Session metadata.
+
+### Template
+
+```markdown
+# Chat 001 Metadata
+
+- chat_id: `<chat-id>`
+- created: `<date>`
+- status: `<status>`
+- external_research_cutoff: `<date>`
+- repository_audit_date: `<date>`
+- target: `<target>`
+- construction_modules: `<number>`
+- reference_only_module: `<module>`
+- final_order: <ordered modules>
 
 ## Purpose
-<Session objective.>
+<session purpose>
 
 ## Inputs
-- <input 1>
-- <input 2>
-- <input 3>
+- <input>
+- <input>
+- ...
 
 ## Output status
-<What this session completed and what it did not implement.>
+<output status>
 ```
 
 ---
 
-### 10. `chats/chat-001/transcript.md`
+## 10. `chats/chat-001/transcript.md`
 
-**Role:** immutable-style RAW evidence. The file preserves the original executable prompt, the complete original research output, and the real execution record. It is not replaced by summaries.
+### Role
 
-**Template structure:**
+Immutable-style RAW record.
 
-```md
-# TRANSCRIPCIÓN RAW DE CHAT-001
+### Important boundary
 
-> <RAW integrity statement.>
+The structure is intentionally **general**. The real prompt and research output remain only in the RAW transcript.
+
+### Template
+
+```markdown
+# TRANSCRIPCIÓN RAW DE <CHAT-ID>
+
+> <RAW preservation statement>
 
 ---
 
 # PARTE A — PROMPT ORIGINAL (TEXTUAL)
 
-# PROMPT ORIGINAL COMPLETO
+<original prompt preserved exactly>
 
-# PROMPT ÓPTIMO — CHAT 1
+---
 
-## Investigación exhaustiva en diferentes fuentes confiables sin inventar datos y reordenamiento profesional de los 12 módulos de proyecto de `<repository>`, utilizando el Módulo 12 exclusivamente como fuente de información, para construir desde cero un proyecto profesional de Agente SRE / DevOps para respuesta a incidentes, conversacional y reflexivo mediante un Agentic SDLC
+# PARTE B — SALIDA ORIGINAL COMPLETA DE INVESTIGACIÓN
 
-# 0. CONTRATO DE EJECUCIÓN
+<complete original research output preserved exactly>
 
-## Resultado obligatorio de Chat 1
-### Prohibición crítica
+<research/source/analysis/comparison/decision/reference sections as actually produced>
 
-## Regla de autenticidad temporal
-
-# 1. MISIÓN PRINCIPAL
-# 2. OBJETIVO DE DECISIÓN
-# 3. RESULTADO CONCEPTUAL ESPERADO
-# 4. ROL Y ESTÁNDAR DE TRABAJO
-# 5. REGLA ABSOLUTA DE NO INVENCIÓN
-# 6. CLASIFICACIÓN OBLIGATORIA DE LA EVIDENCIA
-# 7. HIERARQUÍA DE FUENTES DE VERDAD
-# 8. ACTUALIDAD Y CORTE TEMPORAL
-
-# 9. DOCUMENTOS DE CONTEXTO OBLIGATORIOS
-## Documento A — Memoria externa
-## Documento B — Guía de prompts
-## Documento C — Investigación completa del Agente SRE / DevOps
-
-# 10. LECTURA COMPLETA DE LOS TRES DOCUMENTOS DE CONTEXTO
-# 11. AUDITORÍA REAL DEL REPOSITORIO `<repository>`
-# 12. IDENTIFICACIÓN DE LOS 13 MÓDULOS
-# 13. LECTURA COMPLETA DE LOS 13 MÓDULOS
-# 14. MATRIZ INTERNA DE AUDITORÍA
-# 15. CONTENIDO REAL DE LOS MÓDULOS VS. FUNCIÓN EN EL PROYECTO
-# 16. DEFINICIÓN DE ORDEN PROFESIONAL
-# 17. DISTINGUIR SECUENCIA OBLIGATORIA, RECOMENDABLE Y TRANSVERSAL
-# 18. DOS PERSPECTIVAS SIMULTÁNEAS
-## A. Orden profesional de construcción del producto desde cero
-## B. Orden pedagógico
-# 19. MODELO DE CICLO DE VIDA A CONTRASTAR
-# 20. INVESTIGACIÓN EXTERNA SOBRE DESARROLLO PROFESIONAL
-# 21. INVESTIGACIÓN ESPECÍFICA DEL PRODUCTO OBJETIVO
-# 22. DOCUMENTACIÓN COMO CAPACIDAD TRANSVERSAL
-## Dimensión A — Documentación como ingeniería
-## Dimensión B — Documentación como conocimiento operativo del producto
-# 23. SEGURIDAD Y PRIVACIDAD COMO TEMAS TRANSVERSALES
-# 24. TESTING Y QA
-# 25. BASES DE DATOS, BACKEND Y FRONTEND
-# 26. COPILOTOS, SDD Y DESARROLLO ASISTIDO POR IA
-# 27. TRES O MÁS ÓRDENES CANDIDATOS
-## Candidato A — Orientado a la construcción profesional empresarial desde cero
-## Candidato B — Orientado al Agentic SDLC / desarrollo AI-native / agentic
-## Candidato C — Orientado al aprendizaje pedagógico
-# 28. SISTEMA DE EVALUACIÓN DE CANDIDATOS
-# 29. PRINCIPIO DE MÍNIMO RETRABAJO
-# 30. SHIFT LEFT SIN DOGMA
-# 31. PRINCIPIO DE ITERACIÓN
-# 32. MATRIZ DE DEPENDENCIAS
-# 33. MATRIZ DE CONTRIBUCIÓN DE CADA MÓDULO
-# 34. MATRIZ MÓDULO → COMPONENTE DEL PRODUCTO
-# 35. MATRIZ MÓDULO → ARTEFACTO REAL
-# 36. TRAZABILIDAD
-# 37. IDENTIFICAR HUECOS DEL CURRÍCULO
-# 38. MEMORIA EXTERNA Y EL DISEÑO DEL ENTREGABLE
-# 39. ESTRUCTURA EXACTA Y CERRADA DEL ZIP
-## Regla absoluta de estructura
-### Cómo interpretar los marcadores del árbol
-### Regla importante sobre archivos opcionales
-### Excepción importante
-# 40A. POLÍTICA DE IDIOMA DE LOS ARTEFACTOS `.md`
-# 41. README.md — CONTENIDO OBLIGATORIO
-## 41.1 Propósito
-## 41.2 Proyecto investigado
-## 41.3 Resultado
-## 41.4 Arquitectura de memoria
-## 41.5 Estructura del repositorio
-## 41.6 Catálogo de archivos
-## 41.7 Cómo continuar en el siguiente chat
-## 41.8 Limitaciones
-## 41.9 Plantillas de estructura por archivo
-# 42. MEMORY_PROTOCOL.md — CONTENIDO OBLIGATORIO
-# 43. BOOTSTRAP.md — CONTENIDO OBLIGATORIO
-# 44. STATE.md — CONTENIDO OBLIGATORIO
-# 45. KNOWLEDGE.md — CONTENIDO OBLIGATORIO
-# 46. DECISIONS.md — CONTENIDO OBLIGATORIO
-# 47. OPEN_QUESTIONS.md — CONTENIDO OBLIGATORIO
-# 48. INDEX.md — CONTENIDO OBLIGATORIO
-# 49. chats/chat-001/META.md — CONTENIDO OBLIGATORIO
-# 50. chats/chat-001/transcript.md — REGLA CRÍTICA
-## 50.1 Prompt original
-## 50.2 Salida original completa de la investigación
-## 50.3 Registro real de ejecución
-## 50.4 Regla de integridad del RAW
-# 51. chats/chat-001/HANDOFF.md — CONTENIDO OBLIGATORIO
-## Archivos a leer primero
-# 52. handoffs/chat-001-to-chat-002.md
-# 53. decisions/DEC-XXXX.md
-# DEC-XXXX — [Título]
-## Decisión
-## Contexto
-## Alternativas
-## Criterios
-## Evidencia
-## Consecuencias
-## Archivos relacionados
-# 54. knowledge/facts/
-# 55. knowledge/architecture/
-# 56. knowledge/references/
-# 57. indexes/timeline.md
-# 58. indexes/topics.md
-# 59. indexes/references.md
-# 60. LEGIBLE POR MÁQUINA + LEGIBLE POR HUMANOS
-# 61. PROCEDENCIA
-# 62. TEMPORALIDAD
-# 63. RAW VS DERIVED
-# 64. CONTEXTO MÍNIMO SUFICIENTE
-# 65. RECUPERACIÓN POR CAPAS
-# 66. MEMORIA TEMPORAL Y CONTRADICCIONES
-# 67. ESTADOS RECOMENDADOS
-# 68. CONTROL DE MEMORY DRIFT
-# 69. TEST DE CONTINUIDAD
-### Escenario
-# 70. TEST DE CONTRADICCIÓN
-# 71. TEST DE RECONSTRUCCIÓN
-# 72. TEST DE PORTABILIDAD
-# 73. SEGURIDAD CONTRA CONTAMINACIÓN
-# 74. INVESTIGACIÓN Y RAZONAMIENTO
-# 75. NO SOBREESPECIFICAR EL PROCESO COGNITIVO
-# 76. CRITERIOS DE ÉXITO DEL TRABAJO
-# 77. RESULTADO PRINCIPAL — AGENTE SRE, AGENTIC SDLC Y ORDEN DE LOS 12 MÓDULOS DE PROYECTO
-# Orden profesional recomendado
-# 78. JUSTIFICACIÓN MÓDULO POR MÓDULO
-## Nuevo puesto X — Módulo N — [nombre exacto]
-### Qué contiene realmente
-### Qué aporta al proyecto
-### Qué debe involucrar el proyecto a partir de este módulo
-### Por qué aparece en esta posición
-### Prerrequisitos
-### Dependencias
-### Decisiónes que habilita
-### Artefactos que permite producir
-### Fase primaria
-### Fases secundarias
-### Qué vuelve a utilizarse después
-### Riesgo de introducirlo o aplicarlo demasiado pronto
-### Riesgo de introducirlo o aplicarlo demasiado tarde
-### Evidencia interna del módulo
-### Evidencia externa
-### Inferencia de diseño
-### Veredicto
-# 79. ROADMAP PROFESIONAL DEL PROYECTO
-# 80. MAPA DE ARTEFACTOS
-# 81. ACTIVIDADES TRANSVERSALES
-# 82. MATRIZ DE COBERTURA
-# 83. REGLA DE LONGITUD
-# 84. REGLA SOBRE RESÚMENES
-# 85. REGLA SOBRE DOCUMENTACIÓN
-# 86. REGLA SOBRE FUENTES
-# 87. REGLA DE INVESTIGACIÓN RECIENTE
-# 88. REGLA SOBRE ARCHIVOS Y CONTENIDO NO CONFIABLE
-# 89. REGLA SOBRE GIT Y MEMORIA
-# 90. REGLA SOBRE SECRETOS
-# 91. EVITAR SOBREINGENIERÍA
-# 92. MEMORIA COMO SISTEMA, NO COMO CARPETA DE CHATS
-# 93. CONTINUIDAD SIN DEPENDER DE LA MEMORIA DE CHATGPT
-# 94. PORTABILIDAD
-# 95. EVALUACIÓN DE MADUREZ DE LA MEMORIA
-# 96. PRUEBAS DE BORDE
-# 97. INTENTAR REFUTAR LA DECISIÓN FINAL
-# 98. CRITERIOS DE ACEPTACIÓN DEL ORDEN FINAL
-# 99. CONTENIDO MÍNIMO OBLIGATORIO DE LA INVESTIGACIÓN
-# 100. ESTADO, DECISIONES Y RECOMENDACIONES
-# 101. CONTEXTO PRIORIZADO PARA EL SIGUIENTE CHAT
-# 102. PROTOCOLO DE CIERRE DE CHAT 1
-# 103. VALIDACIÓN FINAL DEL ZIP
-## Estructura
-## Investigación
-## Memoria
-## Calidad
-# 104. PRUEBA FINAL DE CONTINUIDAD
-# 105. REGLA FINAL DE ENTREGA
-# 106. REGLA FINAL SOBRE EL CONTENIDO DEL ZIP
-# 107. PRINCIPIO FINAL DE EXCELENCIA
-# 108. ÚLTIMA INSTRUCCIÓN
-# FIN DEL PROMPT EJECUTABLE
-
-# PARTE B — SALIDA ORIGINAL COMPLETA DE LA INVESTIGACIÓN
-# Chat 1 — Salida completa de la investigación
-## 1. Hallazgo ejecutivo
-### Orden final profesional de construcción
-### Conclusión central
-## 2. Modelo de evidencia
-### Hechos del repositorio
-### Control temporal
-### Etiquetas de evidencia utilizadas en esta investigación
-## 3. Definición completa del producto
-### Producto objetivo
-### Ciclo de vida del incidente
-### Comportamiento esperado del agente
-### Límite de seguridad explícito
-## 4. Arquitectura SRE de referencia extraída de M12
-### Evaluación del stack del producto
-### Snapshot tecnológico compatible con el corte
-## 5. Auditoría completa de los 13 módulos
-### M1 — Tres pilares del uso efectivo de copilotos de IA
-### M2 — Spec-Driven Development
-### M3 — Sistema operativo para copilotos de IA
-### M4 — Planificación efectiva con IA
-### M5 — Documentación efectiva con IA
-### M6 — Ética, regulación y privacidad
-### M7 — Testing y calidad Parte 1
-### M8 — Bases de datos
-### M9 — Backend asistido por IA
-### M10 — Frontend asistido por IA
-### M11 — Tests automatizados y QA Parte 2
-### M12 — Laboratorio SRE/DevOps de respuesta a incidentes — SOLO REFERENCIA
-### M13 — DevSecOps con IA
-## 6. Órdenes candidatas
-### Candidato A — Ejecución profesional / seleccionado
-### Candidato B — Variante security-first
-### Candidato C — Baja disrupción / adyacente a pedagogía
-## 7. Matriz comparativa de evaluación
-## 8. Modelo de dependencias
-### Enlaces críticos
-### Dependencias no lineales
-## 9. Matriz de contribución módulo → proyecto
-## 10. Matriz módulo → componente
-## 11. Cadena real de artefactos
-## 12. Capacidades transversales
-## 13. Definición del Agentic SDLC para este proyecto
-## 14. Roadmap candidato de ejecución
-### Etapa 0 — Fundamentos
-### Etapa 1 — Definición del producto
-### Etapa 2 — Especificación
-### Etapa 3 — Seguridad/privacidad
-### Etapa 4 — Arquitectura y conocimiento
-### Etapa 5 — Línea base de calidad
-### Etapa 6 — Base de datos
-### Etapa 7 — Backend
-### Etapa 8 — Frontend
-### Etapa 9 — QA del sistema
-### Etapa 10 — Entrega y operación
-## 15. Límites del MVP / anti-overengineering
-### Línea base del MVP
-### Siguientes incrementos
-## 16. Huecos del currículo
-## 17. Límite entre la memoria de Chat 1 y la memoria runtime del producto
-## 18. Intento de refutación
-### Desafío 1 — ¿Debe M6 ir antes de M4?
-### Desafío 2 — ¿Debe M6 ir antes de M2?
-### Desafío 3 — ¿Debe M8 ir antes de M7?
-### Desafío 4 — ¿Debe M9 ir antes de M8?
-### Desafío 5 — ¿Podría M5 quedar completamente después de la implementación?
-### Desafío 6 — ¿Debe M13 ir antes porque CI/CD es transversal?
-### Desafío 7 — ¿Debe insertarse M12 porque está directamente relacionado con el objetivo?
-## 19. Comprobaciones de casos extremos requeridas por el prompt
-## 20. Decisión final
-## 21. Qué debe ocurrir a continuación (protocolo futuro, no una sesión de chat futura)
-## 22. Limitaciones
-## 23. Lista de referencias
-## 24. Respuesta final a la pregunta central
+---
 
 # PARTE C — REGISTRO REAL DE EJECUCIÓN
-# Registro real de ejecución de Chat 1
+
+<real execution record>
+
+<execution_log>
+# Registro real de ejecución de <CHAT-ID>
+
 ## Identidad de la sesión
+
+- Sesión: `<chat-id>`
+- Fecha de ejecución: `<date>`
+- Zona horaria del usuario: `<timezone>`
+- Corte de investigación externa aplicado: `<cutoff>`
+- Repositorio auditado: `<repository>` / `<branch>`
+
 ## Acciones registradas
+
+1. <real action>
+2. <real action>
+3. <real action>
+...
+
 ## Nota técnica de ejecución
+
+<technical notes>
+
 ## Nota de integridad temporal
+
+<temporal-integrity notes>
+
 ## Resultado de integridad
+
+<integrity result>
+
+</execution_log>
 ```
 
-**Integrity rule:** this template documents the current structural shape; the actual `transcript.md` remains RAW and should not be replaced by a generated outline.
+### RAW invariants
+
+- Original executable prompt.
+- Complete original research output.
+- Real execution log.
+- No future-chat transcript fabrication.
+- Derived artifacts do not replace RAW.
 
 ---
 
-### 11. `chats/chat-001/HANDOFF.md`
+## 11. `chats/chat-001/HANDOFF.md`
 
-**Role:** explicit handoff from Chat 1 to a future continuation.
+### Role
 
-**Template structure:**
+Direct continuation handoff from Chat 1.
 
-```md
-# Handoff — chat-<NNN> → future continuation
-> This is a handoff artifact, not a future chat transcript.
+### Template
+
+```markdown
+# Handoff — <chat-id> → future continuation
+
+> <handoff-not-transcript clarification>
 
 ## Objective
-<Continuation objective.>
+<continuation objective>
 
 ## Current state
-<Current order and major boundaries.>
+<final order and M12 boundary>
 
 ## Completed
-- <Completed artifact/work 1>
-- <Completed artifact/work 2>
+- <completed item>
+- ...
 
 ## Active decisions
-See `<decision registry>` and `<decision records>`.
+<decision references>
 
 ## Open questions
-See `<open questions file>`.
+<open-question reference>
 
 ## Read first
-1. `<bootstrap>`
-2. `<state>`
-3. `<decisions>`
-4. `<open questions>`
-5. `<relevant architecture>`
+1. <file>
+2. <file>
+3. <file>
+4. <file>
+5. <file>
+6. <file>
 
 ## Evidence retrieval
-<How to use RAW evidence and when it is necessary.>
+<selective evidence rule>
 
 ## Immediate future work
-<Next executable scope.>
+<next task>
 ```
 
 ---
 
-### 12. `decisions/DEC-0001.md` through `decisions/DEC-0006.md`
+# `decisions/`
 
-**Role:** atomic decision records. All six existing records share the same structural family; the exact title and content vary by decision.
+## 12–17. `decisions/DEC-0001.md` through `decisions/DEC-0006.md`
 
-**Template structure:**
+### Important structural rule
 
-```md
-# DEC-<NNNN> — <Title>
+These six files are **six instances of one decision-record structure**. They are not six different templates.
 
-Status: <accepted|superseded|proposed>
-Date: <YYYY-MM-DD>
+### Single shared template
+
+```markdown
+# DEC-<number> — <Decision title>
+
+Status: <status>
+Date: <date>
 
 ## Decision
-<Exact adopted decision.>
 
-## Context
-<Optional/when applicable: context behind the decision.>
+<accepted decision>
 
 ## Reason
-<Why the decision was made.>
 
-## Alternatives
-<Optional alternatives considered.>
-
-## Criteria
-<Optional criteria used.>
+<reason, when this record contains it>
 
 ## Evidence
-<Source records, module audit, research, RAW location, IDs.>
+
+<evidence pointers, when this record contains them>
 
 ## Consequence
-<Operational/product consequences.>
 
-## Consequences
-<Optional plural form when present in the specific record.>
-
-## Files related / Archivos relacionados
-<Related artifacts.>
+<consequence, when this record contains it>
 ```
 
-**Existing record titles:**
+The optional sections are shown because the actual records do not all have the same optional fields.
 
-| File | Current title |
+### Files covered by this one template
+
+```text
+decisions/DEC-0001.md
+decisions/DEC-0002.md
+decisions/DEC-0003.md
+decisions/DEC-0004.md
+decisions/DEC-0005.md
+decisions/DEC-0006.md
+```
+
+### Structural variation actually present
+
+| Record group | Sections present after `## Decision` |
 |---|---|
-| `DEC-0001.md` | Professional Module Order |
-| `DEC-0002.md` | Exclude M12 from Construction |
-| `DEC-0003.md` | Security and Documentation as Gates plus Loops |
-| `DEC-0004.md` | Read-only-first Agent |
-| `DEC-0005.md` | PostgreSQL plus Evaluated pgvector |
-| `DEC-0006.md` | Streamlit Optional |
+| DEC-0001 | `## Reason`, `## Evidence` |
+| DEC-0002 | `## Reason`, `## Consequence` |
+| DEC-0003 | `## Consequence` |
+| DEC-0004 | `## Evidence` |
+| DEC-0005 | `## Reason` |
+| DEC-0006 | none |
 
-**Important:** the generic decision template contains the full family of fields used by the executable prompt; individual current records may intentionally omit optional sections rather than inventing empty content.
+This table documents the real variation while keeping one common decision template.
 
 ---
 
-### 13. `knowledge/facts/repository-audit.md`
+# `handoffs/`
 
-**Role:** factual audit of the external course repository and the 13 modules.
+## 18. `handoffs/chat-001-to-chat-002.md`
 
-**Template structure:**
+### Role
 
-```md
-# Repository Audit — <owner/repository>
+Future handoff protocol.
+
+### Template
+
+```markdown
+# Future Handoff Protocol
+
+<statement that chat-002 does not exist>
+
+## Context packet
+
+```text
+STATE.md
+→ DECISIONS.md
+→ OPEN_QUESTIONS.md
+→ chats/chat-001/HANDOFF.md
+→ relevant architecture/facts
+→ exact source evidence
+```
+
+## Required checks
+
+- <temporal cutoff check>
+- <decision supersession check>
+- <fact/proposal distinction>
+- <selective transcript retrieval>
+- <RAW preservation>
+
+## Suggested first task
+
+<future task>
+```
+
+---
+
+# `indexes/`
+
+## 19. `indexes/references.md`
+
+### Role
+
+Locator for research inputs and derived evidence.
+
+### Template
+
+```markdown
+# Reference Locator Index
+
+## Primary research inputs
+
+- <source/input> — <location/status>
+- ...
+
+## Derived evidence map
+
+<document → evidence mapping>
+```
+
+---
+
+## 20. `indexes/timeline.md`
+
+### Role
+
+Chronological index.
+
+### Template
+
+```markdown
+# Timeline
+
+- **<date>** — <event>.
+- **<date>** — <event>.
+- **<date>** — <event>.
+```
+
+The audited file currently has three timeline entries.
+
+---
+
+## 21. `indexes/topics.md`
+
+### Role
+
+Topic retrieval index.
+
+### Template
+
+```markdown
+# Topic Index
+
+- `<topic>` → `<document>`
+- `<topic>` → `<document>`
+- ...
+```
+
+The audited file currently maps topics including agentic SDLC, module order, repository audit, module content, SRE-agent, security, memory, continuity, testing and data.
+
+---
+
+# `knowledge/facts/`
+
+## 22. `knowledge/facts/repository-audit.md`
+
+### Role
+
+Audit record for `Diiegoal/CursoIA`.
+
+### Template
+
+```markdown
+# Repository Audit — <repository>
 
 ## Repository facts
-- Repository: `<owner/repository>`
+
+- Repository: `<repository>`
 - Default branch: `<branch>`
-- Visibility: `<public/private>`
-- Audit date: `<YYYY-MM-DD>`
-- Module directories: `<count>`
-- Markdown files in modules: `<count>`
-- Additional Markdown files: `<count>`
-- Total Markdown files enumerated in the Git tree: `<count>`
-- Separate final-project directory: `<scope rule>`
+- Visibility: `<visibility>`
+- Audit date: `<date>`
+- Module directories: `<number>`
+- Markdown files in modules: `<number>`
+- Additional final-project Markdown files: `<number>`
+- Total Markdown files enumerated in the Git tree: `<number>`
+- Separate final-project directory: <scope>
 
 ## Module inventory
 
-### M1 — <Exact directory name>
-Files: `<count>`
-<True content focus and all audited file names.>
+### M1 — <module title>
+Files: <count>
+<content focus>
+- <file>
+- ...
 
-### M2 — <Exact directory name>
-Files: `<count>`
-<True content focus and all audited file names.>
+### M2 — <module title>
+Files: <count>
+<content focus>
+- <file>
+- ...
 
-<Repeat through M13.>
+...
+
+### M13 — <module title>
+Files: <count>
+<content focus>
+- <file>
+- ...
 
 ## Additional repository content
-<Non-module directories/files and explicit scope treatment.>
+
+<non-module content>
 
 ## Integrity interpretation
-<Rules that preserve module boundaries, reference-only modules, and out-of-scope material.>
+
+<scope/classification>
 ```
 
 ---
 
-### 14. `knowledge/facts/module-coverage.md`
+## 23. `knowledge/facts/module-coverage.md`
 
-**Role:** module-to-target capability coverage matrix plus explicit project-specific gaps.
+### Role
 
-**Template structure:**
+Module content, build role and target-coverage mapping.
 
-```md
+### Template
+
+```markdown
 # Module Coverage Audit
 
 | Module | Real content focus | Role in build | Coverage of target |
 |---|---|---|---|
-| <M#> | <focus> | <role> | <coverage> |
+| M1 | ... | ... | ... |
+| ... | ... | ... | ... |
 
 ## Coverage classifications
 
-- **COVERED:** <definition>
-- **COVERED INDIRECTLY:** <definition>
-- **PARTIALLY COVERED:** <definition>
-- **COVERED BUT INSUFFICIENT FOR PRODUCT:** <definition>
-- **NOT COVERED:** <definition>
+- **COVERED:** core capability is materially taught.
+- **COVERED INDIRECTLY:** transferable patterns exist, but exact target implementation differs.
+- **PARTIALLY COVERED:** only a significant subset is taught.
+- **COVERED BUT INSUFFICIENT FOR PRODUCT:** concept exists but target-specific depth is missing.
+- **NOT COVERED:** no material curriculum evidence found in the audited modules.
 
 ## Target-specific gaps
 
-1. <Gap>
-2. <Gap>
-3. <Gap>
+1. <gap>
+2. <gap>
 ...
 ```
 
 ---
 
-### 15. `knowledge/facts/external-research.md`
+## 24. `knowledge/facts/external-research.md`
 
-**Role:** external research register, cutoff control, verified sources, and temporal exclusions.
+### Role
 
-**Template structure:**
+External research register and temporal cutoff control.
 
-```md
+### Template
+
+```markdown
 # External Research Register
 
 ## Cutoff rule
-<Mandatory external-research cutoff and interpretation rule.>
+
+<cutoff>
 
 ## Key verified sources
 
 | ID | Source | Date | What it supports | Cutoff use |
 |---|---|---|---|---|
-| R<NN> | <publisher/source> | <date> | <supported claim/capability> | <valid/stable/etc.> |
+| R01 | ... | ... | ... | ... |
+| ... | ... | ... | ... | ... |
 
 ## Temporal exclusions
 
-<Observations/releases/pages after the cutoff and explicit reason they are excluded from cutoff-current claims.>
+<post-cutoff observations and exclusion rule>
 ```
 
 ---
 
-### 16. `knowledge/architecture/agentic-sdlc.md`
+# `knowledge/architecture/`
 
-**Role:** define Agentic SDLC, construction phases, human gates, iterative loops, and the M12 boundary.
+## 25. `knowledge/architecture/agentic-sdlc.md`
 
-**Template structure:**
+### Template
 
-```md
+```markdown
 # Agentic SDLC
 
 ## Definition
-<Definition specific to this investigation/project.>
+<definition>
 
 ## Construction phases
-1. <Phase> — <Module>
-2. <Phase> — <Module>
+1. <phase> — <module>
 ...
+12. <phase> — <module>
 
 ## Why this is agentic
 
 The agent participates in:
-- <Engineering activity>
-- <Engineering activity>
+- <capability>
+- <capability>
+- ...
 
-But human gates remain where <impact/ambiguity criterion>.
+<human-gate statement>
 
 ## Iterative loops
-- <Loop A>
-- <Loop B>
-- <Loop C>
+
+- <loop>
+- <loop>
+- ...
 
 ## M12 boundary
-<M12 reference-only rule.>
+<M12 reference-only rule>
 ```
 
 ---
 
-### 17. `knowledge/architecture/target-architecture.md`
+## 26. `knowledge/architecture/artifact-matrix.md`
 
-**Role:** logical target architecture, persistence, operator surfaces, security boundary, observability, runtime memory and deployment maturity.
+### Template
 
-**Template structure:**
+```markdown
+# Module → Phase → Component → Artifact → Evidence
 
-```md
-# Target Architecture
-
-## Logical architecture
-
-```text
-<source/event>
-    ↓
-<API/service boundary>
-    ↓
-<orchestrator/worker>
-    ↓
-<agent/state runtime>
-    ↓
-<evidence sources>
-    ↓
-<evidence model>
-    ↓
-<hypothesis/verification>
-    ↓
-<proposal>
-    ↓
-<human approval>
-    ↓
-<isolated executor>
-    ↓
-<recovery verification>
-    ↓
-<resolution/postmortem>
-    ↓
-<persistence/retrieval>
-```
-
-## Data/persistence
-<Authoritative storage, retrieval, optional queue/cache.>
-
-## Operator surfaces
-- <Operational surface>
-- <Control center>
-- <Future enterprise UI>
-
-## Security boundary
-<Read-only vs mutation, authorization, credentials, executor.>
-
-## Observability
-<Target-system and agent observability signals.>
-
-## Runtime memory
-- <short-term/current execution state>
-- <long-term product knowledge>
-- <external continuity memory>
-
-## Deployment maturity
-<Local → test → staging → production-like → IaC/gates.>
+| Module | Phase | Component | Artifact | Evidence basis |
+|---|---|---|---|---|
+| M1 | ... | ... | ... | ... |
+| ... | ... | ... | ... | ... |
 ```
 
 ---
 
-### 18. `knowledge/architecture/decision-matrix.md`
+## 27. `knowledge/architecture/component-matrix.md`
 
-**Role:** candidate order definitions and their comparative evaluation.
+### Template
 
-**Template structure:**
+```markdown
+# Module → Component Matrix
 
-```md
+| Product component | Primary modules | Secondary modules | M12 reference contribution |
+|---|---|---|---|
+| <component> | <modules> | <modules> | <reference> |
+| ... | ... | ... | ... |
+```
+
+---
+
+## 28. `knowledge/architecture/contribution-matrix.md`
+
+### Template
+
+```markdown
+# Contribution Matrix
+
+| Module | Capability | Decision enabled | Artifact produced |
+|---|---|---|---|
+| M1 | ... | ... | ... |
+| ... | ... | ... | ... |
+| M12 | Reference only | ... | Reference knowledge only |
+```
+
+---
+
+## 29. `knowledge/architecture/decision-matrix.md`
+
+### Template
+
+```markdown
 # Decision Matrix and Candidate Orders
 
 ## Candidate orders
 
-### A — <name/selection status>
-`<module order>`
+### A — <candidate>
+<order>
 
-### B — <name>
-`<module order>`
+### B — <candidate>
+<order>
 
-### C — <name>
-`<module order>`
+### C — <candidate>
+<order>
 
 ## Weighted evaluation
 
 | Criterion | Weight | A | B | C |
 |---|---:|---:|---:|---:|
 | <criterion> | <weight> | <value> | <value> | <value> |
+| ... | ... | ... | ... | ... |
+| **Weighted** | **100%** | ... | ... | ... |
 
-<Optional methodology/caveat statement.>
+<score interpretation / caveat>
 ```
 
 ---
 
-### 19. `knowledge/architecture/dependency-matrix.md`
+## 30. `knowledge/architecture/dependency-matrix.md`
 
-**Role:** explicit directed dependency relationships plus transversal relationships.
+### Template
 
-**Template structure:**
-
-```md
+```markdown
 # Dependency Matrix
 
 | From | To | Dependency reason | Criticality |
 |---|---|---|---|
-| <module> | <module> | <reason> | <High/Medium/Low> |
+| <module> | <module> | <reason> | <criticality> |
+| ... | ... | ... | ... |
 
 ## Transversal edges
-- <M# ↔ M#>
-- <M# ↔ M#>
-- <Reference module → all modules as reference only>
+
+- <module> ↔ <module>
+- <module> ↔ <module>
+- ...
+- M12 → all modules as reference information only
 ```
 
 ---
 
-### 20. `knowledge/architecture/contribution-matrix.md`
+## 31. `knowledge/architecture/gaps-and-roadmap.md`
 
-**Role:** map each module to capability, decision enabled, and artifact produced.
+### Template
 
-**Template structure:**
-
-```md
-# Contribution Matrix
-
-| Module | Capability | Decision enabled | Artifact produced |
-|---|---|---|---|
-| <M#> | <capability> | <decision> | <artifact> |
-```
-
----
-
-### 21. `knowledge/architecture/component-matrix.md`
-
-**Role:** map product components to primary/secondary modules and reference contribution.
-
-**Template structure:**
-
-```md
-# Module → Component Matrix
-
-| Product component | Primary modules | Secondary modules | M12 reference contribution |
-|---|---|---|---|
-| <component> | <modules> | <modules> | <reference input> |
-```
-
----
-
-### 22. `knowledge/architecture/artifact-matrix.md`
-
-**Role:** map module → phase → component → artifact → evidence basis.
-
-**Template structure:**
-
-```md
-# Module → Phase → Component → Artifact → Evidence
-
-| Module | Phase | Component | Artifact | Evidence basis |
-|---|---|---|---|---|
-| <M#> | <phase> | <component> | <artifact> | <evidence basis> |
-```
-
----
-
-### 23. `knowledge/architecture/gaps-and-roadmap.md`
-
-**Role:** explicit high-priority target gaps and staged product execution roadmap.
-
-**Template structure:**
-
-```md
+```markdown
 # Gaps and Roadmap
 
 ## High-priority gaps
-1. <Gap>
-2. <Gap>
-3. <Gap>
+
+1. <gap>
+2. <gap>
+3. <gap>
 ...
 
 ## Roadmap
-### R0 — <Stage name>
-<Scope and acceptance boundary.>
 
-### R1 — <Stage name>
-<Scope and acceptance boundary.>
+### R0 — <stage title>
+<scope>
 
-### R2 — <Stage name>
-<Scope and acceptance boundary.>
+### R1 — <stage title>
+<scope>
 
-<Continue through the currently justified roadmap stages.>
+### R2 — <stage title>
+<scope>
+
+### R3 — <stage title>
+<scope>
+
+### R4 — <stage title>
+<scope>
+
+### R5 — <stage title>
+<scope>
+
+### R6 — <stage title>
+<scope>
+
+### R7 — <stage title>
+<scope>
 ```
 
 ---
 
-### 24. `knowledge/references/reference-index.md`
+## 32. `knowledge/architecture/target-architecture.md`
 
-**Role:** stable source registry with source IDs, dates, URLs, claims supported, and temporal/provenance status.
+### Template
 
-**Template structure:**
+```markdown
+# Target Architecture
 
-```md
+## Logical architecture
+
+```text
+<logical architecture flow>
+```
+
+## Data/persistence
+<persistence and retrieval>
+
+## Operator surfaces
+
+- <surface>
+- <surface>
+- <surface>
+
+## Security boundary
+<security/action boundary>
+
+## Observability
+<system + agent observability>
+
+## Runtime memory
+
+- <current execution state>
+- <long-term memory>
+- <external Chat 1 memory>
+
+## Deployment maturity
+<deployment progression>
+```
+
+---
+
+# `knowledge/references/`
+
+## 33. `knowledge/references/reference-index.md`
+
+### Template
+
+```markdown
 # Reference Index
 
-- [R<NN>] **<Source/publisher>** — *<Title>* — <date/consultation date> — <URL> — <What it supports> — <evidence type/status>
-- [R<NN>] **<Source/publisher>** — *<Title>* — <date/consultation date> — <URL> — <What it supports> — <evidence type/status>
+- [R01] **<organization>** — *<title>* — <date> — <URL> — <what it supports>. — <evidence classification>
+- [R02] **<organization>** — *<title>* — <date> — <URL> — <what it supports>. — <evidence classification>
+- ...
 ```
+
+The current file contains `R01` through `R20`.
 
 ---
 
-### 25. `indexes/timeline.md`
+# Complete File Inventory
 
-**Role:** chronological locator for major cutoff, execution, audit and temporal-control events.
+The audited repository contains **33 Markdown files**, and every one is represented above.
 
-**Template structure:**
-
-```md
-# Timeline
-- **<YYYY-MM-DD>** — <Event>
-- **<YYYY-MM-DD>** — <Event>
-- **<YYYY-MM-DD>** — <Event>
-```
-
----
-
-### 26. `indexes/topics.md`
-
-**Role:** topic-to-artifact locator.
-
-**Template structure:**
-
-```md
-# Topic Index
-- `<topic-key>` → `<artifact path>`, `<artifact path>`
-- `<topic-key>` → `<artifact path>`
-```
-
----
-
-### 27. `indexes/references.md`
-
-**Role:** locator for primary research inputs and the derived evidence map.
-
-**Template structure:**
-
-```md
-# Reference Locator Index
-
-## Primary research inputs
-- <Input>: <location/path and preservation rule>
-- <Input>: <location/path and preservation rule>
-
-## Derived evidence map
-<Which knowledge/facts/architecture files should be used for which evidence class.>
-```
+| # | File |
+|---:|---|
+| 1 | `README.md` |
+| 2 | `MEMORY_PROTOCOL.md` |
+| 3 | `BOOTSTRAP.md` |
+| 4 | `STATE.md` |
+| 5 | `KNOWLEDGE.md` |
+| 6 | `DECISIONS.md` |
+| 7 | `OPEN_QUESTIONS.md` |
+| 8 | `INDEX.md` |
+| 9 | `chats/chat-001/META.md` |
+| 10 | `chats/chat-001/transcript.md` |
+| 11 | `chats/chat-001/HANDOFF.md` |
+| 12 | `decisions/DEC-0001.md` |
+| 13 | `decisions/DEC-0002.md` |
+| 14 | `decisions/DEC-0003.md` |
+| 15 | `decisions/DEC-0004.md` |
+| 16 | `decisions/DEC-0005.md` |
+| 17 | `decisions/DEC-0006.md` |
+| 18 | `handoffs/chat-001-to-chat-002.md` |
+| 19 | `indexes/references.md` |
+| 20 | `indexes/timeline.md` |
+| 21 | `indexes/topics.md` |
+| 22 | `knowledge/architecture/agentic-sdlc.md` |
+| 23 | `knowledge/architecture/artifact-matrix.md` |
+| 24 | `knowledge/architecture/component-matrix.md` |
+| 25 | `knowledge/architecture/contribution-matrix.md` |
+| 26 | `knowledge/architecture/decision-matrix.md` |
+| 27 | `knowledge/architecture/dependency-matrix.md` |
+| 28 | `knowledge/architecture/gaps-and-roadmap.md` |
+| 29 | `knowledge/architecture/target-architecture.md` |
+| 30 | `knowledge/facts/external-research.md` |
+| 31 | `knowledge/facts/module-coverage.md` |
+| 32 | `knowledge/facts/repository-audit.md` |
+| 33 | `knowledge/references/reference-index.md` |
 
 ---
 
-### 28. `handoffs/chat-001-to-chat-002.md`
+# File Count by Area
 
-**Role:** future continuation protocol/artifact. It must not masquerade as a transcript of Chat 2.
-
-**Template structure:**
-
-```md
-# Handoff: Chat 1 → Chat 2
-
-## Purpose
-<What the future Chat 2 must inherit.>
-
-## Read first
-1. `<bootstrap>`
-2. `<state>`
-3. `<decisions>`
-4. `<open questions>`
-5. `<architecture/knowledge>`
-
-## Current state to inherit
-<Concise state summary.>
-
-## Active decisions to preserve
-- `<DEC-NNNN>` — <decision>
-
-## Open questions to preserve
-- `<OQ-NNNN>` — <question>
-
-## Evidence pointers
-- `<artifact>` — <what evidence to retrieve>
-
-## Immediate next work
-<Next executable work item.>
-
-## Boundary
-<Explicit statement that no Chat 2 transcript exists in this repository yet.>
-```
+| Area | `.md` |
+|---|---:|
+| Repository root | 8 |
+| `chats/chat-001/` | 3 |
+| `decisions/` | 6 |
+| `handoffs/` | 1 |
+| `indexes/` | 3 |
+| `knowledge/architecture/` | 8 |
+| `knowledge/facts/` | 3 |
+| `knowledge/references/` | 1 |
+| **Total** | **33** |
 
 ---
 
-## File-by-file structural equivalence check
+# Important Structural Distinctions
 
-The following checklist covers all 33 `.md` paths currently represented by the repository tree:
+## `STATE.md`
 
-| # | Markdown path | Template included |
-|---:|---|:---:|
-| 1 | `README.md` | ✅ |
-| 2 | `MEMORY_PROTOCOL.md` | ✅ |
-| 3 | `BOOTSTRAP.md` | ✅ |
-| 4 | `STATE.md` | ✅ |
-| 5 | `KNOWLEDGE.md` | ✅ |
-| 6 | `DECISIONS.md` | ✅ |
-| 7 | `OPEN_QUESTIONS.md` | ✅ |
-| 8 | `INDEX.md` | ✅ |
-| 9 | `chats/chat-001/META.md` | ✅ |
-| 10 | `chats/chat-001/transcript.md` | ✅ |
-| 11 | `chats/chat-001/HANDOFF.md` | ✅ |
-| 12 | `decisions/DEC-0001.md` | ✅ |
-| 13 | `decisions/DEC-0002.md` | ✅ |
-| 14 | `decisions/DEC-0003.md` | ✅ |
-| 15 | `decisions/DEC-0004.md` | ✅ |
-| 16 | `decisions/DEC-0005.md` | ✅ |
-| 17 | `decisions/DEC-0006.md` | ✅ |
-| 18 | `knowledge/facts/repository-audit.md` | ✅ |
-| 19 | `knowledge/facts/module-coverage.md` | ✅ |
-| 20 | `knowledge/facts/external-research.md` | ✅ |
-| 21 | `knowledge/architecture/agentic-sdlc.md` | ✅ |
-| 22 | `knowledge/architecture/target-architecture.md` | ✅ |
-| 23 | `knowledge/architecture/decision-matrix.md` | ✅ |
-| 24 | `knowledge/architecture/dependency-matrix.md` | ✅ |
-| 25 | `knowledge/architecture/contribution-matrix.md` | ✅ |
-| 26 | `knowledge/architecture/component-matrix.md` | ✅ |
-| 27 | `knowledge/architecture/artifact-matrix.md` | ✅ |
-| 28 | `knowledge/architecture/gaps-and-roadmap.md` | ✅ |
-| 29 | `knowledge/references/reference-index.md` | ✅ |
-| 30 | `indexes/timeline.md` | ✅ |
-| 31 | `indexes/topics.md` | ✅ |
-| 32 | `indexes/references.md` | ✅ |
-| 33 | `handoffs/chat-001-to-chat-002.md` | ✅ |
+`STATE.md` is a root-level state snapshot with its own structure:
 
-## Structural rules preserved from the repository
+`Snapshot → Current objective → Final order → Current architecture stance → Current lifecycle → Active controls → Current status → Last updated`
 
-### No future chat fabrication
+It is not omitted from this README.
 
-There is no `chat-002/` transcript directory in the current repository. The handoff path documents future continuity only.
+## `DECISIONS.md` versus `decisions/`
 
-### RAW remains RAW
+`DECISIONS.md` is the active decision index.
 
-The template catalog does not replace `chats/chat-001/transcript.md`, nor does it authorize rewriting or summarizing away the original prompt, complete research output, or execution record.
+`decisions/DEC-0001.md` through `DEC-0006.md` are individual records of **one common decision-record type**.
 
-### Derived artifacts remain derived
+## `transcript.md`
 
-`STATE.md`, `KNOWLEDGE.md`, decision records, indexes, architecture matrices and handoffs are retrieval/continuity artifacts. They must remain distinguishable from primary evidence.
+`transcript.md` is intentionally represented by a general RAW template. Its actual prompt and research content remain in that file.
 
-### M12 remains reference-only
+## `handoffs/chat-001-to-chat-002.md`
 
-The construction order contains 12 project modules. M12 is maintained as reference information and is not inserted as a construction stage.
+This is a future handoff protocol only. It does not mean Chat 2 exists.
 
-### Temporal integrity remains explicit
+---
 
-A template may contain fields for cutoff, date, source and status, but those fields must be populated only from actually observed evidence. Post-cutoff observations must remain identified as temporal-control material rather than being silently promoted to cutoff-current state.
+# Memory Flow
 
-### No invented facts in templates
+```text
+RAW
+└── chats/chat-001/transcript.md
+        ↓
+facts + architecture
+        ↓
+STATE / DECISIONS / KNOWLEDGE / OPEN_QUESTIONS
+        ↓
+INDEX + indexes/*
+        ↓
+BOOTSTRAP + handoffs/*
+```
 
-Placeholders such as `<YYYY-MM-DD>`, `<module>`, `<source>`, `<artifact>` and `<evidence>` are structural variables only. They are not permission to manufacture missing content.
+The derived documents are retrieval/consolidation layers and do not replace the RAW transcript.
 
+---
 
-## Resultado de Chat 2
+# Audit Boundary
 
-Chat 2 conserva íntegramente el contenido histórico de Chat 1 y añade, como estado derivado, la aplicación práctica de M1 al proyecto SRE/DevOps. El plan estabilizado contiene siete unidades profesionales y todos sus pasos permanecen en `PLANIFICADO` hasta una futura ejecución real.
+This README documents `Diiegoal/memory-repo`.
 
-### Estado físico
+The `knowledge/facts/repository-audit.md` file documents `Diiegoal/CursoIA`, which was the separate repository audited by Chat 1.
 
-La estructura no contiene `chat-002/`. El resultado de Chat 2 vive en los archivos derivados de `knowledge/` y en sus registros de hechos; no existe una transcripción ficticia de una sesión futura.
+This file is a local artifact only. It does not modify, commit or otherwise change `Diiegoal/memory-repo`.
 
-### Artefactos derivados de Chat 2
+---
 
-- `knowledge/facts/FACT-0001-chat-002-m1-source-audit.md`
-- `knowledge/facts/FACT-0002-chat-002-target-repository-state.md`
-- `knowledge/facts/FACT-0003-chat-002-execution-record.md`
-- `knowledge/architecture/01-project-overview.md`
-- `knowledge/architecture/02-module-audit.md`
-- `knowledge/architecture/03-module-dependency-matrix.md`
-- `knowledge/architecture/04-candidate-orders.md`
-- `knowledge/architecture/05-final-module-order.md`
-- `knowledge/architecture/06-professional-roadmap.md`
-- `knowledge/architecture/07-module-to-artifact-matrix.md`
-- `knowledge/architecture/08-curriculum-gaps.md`
-- `knowledge/architecture/09-cross-cutting-concerns.md`
-- `knowledge/architecture/10-traceability.md`
-- `knowledge/architecture/11-m1-construction-plan.md`
-- `knowledge/architecture/12-m1-quality-gates.md`
-- `knowledge/architecture/13-project-reference-summary.md`
+# Chat 2 Cumulative Update
 
-### Límite de implementación
+## Temporal status
 
-El repositorio objetivo fue observado en modo de solo lectura y se reportó vacío. Chat 2 no ejecuta endpoints, grafos LangGraph, RAG, bases de datos, UI, observabilidad, CI/CD ni acciones productivas.
+Chat 2 was executed on 2026-09-30. The historical Chat 1 content remains the base of this repository; Chat 2 adds a new planning and continuity layer without modifying external repositories.
+
+## New Chat 2 artifacts
+
+- `chats/chat-002/META.md` — metadata of the real Chat 2 session.
+- `chats/chat-002/transcript.md` — RAW record of the prompt executed, substantive production and real execution log.
+- `chats/chat-002/M1_PLAN.md` — complete frozen M1 execution plan with the mandatory 26-field template for every step.
+- `knowledge/facts/chat-002-source-audit.md` — source and continuity audit.
+- `knowledge/facts/chat-002-sre-reference.md` — exhaustive project-reference summary used only as M1 context.
+- `knowledge/facts/chat-002-plan-audit.md` — structural, semantic and anti-degradation gate results.
+- `handoffs/chat-002-to-chat-003.md` — future continuation handoff produced by Chat 2.
+- `chats/chat-002/memory-update-audit.md` — physical accumulation/preservation audit.
+
+## Current cumulative tree additions
+
+```text
+memory-repo/
+├── chats/
+│   └── chat-002/
+│       ├── META.md
+│       ├── transcript.md
+│       ├── M1_PLAN.md
+│       └── memory-update-audit.md
+├── knowledge/
+│   └── facts/
+│       ├── chat-002-source-audit.md
+│       ├── chat-002-sre-reference.md
+│       └── chat-002-plan-audit.md
+└── handoffs/
+    └── chat-002-to-chat-003.md
+```
+
+Chat 2 did not create `chat-003/`, did not create project code, and did not modify the external repositories.
+

@@ -25,7 +25,3 @@
 | **Weighted** | **100%** | **4.95** | **4.78** | **3.78** |
 
 These are professional judgement scores, not empirical measurements.
-
-## Adenda de regresión de Chat 2
-
-La comparación de órdenes heredada de Chat 1 permanece sin cambios. Chat 2 no crea una nueva orden ni reevalúa las decisiones aceptadas como si fueran nuevas.

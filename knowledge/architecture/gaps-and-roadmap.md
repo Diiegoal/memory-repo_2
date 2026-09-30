@@ -43,11 +43,3 @@ Kubernetes/AWS integration, OpenTelemetry, Alertmanager, Docker, CI/CD/IaC.
 ### R7 — Evaluation and continuous improvement
 
 Incident dataset, regression runs, trace review, tool-use evaluation, cost/latency monitoring, postmortem-derived runbook updates.
-
-## Chat 2 scope note
-
-M1 is preparatory methodology for all roadmap stages. Chat 2 does not implement any roadmap stage and does not advance the project into execution.
-
-## Adenda de regresión de Chat 2
-
-El plan de M1 prepara el modo de trabajo para abordar los huecos ya documentados, pero no afirma cerrar FastAPI, LangGraph, SRE operativo, executor seguro, Slack, evaluación u observabilidad.

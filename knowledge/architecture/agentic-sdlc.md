@@ -49,11 +49,3 @@ But human gates remain where the impact or ambiguity requires them.
 ## M12 boundary
 
 M12 is a source of information about the target SRE/DevOps system. It is not one of these phases.
-
-## Chat 2 application
-
-M1 is the foundation for the AI-assisted engineering behavior inside every later phase. The M1 work units prepared in Chat 2 are workflow foundations, not a replacement for the later modules' product construction capabilities.
-
-## Adenda de regresión de Chat 2
-
-M1 queda confirmado como la etapa fundacional del Agentic SDLC de doce módulos. Las siete unidades internas de M1 describen trabajo de construcción asistida por IA; no crean nuevas etapas del ciclo de vida.

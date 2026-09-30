@@ -22,8 +22,6 @@
 - `knowledge/facts/repository-audit.md`
 - `knowledge/facts/module-coverage.md`
 - `knowledge/facts/external-research.md`
-- `knowledge/facts/FACT-0001-chat-002-m1-source-audit.md`
-- `knowledge/facts/FACT-0002-chat-002-target-repository-state.md`
 
 ## Architecture
 
@@ -35,19 +33,6 @@
 - `knowledge/architecture/component-matrix.md`
 - `knowledge/architecture/artifact-matrix.md`
 - `knowledge/architecture/gaps-and-roadmap.md`
-- `knowledge/architecture/01-project-overview.md`
-- `knowledge/architecture/02-module-audit.md`
-- `knowledge/architecture/03-module-dependency-matrix.md`
-- `knowledge/architecture/04-candidate-orders.md`
-- `knowledge/architecture/05-final-module-order.md`
-- `knowledge/architecture/06-professional-roadmap.md`
-- `knowledge/architecture/07-module-to-artifact-matrix.md`
-- `knowledge/architecture/08-curriculum-gaps.md`
-- `knowledge/architecture/09-cross-cutting-concerns.md`
-- `knowledge/architecture/10-traceability.md`
-- `knowledge/architecture/11-m1-construction-plan.md`
-- `knowledge/architecture/12-m1-quality-gates.md`
-- `knowledge/architecture/13-project-reference-summary.md`
 
 ## References and indexes
 
@@ -58,12 +43,23 @@
 
 ## Future handoff protocol
 
-- `handoffs/chat-001-to-chat-002.md` — original Chat 1 handoff protocol; it does not assert that Chat 2 exists in the physical memory structure.
+- `handoffs/chat-001-to-chat-002.md` — future continuity protocol only.
 
-## Chat 2 result locator
+---
 
-The Chat 2 derived planning result is stored in the `knowledge/architecture/01`–`13` documents above. No `chat-002/` directory is created, because the executable prompt explicitly closes the physical ZIP structure at `chat-001/` and prohibits future-chat sessions from being represented as existing records.
+## Chat 2 additions
 
-## Chat 2 execution evidence
+### Session
+- `chats/chat-002/META.md` — Chat 2 metadata.
+- `chats/chat-002/transcript.md` — Chat 2 RAW prompt, production and execution log.
+- `chats/chat-002/M1_PLAN.md` — frozen M1 plan with 26 fields per step.
+- `chats/chat-002/memory-update-audit.md` — cumulative memory physical audit.
 
-- `knowledge/facts/FACT-0003-chat-002-execution-record.md` — actual Chat 2 source-read, planning, validation and boundary record; no target implementation was executed.
+### Evidence
+- `knowledge/facts/chat-002-source-audit.md` — continuity/source audit.
+- `knowledge/facts/chat-002-sre-reference.md` — SRE reference summary.
+- `knowledge/facts/chat-002-plan-audit.md` — quality gates and checklist.
+
+### Handoff
+- `handoffs/chat-002-to-chat-003.md` — future continuation only; it does not assert that Chat 3 exists.
+
